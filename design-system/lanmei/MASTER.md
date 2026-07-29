@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** SilkWay
+**Project:** Lanmei
 **Generated:** 2026-07-29 12:35:52
 **Category:** Logistics/Delivery
 **Design Dials:** Variance 6/10 (Balanced / Modern) | Motion 7/10 (Standard) | Density 4/10 (Standard)
