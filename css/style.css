@@ -774,7 +774,10 @@ a,button,select{cursor:pointer}
   border:1px solid var(--violet-200);background:var(--lilac-bg);outline:none;font-weight:600;resize:none;
   transition:border-color var(--t-fast),box-shadow var(--t-fast),background var(--t-fast);
 }
-.field label{position:absolute;left:15px;top:17px;color:var(--muted);font-size:15px;font-weight:600;pointer-events:none;transform-origin:left top;transition:transform var(--t-hover) var(--ease),color var(--t-fast)}
+/* Плавающая подпись — только для label, идущего сразу за input/textarea.
+   Без ограничения на input+/textarea+ это правило перебивало .field__label
+   у select-полей (та же .field label), и подпись ложилась поверх текста селекта. */
+.field input+label,.field textarea+label{position:absolute;left:15px;top:17px;color:var(--muted);font-size:15px;font-weight:600;pointer-events:none;transform-origin:left top;transition:transform var(--t-hover) var(--ease),color var(--t-fast)}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--violet-500);background:#fff;box-shadow:0 0 0 4px rgba(124,58,237,.14)}
 .field input:focus+label,.field input:not(:placeholder-shown)+label,
 .field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{transform:translateY(-9px) scale(.78);color:var(--violet-600)}

@@ -234,7 +234,7 @@
 </section>
 
 <!-- ══════════ 04. СМЕТА ДО СКЛАДА ══════════ -->
-<section class="estimate section chamfer-tb" id="estimate">
+<section class="estimate section chamfer-t" id="estimate">
   <div class="container">
     <div class="section__head section__head--left section__head--full">
       <span class="tag reveal">Ключевой продукт</span>
@@ -286,7 +286,79 @@
   </div>
 </section>
 
-<!-- ══════════ 05. ЭТАПЫ ПОСТАВКИ ══════════ -->
+<!-- ══════════ 05. БРИФ ══════════ -->
+<section class="brief section chamfer-t" id="brief">
+  <div class="container brief__inner">
+    <div class="brief__text">
+      <h2 class="brief__title reveal">Расчёт вашей поставки<br>за 48 часов</h2>
+      <p class="reveal" data-delay="80">Заполните бриф — ответим в течение 2 часов, уточним детали и пришлём смету до склада с раскладкой по статьям. Бесплатно и без обязательств.</p>
+      <div class="brief__steps reveal" data-delay="160">
+        <div><b>1</b> Бриф</div>
+        <div><b>2</b> Ответ ≤ 2 ч</div>
+        <div><b>3</b> Смета за 48 ч</div>
+      </div>
+      <div class="brief__contacts reveal" data-delay="220">
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hello@lanmei.ru">hello@lanmei.ru</a>
+      </div>
+    </div>
+
+    <form class="briefform reveal" data-delay="120" id="leadForm" novalidate>
+      <div class="field">
+        <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
+        <label for="name">Ваше имя</label>
+        <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
+      </div>
+      <div class="field">
+        <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
+        <label for="phone">Телефон или Telegram</label>
+        <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
+      </div>
+      <div class="field">
+        <input type="text" id="sku" placeholder=" " required aria-describedby="err-sku">
+        <label for="sku">Что везём: категория товара</label>
+        <span class="field__err" id="err-sku">Опишите товар хотя бы парой слов</span>
+      </div>
+      <div class="field field--select">
+        <label for="budget" class="field__label">Объём закупок в месяц</label>
+        <select id="budget">
+          <option value="">Выберите вариант</option>
+          <option>до $3 000</option>
+          <option>$3 000 – $10 000</option>
+          <option>$10 000 – $50 000</option>
+          <option>более $50 000</option>
+        </select>
+      </div>
+      <div class="field field--select">
+        <label for="scheme" class="field__label">Текущая схема поставок</label>
+        <select id="scheme">
+          <option value="">Выберите вариант</option>
+          <option>Карго</option>
+          <option>Работаем с фабрикой напрямую</option>
+          <option>Другой посредник или брокер</option>
+          <option>Ещё не возили из Китая</option>
+        </select>
+      </div>
+      <div class="field">
+        <textarea id="msg" rows="2" placeholder=" "></textarea>
+        <label for="msg">Срок и город склада (необязательно)</label>
+      </div>
+
+      <div class="briefform__hint" id="briefHint" hidden>
+        При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+      </div>
+
+      <button type="submit" class="btn btn--white btn--block btn--glow magnetic">Отправить бриф</button>
+      <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки данных</a>.</p>
+      <div class="briefform__ok" id="leadOk">
+        <b>Бриф отправлен</b>
+        <span>Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ 06. ЭТАПЫ ПОСТАВКИ ══════════ -->
 <section class="process section chamfer-tb" id="process">
   <div class="container">
     <div class="section__head section__head--left">
@@ -319,7 +391,7 @@
   </div>
 </section>
 
-<!-- ══════════ 06. ТРИГГЕРЫ ══════════ -->
+<!-- ══════════ 07. ТРИГГЕРЫ ══════════ -->
 <section class="problem section" id="problem">
   <div class="container">
     <div class="section__head section__head--full">
@@ -357,7 +429,7 @@
   </div>
 </section>
 
-<!-- ══════════ 07. КАРГО VS LANMEI ══════════ -->
+<!-- ══════════ 08. КАРГО VS LANMEI ══════════ -->
 <section class="compare section" id="compare">
   <div class="container">
     <div class="section__head section__head--full">
@@ -432,7 +504,7 @@
   </div>
 </section>
 
-<!-- ══════════ 08. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
+<!-- ══════════ 09. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
 <section class="quality section" id="quality">
   <div class="container quality__inner">
     <div class="quality__text">
@@ -485,7 +557,7 @@
   </div>
 </section>
 
-<!-- ══════════ 09. ДОКУМЕНТЫ ══════════ -->
+<!-- ══════════ 10. ДОКУМЕНТЫ ══════════ -->
 <section class="docs section chamfer-tb" id="docs">
   <div class="container">
     <div class="section__head">
@@ -542,13 +614,12 @@
   </div>
 </section>
 
-<!-- ══════════ 10. КЕЙС ══════════ -->
+<!-- ══════════ 11. КЕЙС ══════════ -->
 <section class="case section" id="case">
   <div class="container">
     <div class="section__head section__head--left">
-      <span class="tag reveal">Кейс</span>
-      <h2 class="section__title reveal" data-delay="60">Что уже сработало</h2>
-      <p class="section__lead reveal" data-delay="120">Четыре поставки, которые уже прошли путь от брифа до склада.</p>
+      <span class="tag reveal">Кейсы</span>
+      <h2 class="section__title reveal" data-delay="60">Примеры поставок</h2>
     </div>
 
     <div class="case__toolbar reveal" data-delay="180">
@@ -716,7 +787,7 @@
   </div>
 </section>
 
-<!-- ══════════ 11. КОМУ ПОДХОДИТ ══════════ -->
+<!-- ══════════ 12. КОМУ ПОДХОДИТ ══════════ -->
 <section class="segments section chamfer-tb" id="segments">
   <div class="container">
     <div class="section__head">
@@ -750,7 +821,7 @@
   </div>
 </section>
 
-<!-- ══════════ 12. ГАРАНТИИ ══════════ -->
+<!-- ══════════ 13. ГАРАНТИИ ══════════ -->
 <section class="guarantee section" id="guarantee">
   <div class="container">
     <div class="section__head">
@@ -818,78 +889,6 @@
         <div class="acc__a"><p>Тогда мы закрываем ту часть, где нужен человек в Китае: выезд на фабрику, переговоры на китайском, инспекция серии и претензии. Многие клиенты используют нас как внешнюю китайскую руку своего отдела ВЭД, а не как замену ему.</p></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ══════════ 15. БРИФ ══════════ -->
-<section class="brief section chamfer-t" id="brief">
-  <div class="container brief__inner">
-    <div class="brief__text">
-      <h2 class="brief__title reveal">Расчёт вашей поставки<br>за 48 часов</h2>
-      <p class="reveal" data-delay="80">Заполните бриф — ответим в течение 2 часов, уточним детали и пришлём смету до склада с раскладкой по статьям. Бесплатно и без обязательств.</p>
-      <div class="brief__steps reveal" data-delay="160">
-        <div><b>1</b> Бриф</div>
-        <div><b>2</b> Ответ ≤ 2 ч</div>
-        <div><b>3</b> Смета за 48 ч</div>
-      </div>
-      <div class="brief__contacts reveal" data-delay="220">
-        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
-        <a href="mailto:hello@lanmei.ru">hello@lanmei.ru</a>
-      </div>
-    </div>
-
-    <form class="briefform reveal" data-delay="120" id="leadForm" novalidate>
-      <div class="field">
-        <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
-        <label for="name">Ваше имя</label>
-        <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
-      </div>
-      <div class="field">
-        <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
-        <label for="phone">Телефон или Telegram</label>
-        <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
-      </div>
-      <div class="field">
-        <input type="text" id="sku" placeholder=" " required aria-describedby="err-sku">
-        <label for="sku">Что везём: категория товара</label>
-        <span class="field__err" id="err-sku">Опишите товар хотя бы парой слов</span>
-      </div>
-      <div class="field field--select">
-        <label for="budget" class="field__label">Объём закупок в месяц</label>
-        <select id="budget">
-          <option value="">Выберите вариант</option>
-          <option>до $3 000</option>
-          <option>$3 000 – $10 000</option>
-          <option>$10 000 – $50 000</option>
-          <option>более $50 000</option>
-        </select>
-      </div>
-      <div class="field field--select">
-        <label for="scheme" class="field__label">Текущая схема поставок</label>
-        <select id="scheme">
-          <option value="">Выберите вариант</option>
-          <option>Карго</option>
-          <option>Работаем с фабрикой напрямую</option>
-          <option>Другой посредник или брокер</option>
-          <option>Ещё не возили из Китая</option>
-        </select>
-      </div>
-      <div class="field">
-        <textarea id="msg" rows="2" placeholder=" "></textarea>
-        <label for="msg">Срок и город склада (необязательно)</label>
-      </div>
-
-      <div class="briefform__hint" id="briefHint" hidden>
-        При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
-      </div>
-
-      <button type="submit" class="btn btn--white btn--block btn--glow magnetic">Отправить бриф</button>
-      <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки данных</a>.</p>
-      <div class="briefform__ok" id="leadOk">
-        <b>Бриф отправлен</b>
-        <span>Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
-      </div>
-    </form>
   </div>
 </section>
 
