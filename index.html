@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanmei — белые поставки из Китая до вашего склада</title>
+<meta name="description" content="Оператор белых поставок из Китая для селлеров с закупками от $5 000 в месяц. Проверка фабрики из Шанхая, контроль партии по ТЗ, документы, таможня и доставка до склада. Расчёт себестоимости за 48 часов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <div class="preloader__logo">LAN<span>MEI</span></div>
+    <div class="preloader__bar"><i></i></div>
+  </div>
+</div>
+
+<a href="#hero" class="skip-link">Перейти к содержимому</a>
+
+<!-- ══════════ ХЕДЕР ══════════ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#hero" class="logo" data-scroll-to="#hero" aria-label="Lanmei — на главную">
+      <span class="logo__mark">兰</span>
+      <span class="logo__text">LAN<b>MEI</b><i>белые поставки из Китая</i></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <a href="#estimate" data-scroll-to="#estimate">Смета</a>
+      <a href="#compare" data-scroll-to="#compare">Карго vs Lanmei</a>
+      <a href="#process" data-scroll-to="#process">Этапы</a>
+      <a href="#case" data-scroll-to="#case">Кейс</a>
+      <a href="#calc" data-scroll-to="#calc">Калькулятор</a>
+      <a href="#faq" data-scroll-to="#faq">Вопросы</a>
+    </nav>
+
+    <div class="header__actions">
+      <a href="tel:+74951234567" class="header__phone">+7 (495) 123-45-67</a>
+      <a href="#brief" class="btn btn--primary btn--sm" data-scroll-to="#brief">Рассчитать доставку</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ 01. ПЕРВЫЙ ЭКРАН ══════════ -->
+<section class="hero" id="hero">
+  <div class="container hero__inner">
+    <div class="hero__badge reveal"><i class="dot"></i> Офис в Шанхае</div>
+
+    <h1 class="hero__title">
+      <span class="line"><span>Доставка из Китая</span></span>
+      <span class="line"><span>в РФ <em>«под ключ»</em></span></span>
+    </h1>
+
+    <p class="hero__kicker reveal" data-delay="120">Расчёт себестоимости до вашего склада за 48 часов</p>
+
+    <p class="hero__sub reveal" data-delay="180">
+      Для селлеров и товарных компаний с закупками <b>от $5 000 в месяц</b>
+    </p>
+
+    <div class="hero__cta reveal" data-delay="260">
+      <a href="#brief" class="btn btn--primary btn--lg btn--glow magnetic" data-scroll-to="#brief">Рассчитать стоимость доставки</a>
+    </div>
+
+    <p class="hero__note reveal" data-delay="340">Отвечаем на квалифицированный запрос в течение 2 часов</p>
+  </div>
+
+  <!-- основной кадр: верх растворяется в фоне страницы -->
+  <div class="hero__media">
+    <img src="photos/glavnaya.png"
+         alt="Контейнеровоз, тягач с контейнером, грузовой самолёт и состав в порту"
+         width="1536" height="1024" fetchpriority="high" decoding="async">
+    <span class="hero__fade" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ══════════ 02. ОПОРНЫЕ ЦИФРЫ ══════════ -->
+<section class="facts" id="facts">
+  <div class="container facts__grid">
+    <div class="fact reveal">
+      <div class="fact__num">≤ <span class="count" data-to="2">0</span> ч</div>
+      <div class="fact__label">ответ на квалифицированный запрос</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="48">0</span> ч</div>
+      <div class="fact__label">на предварительную смету до склада</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="5">0</span>–10%</div>
+      <div class="fact__label">прозрачная комиссия, вынесена отдельной строкой</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="90">0</span> дней</div>
+      <div class="fact__label">на подачу претензий после приёмки</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num">30/70</div>
+      <div class="fact__label">схема оплаты производства</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="facts__note reveal">
+      Проверим фабрику, согласуем образец, отправим серийную партию,
+      оформим документы, таможню и доставку.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ 03. ТРИГГЕРЫ ══════════ -->
+<section class="problem section" id="problem">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Момент решения</span>
+      <h2 class="section__title section__title--wide reveal" data-delay="60">Когда карго перестаёт<br>быть безопасным</h2>
+      <p class="section__lead reveal" data-delay="120">Пока всё работает, схему не меняют. Поиск подрядчика запускают четыре события — и в каждом счёт идёт на дни.</p>
+    </div>
+
+    <div class="problem__grid">
+      <article class="pcard reveal">
+        <div class="pcard__num">Маркетплейс</div>
+        <h3>Маркетплейс или бухгалтерия требуют документы</h3>
+        <p>Риск блокировки карточки, невозможность подтвердить происхождение товара и поставить его на учёт.</p>
+        <span class="pcard__mark pcard__mark--hot">Срочный триггер</span>
+      </article>
+      <article class="pcard reveal">
+        <div class="pcard__num">Фабрика</div>
+        <h3>Серия разошлась с образцом</h3>
+        <p>Нужен независимый контроль до оплаты 70% и подрядчик, который поведёт претензию с фабрикой на китайском.</p>
+        <span class="pcard__mark">Риск качества</span>
+      </article>
+      <article class="pcard reveal">
+        <div class="pcard__num">Посредник</div>
+        <h3>Комиссия растёт, структура непрозрачна</h3>
+        <p>При регулярном объёме заметен каждый процент. Нужна структура стоимости, а не одна общая ставка.</p>
+        <span class="pcard__mark">Экономика</span>
+      </article>
+      <article class="pcard reveal">
+        <div class="pcard__num">Спрос</div>
+        <h3>Ходовой SKU уходит в дефицит</h3>
+        <p>Задержка стоит позиции карточки, эффективности рекламы и сезонной выручки — иногда дороже самой партии.</p>
+        <span class="pcard__mark">Упущенная выручка</span>
+      </article>
+    </div>
+
+    <blockquote class="pullquote reveal">
+      Самая высокая тревога возникает не во время доставки, а при сравнении несопоставимых КП
+      и согласовании ответственности за брак, документы и аванс.
+    </blockquote>
+  </div>
+</section>
+
+<!-- ══════════ 04. СМЕТА ДО СКЛАДА ══════════ -->
+<section class="estimate section chamfer-tb" id="estimate">
+  <div class="container">
+    <div class="section__head section__head--left section__head--full">
+      <span class="tag reveal">Ключевой продукт</span>
+      <h2 class="section__title section__title--line reveal" data-delay="60">Смета до склада — отдельными строками</h2>
+      <p class="section__lead reveal" data-delay="120">
+        <b>Мы даём одну сопоставимую смету, где видно каждый рубль пути от фабрики до вашего склада.</b>
+        Полностью прозрачный расчёт за 48 часов.
+      </p>
+    </div>
+
+    <div class="estimate__inner">
+      <div class="invoice reveal">
+        <div class="invoice__head">
+          <span>Структура полной себестоимости</span>
+          <b>пример по контейнеру</b>
+        </div>
+        <ul class="invoice__rows">
+          <li class="irow" data-share="58"><span class="irow__name">Товар по инвойсу фабрики</span><span class="irow__bar"><i></i></span><span class="irow__val">58%</span></li>
+          <li class="irow" data-share="5"><span class="irow__name">Комиссия Lanmei</span><span class="irow__bar"><i></i></span><span class="irow__val">5%</span></li>
+          <li class="irow" data-share="14"><span class="irow__name">Фрахт до границы</span><span class="irow__bar"><i></i></span><span class="irow__val">14%</span></li>
+          <li class="irow" data-share="3"><span class="irow__name">Экспортное оформление в Китае</span><span class="irow__bar"><i></i></span><span class="irow__val">3%</span></li>
+          <li class="irow" data-share="12"><span class="irow__name">Пошлина и НДС</span><span class="irow__bar"><i></i></span><span class="irow__val">12%</span></li>
+          <li class="irow" data-share="4"><span class="irow__name">Сертификация и маркировка</span><span class="irow__bar"><i></i></span><span class="irow__val">4%</span></li>
+          <li class="irow" data-share="4"><span class="irow__name">Доставка до вашего склада</span><span class="irow__bar"><i></i></span><span class="irow__val">4%</span></li>
+        </ul>
+        <div class="invoice__foot">
+          <span>Итого себестоимость до склада</span>
+          <b>100% — одна цифра, которую можно сравнить</b>
+        </div>
+      </div>
+
+      <div class="estimate__side">
+        <article class="scard reveal">
+          <h3>Что вы получаете вместо ставки за килограмм</h3>
+          <ul class="checklist">
+            <li>Себестоимость единицы товара на вашем складе</li>
+            <li>Сравнение с вашей текущей схемой в тех же статьях</li>
+            <li>Явно указанные допущения расчёта</li>
+            <li>Сроки по каждому этапу маршрута</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="section__cta reveal">
+      <a href="#brief" class="btn btn--primary btn--lg btn--glow magnetic" data-scroll-to="#brief">Получить расчёт</a>
+      <span>Смета придёт в течение 48 часов, бесплатно и без обязательств</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 05. КАРГО VS LANMEI ══════════ -->
+<section class="compare section" id="compare">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Сравнение</span>
+      <h2 class="section__title section__title--line reveal" data-delay="60">Карго, фабрика или напрямую от нашей компании</h2>
+      <p class="section__lead reveal" data-delay="120">Покажем наглядно, как сэкономить деньги и время за счёт прямого контракта с фабрикой — без посредников и с полным комплектом документов.</p>
+    </div>
+
+    <div class="ctable reveal" tabindex="0" role="region" aria-label="Таблица сравнения вариантов поставки, прокручивается по горизонтали">
+      <table>
+        <caption class="visually-hidden">Сравнение вариантов поставки из Китая по пяти критериям</caption>
+        <thead>
+          <tr>
+            <th scope="col">Критерий</th>
+            <th scope="col">Карго</th>
+            <th scope="col">Фабрика напрямую</th>
+            <th scope="col">Крупный 3PL</th>
+            <th scope="col" class="is-us">Lanmei</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Видимая цена на старте</th>
+            <td><i class="m m--high">высокая выгода</i></td>
+            <td><i class="m m--mid">средняя</i></td>
+            <td><i class="m m--mid">средняя</i></td>
+            <td class="is-us"><i class="m m--high">сопоставимая смета</i></td>
+          </tr>
+          <tr>
+            <th scope="row">Полная стоимость до склада</th>
+            <td><i class="m m--low">не раскрыта</i></td>
+            <td><i class="m m--mid">частично</i></td>
+            <td><i class="m m--mid">частично</i></td>
+            <td class="is-us"><i class="m m--high">по строкам</i></td>
+          </tr>
+          <tr>
+            <th scope="row">Белые документы</th>
+            <td><i class="m m--low">нет</i></td>
+            <td><i class="m m--mid">частично</i></td>
+            <td><i class="m m--high">да</i></td>
+            <td class="is-us"><i class="m m--high">полный пакет</i></td>
+          </tr>
+          <tr>
+            <th scope="row">Контроль партии по ТЗ</th>
+            <td><i class="m m--low">нет</i></td>
+            <td><i class="m m--high">со стороны фабрики</i></td>
+            <td><i class="m m--low">нет</i></td>
+            <td class="is-us"><i class="m m--high">инженер + QC-отчёт</i></td>
+          </tr>
+          <tr>
+            <th scope="row">Единая ответственность</th>
+            <td><i class="m m--mid">за перевозку</i></td>
+            <td><i class="m m--mid">за производство</i></td>
+            <td><i class="m m--high">за логистику</i></td>
+            <td class="is-us"><i class="m m--high">за всю цепочку</i></td>
+          </tr>
+          <tr>
+            <th scope="row">Кто ведёт спор с фабрикой</th>
+            <td><i class="m m--low">вы сами</i></td>
+            <td><i class="m m--low">вы сами</i></td>
+            <td><i class="m m--low">вы сами</i></td>
+            <td class="is-us"><i class="m m--high">Lanmei, на китайском</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note reveal">Оценка Lanmei отражает модель сервиса, закреплённую в договоре. Условия по каждой строке фиксируются в приложении к нему.</p>
+    <div class="section__cta reveal">
+      <a href="#brief" class="btn btn--dark btn--lg btn--glow magnetic" data-scroll-to="#brief">Сравните на своей партии</a>
+      <span>Посчитаем обе схемы в одинаковых статьях — бесплатно</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 06. ЧТО ВХОДИТ В УСЛУГУ ══════════ -->
+<section class="service section" id="service">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Полный цикл</span>
+      <h2 class="section__title section__title--line reveal" data-delay="60">Одна компания — полная ответственность<br>от поиска и аудита фабрики до доставки до вашего склада</h2>
+      <p class="section__lead reveal" data-delay="120">Полностью прозрачный расчёт + возможность оплаты 30/70</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- крупная цифра с обводкой от руки -->
+      <article class="bento__card bento__card--stat reveal">
+        <div class="stat-mark">
+          <svg class="stat-mark__scribble" viewBox="0 0 254 104" fill="none" aria-hidden="true">
+            <path d="M112.891 97.7022C140.366 97.0802 171.004 94.6715 201.087 87.5116C210.43 85.2881 219.615 82.6412 228.284 78.2473C232.198 76.3179 235.905 73.9942 239.348 71.3124C241.85 69.2557 243.954 66.7571 245.555 63.9408C249.34 57.3235 248.281 50.5341 242.498 45.6109C239.033 42.7237 235.228 40.2703 231.169 38.3054C219.443 32.7209 207.141 28.4382 194.482 25.534C184.013 23.1927 173.358 21.7755 162.64 21.2989C161.376 21.3512 160.113 21.181 158.908 20.796C158.034 20.399 156.857 19.1682 156.962 18.4535C157.115 17.8927 157.381 17.3689 157.743 16.9139C158.104 16.4588 158.555 16.0821 159.067 15.8066C160.14 15.4683 161.274 15.3733 162.389 15.5286C179.805 15.3566 196.626 18.8373 212.998 24.462C220.978 27.2494 228.798 30.4747 236.423 34.1232C240.476 36.1159 244.202 38.7131 247.474 41.8258C254.342 48.2578 255.745 56.9397 251.841 65.4892C249.793 69.8582 246.736 73.6777 242.921 76.6327C236.224 82.0192 228.522 85.4602 220.502 88.2924C205.017 93.7847 188.964 96.9081 172.738 99.2109C153.442 101.949 133.993 103.478 114.506 103.79C91.1468 104.161 67.9334 102.97 45.1169 97.5831C36.0094 95.5616 27.2626 92.1655 19.1771 87.5116C13.839 84.5746 9.1557 80.5802 5.41318 75.7725C-0.54238 67.7259 -1.13794 59.1763 3.25594 50.2827C5.82447 45.3918 9.29572 41.0315 13.4863 37.4319C24.2989 27.5721 37.0438 20.9681 50.5431 15.7272C68.1451 8.8849 86.4883 5.1395 105.175 2.83669C129.045 0.0992292 153.151 0.134761 177.013 2.94256C197.672 5.23215 218.04 9.01724 237.588 16.3889C240.089 17.3418 242.498 18.5197 244.933 19.6446C246.627 20.4387 247.725 21.6695 246.997 23.615C246.455 25.1105 244.814 25.5605 242.63 24.5811C230.322 18.9961 217.233 16.1904 204.117 13.4376C188.761 10.3438 173.2 8.36665 157.558 7.52174C129.914 5.70776 102.154 8.06792 75.2124 14.5228C60.6177 17.8788 46.5758 23.2977 33.5102 30.6161C26.6595 34.3329 20.4123 39.0673 14.9818 44.658C12.9433 46.8071 11.1336 49.1622 9.58207 51.6855C4.87056 59.5336 5.61172 67.2494 11.9246 73.7608C15.2064 77.0494 18.8775 79.925 22.8564 82.3236C31.6176 87.7101 41.3848 90.5291 51.3902 92.5804C70.6068 96.5773 90.0219 97.7419 112.891 97.7022Z" fill="currentColor"/>
+          </svg>
+          <span class="stat-mark__num">1</span>
+        </div>
+        <h3>Один подрядчик вместо шести</h3>
+        <p>Закупщик, переводчик, инженер, инспектор, брокер и логист — в одном договоре и одном счёте.</p>
+      </article>
+
+      <!-- кольцо с иконкой -->
+      <article class="bento__card bento__card--ring reveal">
+        <div class="ring">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="2"/><path d="m21 21 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Поиск и проверка фабрики</h3>
+        <p>Отбираем производителя, проверяем экспортную готовность и реальные мощности, выезжаем лично.</p>
+      </article>
+
+      <article class="bento__card bento__card--ring reveal">
+        <div class="ring">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="4" width="22" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 12h10M11 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Образец и техническое задание</h3>
+        <p>Фиксируем измеримые параметры в ТЗ, при необходимости дорабатываем изделие с инженером.</p>
+      </article>
+
+      <!-- широкая: контроль + окно с чек-листом -->
+      <article class="bento__card bento__card--wide bento__card--split reveal">
+        <div class="split__text">
+          <div class="ring ring--sm">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 5 8v9c0 7 4.7 12.4 11 14 6.3-1.6 11-7 11-14V8L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m11.5 16 3.3 3.2L21 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>Контроль производства</h3>
+            <p>Инспектируем серию по чек-листу, снимаем фото и видео, фиксируем отклонения до оплаты остатка.</p>
+          </div>
+        </div>
+        <div class="pane" aria-hidden="true">
+          <div class="pane__dots"><span></span><span></span><span></span></div>
+          <ul class="pane__list">
+            <li class="ok">Габариты, ±1 мм</li>
+            <li class="ok">Покрытие и материал</li>
+            <li class="warn">Оттенок партии №3</li>
+            <li class="ok">Маркировка</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- широкая: маршрут -->
+      <article class="bento__card bento__card--wide bento__card--split reveal">
+        <div class="split__text">
+          <div class="ring ring--sm">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="9" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 15h24M11 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3>Экспорт, таможня, доставка</h3>
+            <p>Готовим документы, ведём выпуск и маршрут, привозим партию до двери вашего склада.</p>
+          </div>
+        </div>
+        <div class="track" aria-hidden="true">
+          <div class="track__row"><span class="chip">Экспорт</span><i class="track__dot"></i></div>
+          <div class="track__row track__row--r"><i class="track__dot"></i><span class="chip">Граница</span></div>
+          <div class="track__row"><span class="chip">Таможня</span><i class="track__dot"></i></div>
+          <div class="track__row track__row--r"><i class="track__dot track__dot--end"></i><span class="chip chip--end">Ваш склад</span></div>
+        </div>
+      </article>
+
+      <!-- широкая: переговоры -->
+      <article class="bento__card bento__card--wide bento__card--split reveal">
+        <div class="split__text">
+          <div class="ring ring--sm">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 8h22M5 16h14M5 24h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3>Переговоры на китайском</h3>
+            <p>Согласуем цену, сроки, упаковку и условия напрямую — без потерь смысла через переводчика.</p>
+          </div>
+        </div>
+        <div class="chat" aria-hidden="true">
+          <div class="bubble bubble--cn">价格能再低一点吗？</div>
+          <div class="bubble bubble--ru">Просим −6% при объёме 3 000 шт.</div>
+          <div class="bubble bubble--cn">可以，交期 25 天。</div>
+        </div>
+      </article>
+
+      <!-- широкая: претензии -->
+      <article class="bento__card bento__card--wide bento__card--split reveal">
+        <div class="split__text">
+          <div class="ring ring--sm">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 26V6h14l6 6v14H6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 19h8M12 14h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <h3>Претензии после прибытия</h3>
+            <p>Ведём рекламацию с фабрикой на китайском в течение 90 дней с момента приёмки партии.</p>
+          </div>
+        </div>
+        <div class="gauge" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle class="gauge__bg" cx="60" cy="60" r="50"/>
+            <circle class="gauge__val" cx="60" cy="60" r="50"/>
+          </svg>
+          <div class="gauge__label"><b>90</b><span>дней на претензию</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 07. ЭТАПЫ ПОСТАВКИ ══════════ -->
+<section class="process section chamfer-tb" id="process">
+  <div class="container">
+    <div class="section__head section__head--left">
+      <span class="tag reveal">Процесс</span>
+      <h2 class="section__title reveal" data-delay="60">Как проходит поставка</h2>
+      <p class="section__lead reveal" data-delay="120">Единый календарь ответственности: на каждом этапе видно действие, артефакт и того, кто за него отвечает.</p>
+    </div>
+
+    <div class="road" id="road">
+      <svg class="road__svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path class="road__bg" d="M60 90 H820 Q930 90 930 200 T820 310 H180 Q70 310 70 420 T180 530 H940"/>
+        <path class="road__line" id="roadLine" d="M60 90 H820 Q930 90 930 200 T820 310 H180 Q70 310 70 420 T180 530 H940"/>
+      </svg>
+
+      <div class="road__steps">
+        <div class="rstep rstep--1 reveal"><b>1</b><span><i>Бриф</i>SKU, объём, срок и склад</span></div>
+        <div class="rstep rstep--2 reveal"><b>2</b><span><i>Смета за 48 ч</i>Расчёт до склада и договор</span></div>
+        <div class="rstep rstep--3 reveal"><b>3</b><span><i>Фабрика</i>Проверка, образец, ТЗ</span></div>
+        <div class="rstep rstep--4 reveal"><b>4</b><span><i>Производство</i>Аванс 30% и QC серии</span></div>
+        <div class="rstep rstep--5 reveal"><b>5</b><span><i>Импорт</i>Оплата 70%, экспорт, таможня</span></div>
+        <div class="rstep rstep--6 reveal"><b>6</b><span><i>Приёмка</i>Товар на складе и план-факт</span></div>
+      </div>
+    </div>
+
+    <div class="process__meta">
+      <div class="pmeta reveal"><b>Еженедельно</b><span>статус поставки без запроса менеджеру</span></div>
+      <div class="pmeta reveal"><b>До оплаты 70%</b><span>отчёт «соответствует / не соответствует»</span></div>
+      <div class="pmeta reveal"><b>После приёмки</b><span>сверка прогноза и факта себестоимости</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 08. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
+<section class="quality section" id="quality">
+  <div class="container quality__inner">
+    <div class="quality__text">
+      <span class="tag reveal">Качество</span>
+      <h2 class="section__title reveal" data-delay="60">Фото фабрики<br>ничего не доказывает</h2>
+      <p class="section__lead reveal" data-delay="120">Контроль — это измеримые параметры, выборка, статус каждого пункта и фиксация отклонений до того, как вы оплатите остаток.</p>
+
+      <div class="qsteps reveal" data-delay="180">
+        <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
+        <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
+        <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
+        <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
+      </div>
+    </div>
+
+    <div class="quality__side">
+      <figure class="ph ph--43 reveal" data-delay="80">
+        <!-- <img src="img/qc-inspection.jpg" alt="Инспектор проверяет серийную партию на фабрике" width="1200" height="900" loading="lazy" decoding="async"> -->
+        <div class="ph__inner">
+          <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
+            <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="ph__title">Инспекция на фабрике</p>
+          <p class="ph__hint">Живой кадр с производства: руки инспектора, изделие, чек-лист. Постановочные стоки здесь считываются сразу и убивают доверие.</p>
+          <span class="ph__spec">1200 × 900 · 4:3</span>
+        </div>
+      </figure>
+
+    <aside class="qc-report reveal" data-delay="120" aria-label="Пример QC-отчёта">
+      <div class="qc-report__head">
+        <span>QC-отчёт по серии</span>
+        <b class="qc-badge">Выборка 80 шт.</b>
+      </div>
+      <ul class="qc-list">
+        <li class="ok"><span>Габариты корпуса, ±1 мм</span><i>соответствует</i></li>
+        <li class="ok"><span>Материал и толщина покрытия</span><i>соответствует</i></li>
+        <li class="ok"><span>Комплектность коробки</span><i>соответствует</i></li>
+        <li class="warn"><span>Оттенок пластика партии №3</span><i>отклонение</i></li>
+        <li class="ok"><span>Маркировка и штрихкод</span><i>соответствует</i></li>
+        <li class="ok"><span>Прочность транспортной упаковки</span><i>соответствует</i></li>
+      </ul>
+      <div class="qc-report__foot">
+        <span>Отклонение устранено фабрикой до отгрузки</span>
+        <b>Партия принята</b>
+      </div>
+    </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 09. ДОКУМЕНТЫ ══════════ -->
+<section class="docs section chamfer-tb" id="docs">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Документы</span>
+      <h2 class="section__title reveal" data-delay="60">Белый импорт, который<br>можно показать бухгалтерии</h2>
+      <p class="section__lead reveal" data-delay="120">Состав пакета известен заранее — до того, как вы внесёте аванс. Перечень собираем под вашу категорию товара.</p>
+    </div>
+
+    <div class="docs__grid">
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 3h10l6 6v16H6V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 16h8M10 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Экспортная лицензия фабрики</h3><p>Подтверждаем право производителя на экспорт до запуска партии.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M5 3h18v22l-3-2-3 2-3-2-3 2-3-2-3 2V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 10h8M10 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Инвойс и упаковочный лист</h3><p>Состав партии, вес, объём и стоимость по позициям.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M3 24h22M6 24V11l8-6 8 6v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 24v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Схема таможенного оформления</h3><p>Коды ТН ВЭД, расчёт пошлины и НДС, порядок выпуска.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m10.5 11 2.6 2.5L18 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 18-2 8 7-3 7 3-2-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Сертификация и маркировка</h3><p>Декларации ТР ТС, «Честный знак» и требования площадок.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="4" y="3" width="20" height="22" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M9 9h10M9 14h10M9 19h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Договор с приложением по ТЗ</h3><p>Измеримые параметры, сроки, порядок претензий и лимиты.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 3.5 8v12L14 25l10.5-5V8L14 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 8 14 13m0 0 10.5-5M14 13v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Постпоставочный отчёт</h3><p>План-факт себестоимости и полный комплект для учёта.</p>
+      </article>
+    </div>
+
+    <figure class="ph ph--32 reveal docs__shot">
+      <!-- <img src="img/docs-pack.jpg" alt="Комплект документов на партию: инвойс, упаковочный лист, декларация" width="1500" height="1000" loading="lazy" decoding="async"> -->
+      <div class="ph__inner">
+        <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M28 5v9h9M18 27h13M18 34h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="ph__title">Разворот реального пакета документов</p>
+        <p class="ph__hint">Снимок сверху: инвойс, упаковочный лист, декларация. Персональные данные и суммы закрыть — покажите структуру, а не содержимое.</p>
+        <span class="ph__spec">1500 × 1000 · 3:2</span>
+      </div>
+    </figure>
+
+    <div class="magnets">
+      <div class="magnet reveal"><b>Чек-лист документов</b><span>по вашей категории товара</span><a href="#brief" class="magnet__link" data-scroll-to="#brief">Запросить →</a></div>
+      <div class="magnet reveal"><b>Шаблон ТЗ фабрике</b><span>характеристики, упаковка, приёмка</span><a href="#brief" class="magnet__link" data-scroll-to="#brief">Запросить →</a></div>
+      <div class="magnet reveal"><b>Пример сметы до склада</b><span>реальная структура по контейнеру</span><a href="#brief" class="magnet__link" data-scroll-to="#brief">Запросить →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 10. КЕЙС ══════════ -->
+<section class="case section" id="case">
+  <div class="container">
+    <div class="section__head section__head--left">
+      <span class="tag reveal">Кейс</span>
+      <h2 class="section__title reveal" data-delay="60">≈ $52 000 экономии<br>на одном контейнере</h2>
+    </div>
+
+    <figure class="ph ph--16 reveal case__shot">
+      <!-- <img src="img/case-container.jpg" alt="Партия смесителей на складе после приёмки" width="1600" height="900" loading="lazy" decoding="async"> -->
+      <div class="ph__inner">
+        <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <p class="ph__title">Та самая партия смесителей</p>
+        <p class="ph__hint">Фото приёмки на складе клиента или контейнера под выгрузкой. Кадр должен подтверждать цифру рядом, иначе кейс читается как выдумка.</p>
+        <span class="ph__spec">1600 × 900 · 16:9</span>
+      </div>
+    </figure>
+
+    <div class="case__inner">
+      <article class="case__main reveal">
+        <div class="case__row"><span>Категория</span><b>Смесители и сантехника</b></div>
+        <div class="case__row"><span>Задача</span><b>Перевести ходовые SKU с карго на белую схему</b></div>
+        <div class="case__row"><span>Что сделали</span><b>Сменили фабрику после проверки, пересобрали ТЗ и упаковку, пересчитали маршрут</b></div>
+        <div class="case__row"><span>Результат</span><b>Экономия ≈ $52 000 на контейнере при сохранении характеристик</b></div>
+        <p class="case__note">Это результат конкретной поставки, а не гарантированный показатель. В среднем работа над себестоимостью — цель оптимизации, подтверждённая публичная величина по нашему кейсу составляет около 7%.</p>
+      </article>
+
+      <div class="case__nums">
+        <div class="cnum reveal"><b>≈ $52K</b><span>экономия на контейнере</span></div>
+        <div class="cnum reveal"><b>≈ 7%</b><span>подтверждённое снижение себестоимости</span></div>
+        <div class="cnum reveal"><b>0</b><span>претензий после приёмки партии</span></div>
+        <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 11. КОМУ ПОДХОДИТ ══════════ -->
+<section class="segments section chamfer-tb" id="segments">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Кому подходит</span>
+      <h2 class="section__title reveal" data-delay="60">Мы работаем не со всеми</h2>
+      <p class="section__lead reveal" data-delay="120">Порог входа — закупки от $3 000 в месяц. Ниже этого объёма белая схема экономически не окупается, и мы честно об этом говорим.</p>
+    </div>
+
+    <div class="seg__grid">
+      <article class="seg seg--yes reveal">
+        <div class="seg__top"><b>Подходим</b><span>90/100</span></div>
+        <h3>Селлеры маркетплейсов от $3 000/мес</h3>
+        <p>Нужно перейти с карго и сохранить маржу. Самый короткий путь к первой пилотной партии.</p>
+      </article>
+      <article class="seg seg--yes reveal">
+        <div class="seg__top"><b>Подходим</b><span>86/100</span></div>
+        <h3>Оптовый бизнес с регулярными закупками</h3>
+        <p>Оптимизация прямых поставок. Крупнее чек, но в решении участвует больше людей.</p>
+      </article>
+      <article class="seg seg--test reveal">
+        <div class="seg__top"><b>Обсуждаем</b><span>79/100</span></div>
+        <h3>Импортёры технических товаров</h3>
+        <p>Запуск изделия по техническому ТЗ с инженерным контролем и повторными сериями.</p>
+      </article>
+      <article class="seg seg--test reveal">
+        <div class="seg__top"><b>Обсуждаем</b><span>74/100</span></div>
+        <h3>Оптовики сантехники и товаров для дома</h3>
+        <p>Снижение брака и стоимости контейнера. Наша самая отработанная категория.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 12. ГАРАНТИИ ══════════ -->
+<section class="guarantee section" id="guarantee">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Ответственность</span>
+      <h2 class="section__title reveal" data-delay="60">Что происходит,<br>если что-то пошло не так</h2>
+    </div>
+
+    <div class="grt__grid">
+      <article class="grt reveal">
+        <b>30 / 70</b>
+        <h3>Схема оплаты производства</h3>
+        <p>Аванс запускает партию, остаток уходит только после вашего согласия по QC-отчёту.</p>
+      </article>
+      <article class="grt reveal">
+        <b>90 дней</b>
+        <h3>Период подачи претензий</h3>
+        <p>С момента приёмки. Определение брака, доказательства и сроки ответа закреплены в договоре.</p>
+      </article>
+      <article class="grt reveal">
+        <b>Мы</b>
+        <h3>Ведём спор с фабрикой</h3>
+        <p>Претензионная работа на китайском — это наша задача, а не ваша переписка в мессенджере.</p>
+      </article>
+      <article class="grt reveal">
+        <b>5–10%</b>
+        <h3>Комиссия известна заранее</h3>
+        <p>5% — стандартный цикл, 10% — товар с доработками. Фрахт и зависимые расходы идут отдельными строками.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 13. КАЛЬКУЛЯТОР ══════════ -->
+<section class="calc section chamfer-tb" id="calc">
+  <div class="container calc__inner">
+    <div class="calc__text">
+      <span class="tag reveal">Калькулятор партии</span>
+      <h2 class="section__title reveal" data-delay="60">Прикиньте себестоимость<br>до склада за минуту</h2>
+      <p class="section__lead reveal" data-delay="120">Быстрая оценка по вашим параметрам — чтобы понять порядок цифр до разговора. Точную смету с допущениями пришлём в течение 48 часов.</p>
+      <ul class="calc__list reveal" data-delay="180">
+        <li>Комиссия и фрахт видны отдельно, а не «в тарифе»</li>
+        <li>Пошлина и НДС считаются от таможенной стоимости</li>
+        <li>Расчёт не является офертой</li>
+      </ul>
+    </div>
+
+    <form class="calcbox reveal" data-delay="120" id="calcForm">
+      <div class="calcbox__row">
+        <label for="invoice">Стоимость товара по инвойсу, $</label>
+        <input type="number" id="invoice" min="0" step="100" value="12000">
+      </div>
+
+      <div class="calcbox__cols">
+        <div class="calcbox__row">
+          <label for="weight">Вес партии, кг</label>
+          <input type="number" id="weight" min="0" value="1400">
+        </div>
+        <div class="calcbox__row">
+          <label for="volume">Объём, м³</label>
+          <input type="number" id="volume" min="0" step="0.5" value="8">
+        </div>
+      </div>
+
+      <div class="calcbox__row">
+        <label id="segLabel">Способ доставки</label>
+        <div class="seg-switch" id="seg" role="group" aria-labelledby="segLabel">
+          <button type="button" class="seg__btn is-active" data-rate="2.9" data-days="18–25">Авто</button>
+          <button type="button" class="seg__btn" data-rate="2.2" data-days="25–32">ЖД</button>
+          <button type="button" class="seg__btn" data-rate="1.4" data-days="40–50">Море</button>
+          <button type="button" class="seg__btn" data-rate="5.4" data-days="8–14">Авиа</button>
+        </div>
+      </div>
+
+      <div class="calcbox__cols">
+        <div class="calcbox__row">
+          <label for="duty">Категория товара</label>
+          <select id="duty">
+            <option value="0.05">Товары для дома — пошлина 5%</option>
+            <option value="0.1">Сантехника и мебель — 10%</option>
+            <option value="0.12">Одежда и текстиль — 12%</option>
+            <option value="0.07">Электроника — 7%</option>
+            <option value="0.15">Оборудование с доработкой — 15%</option>
+          </select>
+        </div>
+        <div class="calcbox__row">
+          <label for="fee">Тип цикла</label>
+          <select id="fee">
+            <option value="0.05">Стандартный — комиссия 5%</option>
+            <option value="0.1">Со доработками — комиссия 10%</option>
+          </select>
+        </div>
+      </div>
+
+      <ul class="calcbox__lines" id="calcLines">
+        <li><span>Товар по инвойсу</span><b data-line="goods">$ 0</b></li>
+        <li><span>Комиссия Lanmei</span><b data-line="fee">$ 0</b></li>
+        <li><span>Фрахт до границы</span><b data-line="freight">$ 0</b></li>
+        <li><span>Экспорт и оформление</span><b data-line="export">$ 0</b></li>
+        <li><span>Пошлина</span><b data-line="duty">$ 0</b></li>
+        <li><span>НДС 20%</span><b data-line="vat">$ 0</b></li>
+        <li><span>Доставка до склада</span><b data-line="last">$ 0</b></li>
+      </ul>
+
+      <div class="calcbox__result">
+        <div>
+          <span>Себестоимость до склада</span>
+          <strong id="calcTotal">$ 0</strong>
+        </div>
+        <div class="calcbox__days">
+          <span>Срок в пути</span>
+          <strong id="calcDays">18–25 дней</strong>
+        </div>
+      </div>
+
+      <a href="#brief" class="btn btn--white btn--block magnetic" data-scroll-to="#brief">Получить точную смету за 48 часов</a>
+      <p class="calcbox__note">Предварительная оценка. Итоговые цифры зависят от кода ТН ВЭД, условий фабрики и маршрута.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ 14. ВОЗРАЖЕНИЯ / FAQ ══════════ -->
+<section class="faq section chamfer-t" id="faq">
+  <div class="container faq__inner">
+    <div class="faq__side">
+      <span class="tag reveal">Вопросы</span>
+      <h2 class="section__title reveal" data-delay="60">То, что спрашивают<br>до договора</h2>
+      <p class="section__lead reveal" data-delay="120">Пять возражений, которые звучат почти в каждом разговоре. Отвечаем на них прямо, без обтекаемых формулировок.</p>
+      <a href="#brief" class="btn btn--white magnetic reveal" data-delay="180" data-scroll-to="#brief">Задать свой вопрос</a>
+    </div>
+
+    <div class="acc" id="acc">
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Карго всё равно дешевле»<i></i></button>
+        <div class="acc__a"><p>По видимой ставке — да. Но в ней нет документов, пошлины и НДС, и нет ответственности за брак. Мы считаем обе схемы в одинаковых статьях и показываем разницу в себестоимости единицы на вашем складе. Если после честного сравнения карго выигрывает — мы так и скажем.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Кто вернёт деньги за брак?»<i></i></button>
+        <div class="acc__a"><p>Определение брака, порядок доказательств, сроки ответа и лимиты компенсации закреплены в договоре. Претензию с фабрикой ведём мы, на китайском, в течение 90 дней с момента приёмки. Именно поэтому серия проверяется до оплаты остатка — большинство проблем решается ещё в Китае.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Будут ли скрытые платежи?»<i></i></button>
+        <div class="acc__a"><p>Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Допущения расчёта указываются явно. Если по ходу поставки статья меняется — вы видите это до того, как расход возникнет.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Почему аванс 30%?»<i></i></button>
+        <div class="acc__a"><p>Это стандартная схема запуска производства в Китае: 30% фабрика получает на закупку сырья, 70% — после приёмки серии. Аванс уходит фабрике, а не нам, и подтверждается документами. После оплаты вы получаете календарь поставки с контрольными точками.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Успеем ли пополнить остатки?»<i></i></button>
+        <div class="acc__a"><p>Переход делается параллельно текущим поставкам: начинаем с одной тестовой партии, пока карго продолжает возить. Так вы проверяете схему без риска дефицита ходового SKU и переносите остальной ассортимент уже по факту.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«У нас свой отдел закупок»<i></i></button>
+        <div class="acc__a"><p>Тогда мы закрываем ту часть, где нужен человек в Китае: выезд на фабрику, переговоры на китайском, инспекция серии и претензии. Многие клиенты используют нас как внешнюю китайскую руку своего отдела ВЭД, а не как замену ему.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 15. БРИФ ══════════ -->
+<section class="brief section chamfer-t" id="brief">
+  <div class="container brief__inner">
+    <div class="brief__text">
+      <h2 class="brief__title reveal">Расчёт вашей поставки<br>за 48 часов</h2>
+      <p class="reveal" data-delay="80">Заполните бриф — ответим в течение 2 часов, уточним детали и пришлём смету до склада с раскладкой по статьям. Бесплатно и без обязательств.</p>
+      <div class="brief__steps reveal" data-delay="160">
+        <div><b>1</b> Бриф</div>
+        <div><b>2</b> Ответ ≤ 2 ч</div>
+        <div><b>3</b> Смета за 48 ч</div>
+      </div>
+      <div class="brief__contacts reveal" data-delay="220">
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hello@lanmei.ru">hello@lanmei.ru</a>
+      </div>
+    </div>
+
+    <form class="briefform reveal" data-delay="120" id="leadForm" novalidate>
+      <div class="field">
+        <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
+        <label for="name">Ваше имя</label>
+        <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
+      </div>
+      <div class="field">
+        <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
+        <label for="phone">Телефон или Telegram</label>
+        <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
+      </div>
+      <div class="field">
+        <input type="text" id="sku" placeholder=" " required aria-describedby="err-sku">
+        <label for="sku">Что везём: категория товара</label>
+        <span class="field__err" id="err-sku">Опишите товар хотя бы парой слов</span>
+      </div>
+      <div class="field field--select">
+        <label for="budget" class="field__label">Объём закупок в месяц</label>
+        <select id="budget">
+          <option value="">Выберите вариант</option>
+          <option>до $3 000</option>
+          <option>$3 000 – $10 000</option>
+          <option>$10 000 – $50 000</option>
+          <option>более $50 000</option>
+        </select>
+      </div>
+      <div class="field field--select">
+        <label for="scheme" class="field__label">Текущая схема поставок</label>
+        <select id="scheme">
+          <option value="">Выберите вариант</option>
+          <option>Карго</option>
+          <option>Работаем с фабрикой напрямую</option>
+          <option>Другой посредник или брокер</option>
+          <option>Ещё не возили из Китая</option>
+        </select>
+      </div>
+      <div class="field">
+        <textarea id="msg" rows="2" placeholder=" "></textarea>
+        <label for="msg">Срок и город склада (необязательно)</label>
+      </div>
+
+      <div class="briefform__hint" id="briefHint" hidden>
+        При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+      </div>
+
+      <button type="submit" class="btn btn--white btn--block btn--glow magnetic">Отправить бриф</button>
+      <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки данных</a>.</p>
+      <div class="briefform__ok" id="leadOk">
+        <b>Бриф отправлен</b>
+        <span>Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ 16. ФУТЕР ══════════ -->
+<footer class="footer" id="contacts">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#hero" class="logo logo--light" data-scroll-to="#hero">
+          <span class="logo__mark">兰</span>
+          <span class="logo__text">LAN<b>MEI</b></span>
+        </a>
+        <p>Оператор белых поставок из Китая под ключ. Команда и присутствие в Шанхае, работа с селлерами и товарными компаниями по всей России.</p>
+      </div>
+      <div class="footer__col">
+        <h5>Услуга</h5>
+        <a href="#estimate" data-scroll-to="#estimate">Смета до склада</a>
+        <a href="#service" data-scroll-to="#service">Полный цикл</a>
+        <a href="#quality" data-scroll-to="#quality">Контроль качества</a>
+        <a href="#docs" data-scroll-to="#docs">Документы</a>
+      </div>
+      <div class="footer__col">
+        <h5>Компания</h5>
+        <a href="#compare" data-scroll-to="#compare">Карго vs Lanmei</a>
+        <a href="#case" data-scroll-to="#case">Кейс</a>
+        <a href="#segments" data-scroll-to="#segments">Кому подходит</a>
+        <a href="#guarantee" data-scroll-to="#guarantee">Гарантии</a>
+      </div>
+      <div class="footer__col">
+        <h5>Контакты</h5>
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hello@lanmei.ru">hello@lanmei.ru</a>
+        <a href="#">Telegram</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Lanmei. Белые поставки из Китая.</span>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- индикатор секций, как в референсе -->
+<nav class="dots" id="dots" aria-label="Навигация по секциям"></nav>
+
+<a href="#brief" class="fab" id="fab" data-scroll-to="#brief"><span>Рассчитать<br>доставку</span></a>
+<div class="scrollbar" id="scrollbar"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
