@@ -70,7 +70,7 @@ ul{margin:0;padding:0;list-style:none}
 table{border-collapse:collapse;width:100%}
 
 :focus-visible{outline:3px solid var(--violet-600);outline-offset:3px;border-radius:6px}
-.calc :focus-visible,.brief :focus-visible,.footer :focus-visible{outline-color:#fff}
+.brief :focus-visible,.footer :focus-visible{outline-color:#fff}
 a,button,select{cursor:pointer}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* скип-линк: не заставляем клавиатуру проходить всю навигацию */
@@ -409,12 +409,6 @@ a,button,select{cursor:pointer}
 }
 .pcard__mark--hot{background:#FEE2E2;color:#B91C1C}
 
-.pullquote{
-  margin:36px 0 0;padding:26px 30px;border-left:3px solid var(--violet-600);
-  background:#fff;border-radius:0 var(--radius) var(--radius) 0;
-  font-size:18px;line-height:1.55;color:var(--violet-800);box-shadow:var(--shadow-soft);
-}
-
 /* ---------- 04. СМЕТА ---------- */
 .estimate{background:#fff}
 .estimate__inner{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:start}
@@ -567,9 +561,11 @@ a,button,select{cursor:pointer}
   transition:stroke-dashoffset 1.1s var(--ease-out2);
 }
 .bento__card.is-in .gauge__val{stroke-dashoffset:78}   /* 75% дуги */
-.gauge__label{position:absolute;display:grid;justify-items:center;gap:2px;text-align:center}
+/* max-width держит подпись внутри окружности — без него «дней на претензию»
+   вылезала за дугу, потому что текст шире круга */
+.gauge__label{position:absolute;display:grid;justify-items:center;gap:2px;text-align:center;max-width:100px}
 .gauge__label b{font-family:'Rubik',sans-serif;font-size:32px;font-weight:600;color:var(--violet-700);line-height:1}
-.gauge__label span{font-size:12px;color:var(--muted)}
+.gauge__label span{font-size:11.5px;color:var(--muted);line-height:1.25}
 
 @media (max-width:1100px){
   .bento{grid-template-columns:repeat(2,1fr)}
@@ -669,6 +665,53 @@ a,button,select{cursor:pointer}
 .cnum b{display:block;font-size:34px;font-weight:600;letter-spacing:-.03em}
 .cnum span{display:block;margin-top:8px;font-size:13.5px;color:rgba(255,255,255,.68);line-height:1.45}
 
+/* карусель из четырёх кейсов: тулбар с вкладками и стрелками + стек слайдов */
+.case__toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+  margin-top:clamp(20px,2.6vw,30px);padding-bottom:clamp(18px,2.2vw,24px);
+  border-bottom:1px solid var(--violet-200);
+}
+.case__tabs{display:flex;flex-wrap:wrap;gap:8px}
+.case__tab{
+  padding:9px 16px;border-radius:100px;border:1px solid var(--violet-200);background:#fff;
+  color:var(--muted);font-size:13.5px;font-weight:600;min-height:40px;
+  transition:background var(--t-hover) var(--ease),color var(--t-fast),border-color var(--t-fast);
+}
+.case__tab:hover{border-color:var(--violet-400);color:var(--violet-700)}
+.case__tab.is-active{background:var(--violet-600);border-color:transparent;color:#fff}
+
+.case__nav{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.case__arrow{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--violet-200);background:#fff;
+  color:var(--violet-700);display:grid;place-items:center;flex:0 0 44px;
+  transition:background var(--t-hover) var(--ease),color var(--t-fast),border-color var(--t-fast),transform var(--t-hover) var(--ease);
+}
+.case__arrow svg{width:18px;height:18px}
+.case__arrow:hover{background:var(--violet-600);color:#fff;border-color:transparent;transform:translateY(-2px)}
+.case__arrow:active{transform:scale(.94)}
+.case__count{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);white-space:nowrap}
+.case__count b{color:var(--violet-800);font-weight:700}
+
+/* все слайды лежат в одной grid-ячейке — контейнер сам подстраивается под самый высокий */
+.case__stage{position:relative;display:grid;margin-top:clamp(20px,2.6vw,30px)}
+.case__slide{
+  grid-area:1/1;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(10px);
+  transition:opacity .4s var(--ease-out2),transform .4s var(--ease-out2),visibility .4s;
+}
+.case__slide.is-current{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.case__headline{
+  margin-bottom:clamp(16px,2.2vw,24px);font-family:'Rubik',sans-serif;font-weight:600;
+  text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,2.6vw,34px);line-height:1.08;
+  color:var(--violet-900);
+}
+
+@media (max-width:640px){
+  .case__toolbar{flex-direction:column;align-items:stretch}
+  .case__nav{justify-content:center}
+}
+
 /* ---------- 11. СЕГМЕНТЫ ---------- */
 .segments{background:#fff}
 .seg__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:var(--gap)}
@@ -689,44 +732,6 @@ a,button,select{cursor:pointer}
 .grt b{display:block;font-size:28px;font-weight:600;color:var(--violet-600);letter-spacing:-.03em;margin-bottom:14px}
 .grt h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
 .grt p{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.6}
-
-/* ---------- 13. КАЛЬКУЛЯТОР ---------- */
-.calc{background:var(--violet-900);color:#fff;position:relative;overflow:hidden}
-.calc::before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(124,58,237,.35);filter:blur(120px);top:-220px;right:-160px}
-.calc__inner{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.calc .section__title{color:#fff}
-.calc .section__lead{color:rgba(255,255,255,.72)}
-.calc .tag{background:rgba(255,255,255,.12);color:#fff}
-.calc__list{margin-top:24px;display:grid;gap:11px}
-.calc__list li{position:relative;padding-left:28px;color:rgba(255,255,255,.85);font-size:14.5px}
-.calc__list li::before{
-  content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;
-  background:rgba(255,255,255,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6.5 4.8 9 10 3.5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
-}
-.calcbox{background:#fff;color:var(--ink);border-radius:24px;padding:30px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
-.calcbox__row{margin-bottom:16px}
-.calcbox__row label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:7px}
-.calcbox__cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.calcbox input,.calcbox select{
-  width:100%;padding:13px 15px;border-radius:var(--radius-sm);border:1px solid var(--violet-200);
-  background:var(--lilac-bg);font-weight:600;outline:none;min-height:48px;
-  transition:border-color var(--t-fast),box-shadow var(--t-fast),background var(--t-fast);
-}
-.calcbox input:focus,.calcbox select:focus{border-color:var(--violet-500);background:#fff;box-shadow:0 0 0 4px rgba(124,58,237,.14)}
-.seg-switch{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:var(--lilac-bg);padding:5px;border-radius:100px;border:1px solid var(--violet-200)}
-.seg__btn{border:0;background:transparent;padding:11px 4px;min-height:44px;border-radius:100px;font-weight:700;font-size:14px;color:var(--muted);transition:background var(--t-hover) var(--ease),color var(--t-fast)}
-.seg__btn.is-active{background:var(--violet-600);color:#fff;box-shadow:0 8px 18px -10px var(--violet-600)}
-
-.calcbox__lines{margin:20px 0 0;border-top:1px dashed var(--violet-200);padding-top:14px}
-.calcbox__lines li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;font-size:14px}
-.calcbox__lines span{color:var(--muted)}
-.calcbox__lines b{font-weight:700;font-variant-numeric:tabular-nums}
-.calcbox__result{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;background:var(--violet-100);border-radius:var(--radius-sm);padding:18px 20px;margin:16px 0}
-.calcbox__result span{display:block;font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:4px}
-.calcbox__result strong{font-size:27px;font-weight:700;letter-spacing:-.02em;color:var(--violet-700);font-variant-numeric:tabular-nums}
-.calcbox__days{text-align:right}
-.calcbox__days strong{font-size:16px}
-.calcbox__note{margin-top:12px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.5}
 
 /* ---------- 14. FAQ ---------- */
 .faq{background:#fff}
@@ -854,13 +859,11 @@ a,button,select{cursor:pointer}
    Ниже только то, что нельзя выразить текучестью: перестроения и смена поведения. */
 
 /* двухколоночные секции схлопываются сами */
-.estimate__inner,.case__inner,.quality__inner,.calc__inner,.faq__inner,.brief__inner{
+.estimate__inner,.case__inner,.quality__inner,.faq__inner,.brief__inner{
   grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));
 }
 .case__nums{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 .footer__top{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
-.calcbox__cols{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
-.seg-switch{grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}
 
 @media (max-width:1180px){
   .header__phone{display:none}
@@ -905,8 +908,7 @@ a,button,select{cursor:pointer}
   .irow{grid-template-columns:1fr 54px;gap:6px 12px}
   .irow__bar{grid-column:1/-1;grid-row:2}
   .case__row{grid-template-columns:1fr;gap:6px}
-  .calcbox,.briefform{padding:clamp(18px,4vw,24px)}
-  .pullquote{padding:clamp(18px,4vw,24px)}
+  .briefform{padding:clamp(18px,4vw,24px)}
   .acc__a p{padding-right:0}
   .section__cta{flex-direction:column}
   .section__cta span{text-align:center}

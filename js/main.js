@@ -216,7 +216,7 @@
   const dotsWrap = $('#dots');
   if (dotsWrap) {
     const blocks = $$('section[id]');
-    const darkBlocks = ['calc', 'brief'];   // первый экран теперь светлый
+    const darkBlocks = ['brief'];   // первый экран теперь светлый, calc удалён
 
     blocks.forEach((sec) => {
       const b = document.createElement('button');
@@ -258,6 +258,40 @@
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
+  /* ---------- Карусель кейсов ---------- */
+  const caseStage = $('#caseStage');
+  if (caseStage) {
+    const slides = $$('.case__slide', caseStage);
+    const tabs = $$('.case__tab');
+    const prevBtn = $('#casePrev');
+    const nextBtn = $('#caseNext');
+    const counter = $('#caseCurrent');
+    let current = 0;
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length; // закольцовано в обе стороны
+
+      slides.forEach((s, i) => s.classList.toggle('is-current', i === current));
+      tabs.forEach((t, i) => {
+        const active = i === current;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', String(active));
+        t.tabIndex = active ? 0 : -1;
+      });
+      counter.textContent = String(current + 1).padStart(2, '0');
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    tabs.forEach((tab) => tab.addEventListener('click', () => goTo(Number(tab.dataset.index))));
+
+    // стрелки влево/вправо переключают вкладки, как в стандартном ARIA tabs-паттерне
+    $$('.case__tabs')[0].addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); tabs[current].focus(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); tabs[current].focus(); }
+    });
+  }
+
   /* ---------- Аккордеон ---------- */
   $$('#acc .acc__item').forEach((item) => {
     const q = $('.acc__q', item);
@@ -280,90 +314,6 @@
     const open = $('#acc .acc__item.is-open');
     if (open) $('.acc__a', open).style.height = $('.acc__a', open).scrollHeight + 'px';
   });
-
-  /* ---------- Калькулятор партии ----------
-     Смета собирается по тем же статьям, что и в блоке «Смета до склада»:
-     товар → комиссия → фрахт → экспорт → пошлина → НДС → доставка по РФ  */
-  const calcForm = $('#calcForm');
-  if (calcForm) {
-    const segBtns = $$('#seg .seg__btn');
-    const invoice = $('#invoice');
-    const weight = $('#weight');
-    const volume = $('#volume');
-    const duty = $('#duty');
-    const feeSel = $('#fee');
-    const totalEl = $('#calcTotal');
-    const daysEl = $('#calcDays');
-    const lines = {};
-    $$('#calcLines b').forEach((b) => (lines[b.dataset.line] = b));
-
-    const EXPORT_FEE = 180;   // экспортное оформление в Китае, $
-    const VAT = 0.2;          // НДС
-    const RU_RATE = 0.35;     // доставка по России, $/кг
-    const VOL_WEIGHT = 167;   // объёмный вес, кг в м³
-
-    let rate = 2.9;
-    let days = '18–25';
-    let shownTotal = 0;
-
-    function money(v) {
-      return '$ ' + Math.round(v).toLocaleString('ru-RU');
-    }
-
-    function recalc() {
-      const goods = Math.max(parseFloat(invoice.value) || 0, 0);
-      const w = Math.max(parseFloat(weight.value) || 0, 0);
-      const v = Math.max(parseFloat(volume.value) || 0, 0);
-      const chargeable = Math.max(w, v * VOL_WEIGHT);
-
-      const fee = goods * parseFloat(feeSel.value);
-      const freight = chargeable * rate;
-      const exportFee = goods > 0 ? EXPORT_FEE : 0;
-      const dutySum = goods * parseFloat(duty.value);
-      const vat = (goods + freight + dutySum) * VAT;
-      const lastMile = w * RU_RATE;
-      const total = goods + fee + freight + exportFee + dutySum + vat + lastMile;
-
-      lines.goods.textContent = money(goods);
-      lines.fee.textContent = money(fee);
-      lines.freight.textContent = money(freight);
-      lines.export.textContent = money(exportFee);
-      lines.duty.textContent = money(dutySum);
-      lines.vat.textContent = money(vat);
-      lines.last.textContent = money(lastMile);
-
-      animateTotal(Math.round(total));
-      daysEl.textContent = days + ' дней';
-    }
-
-    let raf = null;
-    function animateTotal(target) {
-      cancelAnimationFrame(raf);
-      // первый расчёт показываем сразу: анимировать нечего, а нулём мигать не нужно
-      if (reduced || shownTotal === 0) { shownTotal = target; totalEl.textContent = money(target); return; }
-      const from = shownTotal;
-      const start = performance.now();
-      (function tick(now) {
-        const p = Math.min((now - start) / 500, 1);
-        shownTotal = Math.round(from + (target - from) * (1 - Math.pow(1 - p, 3)));
-        totalEl.textContent = money(shownTotal);
-        if (p < 1) raf = requestAnimationFrame(tick);
-      })(start);
-    }
-
-    segBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        segBtns.forEach((b) => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        rate = parseFloat(btn.dataset.rate);
-        days = btn.dataset.days;
-        recalc();
-      });
-    });
-    [invoice, weight, volume, duty, feeSel].forEach((el) => el.addEventListener('input', recalc));
-    calcForm.addEventListener('submit', (e) => e.preventDefault());
-    recalc();
-  }
 
   /* ---------- Маска телефона ---------- */
   const phone = $('#phone');
