@@ -96,7 +96,7 @@
   );
 
   // стаггер по сеткам: 70мс шаг, не длиннее 8 элементов подряд
-  $$('.bento, .cards, .problem__grid, .docs__grid, .seg__grid, .grt__grid, .case__nums, .magnets, .process__meta, .facts__grid')
+  $$('.bento, .cards, .problem__grid, .docs__grid, .seg__grid, .grt__grid, .case__nums, .magnets, .process__meta, .facts__grid, .team__grid')
     .forEach((grid) => {
       $$('.reveal', grid).forEach((el, i) => {
         if (!el.dataset.delay) el.dataset.delay = Math.min(i, 7) * 70;
