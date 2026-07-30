@@ -115,7 +115,11 @@
   <div class="container">
     <div class="section__head section__head--full">
       <span class="tag reveal">Полный цикл</span>
-      <h2 class="section__title section__title--line reveal" data-delay="60">Одна компания — полная ответственность<br>от поиска и аудита фабрики до доставки на ваш склад</h2>
+      <!-- desktop/планшет: авто-подгонка в 2 строки под ширину контейнера (см. fitLineTitles в main.js) -->
+      <h2 class="section__title section__title--line reveal only-desktop" data-delay="60">Одна компания — полная ответственность<br>от поиска и аудита фабрики до доставки на ваш склад</h2>
+      <!-- мобильная версия: фиксированная разбивка на 4 строки, без auto-fit —
+           при скрытии <br> на узких экранах слова "ответственность" и "от" склеивались без пробела -->
+      <h2 class="section__title reveal only-mobile" data-delay="60">Одна компания<br>полная ответственность<br>от поиска и аудита фабрики<br>до доставки на ваш склад</h2>
       <p class="section__lead reveal" data-delay="120">Полностью прозрачный расчёт + возможность оплаты 30/70</p>
     </div>
 
