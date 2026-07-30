@@ -439,6 +439,7 @@ a,button,select{cursor:pointer}
   content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;
   background:var(--violet-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6.5 4.8 9 10 3.5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
 }
+.card .checklist{margin-top:12px}
 
 /* ---------- 05. СРАВНЕНИЕ ---------- */
 .ctable{overflow-x:auto;border:1px solid var(--violet-200);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-soft)}
