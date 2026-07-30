@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
@@ -115,11 +115,10 @@
   <div class="container">
     <div class="section__head section__head--full">
       <span class="tag reveal">Полный цикл</span>
-      <!-- desktop/планшет: авто-подгонка в 2 строки под ширину контейнера (см. fitLineTitles в main.js) -->
+      <!-- десктоп/планшет: авто-подгонка в 2 строки под ширину контейнера (см. fitLineTitles в main.js) -->
       <h2 class="section__title section__title--line reveal only-desktop" data-delay="60">Одна компания — полная ответственность<br>от поиска и аудита фабрики до доставки на ваш склад</h2>
-      <!-- мобильная версия: фиксированная разбивка на 4 строки, без auto-fit —
-           при скрытии <br> на узких экранах слова "ответственность" и "от" склеивались без пробела -->
-      <h2 class="section__title reveal only-mobile" data-delay="60">Одна компания<br>полная ответственность<br>от поиска и аудита фабрики<br>до доставки на ваш склад</h2>
+      <!-- мобильная версия: короткий вариант из 2 строк -->
+      <h2 class="section__title reveal only-mobile" data-delay="60">От поиска и аудита фабрики<br>до доставки на ваш склад</h2>
       <p class="section__lead reveal" data-delay="120">Полностью прозрачный расчёт + возможность оплаты 30/70</p>
     </div>
 
@@ -1076,6 +1075,6 @@
 <a href="#brief" class="fab" id="fab" data-scroll-to="#brief"><span>Рассчитать<br>доставку</span></a>
 <div class="scrollbar" id="scrollbar"></div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>
