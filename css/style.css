@@ -280,7 +280,12 @@ a,button,select{cursor:pointer}
   font-size:clamp(26px,3.6vw + 9px,52px);
   line-height:1.04;letter-spacing:-.035em;font-weight:600;
   text-transform:uppercase;color:var(--violet-900);
-  max-width:18ch;
+  max-width:27ch;
+}
+/* текст первой строки длиннее прежнего — на узких экранах базовый clamp
+   упирается в пол 26px и не помещается в одну строку, ломая .line-анимацию */
+@media (max-width:899px){
+  .hero__title{font-size:clamp(19px,5.5vw + 1.4px,52px)}
 }
 .hero__title .line{display:block;overflow:hidden;padding-bottom:.06em}
 .hero__title .line>span{display:block;transform:translateY(105%);transition:transform .9s var(--ease)}
