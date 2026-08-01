@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://funrw1234-del.github.io/lanmei-test/sitemap.xml
