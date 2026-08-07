@@ -526,14 +526,22 @@
       </div>
 
       <div class="briefform__hint" id="briefHint" hidden>
-        При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+        При закупках до $5 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+      </div>
+
+      <!-- honeypot: невидимое обычным пользователям поле-ловушка для ботов.
+           Не position:absolute с уводом за экран — это создавало горизонтальный
+           скролл страницы. Схлопываем высоту/ширину в потоке документа. -->
+      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+        <label for="website">Оставьте это поле пустым</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
       </div>
 
       <button type="submit" class="btn btn--white btn--block btn--glow magnetic">Отправить бриф</button>
       <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки данных</a>.</p>
       <div class="briefform__ok" id="leadOk">
-        <b>Бриф отправлен</b>
-        <span>Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
+        <b id="leadOkTitle">Бриф отправлен</b>
+        <span id="leadOkText">Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
       </div>
     </form>
   </div>
@@ -1168,6 +1176,8 @@
 <a href="#brief" class="fab" id="fab" data-scroll-to="#brief"><span>Рассчитать<br>доставку</span></a>
 <div class="scrollbar" id="scrollbar"></div>
 
-<script src="js/main.js?v=2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/forms-config.js?v=1"></script>
+<script src="js/main.js?v=3"></script>
 </body>
 </html>

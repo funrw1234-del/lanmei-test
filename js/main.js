@@ -335,24 +335,30 @@
     });
   }
 
-  /* ---------- Подсказка о пороге $3 000 ---------- */
+  /* ---------- Подсказка о пороге $5 000 ---------- */
   const budget = $('#budget');
   const hint = $('#briefHint');
   if (budget && hint) {
     budget.addEventListener('change', () => {
-      hint.hidden = budget.value !== 'до $3 000';
+      hint.hidden = budget.value !== 'до $5 000';
     });
   }
 
-  /* ---------- Бриф ---------- */
+  /* ---------- Бриф: отправка на почту (EmailJS) + в Telegram (Cloudflare Worker) ---------- */
   const leadForm = $('#leadForm');
   if (leadForm) {
     const submitBtn = $('button[type="submit"]', leadForm);
+    const cfg = window.LANMEI_FORMS_CONFIG || {};
     const required = [
       { sel: '#name', min: 2 },
       { sel: '#phone', min: 6 },
       { sel: '#sku', min: 2 }
     ];
+
+    // EmailJS требует однократную инициализацию публичным ключом
+    if (window.emailjs && cfg.emailjs && !cfg.emailjs.publicKey.startsWith('ЗАМЕНИТЕ')) {
+      emailjs.init({ publicKey: cfg.emailjs.publicKey });
+    }
 
     function validate(input, min) {
       const valid = input.value.trim().length >= min;
@@ -369,7 +375,36 @@
       });
     });
 
-    leadForm.addEventListener('submit', (e) => {
+    function showResult(ok, title, text) {
+      const box = $('#leadOk');
+      $('#leadOkTitle').textContent = title;
+      $('#leadOkText').textContent = text;
+      box.classList.toggle('is-error', !ok);
+      box.classList.add('is-visible');
+      setTimeout(() => box.classList.remove('is-visible'), 7000);
+    }
+
+    async function sendToEmail(data) {
+      if (!window.emailjs || !cfg.emailjs || cfg.emailjs.serviceId.startsWith('ЗАМЕНИТЕ')) {
+        throw new Error('EmailJS не настроен');
+      }
+      return emailjs.send(cfg.emailjs.serviceId, cfg.emailjs.templateId, data);
+    }
+
+    async function sendToTelegram(data) {
+      if (!cfg.telegramWorkerUrl || cfg.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
+        throw new Error('Telegram-релей не настроен');
+      }
+      const res = await fetch(cfg.telegramWorkerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('Telegram relay ответил ошибкой: ' + res.status);
+      return res;
+    }
+
+    leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       let firstBad = null;
 
@@ -380,25 +415,38 @@
 
       if (firstBad) { firstBad.focus(); return; }
 
+      // honeypot: если скрытое поле заполнено — это бот, тихо "успешно" выходим
+      const hp = $('#website');
+      if (hp && hp.value.trim()) {
+        leadForm.reset();
+        return;
+      }
+
       submitBtn.classList.add('is-loading');
 
-      setTimeout(() => {
-        // TODO: подставить отправку в CRM / Telegram-бот / на бэкенд
-        console.log('Бриф:', {
-          name: $('#name').value,
-          phone: $('#phone').value,
-          sku: $('#sku').value,
-          budget: budget.value,
-          scheme: $('#scheme').value,
-          msg: $('#msg').value
-        });
+      const data = {
+        formType: 'Бриф с сайта Lanmei',
+        name: $('#name').value,
+        phone: $('#phone').value,
+        sku: $('#sku').value,
+        budget: budget.value,
+        scheme: $('#scheme').value,
+        msg: $('#msg').value
+      };
 
-        submitBtn.classList.remove('is-loading');
-        $('#leadOk').classList.add('is-visible');
+      const results = await Promise.allSettled([sendToEmail(data), sendToTelegram(data)]);
+      const anyOk = results.some((r) => r.status === 'fulfilled');
+      results.forEach((r) => { if (r.status === 'rejected') console.warn('Отправка брифа:', r.reason); });
+
+      submitBtn.classList.remove('is-loading');
+
+      if (anyOk) {
+        showResult(true, 'Бриф отправлен', 'Ответим в течение 2 часов, смету пришлём за 48 часов.');
         leadForm.reset();
         hint.hidden = true;
-        setTimeout(() => $('#leadOk').classList.remove('is-visible'), 6000);
-      }, 700);
+      } else {
+        showResult(false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67, либо напишите на hello@lanmei.ru.');
+      }
     });
 
     $$('.field input, .field textarea', leadForm).forEach((el) => {

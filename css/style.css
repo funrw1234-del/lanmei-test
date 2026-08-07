@@ -845,6 +845,7 @@ a,button,select{cursor:pointer}
 .briefform__ok b{font-size:21px;font-weight:600;color:var(--violet-700);font-family:'Rubik',sans-serif}
 .briefform__ok span{font-size:15px;color:var(--muted)}
 .briefform__ok.is-visible{opacity:1;visibility:visible;transform:scale(1)}
+.briefform__ok.is-error b{color:var(--danger)}
 
 /* ---------- 16. ФУТЕР ---------- */
 .footer{background:var(--violet-900);color:rgba(255,255,255,.7);padding:64px 0 28px}
