@@ -267,6 +267,7 @@ a,button,select{cursor:pointer}
 }
 .hero__inner{display:flex;flex-direction:column;align-items:center;text-align:center}
 
+.hero__badges{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px}
 .hero__badge{
   display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:100px;
   background:var(--violet-100);border:1px solid var(--violet-200);color:var(--violet-700);
