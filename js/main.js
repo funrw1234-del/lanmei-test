@@ -292,6 +292,99 @@
     });
   }
 
+  /* ---------- Мини-галерея фото внутри кейса ----------
+     Фото ищутся по имени 1.jpg, 2.jpg, 3.jpg... в папке кейса —
+     подряд, без пропусков. Пока фото нет, виден плейсхолдер. */
+  $$('[data-gallery]').forEach((figure) => {
+    const caseSlug = figure.dataset.case;
+    const altBase = figure.dataset.alt || '';
+    const slidesWrap = $('.gallery__slides', figure);
+    const placeholderSlide = $('.gallery__slide', slidesWrap);
+    const prevBtn = $('.gallery__arrow--prev', figure);
+    const nextBtn = $('.gallery__arrow--next', figure);
+    const dotsWrap = $('.gallery__dots', figure);
+    const MAX_PROBE = 12;
+    const found = [];
+
+    function probe(n) {
+      if (n > MAX_PROBE) return finish();
+      const img = new Image();
+      img.onload = () => { found.push(n); probe(n + 1); };
+      img.onerror = finish;
+      img.src = `photos/cases/${caseSlug}/${n}.jpg`;
+    }
+
+    function finish() {
+      if (!found.length) return; // фото ещё не добавлены — оставляем плейсхолдер
+      buildGallery();
+    }
+
+    function buildGallery() {
+      placeholderSlide.remove();
+      let current = 0;
+      const dots = [];
+
+      const slides = found.map((n, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'gallery__slide' + (i === 0 ? ' is-current' : '');
+        const img = document.createElement('img');
+        img.src = `photos/cases/${caseSlug}/${n}.jpg`;
+        img.alt = altBase;
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        img.decoding = 'async';
+        slide.appendChild(img);
+        slidesWrap.appendChild(slide);
+        return slide;
+      });
+
+      function goTo(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((s, i) => s.classList.toggle('is-current', i === current));
+        dots.forEach((d, i) => d.classList.toggle('is-current', i === current));
+      }
+
+      if (slides.length > 1) {
+        prevBtn.hidden = false;
+        nextBtn.hidden = false;
+        dotsWrap.hidden = false;
+
+        slides.forEach((_, i) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', `Фото ${i + 1} из ${slides.length}`);
+          if (i === 0) b.classList.add('is-current');
+          b.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(b);
+          dots.push(b);
+        });
+
+        prevBtn.addEventListener('click', () => goTo(current - 1));
+        nextBtn.addEventListener('click', () => goTo(current + 1));
+
+        // свайп на тач-устройствах
+        let touchX = null;
+        figure.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        figure.addEventListener('touchend', (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+          touchX = null;
+        });
+
+        // стрелки клавиатуры, когда в фокусе сама галерея
+        figure.tabIndex = 0;
+        figure.setAttribute('role', 'group');
+        figure.setAttribute('aria-label', 'Фотогалерея кейса');
+        figure.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+        });
+      }
+    }
+
+    probe(1);
+  });
+
   /* ---------- Аккордеон ---------- */
   $$('#acc .acc__item').forEach((item) => {
     const q = $('.acc__q', item);
@@ -315,14 +408,14 @@
     if (open) $('.acc__a', open).style.height = $('.acc__a', open).scrollHeight + 'px';
   });
 
-  /* ---------- Маска телефона ---------- */
-  const phone = $('#phone');
-  if (phone) {
-    phone.addEventListener('input', () => {
-      const v = phone.value;
-      if (v.startsWith('@') || /[a-zA-Zа-яА-Я]/.test(v)) return; // Telegram-ник не трогаем
+  /* ---------- Маска телефона (общая для всех форм) ---------- */
+  function applyPhoneMask(input, { allowText = false } = {}) {
+    if (!input) return;
+    input.addEventListener('input', () => {
+      const v = input.value;
+      if (allowText && (v.startsWith('@') || /[a-zA-Zа-яА-Я]/.test(v))) return; // Telegram-ник не трогаем
       let d = v.replace(/\D/g, '');
-      if (!d) { phone.value = ''; return; }
+      if (!d) { input.value = ''; return; }
       if (d[0] === '8') d = '7' + d.slice(1);
       if (d[0] !== '7') d = '7' + d;
       d = d.slice(0, 11);
@@ -331,8 +424,47 @@
       if (d.length >= 5) out += ') ' + d.slice(4, 7);
       if (d.length >= 8) out += '-' + d.slice(7, 9);
       if (d.length >= 10) out += '-' + d.slice(9, 11);
-      phone.value = out;
+      input.value = out;
     });
+  }
+  applyPhoneMask($('#phone'), { allowText: true }); // «Телефон или Telegram» — буквы/@ не трогаем
+
+  /* ---------- Отправка форм: почта (EmailJS) + Telegram (Cloudflare Worker) — общее для всех форм ---------- */
+  const FORMS_CFG = window.LANMEI_FORMS_CONFIG || {};
+  if (window.emailjs && FORMS_CFG.emailjs && !FORMS_CFG.emailjs.publicKey.startsWith('ЗАМЕНИТЕ')) {
+    emailjs.init({ publicKey: FORMS_CFG.emailjs.publicKey });
+  }
+
+  // templateId по умолчанию — шаблон брифа; для других форм передаётм свой,
+  // чтобы в письме не оставалось пустых строк от чужих полей
+  async function sendToEmail(data, templateId) {
+    const tid = templateId || (FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateId);
+    if (!window.emailjs || !FORMS_CFG.emailjs || !tid || tid.startsWith('ЗАМЕНИТЕ')) {
+      throw new Error('EmailJS не настроен');
+    }
+    return emailjs.send(FORMS_CFG.emailjs.serviceId, tid, data);
+  }
+
+  async function sendToTelegram(data) {
+    if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
+      throw new Error('Telegram-релей не настроен');
+    }
+    const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('Telegram relay ответил ошибкой: ' + res.status);
+    return res;
+  }
+
+  // box — элемент .briefform__ok с <b> заголовком и <span> текстом внутри
+  function showFormResult(box, ok, title, text) {
+    $('b', box).textContent = title;
+    $('span', box).textContent = text;
+    box.classList.toggle('is-error', !ok);
+    box.classList.add('is-visible');
+    setTimeout(() => box.classList.remove('is-visible'), 7000);
   }
 
   /* ---------- Подсказка о пороге $5 000 ---------- */
@@ -348,17 +480,11 @@
   const leadForm = $('#leadForm');
   if (leadForm) {
     const submitBtn = $('button[type="submit"]', leadForm);
-    const cfg = window.LANMEI_FORMS_CONFIG || {};
     const required = [
       { sel: '#name', min: 2 },
       { sel: '#phone', min: 6 },
       { sel: '#sku', min: 2 }
     ];
-
-    // EmailJS требует однократную инициализацию публичным ключом
-    if (window.emailjs && cfg.emailjs && !cfg.emailjs.publicKey.startsWith('ЗАМЕНИТЕ')) {
-      emailjs.init({ publicKey: cfg.emailjs.publicKey });
-    }
 
     function validate(input, min) {
       const valid = input.value.trim().length >= min;
@@ -374,35 +500,6 @@
         if (input.value.trim()) validate(input, min);
       });
     });
-
-    function showResult(ok, title, text) {
-      const box = $('#leadOk');
-      $('#leadOkTitle').textContent = title;
-      $('#leadOkText').textContent = text;
-      box.classList.toggle('is-error', !ok);
-      box.classList.add('is-visible');
-      setTimeout(() => box.classList.remove('is-visible'), 7000);
-    }
-
-    async function sendToEmail(data) {
-      if (!window.emailjs || !cfg.emailjs || cfg.emailjs.serviceId.startsWith('ЗАМЕНИТЕ')) {
-        throw new Error('EmailJS не настроен');
-      }
-      return emailjs.send(cfg.emailjs.serviceId, cfg.emailjs.templateId, data);
-    }
-
-    async function sendToTelegram(data) {
-      if (!cfg.telegramWorkerUrl || cfg.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
-        throw new Error('Telegram-релей не настроен');
-      }
-      const res = await fetch(cfg.telegramWorkerUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      if (!res.ok) throw new Error('Telegram relay ответил ошибкой: ' + res.status);
-      return res;
-    }
 
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -441,16 +538,100 @@
       submitBtn.classList.remove('is-loading');
 
       if (anyOk) {
-        showResult(true, 'Бриф отправлен', 'Ответим в течение 2 часов, смету пришлём за 48 часов.');
+        showFormResult($('#leadOk'), true, 'Бриф отправлен', 'Ответим в течение 2 часов, смету пришлём за 48 часов.');
         leadForm.reset();
         hint.hidden = true;
       } else {
-        showResult(false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67, либо напишите на hello@lanmei.ru.');
+        showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67, либо напишите на hello@lanmei.ru.');
       }
     });
 
     $$('.field input, .field textarea', leadForm).forEach((el) => {
       el.addEventListener('input', () => el.closest('.field').classList.remove('is-error'));
+    });
+  }
+
+  /* ---------- Модалка: обратный звонок ---------- */
+  const callbackModal = $('#callbackModal');
+  const openCallbackBtn = $('#openCallback');
+  if (callbackModal && openCallbackBtn) {
+    const closeBtns = $$('[data-modal-close]', callbackModal);
+    const cbForm = $('#callbackForm');
+    const cbPhone = $('#cbPhone');
+    const cbName = $('#cbName');
+    let lastFocused = null;
+
+    applyPhoneMask(cbPhone); // строго телефон, без исключения под Telegram-ник
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') closeCallback();
+    }
+
+    function openCallback() {
+      lastFocused = document.activeElement;
+      callbackModal.hidden = false;
+      setTimeout(() => callbackModal.classList.add('is-open'), 10);
+      document.body.classList.add('modal-open');
+      cbName.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+
+    function closeCallback() {
+      callbackModal.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      document.removeEventListener('keydown', onKeydown);
+      setTimeout(() => { callbackModal.hidden = true; }, 350);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    openCallbackBtn.addEventListener('click', openCallback);
+    closeBtns.forEach((b) => b.addEventListener('click', closeCallback));
+
+    function phoneValid() {
+      const digits = cbPhone.value.replace(/\D/g, '');
+      return digits.length === 11 && digits[0] === '7';
+    }
+
+    function validateCbPhone() {
+      const valid = phoneValid();
+      cbPhone.closest('.field').classList.toggle('is-error', !valid);
+      cbPhone.setAttribute('aria-invalid', String(!valid));
+      return valid;
+    }
+
+    cbPhone.addEventListener('blur', () => { if (cbPhone.value.trim()) validateCbPhone(); });
+    cbPhone.addEventListener('input', () => cbPhone.closest('.field').classList.remove('is-error'));
+
+    cbForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateCbPhone()) { cbPhone.focus(); return; }
+
+      // honeypot
+      const hp = $('#cbWebsite');
+      if (hp && hp.value.trim()) { cbForm.reset(); closeCallback(); return; }
+
+      const submitBtn = $('button[type="submit"]', cbForm);
+      submitBtn.classList.add('is-loading');
+
+      const data = {
+        formType: 'Обратный звонок с сайта Lanmei',
+        name: cbName.value.trim() || 'Не указано',
+        phone: cbPhone.value
+      };
+
+      const cbTemplateId = FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateIdCallback;
+      const results = await Promise.allSettled([sendToEmail(data, cbTemplateId), sendToTelegram(data)]);
+      const anyOk = results.some((r) => r.status === 'fulfilled');
+      results.forEach((r) => { if (r.status === 'rejected') console.warn('Обратный звонок:', r.reason); });
+
+      submitBtn.classList.remove('is-loading');
+
+      if (anyOk) {
+        showFormResult($('#callbackOk'), true, 'Заявка принята', 'Перезвоним в течение 15 минут в рабочее время.');
+        cbForm.reset();
+      } else {
+        showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67.');
+      }
     });
   }
 })();

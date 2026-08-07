@@ -91,7 +91,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=5">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -126,7 +126,7 @@
 
     <div class="header__actions">
       <a href="tel:+74951234567" class="header__phone">+7 (495) 123-45-67</a>
-      <a href="#brief" class="btn btn--primary btn--sm" data-scroll-to="#brief">Рассчитать доставку</a>
+      <button type="button" class="btn btn--primary btn--sm" id="openCallback">Заказать звонок</button>
       <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -836,17 +836,27 @@
       <article class="case__slide is-current" id="caseSlide0" data-index="0" role="tabpanel" aria-labelledby="caseTab0">
         <h3 class="case__headline">≈ $52 000 экономии на одном контейнере</h3>
 
-        <figure class="ph ph--16 reveal case__shot">
-          <!-- <img src="img/case-1-santehnika.jpg" alt="Партия смесителей на складе после приёмки" width="1600" height="900" loading="lazy" decoding="async"> -->
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            <p class="ph__title">Партия смесителей на складе</p>
-            <p class="ph__hint">Фото приёмки на складе клиента или контейнера под выгрузкой — кадр должен подтверждать цифру рядом.</p>
-            <span class="ph__spec">1600 × 900 · 16:9</span>
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="santehnika" data-alt="Партия смесителей на складе после приёмки">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <p class="ph__title">Партия смесителей на складе</p>
+                <p class="ph__hint">Фото приёмки на складе клиента или контейнера под выгрузкой — кадр должен подтверждать цифру рядом.</p>
+                <span class="ph__spec">1600 × 900 · 16:9</span>
+              </div>
+            </div>
           </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
         </figure>
 
         <div class="case__inner">
@@ -871,17 +881,27 @@
       <article class="case__slide" id="caseSlide1" data-index="1" role="tabpanel" aria-labelledby="caseTab1">
         <h3 class="case__headline">Топ-1 продаж и 27 артикулов в категории</h3>
 
-        <figure class="ph ph--16 reveal case__shot">
-          <!-- <img src="img/case-2-roomlogic.jpg" alt="Сенсорные мусорные баки Roomlogic на складе" width="1600" height="900" loading="lazy" decoding="async"> -->
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            <p class="ph__title">Умные мусорные баки Roomlogic</p>
-            <p class="ph__hint">Сенсорные баки на складе или на фабрике — категория выросла с обычных пластиковых вёдер.</p>
-            <span class="ph__spec">1600 × 900 · 16:9</span>
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="roomlogic" data-alt="Сенсорные мусорные баки Roomlogic на складе">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <p class="ph__title">Умные мусорные баки Roomlogic</p>
+                <p class="ph__hint">Сенсорные баки на складе или на фабрике — категория выросла с обычных пластиковых вёдер.</p>
+                <span class="ph__spec">1600 × 900 · 16:9</span>
+              </div>
+            </div>
           </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
         </figure>
 
         <div class="case__inner">
@@ -906,17 +926,27 @@
       <article class="case__slide" id="caseSlide2" data-index="2" role="tabpanel" aria-labelledby="caseTab2">
         <h3 class="case__headline">64 контейнера сухофруктов и орехов в год</h3>
 
-        <figure class="ph ph--16 reveal case__shot">
-          <!-- <img src="img/case-3-suhofrukty.jpg" alt="Отгрузка сухофруктов и орехов на складе" width="1600" height="900" loading="lazy" decoding="async"> -->
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            <p class="ph__title">Фабрики и выставки</p>
-            <p class="ph__hint">Видео и фото с заводов в Узбекистане и с профильных выставок — в разработке.</p>
-            <span class="ph__spec">1600 × 900 · 16:9</span>
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="suhofrukty" data-alt="Отгрузка сухофруктов и орехов на складе">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <p class="ph__title">Фабрики и выставки</p>
+                <p class="ph__hint">Видео и фото с заводов в Узбекистане и с профильных выставок — в разработке.</p>
+                <span class="ph__spec">1600 × 900 · 16:9</span>
+              </div>
+            </div>
           </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
         </figure>
 
         <div class="case__inner">
@@ -941,17 +971,27 @@
       <article class="case__slide" id="caseSlide3" data-index="3" role="tabpanel" aria-labelledby="caseTab3">
         <h3 class="case__headline">24 единицы техники в три страны</h3>
 
-        <figure class="ph ph--16 reveal case__shot">
-          <!-- <img src="img/case-4-tehnika.jpg" alt="Погрузка сельскохозяйственной техники" width="1600" height="900" loading="lazy" decoding="async"> -->
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            <p class="ph__title">Погрузка сельхозтехники</p>
-            <p class="ph__hint">Видео погрузки уже есть — нужен статичный кадр техники на площадке или в порту.</p>
-            <span class="ph__spec">1600 × 900 · 16:9</span>
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="tehnika" data-alt="Погрузка сельскохозяйственной техники">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <p class="ph__title">Погрузка сельхозтехники</p>
+                <p class="ph__hint">Видео погрузки уже есть — нужен статичный кадр техники на площадке или в порту.</p>
+                <span class="ph__spec">1600 × 900 · 16:9</span>
+              </div>
+            </div>
           </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
         </figure>
 
         <div class="case__inner">
@@ -1030,7 +1070,7 @@
   <div class="container">
     <div class="section__head">
       <span class="tag reveal">Кому подходит</span>
-      <h2 class="section__title reveal" data-delay="60">С кем мы работаем</h2>
+      <h2 class="section__title section__title--line reveal" data-delay="60">С кем мы работаем</h2>
       <p class="section__lead reveal" data-delay="120">Порог входа — закупки от $5 000. Ниже этого объёма белая схема экономически не окупается, и мы честно об этом говорим. Или делаем сравнительный расчёт — и вы сами увидите экономию.</p>
     </div>
 
@@ -1176,8 +1216,48 @@
 <a href="#brief" class="fab" id="fab" data-scroll-to="#brief"><span>Рассчитать<br>доставку</span></a>
 <div class="scrollbar" id="scrollbar"></div>
 
+<!-- ══════════ МОДАЛКА: ОБРАТНЫЙ ЗВОНОК ══════════ -->
+<div class="modal" id="callbackModal" hidden>
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
+    <button type="button" class="modal__close" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+
+    <h3 class="modal__title" id="callbackTitle">Закажите обратный звонок</h3>
+    <p class="modal__sub">Перезвоним в течение 15 минут в рабочее время и обсудим вашу поставку.</p>
+
+    <form id="callbackForm" novalidate>
+      <div class="field">
+        <input type="text" id="cbName" placeholder=" " autocomplete="name" aria-describedby="err-cbName">
+        <label for="cbName">Ваше имя</label>
+        <span class="field__err" id="err-cbName">Укажите, как к вам обращаться</span>
+      </div>
+      <div class="field">
+        <input type="tel" id="cbPhone" placeholder=" " required autocomplete="tel" inputmode="tel" aria-describedby="err-cbPhone">
+        <label for="cbPhone">Телефон</label>
+        <span class="field__err" id="err-cbPhone">Введите корректный номер телефона</span>
+      </div>
+
+      <!-- honeypot -->
+      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+        <label for="cbWebsite">Оставьте это поле пустым</label>
+        <input type="text" id="cbWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block btn--glow magnetic">Заказать звонок</button>
+      <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки данных</a>.</p>
+
+      <div class="briefform__ok" id="callbackOk">
+        <b id="callbackOkTitle">Заявка принята</b>
+        <span id="callbackOkText">Перезвоним в течение 15 минут в рабочее время.</span>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/forms-config.js?v=1"></script>
-<script src="js/main.js?v=3"></script>
+<script src="js/main.js?v=7"></script>
 </body>
 </html>

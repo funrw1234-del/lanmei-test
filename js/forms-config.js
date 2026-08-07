@@ -9,7 +9,8 @@ window.LANMEI_FORMS_CONFIG = {
   emailjs: {
     publicKey: 'SQhMTxVRfRMbPODIb',
     serviceId: 'service_c8zqvjb',
-    templateId: 'template_hvldedk'
+    templateId: 'template_hvldedk', // шаблон формы брифа (#leadForm)
+    templateIdCallback: 'template_cu9j7qh' // отдельный шаблон для формы обратного звонка
   },
   telegramWorkerUrl: 'https://lanmei-forms.leonidpadalko1996.workers.dev/'
 };

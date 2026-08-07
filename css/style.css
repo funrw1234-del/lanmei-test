@@ -671,6 +671,37 @@ a,button,select{cursor:pointer}
 
 /* ---------- 10. КЕЙС ---------- */
 .case__shot{margin-bottom:var(--gap)}
+
+/* мини-галерея фото внутри кейса: свой стек слайдов поверх плейсхолдера.
+   Пока в папке кейса нет фото — виден только плейсхолдер, стрелки/точки
+   скрыты атрибутом hidden; JS открывает их, как только находит снимки. */
+.gallery__slides{position:absolute;inset:0;z-index:2}
+.gallery__slide{
+  position:absolute;inset:0;display:grid;place-items:center;
+  opacity:0;visibility:hidden;transition:opacity .4s var(--ease);
+}
+.gallery__slide.is-current{opacity:1;visibility:visible}
+.gallery__slide img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+.gallery__arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+  width:38px;height:38px;border-radius:50%;border:none;
+  background:rgba(20,10,40,.45);backdrop-filter:blur(4px);color:#fff;
+  display:grid;place-items:center;transition:background var(--t-fast),transform var(--t-fast);
+}
+.gallery__arrow svg{width:16px;height:16px}
+.gallery__arrow:hover{background:rgba(20,10,40,.7)}
+.gallery__arrow:active{transform:translateY(-50%) scale(.92)}
+.gallery__arrow--prev{left:12px}
+.gallery__arrow--next{right:12px}
+.gallery__dots{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;gap:6px;
+}
+.gallery__dots button{
+  width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);border:none;padding:0;
+  transition:background var(--t-fast),transform var(--t-fast);
+}
+.gallery__dots button.is-current{background:#fff;transform:scale(1.25)}
 .docs__shot{margin-top:var(--gap)}
 .case__inner{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:start}
 .case__main{background:#fff;border:1px solid var(--violet-200);border-radius:var(--radius);padding:12px 28px 26px;box-shadow:var(--shadow-soft)}
@@ -846,6 +877,35 @@ a,button,select{cursor:pointer}
 .briefform__ok span{font-size:15px;color:var(--muted)}
 .briefform__ok.is-visible{opacity:1;visibility:visible;transform:scale(1)}
 .briefform__ok.is-error b{color:var(--danger)}
+
+/* ---------- МОДАЛКА: ОБРАТНЫЙ ЗВОНОК ---------- */
+body.modal-open{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px}
+.modal[hidden]{display:none}
+.modal__overlay{
+  position:absolute;inset:0;background:rgba(20,10,40,.55);backdrop-filter:blur(3px);
+  opacity:0;transition:opacity .3s var(--ease);
+}
+.modal__panel{
+  position:relative;z-index:1;background:#fff;border-radius:24px;padding:34px 30px 30px;
+  max-width:440px;width:100%;box-shadow:0 40px 80px -40px rgba(0,0,0,.55);
+  opacity:0;transform:translateY(16px) scale(.98);
+  transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+.modal.is-open .modal__overlay{opacity:1}
+.modal.is-open .modal__panel{opacity:1;transform:none}
+.modal__close{
+  position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;flex:0 0 36px;
+  border:1px solid var(--violet-200);background:#fff;color:var(--violet-700);display:grid;place-items:center;
+  transition:background var(--t-fast),color var(--t-fast),border-color var(--t-fast);
+}
+.modal__close svg{width:16px;height:16px}
+.modal__close:hover{background:var(--violet-600);color:#fff;border-color:transparent}
+.modal__title{
+  font-family:'Rubik',sans-serif;font-size:var(--step-2);font-weight:600;letter-spacing:-.02em;
+  color:var(--violet-900);margin:0 0 8px;padding-right:36px;
+}
+.modal__sub{font-size:14px;color:var(--muted);line-height:1.5;margin:0 0 22px}
 
 /* ---------- 16. ФУТЕР ---------- */
 .footer{background:var(--violet-900);color:rgba(255,255,255,.7);padding:64px 0 28px}
