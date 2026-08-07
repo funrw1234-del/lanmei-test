@@ -139,6 +139,8 @@ a,button,select{cursor:pointer}
 }
 /* реальный снимок встанет ровно на место заглушки */
 .ph img{position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:cover}
+/* документ/отчёт с текстом и таблицей — не обрезаем cover'ом, показываем целиком */
+.ph--doc img{object-fit:contain;padding:14px;box-sizing:border-box;background:rgba(255,255,255,.04)}
 
 /* ---------- ПРЕЛОАДЕР ---------- */
 .preloader{position:fixed;inset:0;z-index:200;background:var(--violet-900);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
@@ -628,7 +630,20 @@ a,button,select{cursor:pointer}
 
 /* ---------- 08. КАЧЕСТВО ---------- */
 .quality__inner{display:grid;grid-template-columns:1fr .85fr;gap:56px;align-items:center}
+/* в двухколоночной раскладке (когда колонка ~400-560px) заголовок с
+   ручным переносом ("Аудит поставщика" / "и проверка товара") должен
+   укладываться в одну строку на сегмент — иначе он расползается на 4
+   строки. Ниже 929px колонки уже схлопнуты в одну (auto-fit), там
+   ширины достаточно и обычный --step-4 не переносится лишний раз. */
+@media (min-width:929px){
+  #quality .section__title{font-size:clamp(35px,3.7vw + 0.7px,48px)}
+}
 .qsteps{margin-top:28px;display:grid;gap:18px}
+
+/* заголовок блока "Документы" с ручным переносом ("Поставки в белую, это" /
+   "уверенность и спокойствие") должен укладываться в одну строку на сегмент
+   во всём диапазоне ширин — подобрано эмпирически под .section__head (56ch). */
+#docs .section__title{font-size:clamp(21px,5.56vw + 0.15px,33.5px)}
 .qstep{display:flex;gap:16px;align-items:flex-start}
 .qstep b{flex:0 0 40px;height:40px;border-radius:12px;background:var(--violet-100);color:var(--violet-600);display:grid;place-items:center;font-family:'Rubik',sans-serif;font-size:14px;font-weight:600}
 .qstep h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
