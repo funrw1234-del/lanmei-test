@@ -247,13 +247,19 @@ a,button,select{cursor:pointer}
 .logo__text{display:flex;flex-direction:column;line-height:1.1;font-weight:600;letter-spacing:.08em;font-size:17px}
 .logo__text b{display:inline;color:var(--violet-600);font-weight:600}
 .logo__text i{font-style:normal;font-size:10.5px;letter-spacing:.02em;opacity:.7;font-weight:400;margin-top:3px}
-.nav{display:flex;gap:24px;margin-left:auto;font-size:14.5px;font-weight:600}
+.nav{display:flex;gap:24px;margin-left:48px;font-size:14.5px;font-weight:600}
 .nav a{position:relative;opacity:.88;padding:4px 0;transition:opacity var(--t-fast)}
 .nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:currentColor;border-radius:2px;transition:width var(--t-hover) var(--ease)}
 .nav a:hover{opacity:1}
 .nav a:hover::after,.nav a.is-active::after{width:100%}
 .header__actions{display:flex;align-items:center;gap:14px}
-.header__phone{font-weight:700;font-size:14.5px;white-space:nowrap}
+/* иконки-мессенджеры в шапке вместо номера телефона */
+.header__social{
+  display:grid;place-items:center;width:32px;height:32px;flex:0 0 auto;
+  border-radius:50%;overflow:hidden;transition:transform var(--t-fast);
+}
+.header__social svg{width:100%;height:100%;display:block}
+a.header__social:hover{transform:translateY(-2px)}
 .burger{display:none;width:44px;height:44px;border:0;background:transparent;flex-direction:column;justify-content:center;gap:5px;padding:0}
 .burger span{display:block;height:2px;width:22px;background:currentColor;margin:0 auto;transition:transform .3s var(--ease),opacity var(--t-fast)}
 .burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -987,8 +993,7 @@ body.modal-open{overflow:hidden}
 .footer__top{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 
 @media (max-width:1180px){
-  .header__phone{display:none}
-  .nav{gap:clamp(12px,1.6vw,22px)}
+  .nav{gap:clamp(12px,1.6vw,22px);margin-left:clamp(16px,3vw,48px)}
 }
 
 /* Блоки ровно из четырёх карточек: auto-fit не умеет одновременно давать
