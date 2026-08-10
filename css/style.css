@@ -140,7 +140,7 @@ a,button,select{cursor:pointer}
 /* реальный снимок встанет ровно на место заглушки */
 .ph img{position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:cover}
 /* документ/отчёт с текстом и таблицей — не обрезаем cover'ом, показываем целиком */
-.ph--doc img{object-fit:contain;padding:14px;box-sizing:border-box;background:rgba(255,255,255,.04)}
+.ph--doc img{object-fit:cover}
 
 /* ---------- ПРЕЛОАДЕР ---------- */
 .preloader{position:fixed;inset:0;z-index:200;background:var(--violet-900);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
