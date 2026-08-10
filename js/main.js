@@ -19,6 +19,23 @@
     }, reduced ? 0 : 800);
   });
 
+  /* ---------- Cookie-уведомление ----------
+     Показываем один раз при первом визите (localStorage), не мешая
+     прелоадеру — с небольшой задержкой после загрузки страницы. */
+  const cookieBanner = $('#cookieBanner');
+  if (cookieBanner) {
+    const CONSENT_KEY = 'lanmei_cookie_consent';
+    if (!localStorage.getItem(CONSENT_KEY)) {
+      cookieBanner.hidden = false;
+      setTimeout(() => cookieBanner.classList.add('is-visible'), reduced ? 0 : 1400);
+    }
+    $('#cookieAccept').addEventListener('click', () => {
+      localStorage.setItem(CONSENT_KEY, '1');
+      cookieBanner.classList.remove('is-visible');
+      setTimeout(() => { cookieBanner.hidden = true; }, reduced ? 0 : 500);
+    });
+  }
+
   /* ---------- Плавный скролл ---------- */
   $$('[data-scroll-to]').forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -571,7 +588,7 @@
         leadForm.reset();
         hint.hidden = true;
       } else {
-        showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67, либо напишите на hello@lanmei.ru.');
+        showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
     });
 
@@ -659,7 +676,7 @@
         showFormResult($('#callbackOk'), true, 'Заявка принята', 'Перезвоним в течение 15 минут в рабочее время.');
         cbForm.reset();
       } else {
-        showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Позвоните нам напрямую: +7 (495) 123-45-67.');
+        showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram: t.me/lanmei_logistics.');
       }
     });
   }

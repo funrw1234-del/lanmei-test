@@ -1058,3 +1058,46 @@ body.modal-open{overflow:hidden}
   .reveal{opacity:1;transform:none}
   .pod{display:none}
 }
+
+/* ---------- COOKIE-УВЕДОМЛЕНИЕ ---------- */
+.cookie-banner{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:150;
+  max-width:640px;margin:0 auto;
+  background:#fff;border:1px solid var(--violet-200);border-radius:var(--radius);
+  box-shadow:var(--shadow-card);padding:18px 22px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  transform:translateY(140%);opacity:0;
+  transition:transform .5s var(--ease),opacity .5s var(--ease);
+}
+.cookie-banner.is-visible{transform:translateY(0);opacity:1}
+.cookie-banner p{margin:0;flex:1 1 260px;font-size:13.5px;line-height:1.55;color:var(--muted)}
+.cookie-banner a{color:var(--violet-700);text-decoration:underline;text-underline-offset:2px}
+.cookie-banner a:hover{color:var(--violet-600)}
+.cookie-banner__accept{flex:0 0 auto}
+@media (max-width:480px){
+  .cookie-banner{left:10px;right:10px;bottom:10px;padding:16px}
+}
+
+/* ---------- ЮРИДИЧЕСКАЯ СТРАНИЦА (privacy/index.html) ---------- */
+.legal-header{padding:18px 0;border-bottom:1px solid var(--violet-200);background:#fff}
+.legal-header__inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.legal-header__back{font-size:14px;font-weight:600;color:var(--violet-700);transition:opacity var(--t-fast)}
+.legal-header__back:hover{opacity:.7}
+
+.legal{padding:var(--pad-y) 0;background:var(--lilac-bg)}
+.legal__inner{max-width:760px}
+.legal h1{margin-top:14px;font-size:var(--step-3);font-weight:700;line-height:1.2}
+.legal__updated{margin-top:10px;color:var(--muted);font-size:14px}
+.legal section{margin-top:clamp(28px,4vw,44px);padding-top:clamp(28px,4vw,44px);border-top:1px solid var(--violet-200)}
+.legal h2{font-size:var(--step-1);font-weight:700;color:var(--violet-800)}
+.legal h4{margin-top:18px;font-size:15px;font-weight:700;color:var(--violet-700)}
+.legal p{margin-top:12px;line-height:1.65}
+.legal h2+p,.legal h4+p{margin-top:10px}
+.legal ul{list-style:none;margin-top:10px;display:grid;gap:8px}
+.legal ul li{position:relative;padding-left:18px;line-height:1.6}
+.legal ul li::before{content:"—";position:absolute;left:0;color:var(--violet-400)}
+.legal a{color:var(--violet-700);text-decoration:underline;text-underline-offset:2px}
+.legal a:hover{color:var(--violet-600)}
+
+.legal-footer{padding:22px 0;border-top:1px solid var(--violet-200);background:#fff;color:var(--muted);font-size:13px}
+.legal-footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
