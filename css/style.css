@@ -149,6 +149,10 @@ a,button,select{cursor:pointer}
 .preloader{position:fixed;inset:0;z-index:200;background:var(--violet-900);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
 /* pointer-events снимаем сразу: пока идёт затухание, прелоадер ловил клики */
 .preloader.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.preloader__mark{
+  display:block;width:64px;height:64px;margin:0 auto 16px;border-radius:16px;overflow:hidden;
+  background:#fff;box-shadow:0 10px 30px -12px rgba(0,0,0,.45);object-fit:cover;
+}
 .preloader__logo{color:#fff;font-weight:700;font-size:24px;letter-spacing:.18em;text-align:center;margin-bottom:18px;font-family:'Rubik',sans-serif}
 .preloader__logo span{color:var(--violet-400)}
 .preloader__bar{width:180px;height:3px;border-radius:3px;background:rgba(255,255,255,.15);overflow:hidden}
