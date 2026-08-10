@@ -137,6 +137,9 @@ a,button,select{cursor:pointer}
   .ph--wide{aspect-ratio:16/10}
   .ph--16,.ph--32{aspect-ratio:4/3}
 }
+/* разворот документов — реальное фото шире 3:2, подгоняем рамку под него,
+   чтобы cover не обрезал таблицы по краям */
+.docs__shot{aspect-ratio:16/9}
 /* реальный снимок встанет ровно на место заглушки */
 .ph img{position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:cover}
 /* документ/отчёт с текстом и таблицей — не обрезаем cover'ом, показываем целиком */
