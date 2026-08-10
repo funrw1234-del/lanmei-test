@@ -775,25 +775,23 @@ a,button,select{cursor:pointer}
 /* ---------- 13. КОМАНДА ---------- */
 .team__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:var(--gap)}
 .team__card{
-  background:#fff;border:1px solid rgba(124,58,237,.12);border-radius:var(--radius);padding:28px 24px;
+  background:#fff;border:1px solid rgba(124,58,237,.12);border-radius:var(--radius);overflow:hidden;
   box-shadow:var(--shadow-soft);text-align:center;
   transition:transform var(--t-hover) var(--ease),box-shadow var(--t-hover) var(--ease),border-color var(--t-fast);
 }
 .team__card:hover{transform:translateY(-6px);box-shadow:var(--shadow-card);border-color:var(--violet-300)}
-.team__card h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
-.team__card p{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.55}
+.team__card h3{margin:20px 24px 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.team__card p{margin:8px 24px 24px;color:var(--muted);font-size:14px;line-height:1.55}
 
-/* круглая заглушка фото сотрудника — лёгкая версия .ph без описательного текста,
-   которое не поместилось бы в маленький круг */
+/* фото сотрудника на всю ширину карточки, пропорции под реальные портретные
+   фото (3:4) — вместо маленького круглого плейсхолдера */
 .avatar{
-  position:relative;width:112px;height:112px;margin:0 auto 18px;border-radius:50%;overflow:hidden;
+  position:relative;width:100%;aspect-ratio:3/4;
   background:radial-gradient(120% 90% at 30% 20%,rgba(167,139,250,.35),transparent 60%),linear-gradient(150deg,var(--violet-800),var(--violet-900));
-  border:1px dashed rgba(196,181,253,.5);
   display:grid;place-items:center;color:var(--violet-300);
 }
-.avatar svg{width:44px;height:44px}
+.avatar svg{width:56px;height:56px}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.team__card:hover .avatar{border-color:var(--violet-400)}
 
 /* ---------- 11. СЕГМЕНТЫ ---------- */
 .segments{background:#fff}
