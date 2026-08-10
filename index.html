@@ -91,7 +91,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -550,7 +550,7 @@
 <!-- ══════════ 07. ЭТАПЫ ПОСТАВКИ ══════════ -->
 <section class="process section chamfer-tb" id="process">
   <div class="container">
-    <div class="section__head section__head--left">
+    <div class="section__head">
       <span class="tag reveal">Процесс</span>
       <h2 class="section__title reveal" data-delay="60">Как проходит поставка</h2>
       <p class="section__lead reveal" data-delay="120">Единый календарь ответственности: на каждом этапе видно действие, артефакт и того, кто за него отвечает.</p>
@@ -657,53 +657,38 @@
 
 <!-- ══════════ 09. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
 <section class="quality section" id="quality">
-  <div class="container quality__inner">
-    <div class="quality__text">
+  <div class="container">
+    <div class="section__head section__head--full">
       <span class="tag reveal">Качество</span>
       <h2 class="section__title reveal" data-delay="60">Аудит поставщика<br>и проверка товара</h2>
       <p class="section__lead reveal" data-delay="120">Контролируем ключевые измеримые параметры, выборку, статус каждого пункта, фиксируем отклонения и решаем вопрос с поставщиком.</p>
-
-      <div class="qsteps reveal" data-delay="180">
-        <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
-        <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
-        <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
-        <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
-      </div>
     </div>
 
-    <div class="quality__side">
-      <figure class="ph ph--43 ph--doc reveal" data-delay="80">
-        <img src="photos/proverka.png" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
-        <div class="ph__inner">
-          <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
-            <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <p class="ph__title">Инспекция на фабрике</p>
-          <p class="ph__hint">Живой кадр с производства: руки инспектора, изделие, чек-лист. Постановочные стоки здесь считываются сразу и убивают доверие.</p>
-          <span class="ph__spec">1200 × 900 · 4:3</span>
+    <div class="quality__inner">
+      <div class="quality__text">
+        <div class="qsteps reveal" data-delay="180">
+          <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
+          <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
+          <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
+          <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
         </div>
-      </figure>
+      </div>
 
-    <aside class="qc-report reveal" data-delay="120" aria-label="Пример QC-отчёта">
-      <div class="qc-report__head">
-        <span>QC-отчёт по серии</span>
-        <b class="qc-badge">Выборка 80 шт.</b>
+      <div class="quality__side">
+        <figure class="ph ph--43 ph--doc reveal" data-delay="80">
+          <img src="photos/proverka.png" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
+              <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="ph__title">Инспекция на фабрике</p>
+            <p class="ph__hint">Живой кадр с производства: руки инспектора, изделие, чек-лист. Постановочные стоки здесь считываются сразу и убивают доверие.</p>
+            <span class="ph__spec">1200 × 900 · 4:3</span>
+          </div>
+        </figure>
       </div>
-      <ul class="qc-list">
-        <li class="ok"><span>Габариты корпуса, ±1 мм</span><i>соответствует</i></li>
-        <li class="ok"><span>Материал и толщина покрытия</span><i>соответствует</i></li>
-        <li class="ok"><span>Комплектность коробки</span><i>соответствует</i></li>
-        <li class="warn"><span>Оттенок пластика партии №3</span><i>отклонение</i></li>
-        <li class="ok"><span>Маркировка и штрихкод</span><i>соответствует</i></li>
-        <li class="ok"><span>Прочность транспортной упаковки</span><i>соответствует</i></li>
-      </ul>
-      <div class="qc-report__foot">
-        <span>Отклонение устранено фабрикой до отгрузки</span>
-        <b>Партия принята</b>
-      </div>
-    </aside>
     </div>
   </div>
 </section>
@@ -713,7 +698,7 @@
   <div class="container">
     <div class="section__head section__head--full">
       <span class="tag reveal">Борьба с серым импортом</span>
-      <h2 class="section__title section__title--wide reveal" data-delay="60">Карго становится всё более опасным</h2>
+      <h2 class="section__title reveal" data-delay="60">Карго становится всё более опасным</h2>
       <p class="section__lead reveal" data-delay="120">Пока всё работает, схему не меняют. Поиск подрядчика запускают четыре события — и в каждом счёт идёт на дни.</p>
     </div>
 
@@ -749,7 +734,7 @@
 <!-- ══════════ 11. ДОКУМЕНТЫ ══════════ -->
 <section class="docs section chamfer-tb" id="docs">
   <div class="container">
-    <div class="section__head">
+    <div class="section__head section__head--full">
       <span class="tag reveal">Полный комплект документов</span>
       <h2 class="section__title reveal" data-delay="60">Поставки в белую, это<br>уверенность и спокойствие</h2>
       <p class="section__lead reveal" data-delay="120">Подбираем перечень документов под вашу категорию товара, с гарантией на случай брака.</p>
@@ -806,7 +791,7 @@
 <!-- ══════════ 12. КЕЙС ══════════ -->
 <section class="case section" id="case">
   <div class="container">
-    <div class="section__head section__head--left">
+    <div class="section__head section__head--full">
       <span class="tag reveal">Кейсы</span>
       <h2 class="section__title reveal" data-delay="60">Примеры поставок</h2>
     </div>
@@ -1258,6 +1243,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/forms-config.js?v=1"></script>
-<script src="js/main.js?v=7"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>

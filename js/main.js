@@ -114,7 +114,11 @@
       t.style.fontSize = '';                       // сбрасываем к значению из CSS
       if (window.innerWidth < 900) return;         // ниже — обычный перенос
 
-      const box = t.closest('.container');
+      // мерим по .section__head, если он есть — именно он реально ограничивает
+      // ширину заголовка (у --full он равен .container, у обычного — уже,
+      // 56ch); мерить всегда по .container — баг: для узких head JS решал,
+      // что место есть, и не сжимал шрифт, хотя текст реально не помещался
+      const box = t.closest('.section__head') || t.closest('.container');
       const cs = getComputedStyle(box);
       const avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       const base = parseFloat(getComputedStyle(t).fontSize);
