@@ -927,6 +927,7 @@ body.modal-open{overflow:hidden}
 .footer__col h5{color:#fff;font-size:14px;font-weight:600;margin-bottom:15px;letter-spacing:.04em}
 .footer__col a{display:block;margin-bottom:10px;font-size:14px;transition:color var(--t-fast),transform var(--t-fast) var(--ease)}
 .footer__col a:hover{color:#fff;transform:translateX(3px)}
+.footer__col span{display:block;margin-bottom:10px;font-size:14px;line-height:1.5}
 .footer__bottom{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:16px;font-size:13px;flex-wrap:wrap}
 .footer__bottom a:hover{color:#fff}
 
