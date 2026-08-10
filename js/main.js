@@ -296,9 +296,11 @@
     });
   }
 
-  /* ---------- Мини-галерея фото внутри кейса ----------
-     Фото ищутся по имени 1.jpg, 2.jpg, 3.jpg... в папке кейса —
-     подряд, без пропусков. Пока фото нет, виден плейсхолдер. */
+  /* ---------- Мини-галерея фото/видео внутри кейса ----------
+     Слайды ищутся по имени 1.jpg, 2.jpg, 3.jpg... в папке кейса —
+     подряд, без пропусков. На каждом месте вместо фото можно положить
+     N.mp4 (вертикальное видео, по клику, со звуком и контролами) —
+     галерея сама определит тип. Пока файлов нет, виден плейсхолдер. */
   $$('[data-gallery]').forEach((figure) => {
     const caseSlug = figure.dataset.case;
     const altBase = figure.dataset.alt || '';
@@ -313,13 +315,21 @@
     function probe(n) {
       if (n > MAX_PROBE) return finish();
       const img = new Image();
-      img.onload = () => { found.push(n); probe(n + 1); };
-      img.onerror = finish;
+      img.onload = () => { found.push({ n, type: 'image' }); probe(n + 1); };
+      img.onerror = () => {
+        // фото под этим номером нет — пробуем видео на том же месте
+        fetch(`photos/cases/${caseSlug}/${n}.mp4`, { method: 'HEAD' })
+          .then((res) => {
+            if (res.ok) { found.push({ n, type: 'video' }); probe(n + 1); }
+            else finish();
+          })
+          .catch(finish);
+      };
       img.src = `photos/cases/${caseSlug}/${n}.jpg`;
     }
 
     function finish() {
-      if (!found.length) return; // фото ещё не добавлены — оставляем плейсхолдер
+      if (!found.length) return; // файлов ещё не добавлено — оставляем плейсхолдер
       buildGallery();
     }
 
@@ -328,22 +338,36 @@
       let current = 0;
       const dots = [];
 
-      const slides = found.map((n, i) => {
+      const slides = found.map((item, i) => {
         const slide = document.createElement('div');
         slide.className = 'gallery__slide' + (i === 0 ? ' is-current' : '');
-        const img = document.createElement('img');
-        img.src = `photos/cases/${caseSlug}/${n}.jpg`;
-        img.alt = altBase;
-        img.loading = i === 0 ? 'eager' : 'lazy';
-        img.decoding = 'async';
-        slide.appendChild(img);
+        if (item.type === 'video') {
+          const video = document.createElement('video');
+          video.className = 'gallery__video';
+          video.src = `photos/cases/${caseSlug}/${item.n}.mp4`;
+          video.controls = true;
+          video.playsInline = true;
+          video.preload = 'metadata';
+          slide.appendChild(video);
+        } else {
+          const img = document.createElement('img');
+          img.src = `photos/cases/${caseSlug}/${item.n}.jpg`;
+          img.alt = altBase;
+          img.loading = i === 0 ? 'eager' : 'lazy';
+          img.decoding = 'async';
+          slide.appendChild(img);
+        }
         slidesWrap.appendChild(slide);
         return slide;
       });
 
       function goTo(index) {
         current = (index + slides.length) % slides.length;
-        slides.forEach((s, i) => s.classList.toggle('is-current', i === current));
+        slides.forEach((s, i) => {
+          s.classList.toggle('is-current', i === current);
+          // переключили слайд — останавливаем видео, которое осталось за кадром
+          if (i !== current) { const v = s.querySelector('video'); if (v) v.pause(); }
+        });
         dots.forEach((d, i) => d.classList.toggle('is-current', i === current));
       }
 
@@ -355,7 +379,8 @@
         slides.forEach((_, i) => {
           const b = document.createElement('button');
           b.type = 'button';
-          b.setAttribute('aria-label', `Фото ${i + 1} из ${slides.length}`);
+          const label = found[i].type === 'video' ? 'Видео' : 'Фото';
+          b.setAttribute('aria-label', `${label} ${i + 1} из ${slides.length}`);
           if (i === 0) b.classList.add('is-current');
           b.addEventListener('click', () => goTo(i));
           dotsWrap.appendChild(b);

@@ -690,6 +690,9 @@ a,button,select{cursor:pointer}
 }
 .gallery__slide.is-current{opacity:1;visibility:visible}
 .gallery__slide img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+/* вертикальное видео внутри горизонтальной рамки 16:9 — не обрезаем cover'ом,
+   показываем целиком с чёрными полями по бокам, как в соцсетях */
+.gallery__video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:#0b0518}
 .gallery__arrow{
   position:absolute;top:50%;transform:translateY(-50%);z-index:4;
   width:38px;height:38px;border-radius:50%;border:none;
