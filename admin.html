@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanmei — редактор сайта</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --violet-900:#2E1065;--violet-700:#5B21B6;--violet-600:#7C3AED;--violet-200:#DDD6FE;
+    --violet-100:#EDE9FE;--lilac-bg:#FAF5FF;--muted:#59657C;--ok:#16A34A;--danger:#DC2626;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:'Nunito Sans',Arial,sans-serif;background:var(--lilac-bg);color:var(--violet-900);
+    padding-bottom:120px;
+  }
+  header{
+    position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--violet-200);
+    padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  header h1{font-size:18px;margin:0;font-weight:700}
+  header .sub{font-size:13px;color:var(--muted)}
+  main{max-width:760px;margin:0 auto;padding:28px 20px}
+  .section-block{background:#fff;border:1px solid var(--violet-200);border-radius:16px;padding:20px 22px;margin-bottom:18px}
+  .section-block h2{font-size:15px;margin:0 0 16px;text-transform:uppercase;letter-spacing:.04em;color:var(--violet-700)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px;font-family:monospace}
+  .field input,.field textarea{
+    width:100%;padding:10px 12px;border:1px solid var(--violet-200);border-radius:8px;
+    font-family:inherit;font-size:14.5px;color:var(--violet-900);background:#fff;resize:vertical;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--violet-600);box-shadow:0 0 0 3px rgba(124,58,237,.14)}
+  .field.is-dirty input,.field.is-dirty textarea{border-color:#F59E0B;background:#FFFBEB}
+  .toolbar{
+    position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--violet-200);
+    padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    box-shadow:0 -10px 30px -20px rgba(0,0,0,.3);
+  }
+  .toolbar input[type=password]{
+    padding:9px 12px;border:1px solid var(--violet-200);border-radius:8px;font-size:14px;width:180px;
+  }
+  button{
+    font-family:inherit;font-weight:700;font-size:14px;border:none;border-radius:100px;padding:11px 22px;
+    cursor:pointer;background:var(--violet-600);color:#fff;transition:background .2s;
+  }
+  button:hover{background:var(--violet-700)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .status{font-size:13.5px}
+  .status.ok{color:var(--ok)}
+  .status.err{color:var(--danger)}
+  .loading{padding:60px;text-align:center;color:var(--muted)}
+  .changed-count{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Редактор сайта Lanmei</h1>
+    <div class="sub">Правки сохраняются прямо в GitHub — сайт обновится через 1-2 минуты после сохранения.</div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="loading">Загружаю текущие тексты сайта…</div>
+</main>
+
+<div class="toolbar">
+  <span class="changed-count" id="changedCount">Изменений нет</span>
+  <div style="display:flex;gap:10px;align-items:center">
+    <span class="status" id="status"></span>
+    <input type="password" id="password" placeholder="Пароль" autocomplete="current-password">
+    <button id="saveBtn" disabled>Сохранить</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  // адрес Worker'а из cloudflare-worker/cms-save.js после деплоя
+  const WORKER_URL = 'ЗАМЕНИТЕ_НА_АДРЕС_CMS_WORKER';
+
+  const SECTION_LABELS = {
+    facts: 'Опорные цифры'
+    // сюда добавятся остальные блоки по мере разметки сайта
+  };
+
+  const main = document.getElementById('main');
+  const saveBtn = document.getElementById('saveBtn');
+  const statusEl = document.getElementById('status');
+  const changedCountEl = document.getElementById('changedCount');
+  const passwordEl = document.getElementById('password');
+
+  const dirty = {}; // id -> новое значение
+
+  const savedPassword = sessionStorage.getItem('lanmei_cms_pwd');
+  if (savedPassword) passwordEl.value = savedPassword;
+
+  function groupBySection(fields) {
+    const groups = {};
+    fields.forEach((f) => {
+      const section = f.id.split('.')[0];
+      (groups[section] = groups[section] || []).push(f);
+    });
+    return groups;
+  }
+
+  function updateChangedCount() {
+    const n = Object.keys(dirty).length;
+    changedCountEl.textContent = n ? `Изменено полей: ${n}` : 'Изменений нет';
+    saveBtn.disabled = n === 0;
+  }
+
+  function render(fields) {
+    const groups = groupBySection(fields);
+    main.innerHTML = '';
+    Object.entries(groups).forEach(([section, items]) => {
+      const block = document.createElement('div');
+      block.className = 'section-block';
+      const h2 = document.createElement('h2');
+      h2.textContent = SECTION_LABELS[section] || section;
+      block.appendChild(h2);
+
+      items.forEach((item) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'field';
+        wrap.dataset.id = item.id;
+        const label = document.createElement('label');
+        label.textContent = item.id;
+        wrap.appendChild(label);
+
+        // схлопываем переносы строк/отступы из исходника HTML — это просто
+        // перенос текста в коде, а не смысловая структура
+        const clean = item.text.replace(/\s+/g, ' ').trim();
+        const isLong = clean.length > 60;
+        const input = document.createElement(isLong ? 'textarea' : 'input');
+        if (!isLong) input.type = 'text';
+        else input.rows = 3;
+        input.value = clean;
+        input.addEventListener('input', () => {
+          const original = clean;
+          if (input.value !== original) {
+            dirty[item.id] = input.value;
+            wrap.classList.add('is-dirty');
+          } else {
+            delete dirty[item.id];
+            wrap.classList.remove('is-dirty');
+          }
+          updateChangedCount();
+        });
+        wrap.appendChild(input);
+        block.appendChild(wrap);
+      });
+
+      main.appendChild(block);
+    });
+  }
+
+  async function load() {
+    if (WORKER_URL.startsWith('ЗАМЕНИТЕ')) {
+      main.innerHTML = '<div class="loading">Панель ещё не подключена к Worker — впишите адрес в admin.html.</div>';
+      return;
+    }
+    try {
+      const res = await fetch(WORKER_URL);
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Ошибка загрузки');
+      render(data.fields);
+    } catch (err) {
+      main.innerHTML = '<div class="loading">Не получилось загрузить: ' + String(err) + '</div>';
+    }
+  }
+
+  saveBtn.addEventListener('click', async () => {
+    const password = passwordEl.value;
+    if (!password) { statusEl.textContent = 'Введите пароль'; statusEl.className = 'status err'; return; }
+    sessionStorage.setItem('lanmei_cms_pwd', password);
+
+    saveBtn.disabled = true;
+    statusEl.textContent = 'Сохраняю…';
+    statusEl.className = 'status';
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, edits: dirty })
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Ошибка сохранения');
+
+      statusEl.textContent = 'Сохранено! Сайт обновится через 1-2 минуты.';
+      statusEl.className = 'status ok';
+      Object.keys(dirty).forEach((id) => delete dirty[id]);
+      document.querySelectorAll('.field.is-dirty').forEach((el) => el.classList.remove('is-dirty'));
+      updateChangedCount();
+    } catch (err) {
+      statusEl.textContent = 'Ошибка: ' + String(err);
+      statusEl.className = 'status err';
+      saveBtn.disabled = false;
+    }
+  });
+
+  load();
+})();
+</script>
+
+</body>
+</html>
