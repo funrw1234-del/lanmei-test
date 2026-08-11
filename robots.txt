@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://funrw1234-del.github.io/lanmei-test/sitemap.xml
+# ИИ-краулеры — явный доступ для видимости в AI-поиске
+# (ChatGPT, Perplexity, Google AI Overviews и т.п.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://lanmei.ru/sitemap.xml
