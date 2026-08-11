@@ -697,9 +697,13 @@ a.header__social:hover{transform:translateY(-2px)}
 .gallery__slide{
   position:absolute;inset:0;display:grid;place-items:center;
   opacity:0;visibility:hidden;transition:opacity .4s var(--ease);
+  background:#0b0518;
 }
 .gallery__slide.is-current{opacity:1;visibility:visible}
-.gallery__slide img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover}
+/* contain, а не cover — реальные фото товаров часто вертикальные, cover
+   зумил в них до неузнаваемости; contain показывает товар целиком,
+   с тёмными полями по бокам вместо обрезки */
+.gallery__slide img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain}
 /* вертикальное видео внутри горизонтальной рамки 16:9 — не обрезаем cover'ом,
    показываем целиком с чёрными полями по бокам, как в соцсетях */
 .gallery__video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:#0b0518}
