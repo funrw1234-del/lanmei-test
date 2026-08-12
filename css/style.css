@@ -804,6 +804,7 @@ a.header__social:hover{transform:translateY(-2px)}
 }
 .team__card:hover{transform:translateY(-6px);box-shadow:var(--shadow-card);border-color:var(--violet-300)}
 .team__card h3{margin:20px 24px 0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.team__role{display:block;margin:4px 24px 0;font-size:13px;font-weight:600;color:var(--violet-600)}
 .team__card p{margin:8px 24px 24px;color:var(--muted);font-size:14px;line-height:1.55}
 
 /* фото сотрудника на всю ширину карточки, пропорции под реальные портретные
