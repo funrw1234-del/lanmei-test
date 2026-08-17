@@ -584,9 +584,9 @@
       submitBtn.classList.remove('is-loading');
 
       if (anyOk) {
-        showFormResult($('#leadOk'), true, 'Бриф отправлен', 'Ответим в течение 2 часов, смету пришлём за 48 часов.');
         leadForm.reset();
         hint.hidden = true;
+        window.location.href = 'thanks/';
       } else {
         showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
@@ -673,8 +673,8 @@
       submitBtn.classList.remove('is-loading');
 
       if (anyOk) {
-        showFormResult($('#callbackOk'), true, 'Заявка принята', 'Перезвоним в течение 15 минут в рабочее время.');
         cbForm.reset();
+        window.location.href = 'thanks/';
       } else {
         showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram: t.me/lanmei_logistics.');
       }
