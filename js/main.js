@@ -300,6 +300,10 @@
         t.tabIndex = active ? 0 : -1;
       });
       counter.textContent = String(current + 1).padStart(2, '0');
+
+      // фото/видео этого кейса грузим только сейчас, когда вкладку реально открыли
+      const gallery = $('[data-gallery]', slides[current]);
+      if (gallery) initGallery(gallery);
     }
 
     prevBtn.addEventListener('click', () => goTo(current - 1));
@@ -317,8 +321,20 @@
      Слайды ищутся по имени 1.jpg, 2.jpg, 3.jpg... в папке кейса —
      подряд, без пропусков. На каждом месте вместо фото можно положить
      N.mp4 (вертикальное видео, по клику, со звуком и контролами) —
-     галерея сама определит тип. Пока файлов нет, виден плейсхолдер. */
-  $$('[data-gallery]').forEach((figure) => {
+     галерея сама определит тип. Пока файлов нет, виден плейсхолдер.
+
+     Важно про вес страницы: слайды кейсов и слайды внутри самой галереи
+     визуально наложены друг на друга (grid-area/position:absolute для
+     кроссфейда) — из-за этого нативный loading="lazy" не срабатывает,
+     браузер видит их "рядом с экраном" и грузит все разом. Поэтому:
+     1) галерею конкретного кейса ищем (probe) только когда его вкладку
+        реально открыли, а не для всех 5 кейсов сразу при заходе на сайт;
+     2) даже внутри открытой галереи src следующим фото/видео проставляем
+        по факту пролистывания, а не всем сразу при сборке. */
+  function initGallery(figure) {
+    if (!figure || figure.dataset.galleryInit) return;
+    figure.dataset.galleryInit = '1';
+
     const caseSlug = figure.dataset.case;
     const altBase = figure.dataset.alt || '';
     const slidesWrap = $('.gallery__slides', figure);
@@ -331,23 +347,30 @@
 
     function probe(n) {
       if (n > MAX_PROBE) return finish();
-      const img = new Image();
-      img.onload = () => { found.push({ n, type: 'image' }); probe(n + 1); };
-      img.onerror = () => {
-        // фото под этим номером нет — пробуем видео на том же месте
-        fetch(`photos/cases/${caseSlug}/${n}.mp4`, { method: 'HEAD' })
-          .then((res) => {
-            if (res.ok) { found.push({ n, type: 'video' }); probe(n + 1); }
-            else finish();
-          })
-          .catch(finish);
-      };
-      img.src = `photos/cases/${caseSlug}/${n}.jpg`;
+      fetch(`photos/cases/${caseSlug}/${n}.jpg`, { method: 'HEAD' })
+        .then((res) => {
+          if (res.ok) { found.push({ n, type: 'image' }); probe(n + 1); return; }
+          // фото под этим номером нет — пробуем видео на том же месте
+          return fetch(`photos/cases/${caseSlug}/${n}.mp4`, { method: 'HEAD' })
+            .then((res2) => {
+              if (res2.ok) { found.push({ n, type: 'video' }); probe(n + 1); }
+              else finish();
+            });
+        })
+        .catch(finish);
     }
 
     function finish() {
       if (!found.length) return; // файлов ещё не добавлено — оставляем плейсхолдер
       buildGallery();
+    }
+
+    function loadSlideMedia(slide, item) {
+      if (slide.dataset.loaded) return;
+      slide.dataset.loaded = '1';
+      const el = $('img, video', slide);
+      if (!el) return;
+      el.src = `photos/cases/${caseSlug}/${item.n}.${item.type === 'video' ? 'mp4' : 'jpg'}`;
     }
 
     function buildGallery() {
@@ -361,25 +384,24 @@
         if (item.type === 'video') {
           const video = document.createElement('video');
           video.className = 'gallery__video';
-          video.src = `photos/cases/${caseSlug}/${item.n}.mp4`;
           video.controls = true;
           video.playsInline = true;
           video.preload = 'metadata';
           slide.appendChild(video);
         } else {
           const img = document.createElement('img');
-          img.src = `photos/cases/${caseSlug}/${item.n}.jpg`;
           img.alt = altBase;
-          img.loading = i === 0 ? 'eager' : 'lazy';
           img.decoding = 'async';
           slide.appendChild(img);
         }
         slidesWrap.appendChild(slide);
+        if (i === 0) loadSlideMedia(slide, item); // первый слайд — сразу, он и так виден
         return slide;
       });
 
       function goTo(index) {
         current = (index + slides.length) % slides.length;
+        loadSlideMedia(slides[current], found[current]); // подгружаем по факту перехода
         slides.forEach((s, i) => {
           s.classList.toggle('is-current', i === current);
           // переключили слайд — останавливаем видео, которое осталось за кадром
@@ -429,7 +451,11 @@
     }
 
     probe(1);
-  });
+  }
+
+  // инициализируем сразу только галерею активного на старте кейса
+  const initialGallery = $('.case__slide.is-current [data-gallery]');
+  if (initialGallery) initGallery(initialGallery);
 
   /* ---------- Аккордеон ---------- */
   $$('#acc .acc__item').forEach((item) => {
