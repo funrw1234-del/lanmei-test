@@ -199,8 +199,12 @@
   <!-- основной кадр: верх растворяется в фоне страницы -->
   <div class="hero__media">
     <picture>
-      <source srcset="photos/glavnaya.webp" type="image/webp">
+      <source type="image/webp"
+              srcset="photos/glavnaya-768.webp 768w, photos/glavnaya-1152.webp 1152w, photos/glavnaya.webp 1536w"
+              sizes="100vw">
       <img src="photos/glavnaya.jpg"
+           srcset="photos/glavnaya-768.jpg 768w, photos/glavnaya-1152.jpg 1152w, photos/glavnaya.jpg 1536w"
+           sizes="100vw"
            alt="Контейнеровоз, тягач с контейнером, грузовой самолёт и состав в порту"
            width="1536" height="1024" fetchpriority="high" decoding="async">
     </picture>
@@ -714,7 +718,7 @@
 
       <div class="quality__side">
         <figure class="ph ph--43 ph--doc reveal" data-delay="80">
-          <img src="photos/proverka.png" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
+          <img src="photos/proverka.jpg" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
           <div class="ph__inner">
             <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
               <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
@@ -806,7 +810,7 @@
     </div>
 
     <figure class="ph ph--32 reveal docs__shot">
-      <img src="photos/docs.png" alt="Комплект документов на партию: инвойс, упаковочный лист, экспортная декларация" loading="lazy" decoding="async">
+      <img src="photos/docs.jpg" alt="Комплект документов на партию: инвойс, упаковочный лист, экспортная декларация" loading="lazy" decoding="async">
       <div class="ph__inner">
         <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
           <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
