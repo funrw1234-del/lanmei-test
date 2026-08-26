@@ -22,10 +22,12 @@ const FIELD_LABELS = {
   email: 'Email'
 };
 
-// Домены, которым разрешено слать запросы сюда. Добавьте свой домен
-// после подключения (и можно будет убрать GitHub Pages адрес).
+// Домены, которым разрешено слать запросы сюда.
 const ALLOWED_ORIGINS = [
-  'https://funrw1234-del.github.io'
+  'https://lanmei.ru',
+  'https://www.lanmei.ru',
+  'https://funrw1234-del.github.io',
+  'http://localhost:5173'
 ];
 
 function corsHeaders(origin) {

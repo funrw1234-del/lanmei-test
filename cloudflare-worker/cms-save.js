@@ -17,6 +17,8 @@
  */
 
 const ALLOWED_ORIGINS = [
+  'https://lanmei.ru',
+  'https://www.lanmei.ru',
   'https://funrw1234-del.github.io',
   'http://localhost:5173' // для локальной проверки панели
 ];
