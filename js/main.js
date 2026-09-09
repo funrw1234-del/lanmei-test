@@ -539,12 +539,12 @@
     setTimeout(() => box.classList.remove('is-visible'), 7000);
   }
 
-  /* ---------- Подсказка о пороге $5 000 ---------- */
+  /* ---------- Подсказка о пороге $3 000 ---------- */
   const budget = $('#budget');
   const hint = $('#briefHint');
   if (budget && hint) {
     budget.addEventListener('change', () => {
-      hint.hidden = budget.value !== 'до $5 000';
+      hint.hidden = budget.value !== 'до $3 000';
     });
   }
 
