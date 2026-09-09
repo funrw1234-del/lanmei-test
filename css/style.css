@@ -236,11 +236,15 @@ a,button,select{cursor:pointer}
 
 /* ---------- ШАПКА ---------- */
 /* Первый экран светлый, поэтому шапка тёмная с самого верха */
+/* шапка всегда на белом — постоянная, не зависит от того, что под ней
+   (тёмное фото хиро в том числе), а не только после скролла */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 0;color:var(--violet-900);
-  transition:transform .4s var(--ease),background .35s var(--ease),padding .35s var(--ease),color .3s,box-shadow .3s;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 10px 40px -28px rgba(46,16,101,.35);
+  transition:transform .4s var(--ease),padding .35s var(--ease),box-shadow .3s;
 }
-.header.is-stuck{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);color:var(--violet-900);padding:8px 0;box-shadow:0 10px 40px -28px rgba(46,16,101,.6)}
+.header.is-stuck{padding:8px 0;box-shadow:0 10px 40px -28px rgba(46,16,101,.6)}
 .header.is-hidden{transform:translateY(-110%)}
 .header__inner{display:flex;align-items:center;gap:28px}
 .logo{display:flex;align-items:center;gap:11px;min-height:44px}
