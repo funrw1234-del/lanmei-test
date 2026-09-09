@@ -297,7 +297,7 @@ a.header__social:hover{transform:translateY(-2px)}
 }
 
 .hero__inner{width:100%}
-.hero__content{display:flex;flex-direction:column;align-items:flex-start;max-width:780px;text-align:left}
+.hero__content{display:flex;flex-direction:column;align-items:flex-start;max-width:920px;text-align:left}
 
 .hero__badges{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px}
 .hero__badge{
