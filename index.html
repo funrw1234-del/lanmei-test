@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=23">
+<link rel="stylesheet" href="css/style.css?v=24">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -195,42 +195,42 @@
 <!-- ══════════ 01. ПЕРВЫЙ ЭКРАН ══════════ -->
 <section class="hero" id="hero">
   <div class="container hero__inner">
-    <div class="hero__badges">
-      <div class="hero__badge reveal"><i class="dot"></i> Офис в Шанхае</div>
-      <div class="hero__badge reveal" data-delay="40">Работаем уже более 3 лет</div>
+    <div class="hero__content">
+      <div class="hero__badges">
+        <div class="hero__badge reveal"><i class="dot"></i> Офис в Шанхае</div>
+        <div class="hero__badge reveal" data-delay="40">Работаем уже более 3 лет</div>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="line"><span>Выкуп и доставка товаров</span></span>
+        <span class="line"><span>из Китая в Россию <em>«под ключ»</em></span></span>
+      </h1>
+
+      <p class="hero__kicker reveal" data-delay="120">Расчёт себестоимости до вашего склада за 48 часов</p>
+
+      <p class="hero__sub reveal" data-delay="180">
+        Для селлеров и товарных компаний с закупками <b>от $5 000</b>
+      </p>
+
+      <div class="hero__cta reveal" data-delay="260">
+        <a href="#brief" class="btn btn--primary btn--lg btn--glow magnetic" data-scroll-to="#brief">Рассчитать стоимость доставки</a>
+      </div>
+
+      <p class="hero__note reveal" data-delay="340">Отвечаем на квалифицированный запрос в течение 2 часов</p>
     </div>
 
-    <h1 class="hero__title">
-      <span class="line"><span>Выкуп и доставка товаров</span></span>
-      <span class="line"><span>из Китая в Россию <em>«под ключ»</em></span></span>
-    </h1>
-
-    <p class="hero__kicker reveal" data-delay="120">Расчёт себестоимости до вашего склада за 48 часов</p>
-
-    <p class="hero__sub reveal" data-delay="180">
-      Для селлеров и товарных компаний с закупками <b>от $5 000</b>
-    </p>
-
-    <div class="hero__cta reveal" data-delay="260">
-      <a href="#brief" class="btn btn--primary btn--lg btn--glow magnetic" data-scroll-to="#brief">Рассчитать стоимость доставки</a>
+    <div class="hero__visual reveal" data-delay="200">
+      <picture>
+        <source type="image/webp"
+                srcset="photos/glavnaya-768.webp 768w, photos/glavnaya-1152.webp 1152w, photos/glavnaya.webp 1536w"
+                sizes="(max-width:899px) 100vw, 50vw">
+        <img src="photos/glavnaya.jpg"
+             srcset="photos/glavnaya-768.jpg 768w, photos/glavnaya-1152.jpg 1152w, photos/glavnaya.jpg 1536w"
+             sizes="(max-width:899px) 100vw, 50vw"
+             alt="Контейнеровоз, тягач с контейнером, грузовой самолёт и состав в порту"
+             width="1536" height="1024" fetchpriority="high" decoding="async">
+      </picture>
     </div>
-
-    <p class="hero__note reveal" data-delay="340">Отвечаем на квалифицированный запрос в течение 2 часов</p>
-  </div>
-
-  <!-- основной кадр: верх растворяется в фоне страницы -->
-  <div class="hero__media">
-    <picture>
-      <source type="image/webp"
-              srcset="photos/glavnaya-768.webp 768w, photos/glavnaya-1152.webp 1152w, photos/glavnaya.webp 1536w"
-              sizes="100vw">
-      <img src="photos/glavnaya.jpg"
-           srcset="photos/glavnaya-768.jpg 768w, photos/glavnaya-1152.jpg 1152w, photos/glavnaya.jpg 1536w"
-           sizes="100vw"
-           alt="Контейнеровоз, тягач с контейнером, грузовой самолёт и состав в порту"
-           width="1536" height="1024" fetchpriority="high" decoding="async">
-    </picture>
-    <span class="hero__fade" aria-hidden="true"></span>
   </div>
 </section>
 
