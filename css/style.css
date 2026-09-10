@@ -85,6 +85,11 @@ a,button,select{cursor:pointer}
 .container{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--pad-x)}
 .section{padding:var(--pad-y) 0}
 
+/* «Полный цикл» и «Наши преимущества» идут подряд — обычный двойной
+   --pad-y между ними давал слишком большой разрыв */
+.service{padding-bottom:clamp(28px,3.2vw,44px)}
+.advantages{padding-top:clamp(28px,3.2vw,44px)}
+
 /* Угловые срезы: тёмные и цветные секции обрезаются по диагонали,
    как «углы и линии» в референсе Abu Dhabi Terminals. */
 .chamfer-t{clip-path:polygon(0 var(--chamfer), 100% 0, 100% 100%, 0 100%)}
