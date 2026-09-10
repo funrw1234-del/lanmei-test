@@ -78,25 +78,29 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Мобильное меню ---------- */
+  /* ---------- Мобильное меню (шапка теперь без навигации — блок
+     оставлен на случай, если бургер/nav вернут обратно) ---------- */
   const burger = $('#burger');
   const nav = $('#nav');
 
   function closeNav() {
+    if (!nav || !burger) return;
     nav.classList.remove('is-open');
     burger.classList.remove('is-open');
     burger.setAttribute('aria-expanded', 'false');
     header.classList.remove('is-nav-open');
     document.body.style.overflow = '';
   }
-  burger.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    burger.classList.toggle('is-open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    header.classList.toggle('is-nav-open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  window.addEventListener('keydown', (e) => e.key === 'Escape' && closeNav());
+  if (burger && nav) {
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-nav-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    window.addEventListener('keydown', (e) => e.key === 'Escape' && closeNav());
+  }
 
   /* ---------- Появление блоков ---------- */
   const io = new IntersectionObserver(
