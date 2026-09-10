@@ -546,7 +546,7 @@ a.header__social:hover{transform:translateY(-2px)}
 .svccard__text p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.55}
 .svccard__photo{aspect-ratio:4/3;margin:0;border-radius:12px}
 .svccard__photo .ph__inner{padding:0}
-.svccard__photo .ph__ico{width:26px;height:26px}
+.svccard__photo .ph__ico{width:44px;height:44px}
 @media (max-width:760px){
   .svcgrid{grid-template-columns:1fr}
   .svcgrid .svccard{border-right:none;grid-template-columns:1fr 110px;padding:22px 24px}
