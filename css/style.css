@@ -982,6 +982,9 @@ a.header__social:hover{transform:translateY(-2px)}
 .quiz__consent a{color:var(--violet-600);text-decoration:underline}
 
 .quiz__nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
+/* .btn задаёт свой display:inline-flex, из-за чего перебивает стандартный
+   [hidden]{display:none} — без этого правила скрытая кнопка оставалась видимой */
+.quiz__nav [hidden]{display:none!important}
 .quiz__back{
   background:none;border:0;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;padding:10px 4px;
   transition:color var(--t-fast);
