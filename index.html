@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=39">
+<link rel="stylesheet" href="css/style.css?v=40">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -270,82 +270,56 @@
       <p class="section__lead reveal" data-delay="120">Полностью прозрачный расчёт + возможность рассрочки 30/70</p>
     </div>
 
-    <div class="bento">
+    <div class="svcgrid">
 
-      <!-- кольцо с иконкой -->
-      <article class="bento__card bento__card--ring reveal">
-        <div class="ring">
-          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="2"/><path d="m21 21 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Поиск и проверка фабрики</h3>
+          <p>Отбираем производителя, проверяем экспортную готовность и реальные мощности, выезжаем лично.</p>
         </div>
-        <h3>Поиск и проверка фабрики</h3>
-        <p>Отбираем производителя, проверяем экспортную готовность и реальные мощности, выезжаем лично.</p>
+        <figure class="ph svccard__photo" aria-hidden="true">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="2"/><path d="m21 21 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
       </article>
 
-      <article class="bento__card bento__card--ring reveal">
-        <div class="ring">
-          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="4" width="22" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 12h10M11 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Образец и техническое задание</h3>
+          <p>Фиксируем измеримые параметры в ТЗ, при необходимости дорабатываем изделие с инженером.</p>
         </div>
-        <h3>Образец и техническое задание</h3>
-        <p>Фиксируем измеримые параметры в ТЗ, при необходимости дорабатываем изделие с инженером.</p>
+        <figure class="ph svccard__photo" aria-hidden="true">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><rect x="5" y="4" width="22" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 12h10M11 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
       </article>
 
-      <!-- широкая: контроль + окно с чек-листом -->
-      <article class="bento__card bento__card--wide bento__card--split reveal">
-        <div class="split__text">
-          <div class="ring ring--sm">
-            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 5 8v9c0 7 4.7 12.4 11 14 6.3-1.6 11-7 11-14V8L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m11.5 16 3.3 3.2L21 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div>
-            <h3>Контроль производства</h3>
-            <p>Инспектируем серию по чек-листу, снимаем фото и видео, фиксируем отклонения до оплаты остатка.</p>
-          </div>
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Контроль производства</h3>
+          <p>Инспектируем серию по чек-листу, снимаем фото и видео, фиксируем отклонения до оплаты остатка.</p>
         </div>
-        <div class="pane" aria-hidden="true">
-          <div class="pane__dots"><span></span><span></span><span></span></div>
-          <ul class="pane__list">
-            <li class="ok">Габариты, ±1 мм</li>
-            <li class="ok">Покрытие и материал</li>
-            <li class="warn">Оттенок партии №3</li>
-            <li class="ok">Маркировка</li>
-          </ul>
-        </div>
+        <figure class="ph svccard__photo" aria-hidden="true">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><path d="M16 3 5 8v9c0 7 4.7 12.4 11 14 6.3-1.6 11-7 11-14V8L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m11.5 16 3.3 3.2L21 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </figure>
       </article>
 
-      <!-- широкая: маршрут -->
-      <article class="bento__card bento__card--wide bento__card--split reveal">
-        <div class="split__text">
-          <div class="ring ring--sm">
-            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="9" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 15h24M11 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <h3>Экспорт, таможня, доставка</h3>
-            <p>Готовим документы, ведём выпуск и маршрут, привозим партию до двери вашего склада.</p>
-          </div>
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Экспорт, таможня, доставка</h3>
+          <p>Готовим документы, ведём выпуск и маршрут, привозим партию до двери вашего склада.</p>
         </div>
-        <div class="track" aria-hidden="true">
-          <div class="track__row"><span class="chip">Экспорт</span><i class="track__dot"></i></div>
-          <div class="track__row track__row--r"><i class="track__dot"></i><span class="chip">Граница</span></div>
-          <div class="track__row"><span class="chip">Таможня</span><i class="track__dot"></i></div>
-          <div class="track__row track__row--r"><i class="track__dot track__dot--end"></i><span class="chip chip--end">Ваш склад</span></div>
-        </div>
+        <figure class="ph svccard__photo" aria-hidden="true">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><rect x="4" y="9" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 15h24M11 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
       </article>
 
-      <!-- широкая: переговоры -->
-      <article class="bento__card bento__card--wide bento__card--split reveal">
-        <div class="split__text">
-          <div class="ring ring--sm">
-            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 8h22M5 16h14M5 24h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <div>
-            <h3>Переговоры на китайском</h3>
-            <p>Согласуем цену, сроки, упаковку и условия напрямую — без потерь смысла через переводчика.</p>
-          </div>
+      <article class="svccard svccard--wide reveal">
+        <div class="svccard__text">
+          <h3>Переговоры на китайском</h3>
+          <p>Согласуем цену, сроки, упаковку и условия напрямую — без потерь смысла через переводчика.</p>
         </div>
-        <div class="chat" aria-hidden="true">
-          <div class="bubble bubble--cn">价格能再低一点吗？</div>
-          <div class="bubble bubble--ru">3000件的话，能优惠6%吗？</div>
-          <div class="bubble bubble--cn">可以，交期 25 天。</div>
-        </div>
+        <figure class="ph svccard__photo" aria-hidden="true">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><path d="M5 8h22M5 16h14M5 24h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
       </article>
 
     </div>
@@ -1236,6 +1210,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/forms-config.js?v=1"></script>
-<script src="js/main.js?v=16"></script>
+<script src="js/main.js?v=17"></script>
 </body>
 </html>

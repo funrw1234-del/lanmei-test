@@ -529,110 +529,24 @@ a.header__social:hover{transform:translateY(-2px)}
 }
 
 /* =========================================================
-   BENTO — раскладка по образцу shadcn features-8,
-   собрана нативно: сетка 6 колонок, карточки на 2 и на 3.
+   СЕРВИС — что входит в услугу. 2×2 карточки одного веса:
+   текст слева, небольшое фото справа (заглушка до реальных фото).
    ========================================================= */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap)}
-.bento__card{
-  grid-column:span 2;position:relative;overflow:hidden;
-  background:#fff;border:1px solid rgba(124,58,237,.12);border-radius:var(--radius);
-  padding:clamp(24px,2.2vw,32px);box-shadow:var(--shadow-soft);
-  transition:transform var(--t-hover) var(--ease),box-shadow var(--t-hover) var(--ease),border-color var(--t-fast);
+.svcgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.svccard{
+  display:grid;grid-template-columns:1fr 132px;align-items:center;gap:22px;
+  background:var(--lilac-bg);border:1px solid var(--violet-100);border-radius:var(--radius);
+  padding:26px;
 }
-.bento__card:hover{transform:translateY(-5px);box-shadow:var(--shadow-card);border-color:var(--violet-300)}
-.bento__card--wide{grid-column:span 3}
-.bento__card h3{font-size:var(--step-1);font-weight:600;letter-spacing:-.02em;line-height:1.3}
-.bento__card p{margin-top:9px;color:var(--muted);font-size:var(--step-0);line-height:1.55}
-
-/* цифра с обводкой от руки */
-.bento__card--stat{display:flex;flex-direction:column;align-items:center;text-align:center}
-.stat-mark{position:relative;display:grid;place-items:center;width:190px;height:96px;margin-bottom:6px}
-.stat-mark__scribble{position:absolute;inset:0;width:100%;height:100%;color:var(--violet-100)}
-.stat-mark__num{
-  position:relative;font-family:'Rubik',sans-serif;font-size:clamp(46px,5vw,62px);
-  font-weight:600;line-height:1;color:var(--violet-600);
-}
-
-/* кольцо вокруг иконки — двойной контур, как в компоненте */
-.ring{
-  position:relative;width:60px;height:60px;flex:0 0 60px;border-radius:50%;
-  display:grid;place-items:center;border:1px solid var(--violet-200);color:var(--violet-600);
-  margin-bottom:22px;
-  transition:background var(--t-hover),color var(--t-hover);
-}
-.ring::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid var(--violet-100)}
-.ring svg{width:26px;height:26px}
-.bento__card:hover .ring{background:var(--violet-600);color:#fff}
-.ring--sm{width:48px;height:48px;flex:0 0 48px;margin-bottom:0}
-.ring--sm svg{width:22px;height:22px}
-
-/* широкая карточка: текст слева, визуал справа */
-.bento__card--split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2vw,28px);align-items:center}
-.split__text{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,30px)}
-
-/* панель-«окно» */
-.pane{
-  position:relative;border:1px solid var(--violet-200);border-radius:14px;
-  background:var(--lilac-bg);padding:26px 16px 14px;
-}
-.pane__dots{position:absolute;top:11px;left:13px;display:flex;gap:5px}
-.pane__dots span{width:7px;height:7px;border-radius:50%;background:var(--violet-200)}
-.pane__list{display:grid;gap:7px}
-.pane__list li{
-  display:flex;align-items:center;gap:8px;font-size:13px;color:var(--violet-800);
-  background:#fff;border:1px solid var(--violet-100);border-radius:8px;padding:8px 10px;
-}
-.pane__list li::before{content:"";width:7px;height:7px;border-radius:50%;flex:0 0 7px}
-.pane__list .ok::before{background:var(--ok)}
-.pane__list .warn::before{background:var(--warn)}
-
-/* маршрут: осевая линия и чипы по сторонам */
-.track{position:relative;display:grid;gap:10px;padding:6px 0}
-.track::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--violet-200)}
-.track__row{display:flex;align-items:center;gap:8px;justify-content:flex-end;width:calc(50% + 7px)}
-.track__row--r{justify-content:flex-start;margin-left:calc(50% - 7px);width:auto}
-.track__dot{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--violet-400);flex:0 0 12px}
-.track__dot--end{border-color:var(--ok)}
-.chip{
-  font-size:12.5px;font-weight:600;color:var(--violet-800);
-  background:#fff;border:1px solid var(--violet-200);border-radius:100px;padding:5px 11px;white-space:nowrap;
-}
-.chip--end{border-color:var(--ok);color:var(--ok)}
-
-/* переписка */
-.chat{display:grid;gap:8px}
-.bubble{
-  font-size:13px;line-height:1.4;padding:9px 13px;border-radius:14px;max-width:88%;
-  border:1px solid var(--violet-200);
-}
-.bubble--cn{background:var(--lilac-bg);color:var(--violet-800);border-bottom-left-radius:4px}
-.bubble--ru{background:var(--violet-600);color:#fff;border-color:transparent;border-bottom-right-radius:4px;margin-left:auto}
-
-/* циферблат претензий */
-.gauge{position:relative;display:grid;place-items:center;min-height:150px}
-.gauge svg{width:150px;height:150px;transform:rotate(-90deg)}
-.gauge__bg{fill:none;stroke:var(--violet-100);stroke-width:9}
-.gauge__val{
-  fill:none;stroke:var(--violet-600);stroke-width:9;stroke-linecap:round;
-  stroke-dasharray:314;stroke-dashoffset:314;
-  transition:stroke-dashoffset 1.1s var(--ease-out2);
-}
-.bento__card.is-in .gauge__val{stroke-dashoffset:78}   /* 75% дуги */
-/* max-width держит подпись внутри окружности — без него «дней на претензию»
-   вылезала за дугу, потому что текст шире круга */
-.gauge__label{position:absolute;display:grid;justify-items:center;gap:2px;text-align:center;max-width:100px}
-.gauge__label b{font-family:'Rubik',sans-serif;font-size:32px;font-weight:600;color:var(--violet-700);line-height:1}
-.gauge__label span{font-size:11.5px;color:var(--muted);line-height:1.25}
-
-@media (max-width:1100px){
-  .bento{grid-template-columns:repeat(2,1fr)}
-  .bento__card{grid-column:span 1}
-  .bento__card--wide{grid-column:span 2}
-}
-@media (max-width:700px){
-  .bento{grid-template-columns:1fr}
-  .bento__card,.bento__card--wide{grid-column:span 1}
-  .bento__card--split{grid-template-columns:1fr}
+.svccard--wide{grid-column:1 / -1}
+.svccard__text h3{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
+.svccard__text p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.55}
+.svccard__photo{aspect-ratio:3/4;margin:0;border-radius:14px}
+.svccard__photo .ph__inner{padding:0}
+.svccard__photo .ph__ico{width:26px;height:26px}
+@media (max-width:760px){
+  .svcgrid{grid-template-columns:1fr}
+  .svccard{grid-template-columns:1fr 96px;padding:20px}
 }
 
 /* ---------- 07. ЭТАПЫ ---------- */
@@ -1096,11 +1010,11 @@ a.footer__clink:hover{color:#fff}
 /* ---------- REVEAL ---------- */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease-out2),transform .5s var(--ease-out2)}
 .reveal.is-in{opacity:1;transform:none}
-.bento .reveal,.cards .reveal,.problem__grid .reveal,.docs__grid .reveal,.seg__grid .reveal,.grt__grid .reveal,.case__nums .reveal,.magnets .reveal,.process__meta .reveal,.team__grid .reveal{
+.svcgrid .reveal,.cards .reveal,.problem__grid .reveal,.docs__grid .reveal,.seg__grid .reveal,.grt__grid .reveal,.case__nums .reveal,.magnets .reveal,.process__meta .reveal,.team__grid .reveal{
   transform:translateY(16px) scale(.94);
   transition:opacity .45s var(--ease-out2),transform .45s var(--ease-back);
 }
-.bento .reveal.is-in,.cards .reveal.is-in,.problem__grid .reveal.is-in,.docs__grid .reveal.is-in,.seg__grid .reveal.is-in,
+.svcgrid .reveal.is-in,.cards .reveal.is-in,.problem__grid .reveal.is-in,.docs__grid .reveal.is-in,.seg__grid .reveal.is-in,
 .grt__grid .reveal.is-in,.case__nums .reveal.is-in,.magnets .reveal.is-in,.process__meta .reveal.is-in,.team__grid .reveal.is-in{transform:none}
 
 /* ---------- АДАПТИВ ----------
