@@ -815,6 +815,9 @@ a.header__social:hover{transform:translateY(-2px)}
 .faq{background:#fff}
 .faq__inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
 .faq__side .btn{margin-top:24px}
+@media (max-width:760px){
+  .faq__cta{display:none}
+}
 .acc__item{border-bottom:1px solid var(--violet-200)}
 .acc__q{width:100%;background:transparent;border:0;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;text-align:left;font-size:19px;font-weight:600;letter-spacing:-.01em;font-family:'Rubik',sans-serif;transition:color var(--t-fast)}
 .acc__q:hover{color:var(--violet-600)}
