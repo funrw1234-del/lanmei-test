@@ -529,23 +529,28 @@ a.header__social:hover{transform:translateY(-2px)}
 }
 
 /* =========================================================
-   СЕРВИС — что входит в услугу. 2×2 карточки одного веса:
-   текст слева, небольшое фото справа (заглушка до реальных фото).
+   СЕРВИС — что входит в услугу. Единая панель 2×2, разделённая
+   внутренними линиями (крест), у каждой ячейки — цветная полоска
+   слева, текст + небольшое фото справа (заглушка до реальных фото).
    ========================================================= */
-.svcgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.svcpanel{background:#fff;border:1px solid var(--violet-200);border-radius:var(--radius);overflow:hidden}
+.svcgrid{display:grid;grid-template-columns:1fr 1fr}
 .svccard{
-  display:grid;grid-template-columns:1fr 132px;align-items:center;gap:22px;
-  background:var(--lilac-bg);border:1px solid var(--violet-100);border-radius:var(--radius);
-  padding:26px;
+  position:relative;display:grid;grid-template-columns:1fr 150px;align-items:center;gap:24px;
+  padding:30px 32px;
 }
+.svccard::before{content:"";position:absolute;left:0;top:26px;bottom:26px;width:3px;border-radius:2px;background:var(--violet-500)}
+.svcgrid .svccard:nth-child(odd){border-right:1px solid var(--violet-100)}
+.svcgrid .svccard:nth-child(-n+2){border-bottom:1px solid var(--violet-100)}
 .svccard__text h3{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
 .svccard__text p{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.55}
-.svccard__photo{aspect-ratio:3/4;margin:0;border-radius:14px}
+.svccard__photo{aspect-ratio:4/3;margin:0;border-radius:12px}
 .svccard__photo .ph__inner{padding:0}
 .svccard__photo .ph__ico{width:26px;height:26px}
 @media (max-width:760px){
   .svcgrid{grid-template-columns:1fr}
-  .svccard{grid-template-columns:1fr 96px;padding:20px}
+  .svcgrid .svccard{border-right:none;grid-template-columns:1fr 110px;padding:22px 24px}
+  .svcgrid .svccard:not(:last-child){border-bottom:1px solid var(--violet-100)}
 }
 
 /* ---------- 07. ЭТАПЫ ---------- */
