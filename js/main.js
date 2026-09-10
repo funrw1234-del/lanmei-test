@@ -543,50 +543,98 @@
     setTimeout(() => box.classList.remove('is-visible'), 7000);
   }
 
-  /* ---------- Подсказка о пороге $3 000 ---------- */
-  const budget = $('#budget');
-  const hint = $('#briefHint');
-  if (budget && hint) {
-    budget.addEventListener('change', () => {
-      hint.hidden = budget.value !== 'до $3 000';
-    });
-  }
-
-  /* ---------- Бриф: отправка на почту (EmailJS) + в Telegram (Cloudflare Worker) ---------- */
+  /* ---------- Квиз-бриф: пошаговый тест вместо длинной формы ---------- */
   const leadForm = $('#leadForm');
   if (leadForm) {
-    const submitBtn = $('button[type="submit"]', leadForm);
-    const required = [
-      { sel: '#name', min: 2 },
-      { sel: '#phone', min: 6 },
-      { sel: '#sku', min: 2 }
-    ];
+    const steps = $$('.quizstep', leadForm);
+    const totalSteps = steps.length; // 5: 4 вопроса + контакты
+    const questionSteps = totalSteps - 1; // «N/4» считаем только по вопросам
+    let current = 1;
 
-    function validate(input, min) {
-      const valid = input.value.trim().length >= min;
-      input.closest('.field').classList.toggle('is-error', !valid);
-      input.setAttribute('aria-invalid', String(!valid));
-      return valid;
-    }
+    const stepNum = $('#quizStepNum');
+    const barLabel = $('.quiz__bar-label', leadForm);
+    const barStep = $('.quiz__bar-step', leadForm);
+    const backBtn = $('#quizBack');
+    const nextBtn = $('#quizNext');
+    const submitBtn = $('#quizSubmit');
+    const hint = $('#briefHint');
 
-    // проверяем по blur, а не только на сабмите: ошибка видна сразу после поля
-    required.forEach(({ sel, min }) => {
-      const input = $(sel);
-      input.addEventListener('blur', () => {
-        if (input.value.trim()) validate(input, min);
+    // выбор плитки: одиночный выбор внутри своей группы, значение — в dataset
+    $$('.quiz__tiles', leadForm).forEach((group) => {
+      $$('.quiz__tile', group).forEach((tile) => {
+        tile.addEventListener('click', () => {
+          $$('.quiz__tile', group).forEach((t) => t.classList.remove('is-selected'));
+          tile.classList.add('is-selected');
+          group.dataset.value = tile.dataset.value;
+          group.closest('.quizstep').querySelector('.quiz__err')?.classList.remove('is-visible');
+          if (group.dataset.field === 'budget' && hint) {
+            hint.hidden = tile.dataset.value !== 'до $3 000';
+          }
+        });
       });
     });
+
+    function showStep(n) {
+      steps.forEach((s) => s.classList.toggle('is-active', Number(s.dataset.step) === n));
+      backBtn.hidden = n === 1;
+      submitBtn.hidden = n !== totalSteps;
+      nextBtn.hidden = n === totalSteps;
+      if (n === totalSteps) {
+        barLabel.lastChild.textContent = ' Отлично, остался последний шаг!';
+        barStep.hidden = true;
+      } else {
+        barLabel.lastChild.textContent = ' Короткий тест — всего 2 минуты';
+        barStep.hidden = false;
+        stepNum.textContent = n;
+      }
+    }
+
+    function validateStep(n) {
+      const step = steps[n - 1];
+      const tileGroup = $('.quiz__tiles', step);
+      const err = $('.quiz__err', step);
+
+      if (tileGroup && tileGroup.dataset.required === 'true' && !tileGroup.dataset.value) {
+        if (err) err.classList.add('is-visible');
+        return false;
+      }
+      if (err) err.classList.remove('is-visible');
+
+      const input = $('.field input[required]', step);
+      if (input) {
+        const valid = input.value.trim().length >= 2;
+        input.closest('.field').classList.toggle('is-error', !valid);
+        if (!valid) { input.focus(); return false; }
+      }
+      return true;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (!validateStep(current)) return;
+      current = Math.min(current + 1, totalSteps);
+      showStep(current);
+    });
+    backBtn.addEventListener('click', () => {
+      current = Math.max(current - 1, 1);
+      showStep(current);
+    });
+
+    showStep(current);
+
+    function validateFinal() {
+      let ok = true;
+      const name = $('#name'), phone = $('#phone'), consent = $('#consent');
+      if (name.value.trim().length < 2) { name.closest('.field').classList.add('is-error'); ok = false; }
+      if (phone.value.trim().length < 6) { phone.closest('.field').classList.add('is-error'); ok = false; }
+      const consentErr = $('#err-consent');
+      if (!consent.checked) { consentErr.classList.add('is-visible'); ok = false; }
+      else consentErr.classList.remove('is-visible');
+      return ok;
+    }
 
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      let firstBad = null;
-
-      required.forEach(({ sel, min }) => {
-        const input = $(sel);
-        if (!validate(input, min) && !firstBad) firstBad = input;
-      });
-
-      if (firstBad) { firstBad.focus(); return; }
+      if (!validateFinal()) return;
 
       // honeypot: если скрытое поле заполнено — это бот, тихо "успешно" выходим
       const hp = $('#website');
@@ -598,13 +646,13 @@
       submitBtn.classList.add('is-loading');
 
       const data = {
-        formType: 'Бриф с сайта Lanmei',
+        formType: 'Квиз-бриф с сайта Lanmei',
         name: $('#name').value,
         phone: $('#phone').value,
-        sku: $('#sku').value,
-        budget: budget.value,
-        scheme: $('#scheme').value,
-        msg: $('#msg').value
+        sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
+        link: $('#link').value,
+        budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
+        city: $('#city').value
       };
 
       const results = await Promise.allSettled([sendToEmail(data), sendToTelegram(data)]);
@@ -615,16 +663,17 @@
 
       if (anyOk) {
         leadForm.reset();
-        hint.hidden = true;
+        if (hint) hint.hidden = true;
         window.location.href = 'thanks/';
       } else {
         showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
     });
 
-    $$('.field input, .field textarea', leadForm).forEach((el) => {
+    $$('.field input', leadForm).forEach((el) => {
       el.addEventListener('input', () => el.closest('.field').classList.remove('is-error'));
     });
+    $('#consent')?.addEventListener('change', () => $('#err-consent').classList.remove('is-visible'));
   }
 
   /* ---------- Модалка: обратный звонок ---------- */

@@ -18,9 +18,9 @@ const FIELD_LABELS = {
   name: 'Имя',
   phone: 'Телефон/Telegram',
   sku: 'Категория товара',
+  link: 'Ссылка на товар',
   budget: 'Объём закупок',
-  scheme: 'Текущая схема',
-  msg: 'Комментарий',
+  city: 'Город доставки',
   email: 'Email'
 };
 
