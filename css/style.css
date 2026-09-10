@@ -273,6 +273,18 @@ a,button,select{cursor:pointer}
 }
 .header__stat b{color:var(--violet-900)}
 @media (min-width:1180px){.header__stat{display:block}}
+/* на мобильном показываем тем же текстом, но отдельной строкой снизу —
+   в среднем диапазоне (760–1180px) не помещается рядом с иконками, там
+   оставляем скрытой */
+@media (max-width:760px){
+  .header__inner{flex-wrap:wrap;row-gap:4px}
+  .logo{order:1}
+  .header__actions{order:2}
+  .header__stat{
+    order:3;flex-basis:100%;display:block;white-space:normal;
+    font-size:11.5px;text-align:left;
+  }
+}
 
 .header__actions{display:flex;align-items:center;gap:14px}
 /* иконки-мессенджеры в шапке вместо номера телефона */
@@ -725,6 +737,13 @@ a.header__social:hover{transform:translateY(-2px)}
 @media (max-width:640px){
   .case__toolbar{flex-direction:column;align-items:stretch}
   .case__nav{justify-content:center}
+  /* на десктопе слайды намеренно лежат в одной grid-ячейке (контейнер
+     подстраивается под самый высокий — так переключение не дёргает
+     высоту), но на мобильном это оставляло пустую область под коротким
+     слайдом высотой с самый длинный. Здесь просто скрываем неактивные. */
+  .case__stage{display:block}
+  .case__slide{display:none}
+  .case__slide.is-current{display:block}
 }
 
 /* ---------- 13. КОМАНДА ---------- */
@@ -1059,10 +1078,7 @@ a.footer__clink:hover{color:#fff}
   .nav a{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);min-height:48px}
   .nav a::after{display:none}
   .header__actions .btn{display:none}
-  /* раньше здесь шапка становилась прозрачной при открытом меню — из-за
-     этого лого/иконки терялись на фоне тёмного хиро; шапка должна быть
-     белой всегда, открытое меню не исключение */
-  .logo__text i{display:none}
+  .logo__text i{font-size:8.5px}
 
   .fact::before{display:none}
   .facts{margin-top:-34px}

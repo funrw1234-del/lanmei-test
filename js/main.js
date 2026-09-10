@@ -559,16 +559,23 @@
     const submitBtn = $('#quizSubmit');
     const hint = $('#briefHint');
 
-    // выбор плитки: одиночный выбор внутри своей группы, значение — в dataset
+    // выбор плитки: одиночный выбор внутри своей группы, значение — в dataset.
+    // Шаги с плитками (1 и 3) после выбора сами переходят дальше — не нужно
+    // жать «Дальше». Шаги 2 и 4 — текстовые поля, туда это не относится.
     $$('.quiz__tiles', leadForm).forEach((group) => {
       $$('.quiz__tile', group).forEach((tile) => {
         tile.addEventListener('click', () => {
           $$('.quiz__tile', group).forEach((t) => t.classList.remove('is-selected'));
           tile.classList.add('is-selected');
           group.dataset.value = tile.dataset.value;
-          group.closest('.quizstep').querySelector('.quiz__err')?.classList.remove('is-visible');
+          const step = group.closest('.quizstep');
+          step.querySelector('.quiz__err')?.classList.remove('is-visible');
           if (group.dataset.field === 'budget' && hint) {
             hint.hidden = tile.dataset.value !== 'до $3 000';
+          }
+          const stepNo = Number(step.dataset.step);
+          if (stepNo !== 2 && stepNo !== 4) {
+            setTimeout(() => { if (current === stepNo) goNext(); }, 350);
           }
         });
       });
@@ -609,11 +616,13 @@
       return true;
     }
 
-    nextBtn.addEventListener('click', () => {
+    function goNext() {
       if (!validateStep(current)) return;
       current = Math.min(current + 1, totalSteps);
       showStep(current);
-    });
+    }
+
+    nextBtn.addEventListener('click', goNext);
     backBtn.addEventListener('click', () => {
       current = Math.max(current - 1, 1);
       showStep(current);
