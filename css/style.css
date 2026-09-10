@@ -554,7 +554,11 @@ a.header__social:hover{transform:translateY(-2px)}
 .svccard__photo .ph__ico{width:56px;height:56px}
 @media (max-width:760px){
   .svcgrid{grid-template-columns:1fr}
-  .svcgrid .svccard{border-right:none;grid-template-columns:1fr 130px;padding:26px 28px}
+  .svcgrid .svccard{
+    border-right:none;grid-template-columns:1fr;justify-items:start;padding:26px 28px 28px 32px;
+  }
+  .svccard::before{top:26px;bottom:auto;height:22px}
+  .svcgrid .svccard__photo{width:100%;max-width:220px;aspect-ratio:4/3;margin-top:18px}
   .svcgrid .svccard:not(:last-child){border-bottom:1px solid var(--violet-100)}
 }
 
