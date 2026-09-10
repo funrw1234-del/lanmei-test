@@ -9,3 +9,6 @@ __pycache__/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# черновики/превью, не часть сайта
+preview-hero-v2.html
