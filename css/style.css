@@ -598,8 +598,8 @@ a.header__social:hover{transform:translateY(-2px)}
 .qsteps{display:grid;gap:18px}
 .qstep{display:flex;gap:16px;align-items:flex-start}
 .qstep b{flex:0 0 40px;height:40px;border-radius:12px;background:var(--violet-100);color:var(--violet-600);display:grid;place-items:center;font-family:'Rubik',sans-serif;font-size:14px;font-weight:600}
-.qstep h4{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
-.qstep p{margin-top:5px;color:var(--muted);font-size:14.5px;line-height:1.55}
+.qstep h4{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.qstep p{margin-top:6px;color:var(--muted);font-size:16px;line-height:1.55}
 
 .quality__side{display:grid;gap:var(--gap)}
 .qc-report{background:#fff;border:1px solid var(--violet-200);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card)}
