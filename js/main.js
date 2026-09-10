@@ -759,4 +759,70 @@
       }
     });
   }
+
+  /* ---------- Форма в подвале: «Получить консультацию» ---------- */
+  const footerForm = $('#footerLeadForm');
+  if (footerForm) {
+    const flName = $('#flName');
+    const flEmail = $('#flEmail');
+    const flPhone = $('#flPhone');
+
+    applyPhoneMask(flPhone);
+
+    function validateFlPhone() {
+      const digits = flPhone.value.replace(/\D/g, '');
+      const valid = digits.length === 11 && digits[0] === '7';
+      flPhone.closest('.field').classList.toggle('is-error', !valid);
+      return valid;
+    }
+    function validateFlEmail() {
+      const v = flEmail.value.trim();
+      if (!v) return true; // необязательное поле
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      flEmail.closest('.field').classList.toggle('is-error', !valid);
+      return valid;
+    }
+
+    flPhone.addEventListener('blur', () => { if (flPhone.value.trim()) validateFlPhone(); });
+    flEmail.addEventListener('blur', () => { if (flEmail.value.trim()) validateFlEmail(); });
+    $$('.field input', footerForm).forEach((el) => {
+      el.addEventListener('input', () => el.closest('.field').classList.remove('is-error'));
+    });
+
+    footerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const phoneOk = validateFlPhone();
+      const emailOk = validateFlEmail();
+      if (!phoneOk) { flPhone.focus(); return; }
+      if (!emailOk) { flEmail.focus(); return; }
+
+      // honeypot
+      const hp = $('#flWebsite');
+      if (hp && hp.value.trim()) { footerForm.reset(); return; }
+
+      const submitBtn = $('button[type="submit"]', footerForm);
+      submitBtn.classList.add('is-loading');
+
+      const data = {
+        formType: 'Заявка из подвала сайта Lanmei',
+        name: flName.value.trim() || 'Не указано',
+        phone: flPhone.value,
+        email: flEmail.value.trim() || 'Не указан'
+      };
+
+      const flTemplateId = FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateIdCallback;
+      const results = await Promise.allSettled([sendToEmail(data, flTemplateId), sendToTelegram(data)]);
+      const anyOk = results.some((r) => r.status === 'fulfilled');
+      results.forEach((r) => { if (r.status === 'rejected') console.warn('Заявка из подвала:', r.reason); });
+
+      submitBtn.classList.remove('is-loading');
+
+      if (anyOk) {
+        footerForm.reset();
+        window.location.href = 'thanks/';
+      } else {
+        showFormResult($('#footerLeadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
+      }
+    });
+  }
 })();

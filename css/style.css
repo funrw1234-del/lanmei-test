@@ -470,6 +470,11 @@ a.header__social:hover{transform:translateY(-2px)}
 .invoice__foot span{font-weight:700}
 .invoice__foot b{font-size:13.5px;font-weight:600;color:var(--violet-600);text-align:right}
 
+/* реальный пример расчёта (фото настоящего счёта) вместо абстрактных % */
+.estimate__doc{margin:0;background:#fff;border:1px solid var(--violet-200);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow-card)}
+.estimate__doc img{display:block;width:100%;height:auto;border-radius:calc(var(--radius) - 8px)}
+.estimate__doc figcaption{margin:12px 4px 2px;font-size:13px;color:var(--muted);text-align:center;line-height:1.5}
+
 .estimate__side{display:grid;gap:16px}
 .scard{background:var(--lilac-bg);border:1px solid var(--violet-200);border-radius:var(--radius);padding:26px 24px}
 .scard--accent{background:var(--violet-900);border-color:transparent;color:#fff}
@@ -1019,16 +1024,38 @@ body.modal-open{overflow:hidden}
 
 /* ---------- 16. ФУТЕР ---------- */
 .footer{background:var(--violet-900);color:rgba(255,255,255,.7);padding:64px 0 28px}
-.footer__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px}
-.footer__brand p{margin-top:16px;font-size:14px;line-height:1.6;max-width:330px}
+.footer__top{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
 .logo--light{color:#fff}
 .logo--light .logo__text b{color:var(--violet-300)}
-.footer__col h5{color:#fff;font-size:14px;font-weight:600;margin-bottom:15px;letter-spacing:.04em}
-.footer__col a{display:block;margin-bottom:10px;font-size:14px;transition:color var(--t-fast),transform var(--t-fast) var(--ease)}
-.footer__col a:hover{color:#fff;transform:translateX(3px)}
-.footer__col span{display:block;margin-bottom:10px;font-size:14px;line-height:1.5}
+.footer__lead{margin-top:16px;font-size:14px;line-height:1.6;max-width:380px}
 .footer__bottom{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:16px;font-size:13px;flex-wrap:wrap}
 .footer__bottom a:hover{color:#fff}
+
+/* левая колонка: фото + контакты */
+.footer__contact{display:flex;align-items:center;gap:18px;margin-top:26px;padding:20px;border-radius:var(--radius-sm);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.footer__photo{width:72px;height:72px;border-radius:14px;object-fit:cover;flex:none}
+.footer__clinks{display:flex;flex-direction:column;gap:9px;min-width:0}
+.footer__clink{display:flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,255,255,.78);transition:color var(--t-fast)}
+.footer__clink svg,.footer__clink img{width:18px;height:18px;flex:none;color:var(--violet-300)}
+a.footer__clink:hover{color:#fff}
+.footer__clink--static{color:rgba(255,255,255,.6)}
+.footer__meta{display:flex;align-items:flex-start;gap:9px;margin-top:14px;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.6)}
+.footer__meta svg{width:17px;height:17px;flex:none;margin-top:1px;color:var(--violet-300)}
+
+/* правая колонка: форма-заявка */
+.footer__form{background:#fff;border-radius:24px;padding:30px;color:var(--ink)}
+.footer__form h3{font-family:'Rubik',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.footer__form>p{margin-top:8px;color:var(--muted);font-size:14px;line-height:1.55}
+.footer__form form{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+
+@media (max-width:900px){
+  .footer__top{grid-template-columns:1fr}
+  .footer__contact{flex-wrap:wrap}
+}
+@media (max-width:480px){
+  .footer__contact{padding:16px}
+  .footer__photo{width:60px;height:60px}
+}
 
 /* ---------- FAB + ПРОГРЕСС ---------- */
 .fab{
@@ -1079,7 +1106,6 @@ body.modal-open{overflow:hidden}
   grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));
 }
 .case__nums{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
-.footer__top{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
 
 @media (max-width:1180px){
   .nav{gap:clamp(12px,1.6vw,22px);margin-left:clamp(16px,3vw,48px)}

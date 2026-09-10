@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=33">
+<link rel="stylesheet" href="css/style.css?v=34">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -698,25 +698,10 @@
     </div>
 
     <div class="estimate__inner">
-      <div class="invoice reveal">
-        <div class="invoice__head">
-          <span>Структура полной себестоимости</span>
-          <b>пример по контейнеру</b>
-        </div>
-        <ul class="invoice__rows">
-          <li class="irow" data-share="58"><span class="irow__name">Товар по инвойсу фабрики</span><span class="irow__bar"><i></i></span><span class="irow__val">58%</span></li>
-          <li class="irow" data-share="5"><span class="irow__name">Комиссия Lanmei</span><span class="irow__bar"><i></i></span><span class="irow__val">5%</span></li>
-          <li class="irow" data-share="14"><span class="irow__name">Фрахт до границы</span><span class="irow__bar"><i></i></span><span class="irow__val">14%</span></li>
-          <li class="irow" data-share="3"><span class="irow__name">Экспортное оформление в Китае</span><span class="irow__bar"><i></i></span><span class="irow__val">3%</span></li>
-          <li class="irow" data-share="12"><span class="irow__name">Пошлина и НДС</span><span class="irow__bar"><i></i></span><span class="irow__val">12%</span></li>
-          <li class="irow" data-share="4"><span class="irow__name">Сертификация и маркировка</span><span class="irow__bar"><i></i></span><span class="irow__val">4%</span></li>
-          <li class="irow" data-share="4"><span class="irow__name">Доставка до вашего склада</span><span class="irow__bar"><i></i></span><span class="irow__val">4%</span></li>
-        </ul>
-        <div class="invoice__foot">
-          <span>Итого себестоимость до склада</span>
-          <b>100% — одна цифра, которую можно сравнить</b>
-        </div>
-      </div>
+      <figure class="estimate__doc reveal">
+        <img src="photos/estimate-example.jpg" alt="Пример реального расчёта себестоимости поставки: фрахт, таможенные платежи, сертификация, доставка до склада" loading="lazy" decoding="async">
+        <figcaption>Пример реального расчёта — позиции и цифры считаем под ваш товар и маршрут</figcaption>
+      </figure>
 
       <div class="estimate__side">
         <article class="scard reveal">
@@ -1118,20 +1103,80 @@
 <footer class="footer" id="contacts">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__brand">
+      <div class="footer__info">
         <a href="#hero" class="logo logo--light" data-scroll-to="#hero">
           <img class="logo__mark" src="photos/logo.jpg" alt="" width="38" height="38">
           <span class="logo__text"><span class="logo__name">Lan<b>mei</b></span></span>
         </a>
-        <p>Помогаем бизнесу организовать надёжные поставки из Китая, от проверенных поставщиков с полным комплектом документов.</p>
+        <p class="footer__lead">Помогаем бизнесу организовать надёжные поставки из Китая, от проверенных поставщиков с полным комплектом документов.</p>
+
+        <div class="footer__contact">
+          <img class="footer__photo" src="photos/team/osnovatel.jpg" alt="Юлия Бурматова — основатель Lanmei" width="72" height="72" loading="lazy" decoding="async">
+          <div class="footer__clinks">
+            <a class="footer__clink" href="mailto:lanmeiltd_sale2@163.com">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m3.5 6 6.5 5 6.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              lanmeiltd_sale2@163.com
+            </a>
+            <a class="footer__clink" href="https://t.me/burmatovaSH" target="_blank" rel="noopener">
+              <img src="photos/icons/telegram.png" alt="" width="18" height="18" loading="lazy" decoding="async">
+              Telegram
+            </a>
+            <a class="footer__clink" href="https://wa.me/8613120794214" target="_blank" rel="noopener">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 0 0-6.4 11.4L3 17.5l3.7-.97A7.5 7.5 0 1 0 10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.3 7.2c.2-.5.5-.5.7-.5h.5c.2 0 .4 0 .5.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.9 1.4 1.9 2.2 1.3 1 2.2 1.3 2.6 1.1.1 0 .3-.1.4-.2l.5-.6c.1-.1.3-.2.5-.1l1.4.7c.2.1.3.1.4.2 0 .2 0 1-.4 1.5-.4.5-1.2.9-2 .8-1.9-.2-3.7-1.3-4.9-2.5-1.1-1-1.9-2.3-2.2-3.7-.1-.6.1-1.3.4-1.7Z" fill="currentColor"/></svg>
+              WhatsApp
+            </a>
+            <span class="footer__clink footer__clink--static">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6.5 3.5C3.5 4 1.5 6.3 1.5 9c0 1.6.8 3 2 4l-.5 2.2 2.3-1c.6.2 1.2.3 1.9.3h.1M13.5 6.5c3 .5 5 2.8 5 5.5 0 1.6-.8 3-2 4l.5 2.2-2.3-1c-.6.2-1.2.3-1.9.3-3.3 0-6-2.4-6-5.4s2.7-5.4 6-5.4c.3 0 .5 0 .7.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              WeChat: +86 131 2079 4214
+            </span>
+          </div>
+        </div>
+
+        <p class="footer__meta">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18s6-5.1 6-9.6A6 6 0 0 0 4 8.4C4 12.9 10 18 10 18Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8.2" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+          Шанхай, район Пудун, ул. Шанчэнлу, башня «Лэкай», офис 2408
+        </p>
+        <p class="footer__meta">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.3" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.8V10l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Отвечаем в течение 2 часов в рабочее время
+        </p>
       </div>
-      <div class="footer__col">
-        <h5>Контакты</h5>
-        <a href="mailto:lanmeiltd_sale2@163.com">lanmeiltd_sale2@163.com</a>
-        <a href="https://t.me/burmatovaSH" target="_blank" rel="noopener">Telegram</a>
-        <a href="https://wa.me/8613120794214" target="_blank" rel="noopener">WhatsApp</a>
-        <span>WeChat: +86 131 2079 4214</span>
-        <span>Шанхай, район Пудун, ул. Шанчэнлу, башня «Лэкай», офис 2408</span>
+
+      <div class="footer__form">
+        <h3>Получить консультацию</h3>
+        <p>Оставьте контакты — разберём запрос и пришлём предварительный расчёт.</p>
+
+        <form id="footerLeadForm" novalidate>
+          <div class="field">
+            <input type="text" id="flName" placeholder=" " autocomplete="name" aria-describedby="err-flName">
+            <label for="flName">Ваше имя</label>
+            <span class="field__err" id="err-flName">Укажите, как к вам обращаться</span>
+          </div>
+          <div class="field">
+            <input type="email" id="flEmail" placeholder=" " autocomplete="email" aria-describedby="err-flEmail">
+            <label for="flEmail">Email (необязательно)</label>
+            <span class="field__err" id="err-flEmail">Проверьте адрес почты</span>
+          </div>
+          <div class="field">
+            <input type="tel" id="flPhone" placeholder=" " required autocomplete="tel" inputmode="tel" aria-describedby="err-flPhone">
+            <label for="flPhone">Телефон</label>
+            <span class="field__err" id="err-flPhone">Введите корректный номер телефона</span>
+          </div>
+
+          <!-- honeypot -->
+          <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+            <label for="flWebsite">Оставьте это поле пустым</label>
+            <input type="text" id="flWebsite" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block btn--glow magnetic">Получить консультацию</button>
+          <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
+
+          <div class="briefform__ok" id="footerLeadOk">
+            <b id="footerLeadOkTitle">Заявка отправлена</b>
+            <span id="footerLeadOkText">Ответим в течение 2 часов в рабочее время.</span>
+          </div>
+        </form>
       </div>
     </div>
     <div class="footer__bottom">
@@ -1194,6 +1239,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/forms-config.js?v=1"></script>
-<script src="js/main.js?v=15"></script>
+<script src="js/main.js?v=16"></script>
 </body>
 </html>
