@@ -1,16 +1,11 @@
 /*
- * Настройки доставки заявок с сайта: EmailJS (почта) + Cloudflare Worker (Telegram).
- * Заполните значения ниже своими — инструкция по получению каждого в FORMS_SETUP.md.
- * Пока значения не заполнены (остались "ЗАМЕНИТЕ..."), форма продолжит работать
- * визуально (успех показывается), но заявки никуда не уйдут — это чтобы сайт
- * не ломался, пока настройка не завершена.
+ * Настройки доставки заявок с сайта: и почта (EmailJS), и Telegram уходят
+ * ОДНИМ запросом через Cloudflare Worker (см. cloudflare-worker/telegram-relay.js) —
+ * ключи EmailJS и токен бота хранятся в секретах Worker'а, здесь их нет.
+ * Отсюда нужно только знать URL Worker'а и id шаблона EmailJS под каждую форму.
  */
 window.LANMEI_FORMS_CONFIG = {
-  emailjs: {
-    publicKey: 'SQhMTxVRfRMbPODIb',
-    serviceId: 'service_c8zqvjb',
-    templateId: 'template_hvldedk', // шаблон формы брифа (#leadForm)
-    templateIdCallback: 'template_cu9j7qh' // отдельный шаблон для формы обратного звонка
-  },
+  emailTemplateId: 'template_hvldedk', // шаблон квиза (#leadForm)
+  emailTemplateIdCallback: 'template_cu9j7qh', // обратный звонок + форма в подвале
   telegramWorkerUrl: 'https://lanmei-forms.leonidpadalko1996.workers.dev/'
 };

@@ -505,33 +505,31 @@
   }
   applyPhoneMask($('#phone'), { allowText: true }); // «Телефон или Telegram» — буквы/@ не трогаем
 
-  /* ---------- Отправка форм: почта (EmailJS) + Telegram (Cloudflare Worker) — общее для всех форм ---------- */
+  /* ---------- Отправка форм: и почта, и Telegram — одним запросом в Cloudflare
+     Worker (см. cloudflare-worker/telegram-relay.js). Раньше почта уходила прямо
+     из браузера через EmailJS SDK отдельным запросом от Telegram-релея — если
+     блокировщик рекламы рубил только домен *.workers.dev, заявка терялась в
+     одном из двух каналов незаметно для посетителя. Теперь один запрос — либо
+     блокируется целиком (и видно ошибку), либо доходит и разносится на оба
+     канала на стороне Worker'а. ---------- */
   const FORMS_CFG = window.LANMEI_FORMS_CONFIG || {};
-  if (window.emailjs && FORMS_CFG.emailjs && !FORMS_CFG.emailjs.publicKey.startsWith('ЗАМЕНИТЕ')) {
-    emailjs.init({ publicKey: FORMS_CFG.emailjs.publicKey });
-  }
 
-  // templateId по умолчанию — шаблон брифа; для других форм передаётм свой,
-  // чтобы в письме не оставалось пустых строк от чужих полей
-  async function sendToEmail(data, templateId) {
-    const tid = templateId || (FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateId);
-    if (!window.emailjs || !FORMS_CFG.emailjs || !tid || tid.startsWith('ЗАМЕНИТЕ')) {
-      throw new Error('EmailJS не настроен');
-    }
-    return emailjs.send(FORMS_CFG.emailjs.serviceId, tid, data);
-  }
-
-  async function sendToTelegram(data) {
+  async function submitLead(data, emailTemplateId) {
     if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
-      throw new Error('Telegram-релей не настроен');
+      return false;
     }
-    const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (!res.ok) throw new Error('Telegram relay ответил ошибкой: ' + res.status);
-    return res;
+    try {
+      const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, emailTemplateId })
+      });
+      const json = await res.json().catch(() => ({}));
+      return res.ok && json.ok !== false;
+    } catch (err) {
+      console.warn('Отправка заявки:', err);
+      return false;
+    }
   }
 
   // box — элемент .briefform__ok с <b> заголовком и <span> текстом внутри
@@ -664,9 +662,7 @@
         city: $('#city').value
       };
 
-      const results = await Promise.allSettled([sendToEmail(data), sendToTelegram(data)]);
-      const anyOk = results.some((r) => r.status === 'fulfilled');
-      results.forEach((r) => { if (r.status === 'rejected') console.warn('Отправка брифа:', r.reason); });
+      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateId);
 
       submitBtn.classList.remove('is-loading');
 
@@ -753,10 +749,7 @@
         phone: cbPhone.value
       };
 
-      const cbTemplateId = FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateIdCallback;
-      const results = await Promise.allSettled([sendToEmail(data, cbTemplateId), sendToTelegram(data)]);
-      const anyOk = results.some((r) => r.status === 'fulfilled');
-      results.forEach((r) => { if (r.status === 'rejected') console.warn('Обратный звонок:', r.reason); });
+      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
       submitBtn.classList.remove('is-loading');
 
@@ -819,10 +812,7 @@
         email: flEmail.value.trim() || 'Не указан'
       };
 
-      const flTemplateId = FORMS_CFG.emailjs && FORMS_CFG.emailjs.templateIdCallback;
-      const results = await Promise.allSettled([sendToEmail(data, flTemplateId), sendToTelegram(data)]);
-      const anyOk = results.some((r) => r.status === 'fulfilled');
-      results.forEach((r) => { if (r.status === 'rejected') console.warn('Заявка из подвала:', r.reason); });
+      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
       submitBtn.classList.remove('is-loading');
 

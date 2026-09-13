@@ -1,16 +1,33 @@
 /*
- * Cloudflare Worker: принимает JSON с любой формы сайта Lanmei и пересылает
- * его сообщением в Telegram-канал/группу через Bot API. Токен бота хранится
- * только здесь, в секретах Worker'а — в браузере он никогда не появляется.
+ * Cloudflare Worker: принимает JSON с любой формы сайта Lanmei и рассылает
+ * заявку сразу в два канала — Telegram (Bot API) и почту (EmailJS REST API).
+ * Раньше письмо уходило прямо из браузера через EmailJS SDK, а сюда шёл
+ * отдельный запрос только для Telegram — из-за этого блокировщик рекламы,
+ * ловящий домен *.workers.dev как «трекер», мог зарубить именно Telegram,
+ * а письмо через emailjs.com уходило — заявка терялась только в одном
+ * канале незаметно. Теперь оба канала дергаются отсюда одним запросом:
+ * либо блокировщик рубит его целиком (и тогда клиент это видит), либо
+ * пропускает — и оба канала отрабатывают вместе.
+ *
+ * Токен бота и приватный ключ EmailJS хранятся только здесь, в секретах
+ * Worker'а — в браузере они не появляются.
  * Дополнительно, если в присланных данных есть поле, похожее на реальный
  * российский номер телефона, — шлёт клиенту SMS-подтверждение через SMS.ru.
  *
  * Универсальный: подходит для любой формы на сайте — просто передайте
- * в body любые поля + "formType" (название формы для заголовка сообщения).
+ * в body любые поля + "formType" (название формы для заголовка сообщения)
+ * и "emailTemplateId" (какой шаблон EmailJS использовать для этой формы).
  * Новые поля не нужно нигде регистрировать — Worker распечатает всё, что придёт.
  *
  * Деплой и секреты — см. FORMS_SETUP.md и SMS_SETUP.md в корне проекта.
+ * Нужные секреты Worker'а: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID,
+ * EMAILJS_PRIVATE_KEY (Account → API Keys в дашборде EmailJS), опционально SMS_RU_API_ID.
  */
+
+// service_id и public key EmailJS не секретны (уже были видны в браузере
+// в исходниках сайта) — можно хранить прямо в коде.
+const EMAILJS_SERVICE_ID = 'service_c8zqvjb';
+const EMAILJS_PUBLIC_KEY = 'SQhMTxVRfRMbPODIb';
 
 // Человекочитаемые подписи для известных полей (необязательно — незнакомые
 // поля просто напечатаются под своим ключом).
@@ -23,6 +40,10 @@ const FIELD_LABELS = {
   city: 'Город доставки',
   email: 'Email'
 };
+
+// Служебные поля запроса — не показываем в тексте Telegram-сообщения и не
+// шлём в EmailJS как есть (emailTemplateId вообще не нужен в письме).
+const SERVICE_FIELDS = ['formType', 'website', 'emailTemplateId'];
 
 // Домены, которым разрешено слать запросы сюда.
 const ALLOWED_ORIGINS = [
@@ -64,8 +85,7 @@ function extractRuPhone(data) {
 }
 
 // SMS-подтверждение клиенту через SMS.ru (https://sms.ru/api). Не бросает
-// исключение при неудаче — SMS вторична, отправка в Telegram важнее и не
-// должна ломаться из-за проблем с SMS-шлюзом.
+// исключение при неудаче — SMS вторична и не должна ронять остальное.
 async function sendConfirmationSms(phone, env) {
   if (!env.SMS_RU_API_ID) return { skipped: 'SMS.ru не настроен' };
   const text = 'Lanmei: заявка принята. Менеджер свяжется с вами в течение 2 часов.';
@@ -76,10 +96,64 @@ async function sendConfirmationSms(phone, env) {
   url.searchParams.set('json', '1');
   try {
     const resp = await fetch(url.toString(), { method: 'GET' });
-    const json = await resp.json();
-    return json;
+    return await resp.json();
   } catch (err) {
     return { error: String(err) };
+  }
+}
+
+// Telegram — обёрнуто в try/catch: раньше сетевой сбой при вызове
+// api.telegram.org валил весь Promise.all и обрывал обработчик необработанным
+// исключением (Worker отвечал общей 500-кой без деталей).
+async function sendTelegram(text, env) {
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: env.TELEGRAM_CHAT_ID,
+        text,
+        parse_mode: 'MarkdownV2'
+      })
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      return { ok: false, error: errText };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+}
+
+// Письмо — через REST API EmailJS (https://www.emailjs.com/docs/rest-api/send/),
+// а не через их браузерный SDK: раньше это был отдельный запрос из браузера
+// напрямую на emailjs.com, теперь дергаем отсюда вместе с Telegram одним
+// запросом от клиента. Требует приватный ключ (EmailJS → Account → API Keys)
+// в секрете EMAILJS_PRIVATE_KEY — без него письмо просто не уходит, ошибки
+// это не считается (сайт продолжит работать через Telegram).
+async function sendEmail(data, templateId, env) {
+  if (!env.EMAILJS_PRIVATE_KEY) return { ok: false, skipped: 'EMAILJS_PRIVATE_KEY не задан' };
+  if (!templateId) return { ok: false, skipped: 'шаблон не передан' };
+  try {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: EMAILJS_SERVICE_ID,
+        template_id: templateId,
+        user_id: EMAILJS_PUBLIC_KEY,
+        accessToken: env.EMAILJS_PRIVATE_KEY,
+        template_params: data
+      })
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      return { ok: false, error: errText };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: String(err) };
   }
 }
 
@@ -117,7 +191,7 @@ export default {
     const lines = [`*${escapeMarkdown(formType)}*`, ''];
 
     for (const [key, value] of Object.entries(data)) {
-      if (key === 'formType' || key === 'website') continue;
+      if (SERVICE_FIELDS.includes(key)) continue;
       if (!value) continue;
       const label = FIELD_LABELS[key] || key;
       lines.push(`*${escapeMarkdown(label)}:* ${escapeMarkdown(value)}`);
@@ -125,32 +199,19 @@ export default {
 
     const text = lines.join('\n');
 
-    // Telegram и SMS — параллельно; SMS не должна блокировать/ронять ответ,
-    // если у клиента в поле оказался Telegram-ник, а не номер, — extractRuPhone
-    // вернёт null, и sendConfirmationSms просто не будет вызвана.
+    // Telegram, письмо и SMS — параллельно, каждый сам ловит свои ошибки и
+    // не роняет остальные два.
     const phone = extractRuPhone(data);
-    const [tgResp, smsResult] = await Promise.all([
-      fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: env.TELEGRAM_CHAT_ID,
-          text,
-          parse_mode: 'Markdown'
-        })
-      }),
+    const [tgResult, emailResult, smsResult] = await Promise.all([
+      sendTelegram(text, env),
+      sendEmail(data, data.emailTemplateId, env),
       phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' })
     ]);
 
-    if (!tgResp.ok) {
-      const errText = await tgResp.text();
-      return new Response(JSON.stringify({ ok: false, error: errText, sms: smsResult }), {
-        status: 502,
-        headers: { ...headers, 'Content-Type': 'application/json' }
-      });
-    }
+    const anyOk = tgResult.ok || emailResult.ok;
 
-    return new Response(JSON.stringify({ ok: true, sms: smsResult }), {
+    return new Response(JSON.stringify({ ok: anyOk, telegram: tgResult, email: emailResult, sms: smsResult }), {
+      status: anyOk ? 200 : 502,
       headers: { ...headers, 'Content-Type': 'application/json' }
     });
   }
