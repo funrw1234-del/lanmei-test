@@ -1,6 +1,7 @@
 /*
  * Cloudflare Worker: принимает JSON с любой формы сайта Lanmei и рассылает
- * заявку сразу в два канала — Telegram (Bot API) и почту (EmailJS REST API).
+ * заявку сразу в три канала — Telegram (Bot API), почту (EmailJS REST API)
+ * и строку в Google Sheets (через Apps Script Web App).
  * Раньше письмо уходило прямо из браузера через EmailJS SDK, а сюда шёл
  * отдельный запрос только для Telegram — из-за этого блокировщик рекламы,
  * ловящий домен *.workers.dev как «трекер», мог зарубить именно Telegram,
@@ -9,8 +10,8 @@
  * либо блокировщик рубит его целиком (и тогда клиент это видит), либо
  * пропускает — и оба канала отрабатывают вместе.
  *
- * Токен бота и приватный ключ EmailJS хранятся только здесь, в секретах
- * Worker'а — в браузере они не появляются.
+ * Токен бота, приватный ключ EmailJS и адрес Google-таблицы хранятся только
+ * здесь, в секретах Worker'а — в браузере они не появляются.
  * Дополнительно, если в присланных данных есть поле, похожее на реальный
  * российский номер телефона, — шлёт клиенту SMS-подтверждение через SMS.ru.
  *
@@ -21,7 +22,8 @@
  *
  * Деплой и секреты — см. FORMS_SETUP.md и SMS_SETUP.md в корне проекта.
  * Нужные секреты Worker'а: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID,
- * EMAILJS_PRIVATE_KEY (Account → API Keys в дашборде EmailJS), опционально SMS_RU_API_ID.
+ * EMAILJS_PRIVATE_KEY (Account → API Keys в дашборде EmailJS), опционально
+ * SMS_RU_API_ID и GOOGLE_SHEETS_WEBHOOK_URL (см. FORMS_SETUP.md).
  */
 
 // service_id и public key EmailJS не секретны (уже были видны в браузере
@@ -157,6 +159,29 @@ async function sendEmail(data, templateId, env) {
   }
 }
 
+// Google Sheets — через Apps Script Web App, привязанный к таблице (см.
+// FORMS_SETUP.md, как его создать и задеплоить). Не критичный канал: если
+// GOOGLE_SHEETS_WEBHOOK_URL не задан или запрос упал, остальное продолжает
+// работать как обычно.
+async function sendToSheet(data, env) {
+  if (!env.GOOGLE_SHEETS_WEBHOOK_URL) return { ok: false, skipped: 'GOOGLE_SHEETS_WEBHOOK_URL не задан' };
+  try {
+    const res = await fetch(env.GOOGLE_SHEETS_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      return { ok: false, error: errText };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -199,18 +224,21 @@ export default {
 
     const text = lines.join('\n');
 
-    // Telegram, письмо и SMS — параллельно, каждый сам ловит свои ошибки и
-    // не роняет остальные два.
+    // Telegram, письмо, SMS и строка в Google Sheets — параллельно, каждый
+    // сам ловит свои ошибки и не роняет остальные.
     const phone = extractRuPhone(data);
-    const [tgResult, emailResult, smsResult] = await Promise.all([
+    const [tgResult, emailResult, smsResult, sheetResult] = await Promise.all([
       sendTelegram(text, env),
       sendEmail(data, data.emailTemplateId, env),
-      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' })
+      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' }),
+      sendToSheet(data, env)
     ]);
 
+    // Таблица — вспомогательный канал, не влияет на anyOk: если она недоступна,
+    // заявка всё равно должна дойти по основным каналам и клиент увидит успех.
     const anyOk = tgResult.ok || emailResult.ok;
 
-    return new Response(JSON.stringify({ ok: anyOk, telegram: tgResult, email: emailResult, sms: smsResult }), {
+    return new Response(JSON.stringify({ ok: anyOk, telegram: tgResult, email: emailResult, sms: smsResult, sheet: sheetResult }), {
       status: anyOk ? 200 : 502,
       headers: { ...headers, 'Content-Type': 'application/json' }
     });
