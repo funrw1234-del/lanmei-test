@@ -245,3 +245,15 @@ a.seg{display:flex;flex-direction:column;background:#fff;box-shadow:var(--shadow
 .seg__photo--empty svg{width:30px;height:30px}
 .seg__body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
 @media (max-width:620px){.seg__photo{height:130px}}
+
+/* ---------- Первый экран: фиолетовое затемнение фото, как на схеме ---------- */
+.hero__scrim{
+  background:linear-gradient(90deg,rgba(27,8,53,.92) 0%,rgba(40,12,80,.7) 55%,rgba(45,14,88,.25) 100%);
+}
+@media (max-width:899px){
+  .hero__scrim{background:linear-gradient(180deg,rgba(30,9,60,.9) 0%,rgba(40,12,80,.75) 100%)}
+}
+/* затемнение лежало под фото (z-index:-1 внутри .hero__bg) и не было видно —
+   поднимаем над фото, а само фото не глушим фильтром */
+.hero__scrim{z-index:1}
+.hero__bg img{filter:none}
