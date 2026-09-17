@@ -87,7 +87,7 @@
       "name": "Будут ли скрытые платежи?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Допущения расчёта указываются явно. Если по ходу поставки статья меняется — вы видите это до того, как расход возникнет."
+        "text": "Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Цена в договоре фиксируется в юанях или долларах: закупка идёт не в рублях, а в иностранной валюте. Поэтому сумма в рублях может измениться, если изменится курс юаня или доллара."
       }
     },
     {
@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=56">
+<link rel="stylesheet" href="css/style.css?v=57">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -153,14 +153,6 @@
 </head>
 <body>
 
-<div class="preloader" id="preloader">
-  <div class="preloader__inner">
-    <img class="preloader__mark" src="photos/logo.jpg" alt="" width="64" height="64">
-    <div class="preloader__logo">LAN<span>MEI</span></div>
-    <div class="preloader__bar"><i></i></div>
-  </div>
-</div>
-
 <a href="#hero" class="skip-link">Перейти к содержимому</a>
 
 <!-- ══════════ ХЕДЕР ══════════ -->
@@ -171,7 +163,7 @@
       <span class="logo__text"><span class="logo__name">Lan<b>mei</b></span><i>помогаем бизнесу с выкупом и доставкой товаров из Китая</i></span>
     </a>
 
-    <p class="header__stat">Доставили более <b>500+</b> партий товаров для клиентов из РФ</p>
+    <p class="header__stat">Доставили <b>500+</b> партий товаров для клиентов из РФ</p>
 
     <div class="header__actions">
       <a href="https://t.me/lanmei_logistics" target="_blank" rel="noopener" class="header__social" aria-label="Telegram">
@@ -209,16 +201,17 @@
       </div>
 
       <h1 class="hero__title">
-        <span class="line"><span>Выкупим и доставим товар</span></span>
-        <span class="line"><span>из Китая с документами</span></span>
+        <span class="line"><span>Выкуп и доставка товаров</span></span>
+        <span class="line"><span>из Китая с фиксированной</span></span>
+        <span class="line"><span>ценой в договоре</span></span>
       </h1>
 
-      <p class="hero__sub reveal" data-delay="120">Снижаем себестоимость на 20–30% за счёт прямого контракта с поставщиком</p>
+      <p class="hero__sub reveal" data-delay="120">Для компаний, которые закупают регулярно и уходят с карго на белый импорт. Считаем за 48 часов бесплатно.</p>
 
       <ul class="hero__points reveal" data-delay="180">
-        <li>Предоставляем полный комплект документов</li>
-        <li>Официальное юр. лицо в Китае и счёт в банке</li>
-        <li>Гибкие условия оплаты и отсрочки платежей</li>
+        <li>Смета по строкам: товар, комиссия, фрахт, таможня, доставка — отдельно</li>
+        <li>30% на запуск производства, 70% — после приёмки партии по вашему ТЗ</li>
+        <li>Фиксируем цену в договоре</li>
       </ul>
 
       <div class="hero__cta reveal" data-delay="260">
@@ -252,7 +245,7 @@
 
   <div class="container">
     <p class="facts__note reveal" data-cms-id="facts.note">
-      Найдём товар по лучшей цене, проведём аудит фабрики, надёжно упакуем
+      Найдём подходящий товар, проведём аудит фабрики, надёжно упакуем
       и доставим товар с документами на ваш склад.
     </p>
   </div>
@@ -272,7 +265,7 @@
       <article class="svccard reveal">
         <div class="svccard__text">
           <h3>Поиск и проверка фабрики</h3>
-          <p>Отбираем лучших поставщиков, проверяем юридическую историю и реальные мощности. В результате получаем полную картину от 2 до 5 фабрик.</p>
+          <p>Проверяем юридическую историю и реальные производственные мощности, сравниваем 2–5 фабрик и показываем вам полную картину по каждой.</p>
         </div>
         <figure class="ph svccard__photo">
           <img src="photos/service-poisk.jpg" alt="Поиск и проверка фабрики" loading="lazy" decoding="async">
@@ -305,7 +298,7 @@
       <article class="svccard reveal">
         <div class="svccard__text">
           <h3>Экспорт, таможня, доставка</h3>
-          <p>Надёжно упакуем, рассчитаем лучший маршрут по Китаю, подготовим все необходимые документы, пройдём таможенный контроль и доставим до вашего склада в России.</p>
+          <p>Надёжно упакуем, рассчитаем маршрут по Китаю, оформим экспортные и таможенные документы, пройдём контроль и доставим до вашего склада в России.</p>
         </div>
         <figure class="ph svccard__photo">
           <img src="photos/service-export.jpg" alt="Экспорт, таможня, доставка" loading="lazy" decoding="async">
@@ -324,7 +317,7 @@
     <div class="section__head">
       <span class="tag reveal">Наши преимущества</span>
       <h2 class="section__title reveal" data-delay="60">Почему выбирают нас</h2>
-      <p class="section__lead reveal" data-delay="120">Полная прозрачность, контроль качества и предсказуемые сроки на каждом этапе поставки.</p>
+      <p class="section__lead reveal" data-delay="120">Смета по строкам, инспекция партии до отгрузки и фиксированная комиссия — без пересчётов после того, как вы заплатили.</p>
     </div>
 
     <div class="advlist">
@@ -337,9 +330,6 @@
           <img src="photos/docs.jpg" alt="Полный комплект документов" loading="lazy" decoding="async">
           <div class="ph__inner">
             <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16h16M16 24h16M16 32h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="ph__title">Пакет документов на партию</p>
-            <p class="ph__hint">Разворот реальных документов — инвойс, упаковочный лист, декларация.</p>
-            <span class="ph__spec">1600 × 1000 · 8:5</span>
           </div>
         </figure>
       </div>
@@ -347,15 +337,12 @@
       <div class="advrow reveal">
         <div class="advrow__text">
           <h3><span class="advrow__num">02.</span> Прозрачный расчёт</h3>
-          <p>Получаете честный прозрачный расчёт, где видно цену за: товар, комиссию, упаковку, логистику, пошлину и доставку. Комиссия нашей компании фиксирована и известна заранее, а переговоры с фабрикой ведём мы, добиваясь лучших условий.</p>
+          <p>Получаете расчёт, где видно цену за: товар, комиссию, упаковку, логистику, пошлину и доставку. Комиссия нашей компании фиксирована и известна заранее, а переговоры с фабрикой ведём мы.</p>
         </div>
         <figure class="ph ph--43 advrow__visual advrow__visual--doc">
           <img src="photos/estimate-example.jpg" alt="Прозрачный расчёт" loading="lazy" decoding="async">
           <div class="ph__inner">
             <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 15l12 12 7-7 13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 33h9v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p class="ph__title">Смета до склада на экране</p>
-            <p class="ph__hint">Скриншот реальной сметы по строкам или графика снижения себестоимости.</p>
-            <span class="ph__spec">1600 × 1000 · 8:5</span>
           </div>
         </figure>
       </div>
@@ -363,15 +350,12 @@
       <div class="advrow reveal">
         <div class="advrow__text">
           <h3><span class="advrow__num">03.</span> Полный контроль качества на всех этапах</h3>
-          <p>Проводим аудит 3–5 фабрик и выбираем лучшую, утверждаем образец и фиксируем параметры в техническом задании. Фото- и видеоотчёты партий до отгрузки, во время погрузки делаем финальную проверку с фиксацией и проверяем качество упаковки.</p>
+          <p>Проводим аудит 2–5 фабрик и выбираем лучшую, утверждаем образец и фиксируем параметры в техническом задании. Фото- и видеоотчёты партий до отгрузки, во время погрузки делаем финальную проверку с фиксацией и проверяем качество упаковки.</p>
         </div>
         <figure class="ph ph--43 advrow__visual">
           <img src="photos/adv-kontrol.jpg" alt="Полный контроль качества на всех этапах" loading="lazy" decoding="async">
           <div class="ph__inner">
             <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 5 8 12v12c0 10 6.5 17 16 20 9.5-3 16-10 16-20V12L24 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m17 24 5 5 10-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p class="ph__title">Инспекция партии на фабрике</p>
-            <p class="ph__hint">Живой кадр приёмки: руки инспектора, изделие, чек-лист — не постановочный сток.</p>
-            <span class="ph__spec">1600 × 1000 · 8:5</span>
           </div>
         </figure>
       </div>
@@ -379,15 +363,12 @@
       <div class="advrow reveal">
         <div class="advrow__text">
           <h3><span class="advrow__num">04.</span> Гарантия на товар после отгрузки</h3>
-          <p>Фабрика предоставляет гарантию на товар и 90 дней на предъявление претензий. Мы ведём переговоры и решаем сложные спорные вопросы с китайцами, добиваясь лучшего решения для вас.</p>
+          <p>Фабрика предоставляет гарантию на товар и 90 дней на предъявление претензий. Мы ведём переговоры и решаем спорные вопросы с фабрикой на месте, на китайском языке.</p>
         </div>
         <figure class="ph ph--43 advrow__visual">
           <img src="photos/adv-garantiya.jpg" alt="Гарантия на товар после отгрузки" loading="lazy" decoding="async">
           <div class="ph__inner">
             <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 38V9h21l9 9v20H9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 27h13M17 20h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="ph__title">Акт приёмки или переписка по браку</p>
-            <p class="ph__hint">Документ или переписка, подтверждающие решённую претензию с фабрикой.</p>
-            <span class="ph__spec">1600 × 1000 · 8:5</span>
           </div>
         </figure>
       </div>
@@ -437,9 +418,6 @@
                   <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-                <p class="ph__title">Партия смесителей на складе</p>
-                <p class="ph__hint">Фото приёмки на складе клиента или контейнера под выгрузкой — кадр должен подтверждать цифру рядом.</p>
-                <span class="ph__spec">1600 × 900 · 16:9</span>
               </div>
             </div>
           </div>
@@ -482,9 +460,6 @@
                   <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-                <p class="ph__title">Умные мусорные баки Roomlogic</p>
-                <p class="ph__hint">Сенсорные баки на складе или на фабрике — категория выросла с обычных пластиковых вёдер.</p>
-                <span class="ph__spec">1600 × 900 · 16:9</span>
               </div>
             </div>
           </div>
@@ -527,9 +502,6 @@
                   <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-                <p class="ph__title">Фабрики и выставки</p>
-                <p class="ph__hint">Видео и фото с заводов в Узбекистане и с профильных выставок — в разработке.</p>
-                <span class="ph__spec">1600 × 900 · 16:9</span>
               </div>
             </div>
           </div>
@@ -572,9 +544,6 @@
                   <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-                <p class="ph__title">Погрузка сельхозтехники</p>
-                <p class="ph__hint">Видео погрузки уже есть — нужен статичный кадр техники на площадке или в порту.</p>
-                <span class="ph__spec">1600 × 900 · 16:9</span>
               </div>
             </div>
           </div>
@@ -617,9 +586,6 @@
                   <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
-                <p class="ph__title">Дегидраторы после доработки</p>
-                <p class="ph__hint">Фото готового изделия на тестировании или в упаковке — кадр должен показывать финальный продукт.</p>
-                <span class="ph__spec">1600 × 900 · 16:9</span>
               </div>
             </div>
           </div>
@@ -661,7 +627,7 @@
       <span class="tag reveal">Ключевой продукт</span>
       <h2 class="section__title reveal" data-delay="60">Расчёт, в котором видно все расходы</h2>
       <p class="section__lead reveal" data-delay="120">
-        <b>За 48 часов мы даём полностью прозрачный расчёт, в котором видно стоимость услуг и нашей комиссии,</b>
+        <b>За 48 часов мы даём расчёт, в котором видно стоимость услуг и нашей комиссии,</b>
         без скрытых платежей перекупам и агентам.
       </p>
     </div>
@@ -679,7 +645,7 @@
             <li>Себестоимость единицы товара</li>
             <li>Сравнение 2–5 фабрик/поставщиков</li>
             <li>Прозрачная комиссия компании</li>
-            <li>Прозрачный расчёт, где видно цену за каждый этап поставки</li>
+            <li>Срок производства и доставки по датам</li>
           </ul>
         </article>
       </div>
@@ -691,7 +657,7 @@
 <section class="brief section chamfer-t" id="brief">
   <div class="container brief__inner">
     <div class="brief__text">
-      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 3–5 фабрик</h2>
+      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 2–5 фабрик</h2>
       <p class="reveal" data-delay="80">После прохождения с вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в Telegram или WhatsApp в течение 48 часов. Бесплатно и без обязательств.</p>
       <div class="brief__steps reveal" data-delay="160">
         <div><b>1</b> Тест — 2 минуты</div>
@@ -776,7 +742,7 @@
         </div>
 
         <div class="quizstep" data-step="5">
-          <h3 class="quiz__q">Напишите ваш телефон для получения коммерческого предложения</h3>
+          <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
           <div class="field">
             <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
             <label for="name">Ваше имя</label>
@@ -845,9 +811,6 @@
               <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <p class="ph__title">Инспекция на фабрике</p>
-            <p class="ph__hint">Живой кадр с производства: руки инспектора, изделие, чек-лист. Постановочные стоки здесь считываются сразу и убивают доверие.</p>
-            <span class="ph__spec">1200 × 900 · 4:3</span>
           </div>
         </figure>
       </div>
@@ -899,9 +862,6 @@
           <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           <path d="M28 5v9h9M18 27h13M18 34h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <p class="ph__title">Разворот реального пакета документов</p>
-        <p class="ph__hint">Снимок сверху: инвойс, упаковочный лист, декларация. Персональные данные и суммы закрыть — покажите структуру, а не содержимое.</p>
-        <span class="ph__spec">1500 × 1000 · 3:2</span>
       </div>
     </figure>
   </div>
@@ -913,7 +873,7 @@
     <div class="section__head">
       <span class="tag reveal">Экспертиза</span>
       <h2 class="section__title reveal" data-delay="60">Команда</h2>
-      <p class="section__lead reveal" data-delay="120">Опытная команда экспертов найдёт лучшую фабрику, договорится на выгодных условиях, сопровождает контракт и держит в курсе всех деталей.</p>
+      <p class="section__lead reveal" data-delay="120">Пять человек ведут поставку от поиска фабрики до документов на складе: переговоры с фабрикой, инженерная доработка, закуп и сопровождение контракта — у каждого этапа свой ответственный.</p>
     </div>
 
     <div class="team__grid">
@@ -973,7 +933,7 @@
   <div class="container">
     <div class="section__head section__head--full">
       <span class="tag reveal">Ответственность</span>
-      <h2 class="section__title reveal" data-delay="60">Берём на себя<br>полную ответственность<br>а также:</h2>
+      <h2 class="section__title reveal" data-delay="60">Отвечаем за результат —<br>вот как это устроено:</h2>
     </div>
 
     <div class="grt__grid">
@@ -1021,7 +981,7 @@
       </div>
       <div class="acc__item reveal">
         <button class="acc__q" type="button" aria-expanded="false">«Будут ли скрытые платежи?»<i></i></button>
-        <div class="acc__a"><p>Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Допущения расчёта указываются явно. Если по ходу поставки статья меняется — вы видите это до того, как расход возникнет.</p></div>
+        <div class="acc__a"><p>Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Цена в договоре фиксируется в юанях или долларах: закупка идёт не в рублях, а в иностранной валюте. Поэтому сумма в рублях может измениться, если изменится курс юаня или доллара.</p></div>
       </div>
       <div class="acc__item reveal">
         <button class="acc__q" type="button" aria-expanded="false">«Почему аванс 30%?»<i></i></button>
@@ -1172,11 +1132,11 @@
 </div>
 
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании файлов cookie" hidden>
-  <p>Мы используем файлы cookie, чтобы сайт работал лучше. Оставаясь на сайте, вы соглашаетесь с <a href="privacy/" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
+  <p>Сайт использует cookie. <a href="privacy/" target="_blank" rel="noopener">Подробнее</a></p>
   <button type="button" class="btn btn--primary btn--sm cookie-banner__accept" id="cookieAccept">Хорошо</button>
 </div>
 
 <script src="js/forms-config.js?v=2"></script>
-<script src="js/main.js?v=19"></script>
+<script src="js/main.js?v=20"></script>
 </body>
 </html>

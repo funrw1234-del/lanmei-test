@@ -11,12 +11,9 @@
   const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Прелоадер ---------- */
+  /* ---------- Появление заголовка первого экрана ---------- */
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      $('#preloader').classList.add('is-hidden');
-      document.body.classList.add('is-loaded');
-    }, reduced ? 0 : 800);
+    document.body.classList.add('is-loaded');
   });
 
   /* ---------- Cookie-уведомление ----------
@@ -516,20 +513,37 @@
 
   async function submitLead(data, emailTemplateId) {
     if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
-      return false;
+      return { ok: false };
     }
+    // На мобильной сети fetch без таймаута мог зависнуть на неопределённое
+    // время (кнопка крутится, редиректа нет) — обрываем через 12с. keepalive
+    // держит запрос живым, даже если посетитель свернёт вкладку сразу после
+    // отправки, пока браузер ждёт ответ Worker'а.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
     try {
       const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, emailTemplateId })
+        body: JSON.stringify({ ...data, emailTemplateId }),
+        keepalive: true,
+        signal: controller.signal
       });
       const json = await res.json().catch(() => ({}));
-      return res.ok && json.ok !== false;
+      return { ok: res.ok && json.ok !== false };
     } catch (err) {
       console.warn('Отправка заявки:', err);
-      return false;
+      return { ok: false };
+    } finally {
+      clearTimeout(timer);
     }
+  }
+
+  // Микроцели квиза в Яндекс.Метрике — считаем шаги воронки отдельно от
+  // финальной заявки, чтобы видеть, на каком вопросе отваливаются.
+  function trackGoal(name) {
+    try { if (typeof window.ym === 'function') window.ym(111955901, 'reachGoal', name); }
+    catch (err) { /* блокировщики рекламы режут ym — не мешаем работе формы */ }
   }
 
   // box — элемент .briefform__ok с <b> заголовком и <span> текстом внутри
@@ -616,6 +630,7 @@
 
     function goNext() {
       if (!validateStep(current)) return;
+      trackGoal('quiz_step_' + current); // текущий вопрос только что пройден
       current = Math.min(current + 1, totalSteps);
       showStep(current);
     }
@@ -650,6 +665,7 @@
         return;
       }
 
+      trackGoal('quiz_submit');
       submitBtn.classList.add('is-loading');
 
       const data = {
@@ -662,7 +678,7 @@
         city: $('#city').value
       };
 
-      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateId);
+      const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateId);
 
       submitBtn.classList.remove('is-loading');
 
@@ -749,7 +765,7 @@
         phone: cbPhone.value
       };
 
-      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
+      const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
       submitBtn.classList.remove('is-loading');
 
@@ -812,7 +828,7 @@
         email: flEmail.value.trim() || 'Не указан'
       };
 
-      const anyOk = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
+      const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
       submitBtn.classList.remove('is-loading');
 

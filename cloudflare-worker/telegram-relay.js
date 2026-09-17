@@ -163,6 +163,9 @@ async function sendEmail(data, templateId, env) {
 // FORMS_SETUP.md, как его создать и задеплоить). Не критичный канал: если
 // GOOGLE_SHEETS_WEBHOOK_URL не задан или запрос упал, остальное продолжает
 // работать как обычно.
+// Возвращает ещё и порядковый номер заявки (Apps Script считает его по
+// количеству строк в таблице) — используется, чтобы проставить "Заявка №N"
+// в тексте Telegram-сообщения команде, см. вызов ниже.
 async function sendToSheet(data, env) {
   if (!env.GOOGLE_SHEETS_WEBHOOK_URL) return { ok: false, skipped: 'GOOGLE_SHEETS_WEBHOOK_URL не задан' };
   try {
@@ -176,7 +179,8 @@ async function sendToSheet(data, env) {
       const errText = await res.text();
       return { ok: false, error: errText };
     }
-    return { ok: true };
+    const json = await res.json().catch(() => ({}));
+    return { ok: true, number: json.number };
   } catch (err) {
     return { ok: false, error: String(err) };
   }
@@ -212,8 +216,17 @@ export default {
       });
     }
 
+    // Таблица дёргается первой (не в общем Promise.all) — она присваивает
+    // порядковый номер заявки, и он должен успеть попасть в текст
+    // Telegram-сообщения команде. Небольшая доп. задержка (обычно <1с)
+    // того стоит: без сквозной нумерации заявки было не удобно отслеживать.
+    const sheetResult = await sendToSheet(data, env);
+
     const formType = data.formType || 'Заявка с сайта';
-    const lines = [`*${escapeMarkdown(formType)}*`, ''];
+    const titleLine = sheetResult.number
+      ? `*Заявка №${sheetResult.number}: ${escapeMarkdown(formType)}*`
+      : `*${escapeMarkdown(formType)}*`;
+    const lines = [titleLine, ''];
 
     for (const [key, value] of Object.entries(data)) {
       if (SERVICE_FIELDS.includes(key)) continue;
@@ -224,14 +237,13 @@ export default {
 
     const text = lines.join('\n');
 
-    // Telegram, письмо, SMS и строка в Google Sheets — параллельно, каждый
-    // сам ловит свои ошибки и не роняет остальные.
+    // Telegram, письмо и SMS — параллельно, каждый сам ловит свои ошибки и
+    // не роняет остальные.
     const phone = extractRuPhone(data);
-    const [tgResult, emailResult, smsResult, sheetResult] = await Promise.all([
+    const [tgResult, emailResult, smsResult] = await Promise.all([
       sendTelegram(text, env),
       sendEmail(data, data.emailTemplateId, env),
-      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' }),
-      sendToSheet(data, env)
+      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' })
     ]);
 
     // Таблица — вспомогательный канал, не влияет на anyOk: если она недоступна,
