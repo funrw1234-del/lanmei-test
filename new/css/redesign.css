@@ -235,3 +235,13 @@ a.seg{display:flex;flex-direction:column;background:#fff;box-shadow:var(--shadow
   .header__mail{display:none}
   .header__contacts{margin:0}
 }
+
+/* ---------- Кому подходит: место под фото ---------- */
+.segments a.seg{padding:0;overflow:hidden}
+.seg__photo{margin:0;height:150px;background:var(--violet-100);position:relative}
+.seg__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.seg__photo--empty{display:grid;place-items:center;background:#E4E8EE;color:#8A94A3}
+.seg__photo--empty span{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.seg__photo--empty svg{width:30px;height:30px}
+.seg__body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+@media (max-width:620px){.seg__photo{height:130px}}
