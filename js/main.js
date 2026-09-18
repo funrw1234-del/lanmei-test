@@ -11,6 +11,35 @@
   const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Захват yclid для офлайн-конверсий Директа ----------
+     Счётчик конверсии в Директе сейчас завязан на клиентскую Метрику —
+     если у посетителя блокировщик режет mc.yandex.ru, заявка доходит
+     (Worker серверный), а конверсия в Директе не считается. Чтобы это
+     обойти, сохраняем yclid из URL при заходе и шлём его вместе с
+     заявкой — дальше Worker сам загружает офлайн-конверсию в Директ
+     напрямую через API, в обход браузера посетителя.
+     См. YANDEX_OFFLINE_CONVERSIONS_SETUP.md. */
+  (function captureYclid() {
+    try {
+      const yclid = new URLSearchParams(window.location.search).get('yclid');
+      if (yclid) {
+        localStorage.setItem('lanmei_yclid', yclid);
+        localStorage.setItem('lanmei_yclid_ts', String(Date.now()));
+      }
+    } catch (e) {}
+  })();
+
+  function getStoredYclid() {
+    try {
+      const ts = Number(localStorage.getItem('lanmei_yclid_ts') || 0);
+      const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 дней — типичное окно атрибуции
+      if (!ts || Date.now() - ts > MAX_AGE) return '';
+      return localStorage.getItem('lanmei_yclid') || '';
+    } catch (e) {
+      return '';
+    }
+  }
+
   /* ---------- Появление заголовка первого экрана ---------- */
   window.addEventListener('load', () => {
     document.body.classList.add('is-loaded');
@@ -675,7 +704,8 @@
         sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
         link: $('#link').value,
         budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
-        city: $('#city').value
+        city: $('#city').value,
+        yclid: getStoredYclid()
       };
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateId);
@@ -762,7 +792,8 @@
       const data = {
         formType: 'Обратный звонок с сайта Lanmei',
         name: cbName.value.trim() || 'Не указано',
-        phone: cbPhone.value
+        phone: cbPhone.value,
+        yclid: getStoredYclid()
       };
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
@@ -825,7 +856,8 @@
         formType: 'Заявка из подвала сайта Lanmei',
         name: flName.value.trim() || 'Не указано',
         phone: flPhone.value,
-        email: flEmail.value.trim() || 'Не указан'
+        email: flEmail.value.trim() || 'Не указан',
+        yclid: getStoredYclid()
       };
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);

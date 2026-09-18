@@ -23,7 +23,9 @@
  * Деплой и секреты — см. FORMS_SETUP.md и SMS_SETUP.md в корне проекта.
  * Нужные секреты Worker'а: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID,
  * EMAILJS_PRIVATE_KEY (Account → API Keys в дашборде EmailJS), опционально
- * SMS_RU_API_ID и GOOGLE_SHEETS_WEBHOOK_URL (см. FORMS_SETUP.md).
+ * SMS_RU_API_ID, GOOGLE_SHEETS_WEBHOOK_URL (см. FORMS_SETUP.md) и
+ * YANDEX_DIRECT_TOKEN + YANDEX_OFFLINE_GOAL (см.
+ * YANDEX_OFFLINE_CONVERSIONS_SETUP.md) — для офлайн-конверсий в Директ.
  */
 
 // service_id и public key EmailJS не секретны (уже были видны в браузере
@@ -39,13 +41,16 @@ const FIELD_LABELS = {
   sku: 'Категория товара',
   link: 'Ссылка на товар',
   budget: 'Объём закупок',
+  qty: 'Количество товара',
   city: 'Город доставки',
   email: 'Email'
 };
 
 // Служебные поля запроса — не показываем в тексте Telegram-сообщения и не
 // шлём в EmailJS как есть (emailTemplateId вообще не нужен в письме).
-const SERVICE_FIELDS = ['formType', 'website', 'emailTemplateId'];
+// yclid сюда же — команде в чате он не нужен, используется только для
+// офлайн-конверсии в Директ (см. sendOfflineConversion ниже).
+const SERVICE_FIELDS = ['formType', 'website', 'emailTemplateId', 'yclid'];
 
 // Домены, которым разрешено слать запросы сюда.
 const ALLOWED_ORIGINS = [
@@ -90,7 +95,7 @@ function extractRuPhone(data) {
 // исключение при неудаче — SMS вторична и не должна ронять остальное.
 async function sendConfirmationSms(phone, env) {
   if (!env.SMS_RU_API_ID) return { skipped: 'SMS.ru не настроен' };
-  const text = 'Lanmei: заявка принята. Менеджер свяжется с вами в течение 2 часов.';
+  const text = 'Lanmei: заявка принята. Менеджер свяжется с вами в ближайшее время.';
   const url = new URL('https://sms.ru/sms/send');
   url.searchParams.set('api_id', env.SMS_RU_API_ID);
   url.searchParams.set('to', phone);
@@ -186,6 +191,57 @@ async function sendToSheet(data, env) {
   }
 }
 
+// Офлайн-конверсия в Яндекс.Директ — обходит блокировщики рекламы у
+// посетителя. Обычная цель в Метрике считается счётчиком в браузере
+// клиента (mc.yandex.ru); если у него блокировщик режет именно Метрику —
+// заявка всё равно доходит (этот Worker серверный), а конверсия в Директе
+// не засчитывается. Здесь сервер сам, напрямую по API, сообщает Директу,
+// что по этому yclid была реальная заявка — без участия браузера клиента.
+//
+// Нужен yclid (см. js/main.js: captureYclid/getStoredYclid) — без него
+// нечего заливать, просто пропускаем. Требует токен Yandex Direct API и имя
+// цели, настроенной в Метрике под офлайн-конверсии — см.
+// YANDEX_OFFLINE_CONVERSIONS_SETUP.md, это одноразовая настройка.
+//
+// Важно: точная форма параметров API проверена по документации, но не
+// «обкатана» живым вызовом — при первом реальном тесте возможно потребуется
+// поправить пару названий полей по тексту ошибки от Яндекса.
+async function sendOfflineConversion(data, env) {
+  if (!data.yclid) return { ok: false, skipped: 'yclid отсутствует (визит не с рекламы или блокировщик)' };
+  if (!env.YANDEX_DIRECT_TOKEN) return { ok: false, skipped: 'YANDEX_DIRECT_TOKEN не задан' };
+
+  const target = env.YANDEX_OFFLINE_GOAL || 'lead_submitted';
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const dateTime = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+  try {
+    const res = await fetch('https://api.direct.yandex.com/json/v5/offlineconversions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.YANDEX_DIRECT_TOKEN}`,
+        'Accept-Language': 'ru',
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({
+        method: 'upload',
+        params: {
+          Conversions: [
+            { Yclid: data.yclid, Target: target, DateTime: dateTime, Currency: 'RUB' }
+          ]
+        }
+      })
+    });
+    const json = await res.json().catch(() => ({}));
+    if (json.error) {
+      return { ok: false, error: json.error.error_string || JSON.stringify(json.error) };
+    }
+    return { ok: true, result: json.result };
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -237,20 +293,22 @@ export default {
 
     const text = lines.join('\n');
 
-    // Telegram, письмо и SMS — параллельно, каждый сам ловит свои ошибки и
-    // не роняет остальные.
+    // Telegram, письмо, SMS и офлайн-конверсия в Директ — параллельно,
+    // каждый сам ловит свои ошибки и не роняет остальные.
     const phone = extractRuPhone(data);
-    const [tgResult, emailResult, smsResult] = await Promise.all([
+    const [tgResult, emailResult, smsResult, offlineConvResult] = await Promise.all([
       sendTelegram(text, env),
       sendEmail(data, data.emailTemplateId, env),
-      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' })
+      phone ? sendConfirmationSms(phone, env) : Promise.resolve({ skipped: 'номер не распознан' }),
+      sendOfflineConversion(data, env)
     ]);
 
-    // Таблица — вспомогательный канал, не влияет на anyOk: если она недоступна,
-    // заявка всё равно должна дойти по основным каналам и клиент увидит успех.
+    // Таблица и офлайн-конверсия — вспомогательные каналы, не влияют на
+    // anyOk: если они недоступны, заявка всё равно должна дойти по основным
+    // каналам и клиент увидит успех.
     const anyOk = tgResult.ok || emailResult.ok;
 
-    return new Response(JSON.stringify({ ok: anyOk, telegram: tgResult, email: emailResult, sms: smsResult, sheet: sheetResult }), {
+    return new Response(JSON.stringify({ ok: anyOk, telegram: tgResult, email: emailResult, sms: smsResult, sheet: sheetResult, offlineConversion: offlineConvResult }), {
       status: anyOk ? 200 : 502,
       headers: { ...headers, 'Content-Type': 'application/json' }
     });
