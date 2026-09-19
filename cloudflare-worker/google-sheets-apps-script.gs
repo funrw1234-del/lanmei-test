@@ -17,12 +17,12 @@
 var SHEET_NAME = 'Заявки';
 var HEADERS = [
   '№', 'Дата', 'Тип заявки', 'Имя', 'Телефон/Telegram',
-  'Категория товара', 'Ссылка на товар', 'Объём закупок',
-  'Город доставки', 'Email', 'Прочее (JSON)', 'Количество'
+  'Категория товара', 'Ссылка на товар', 'Объём закупок', 'Количество',
+  'Город доставки', 'Email', 'Прочее (JSON)'
 ];
-// Колонка «Количество» (qty из квиза) добавлена последней, в L, — чтобы не
-// сдвигать уже заполненные колонки старых заявок.
-var QTY_HEADER_CELL = 'L1';
+// «Количество» (qty из квиза) стоит в I, сразу за «Объёмом закупок».
+var QTY_HEADER = 'Количество';
+var QTY_COL = 9; // I
 var KNOWN_FIELDS = ['formType', 'name', 'phone', 'sku', 'link', 'budget', 'city', 'email', 'qty'];
 
 // Защита от дублей: та же форма с тем же телефоном/Telegram за последние
@@ -80,9 +80,19 @@ function getOrCreateSheet_() {
     sheet.insertColumnBefore(1);
     sheet.getRange('A1').setValue('№');
   }
-  // Лист создан до появления вопроса про количество — дописываем заголовок.
-  if (sheet.getRange(QTY_HEADER_CELL).getValue() !== 'Количество') {
-    sheet.getRange(QTY_HEADER_CELL).setValue('Количество');
+  // Колонка «Количество» должна стоять в I. Разовая миграция старых листов:
+  // - колонки нет совсем (лист до вопроса про количество) — вставляем её в I;
+  // - она в другом месте (первая версия ставила её в конец, в L) —
+  //   переносим целиком, вместе со значениями.
+  // Делается скриптом, а не руками в таблице: иначе между ручным переносом
+  // и деплоем новой версии заявки писались бы в старом порядке и съезжали.
+  var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var qtyAt = header.indexOf(QTY_HEADER) + 1; // 1-based, 0 = нет
+  if (qtyAt === 0) {
+    sheet.insertColumnBefore(QTY_COL);
+    sheet.getRange(1, QTY_COL).setValue(QTY_HEADER);
+  } else if (qtyAt !== QTY_COL) {
+    sheet.moveColumns(sheet.getRange(1, qtyAt, sheet.getMaxRows(), 1), QTY_COL);
   }
   // Телефон часто начинается с "+" — без текстового формата колонки
   // Google Sheets воспринимает такие значения как формулу и пишет #ERROR!
@@ -137,10 +147,10 @@ function doPost(e) {
       data.sku || '',
       data.link || '',
       data.budget || '',
+      data.qty || '',
       data.city || '',
       data.email || '',
-      Object.keys(extra).length ? JSON.stringify(extra) : '',
-      data.qty || ''
+      Object.keys(extra).length ? JSON.stringify(extra) : ''
     ]);
 
     return ContentService
