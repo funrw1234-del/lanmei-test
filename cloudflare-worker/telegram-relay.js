@@ -171,23 +171,40 @@ async function sendEmail(data, templateId, env) {
 // Возвращает ещё и порядковый номер заявки (Apps Script считает его по
 // количеству строк в таблице) — используется, чтобы проставить "Заявка №N"
 // в тексте Telegram-сообщения команде, см. вызов ниже.
+//
+// Ждём таблицу не дольше SHEET_TIMEOUT_MS: Apps Script после простоя может
+// «просыпаться» 10+ секунд, и тогда сайт по своему таймауту показывал клиенту
+// ошибку, а тот отправлял заявку повторно (19.09 одна заявка пришла трижды).
+// Если таблица не успела — заявка уходит в Telegram без номера, но сразу;
+// строку в таблицу Apps Script всё равно допишет.
+//
+// duplicate: true — Apps Script нашёл ту же форму с тем же телефоном за
+// последние 10 минут (повторная отправка). Старая версия Apps Script этого
+// поля не присылает — тогда всё работает как раньше.
+const SHEET_TIMEOUT_MS = 8000;
+
 async function sendToSheet(data, env) {
   if (!env.GOOGLE_SHEETS_WEBHOOK_URL) return { ok: false, skipped: 'GOOGLE_SHEETS_WEBHOOK_URL не задан' };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), SHEET_TIMEOUT_MS);
   try {
     const res = await fetch(env.GOOGLE_SHEETS_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-      redirect: 'follow'
+      redirect: 'follow',
+      signal: controller.signal
     });
     if (!res.ok) {
       const errText = await res.text();
       return { ok: false, error: errText };
     }
     const json = await res.json().catch(() => ({}));
-    return { ok: true, number: json.number };
+    return { ok: true, number: json.number, duplicate: json.duplicate === true };
   } catch (err) {
-    return { ok: false, error: String(err) };
+    return { ok: false, error: controller.signal.aborted ? `таблица не ответила за ${SHEET_TIMEOUT_MS / 1000}с` : String(err) };
+  } finally {
+    clearTimeout(timer);
   }
 }
 
@@ -274,9 +291,18 @@ export default {
 
     // Таблица дёргается первой (не в общем Promise.all) — она присваивает
     // порядковый номер заявки, и он должен успеть попасть в текст
-    // Telegram-сообщения команде. Небольшая доп. задержка (обычно <1с)
-    // того стоит: без сквозной нумерации заявки было не удобно отслеживать.
+    // Telegram-сообщения команде. Ждём её не дольше SHEET_TIMEOUT_MS.
     const sheetResult = await sendToSheet(data, env);
+
+    // Повторная отправка той же заявки — таблица её уже знает. Клиенту
+    // отвечаем успехом (пусть уйдёт на /thanks/), но в Telegram, на почту,
+    // в SMS и в Директ второй раз не шлём.
+    if (sheetResult.duplicate) {
+      return new Response(JSON.stringify({ ok: true, duplicate: true, sheet: sheetResult }), {
+        status: 200,
+        headers: { ...headers, 'Content-Type': 'application/json' }
+      });
+    }
 
     const formType = data.formType || 'Заявка с сайта';
     const titleLine = sheetResult.number

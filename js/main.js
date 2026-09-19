@@ -545,11 +545,13 @@
       return { ok: false };
     }
     // На мобильной сети fetch без таймаута мог зависнуть на неопределённое
-    // время (кнопка крутится, редиректа нет) — обрываем через 12с. keepalive
-    // держит запрос живым, даже если посетитель свернёт вкладку сразу после
-    // отправки, пока браузер ждёт ответ Worker'а.
+    // время (кнопка крутится, редиректа нет) — обрываем через 25с. Раньше
+    // было 12с, но Worker сам ждёт Google-таблицу до 8с, и при медленном
+    // ответе клиент видел «Не получилось отправить», хотя заявка уже ушла,
+    // и отправлял её повторно. keepalive держит запрос живым, даже если
+    // посетитель свернёт вкладку сразу после отправки.
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 12000);
+    const timer = setTimeout(() => controller.abort(), 25000);
     try {
       const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
         method: 'POST',
@@ -566,6 +568,23 @@
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  // Пока заявка отправляется, форма заблокирована: класс is-loading на кнопке
+  // гасил только клики мышью, а Enter в поле отправлял форму повторно.
+  // Возвращает false, если отправка уже идёт — тогда обработчик выходит.
+  function beginSubmit(form, btn) {
+    if (form.dataset.sending === '1') return false;
+    form.dataset.sending = '1';
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+    return true;
+  }
+
+  function endSubmit(form, btn) {
+    delete form.dataset.sending;
+    btn.disabled = false;
+    btn.classList.remove('is-loading');
   }
 
   // Микроцели квиза в Яндекс.Метрике — считаем шаги воронки отдельно от
@@ -694,8 +713,8 @@
         return;
       }
 
+      if (!beginSubmit(leadForm, submitBtn)) return;
       trackGoal('quiz_submit');
-      submitBtn.classList.add('is-loading');
 
       const data = {
         formType: 'Квиз-бриф с сайта Lanmei',
@@ -710,13 +729,13 @@
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateId);
 
-      submitBtn.classList.remove('is-loading');
-
       if (anyOk) {
+        // Форму не разблокируем: идёт переход на /thanks/.
         leadForm.reset();
         if (hint) hint.hidden = true;
         window.location.href = 'thanks/';
       } else {
+        endSubmit(leadForm, submitBtn);
         showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
     });
@@ -787,7 +806,7 @@
       if (hp && hp.value.trim()) { cbForm.reset(); closeCallback(); return; }
 
       const submitBtn = $('button[type="submit"]', cbForm);
-      submitBtn.classList.add('is-loading');
+      if (!beginSubmit(cbForm, submitBtn)) return;
 
       const data = {
         formType: 'Обратный звонок с сайта Lanmei',
@@ -798,12 +817,11 @@
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
-      submitBtn.classList.remove('is-loading');
-
       if (anyOk) {
         cbForm.reset();
         window.location.href = 'thanks/';
       } else {
+        endSubmit(cbForm, submitBtn);
         showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram: t.me/lanmei_logistics.');
       }
     });
@@ -850,7 +868,7 @@
       if (hp && hp.value.trim()) { footerForm.reset(); return; }
 
       const submitBtn = $('button[type="submit"]', footerForm);
-      submitBtn.classList.add('is-loading');
+      if (!beginSubmit(footerForm, submitBtn)) return;
 
       const data = {
         formType: 'Заявка из подвала сайта Lanmei',
@@ -862,12 +880,11 @@
 
       const { ok: anyOk } = await submitLead(data, FORMS_CFG.emailTemplateIdCallback);
 
-      submitBtn.classList.remove('is-loading');
-
       if (anyOk) {
         footerForm.reset();
         window.location.href = 'thanks/';
       } else {
+        endSubmit(footerForm, submitBtn);
         showFormResult($('#footerLeadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
     });
