@@ -607,8 +607,8 @@
   const leadForm = $('#leadForm');
   if (leadForm) {
     const steps = $$('.quizstep', leadForm);
-    const totalSteps = steps.length; // 5: 4 вопроса + контакты
-    const questionSteps = totalSteps - 1; // «N/4» считаем только по вопросам
+    const totalSteps = steps.length; // 6: 5 вопросов + контакты
+    const questionSteps = totalSteps - 1; // «N/5» считаем только по вопросам
     let current = 1;
 
     const stepNum = $('#quizStepNum');
@@ -634,7 +634,10 @@
             hint.hidden = tile.dataset.value !== 'до $3 000';
           }
           const stepNo = Number(step.dataset.step);
-          if (stepNo !== 2 && stepNo !== 4) {
+          // Автопереход только на шагах с одними плитками: где есть текстовое
+          // поле, «Дальше» нажимают сами (номера шагов не зашиты — квиз
+          // может менять состав вопросов).
+          if (!step.querySelector('.field input')) {
             setTimeout(() => { if (current === stepNo) goNext(); }, 350);
           }
         });
@@ -723,6 +726,7 @@
         sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
         link: $('#link').value,
         budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
+        qty: $('#qty').value.trim(),
         city: $('#city').value,
         yclid: getStoredYclid()
       };

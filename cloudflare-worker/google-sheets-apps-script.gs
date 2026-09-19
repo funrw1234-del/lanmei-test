@@ -18,9 +18,12 @@ var SHEET_NAME = 'Заявки';
 var HEADERS = [
   '№', 'Дата', 'Тип заявки', 'Имя', 'Телефон/Telegram',
   'Категория товара', 'Ссылка на товар', 'Объём закупок',
-  'Город доставки', 'Email', 'Прочее (JSON)'
+  'Город доставки', 'Email', 'Прочее (JSON)', 'Количество'
 ];
-var KNOWN_FIELDS = ['formType', 'name', 'phone', 'sku', 'link', 'budget', 'city', 'email'];
+// Колонка «Количество» (qty из квиза) добавлена последней, в L, — чтобы не
+// сдвигать уже заполненные колонки старых заявок.
+var QTY_HEADER_CELL = 'L1';
+var KNOWN_FIELDS = ['formType', 'name', 'phone', 'sku', 'link', 'budget', 'city', 'email', 'qty'];
 
 // Защита от дублей: та же форма с тем же телефоном/Telegram за последние
 // DUPLICATE_WINDOW_MIN минут считается повтором (клиент нажал "отправить"
@@ -77,6 +80,10 @@ function getOrCreateSheet_() {
     sheet.insertColumnBefore(1);
     sheet.getRange('A1').setValue('№');
   }
+  // Лист создан до появления вопроса про количество — дописываем заголовок.
+  if (sheet.getRange(QTY_HEADER_CELL).getValue() !== 'Количество') {
+    sheet.getRange(QTY_HEADER_CELL).setValue('Количество');
+  }
   // Телефон часто начинается с "+" — без текстового формата колонки
   // Google Sheets воспринимает такие значения как формулу и пишет #ERROR!
   // Ставим формат каждый раз (не только при создании листа), чтобы починить
@@ -132,7 +139,8 @@ function doPost(e) {
       data.budget || '',
       data.city || '',
       data.email || '',
-      Object.keys(extra).length ? JSON.stringify(extra) : ''
+      Object.keys(extra).length ? JSON.stringify(extra) : '',
+      data.qty || ''
     ]);
 
     return ContentService

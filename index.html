@@ -733,6 +733,16 @@
         </div>
 
         <div class="quizstep" data-step="4">
+          <h3 class="quiz__q">Сколько товара планируете заказать?</h3>
+          <p class="briefform__hint">Берём заказы от&nbsp;300&nbsp;кг или от&nbsp;250&nbsp;000&nbsp;₽</p>
+          <div class="field">
+            <input type="text" id="qty" placeholder=" " required aria-describedby="err-qty">
+            <label for="qty">Количество в штуках или килограммах</label>
+            <span class="field__err" id="err-qty">Укажите количество, например 500&nbsp;шт или 300&nbsp;кг</span>
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="5">
           <h3 class="quiz__q">В какой город доставить товар?</h3>
           <div class="field">
             <input type="text" id="city" placeholder=" " required aria-describedby="err-city">
@@ -741,7 +751,7 @@
           </div>
         </div>
 
-        <div class="quizstep" data-step="5">
+        <div class="quizstep" data-step="6">
           <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
           <div class="field">
             <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
@@ -1137,6 +1147,6 @@
 </div>
 
 <script src="js/forms-config.js?v=2"></script>
-<script src="js/main.js?v=22"></script>
+<script src="js/main.js?v=23"></script>
 </body>
 </html>
