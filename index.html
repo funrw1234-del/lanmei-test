@@ -1,102 +1,1152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#1a1a1f" />
-    <!--
-      Lanmei — главная по прототипу Никиты (синий вариант, сборка 18.09.2026 по правкам Леонида).
-      Вёрстка, тексты и картинки — из его проекта без изменений; подключена боевая отправка заявок
-      (Worker → Telegram / почта / Google-таблица / офлайн-конверсии Директа), SEO и счётчики живого сайта.
-      Исходники: ClaudeSite-lab/lanmei-v2, сборка — build.sh.
-    -->
-    <title>Lanmei — выкуп и доставка из Китая в РФ «под ключ»</title>
-    <meta name="description" content="Выкуп и доставка товаров из Китая с фиксированной ценой в договоре. Смета по строкам: товар, комиссия, фрахт, таможня, доставка. 30% на запуск производства, 70% после приёмки партии. Расчёт за 48 часов бесплатно." />
-    <link rel="canonical" href="https://lanmei.ru/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:url" content="https://lanmei.ru/" />
-    <meta property="og:title" content="Lanmei — выкуп и доставка из Китая в РФ «под ключ»" />
-    <meta property="og:description" content="Выкуп и доставка товаров из Китая с фиксированной ценой в договоре. Смета по строкам, 30% на запуск, 70% после приёмки партии. Расчёт за 48 часов бесплатно." />
-    <meta property="og:image" content="https://lanmei.ru/photos/glavnaya.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Lanmei — выкуп и доставка из Китая в РФ «под ключ»" />
-    <meta name="twitter:description" content="Выкуп и доставка товаров из Китая с фиксированной ценой в договоре. Смета по строкам, 30% на запуск, 70% после приёмки партии. Расчёт за 48 часов бесплатно." />
-    <meta name="twitter:image" content="https://lanmei.ru/photos/glavnaya.jpg" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://lanmei.ru/#organization",
-      "name": "Lanmei",
-      "url": "https://lanmei.ru/",
-      "logo": "https://lanmei.ru/photos/logo.jpg",
-      "description": "Выкуп и доставка товаров из Китая для бизнеса из РФ с фиксированной ценой в договоре: поиск и аудит фабрик, инспекция партии, экспортные и таможенные документы, доставка до склада. Офис в Шанхае.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shangcheng Road, Lekai Tower, Office 2408",
-        "addressLocality": "Pudong New Area, Shanghai",
-        "addressCountry": "CN"
-      },
-      "areaServed": { "@type": "Country", "name": "Russia" },
-      "sameAs": ["https://t.me/lanmei_logistics"],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "email": "lanmeiltd_sale2@163.com",
-        "telephone": "+86-131-2079-4214",
-        "areaServed": "RU",
-        "availableLanguage": ["Russian", "English", "Chinese"]
-      },
-      "makesOffer": {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Выкуп и доставка товаров из Китая «под ключ»",
-          "description": "Поиск и аудит фабрики, техническое задание, инспекция партии перед отгрузкой, оформление экспортных и таможенных документов, доставка до склада клиента в России.",
-          "provider": { "@id": "https://lanmei.ru/#organization" },
-          "areaServed": { "@type": "Country", "name": "Russia" }
-        }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanmei — выкуп и доставка из Китая в РФ «под ключ»</title>
+<meta name="description" content="Оператор белых поставок из Китая для селлеров с закупками от $3 000 в месяц. Проверка фабрики из Шанхая, контроль партии по ТЗ, документы, таможня и доставка до склада. Расчёт себестоимости за 48 часов.">
+<link rel="canonical" href="https://lanmei.ru/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://lanmei.ru/">
+<meta property="og:title" content="Lanmei — выкуп и доставка из Китая в РФ «под ключ»">
+<meta property="og:description" content="Оператор белых поставок из Китая для селлеров с закупками от $3 000 в месяц. Проверка фабрики из Шанхая, контроль партии по ТЗ, документы, таможня и доставка до склада. Расчёт себестоимости за 48 часов.">
+<meta property="og:image" content="https://lanmei.ru/photos/glavnaya.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lanmei — выкуп и доставка из Китая в РФ «под ключ»">
+<meta name="twitter:description" content="Оператор белых поставок из Китая для селлеров с закупками от $3 000 в месяц. Проверка фабрики из Шанхая, контроль партии по ТЗ, документы, таможня и доставка до склада.">
+<meta name="twitter:image" content="https://lanmei.ru/photos/glavnaya.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://lanmei.ru/#organization",
+  "name": "Lanmei",
+  "url": "https://lanmei.ru/",
+  "logo": "https://lanmei.ru/photos/logo.jpg",
+  "description": "Оператор белых поставок из Китая для селлеров с закупками от $3 000 в месяц. Проверка фабрики из Шанхая, контроль партии по ТЗ, документы, таможня и доставка до склада.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shangcheng Road, Lekai Tower, Office 2408",
+    "addressLocality": "Pudong New Area, Shanghai",
+    "addressCountry": "CN"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Russia"
+  },
+  "sameAs": [
+    "https://t.me/lanmei_logistics"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "email": "lanmeiltd_sale2@163.com",
+    "telephone": "+86-131-2079-4214",
+    "areaServed": "RU",
+    "availableLanguage": ["Russian", "English", "Chinese"]
+  },
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Белые поставки из Китая в РФ «под ключ»",
+      "description": "Поиск и аудит фабрики, техническое задание, инспекция партии перед отгрузкой, оформление экспортных и таможенных документов, доставка до склада клиента в России.",
+      "provider": { "@id": "https://lanmei.ru/#organization" },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Russia"
       }
     }
-    </script>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Будут ли доплаты после оплаты?", "acceptedAnswer": {"@type": "Answer", "text": "Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Цену фиксируем в договоре в юанях или долларах, поэтому сумма в рублях может измениться вместе с курсом."}}, {"@type": "Question", "name": "Карго всё равно дешевле?", "acceptedAnswer": {"@type": "Answer", "text": "По видимой ставке — да. Но в ней нет документов, пошлины и НДС, и нет ответственности за брак. Мы считаем обе схемы в одинаковых статьях и показываем разницу в себестоимости единицы на вашем складе. Если после честного сравнения карго выигрывает — так и скажем."}}, {"@type": "Question", "name": "Как узнать стоимость заранее?", "acceptedAnswer": {"@type": "Answer", "text": "Ответьте на 5 вопросов на сайте — менеджер уточнит детали, и в течение 48 часов пришлём расчёт в Telegram или WhatsApp. Бесплатно и без обязательств."}}, {"@type": "Question", "name": "Можно ли оплатить в рублях и с НДС?", "acceptedAnswer": {"@type": "Answer", "text": "Да, оплатить можно в рублях и с НДС. Порядок оплаты и документы для бухгалтерии согласуем при расчёте."}}, {"@type": "Question", "name": "Какие документы я получу?", "acceptedAnswer": {"@type": "Answer", "text": "Инвойс и упаковочный лист, экспортную декларацию, схему таможенного оформления с кодами ТН ВЭД и расчётом пошлины и НДС, декларации ТР ТС и маркировку «Честный знак», если они нужны вашей категории, и договор с приложением по ТЗ."}}, {"@type": "Question", "name": "Подойдут ли документы для маркетплейсов?", "acceptedAnswer": {"@type": "Answer", "text": "С 1 октября 2026 года площадки проверяют сертификаты и декларации по госреестрам. Подбираем перечень документов под вашу категорию: декларации ТР ТС, «Честный знак», требования площадок."}}, {"@type": "Question", "name": "Как вы проверяете фабрику?", "acceptedAnswer": {"@type": "Answer", "text": "Проверяем юридическую историю и реальные производственные мощности, сравниваем 2 – 5 фабрик и показываем картину по каждой. Затем утверждаем образец, фиксируем параметры в ТЗ и проверяем партию до того, как уйдут 70% оплаты."}}, {"@type": "Question", "name": "Какой минимальный заказ?", "acceptedAnswer": {"@type": "Answer", "text": "Берём заказы от $3 000 за партию или от 300 кг."}}, {"@type": "Question", "name": "Можно ли работать с нашим поставщиком?", "acceptedAnswer": {"@type": "Answer", "text": "Да, можем работать с вашим поставщиком. Укажите его при расчёте — в квизе есть поле для ссылки на товар."}}, {"@type": "Question", "name": "Кто вернёт деньги за брак?", "acceptedAnswer": {"@type": "Answer", "text": "Определение брака, порядок доказательств, сроки ответа и лимиты компенсации закреплены в договоре. На претензии — 90 дней. Претензию с фабрикой ведём мы, на китайском. Серия проверяется до оплаты остатка, поэтому большинство проблем решается ещё в Китае."}}, {"@type": "Question", "name": "Почему аванс 30%?", "acceptedAnswer": {"@type": "Answer", "text": "Это стандартная схема запуска производства в Китае: 30% фабрика получает на закупку сырья, 70% — после приёмки серии. После оплаты вы получаете календарь поставки с контрольными точками."}}, {"@type": "Question", "name": "Сколько идёт поставка?", "acceptedAnswer": {"@type": "Answer", "text": "Срок производства и доставки называем в смете по датам. Сроки таможни и доставки по России зависят от товара."}}, {"@type": "Question", "name": "Можно ли отследить партию в пути?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Менеджер отслеживает ваш груз и сообщает о его перемещении."}}]}</script>
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <!-- Gilroy — свои файлы; предзагрузка начертаний первого экрана -->
-    <link rel="preload" href="./fonts/Gilroy-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="./fonts/Gilroy-Bold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="./fonts/Gilroy-Normal.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4LTW009FB"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Z4LTW009FB');
-    </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111955901', 'ym');
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Карго всё равно дешевле?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "По видимой ставке — да. Но в ней нет документов, пошлины и НДС, и нет ответственности за брак. Мы считаем обе схемы в одинаковых статьях и показываем разницу в себестоимости единицы на вашем складе. Если после честного сравнения карго выигрывает — мы так и скажем."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Кто вернёт деньги за брак?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Определение брака, порядок доказательств, сроки ответа и лимиты компенсации закреплены в договоре. Претензию с фабрикой ведём мы, на китайском — от заявки до решения. Именно поэтому серия проверяется до оплаты остатка — большинство проблем решается ещё в Китае."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Будут ли скрытые платежи?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Цена в договоре фиксируется в юанях или долларах: закупка идёт не в рублях, а в иностранной валюте. Поэтому сумма в рублях может измениться, если изменится курс юаня или доллара."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Почему аванс 30%?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Это стандартная схема запуска производства в Китае: 30% фабрика получает на закупку сырья, 70% — после приёмки серии. Аванс уходит фабрике, а не нам, и подтверждается документами. После оплаты вы получаете календарь поставки с контрольными точками."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Успеем ли пополнить остатки?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Переход делается параллельно текущим поставкам: начинаем с одной тестовой партии, пока карго продолжает возить. Так вы проверяете схему без риска дефицита ходового SKU и переносите остальной ассортимент уже по факту."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "У нас свой отдел закупок",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Тогда мы закрываем ту часть, где нужен человек в Китае: выезд на фабрику, переговоры на китайском, инспекция серии и претензии. Многие клиенты используют нас как внешнюю китайскую руку своего отдела ВЭД, а не как замену ему."
+      }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- шрифты не блокируют отрисовку страницы: грузятся асинхронно, применяются как только готовы -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.css?v=57">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4LTW009FB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        ym(111955901, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-    </script>
-    <!-- /Yandex.Metrika counter -->
-    <!-- URL Worker'а и шаблоны писем — общий файл живого сайта -->
-    <script src="/js/forms-config.js?v=2"></script>
-    <script type="module" crossorigin src="./assets/index-DZtq0r6T.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B7Gi-DQ2.css">
-  </head>
-  <body>
-    <noscript><div><img src="https://mc.yandex.ru/watch/111955901" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <div id="root"><div class="rail"><a href="#top"><img width="1024" height="1024" loading="eager" decoding="async" fetchpriority="high" alt="Lanmei" class="w-10 h-10 rounded-xl" src="img/logo.jpg"></a><button class="burger " aria-label="Меню"><i></i><i></i><i></i></button><span class="menu">меню</span><a class="soc" href="https://t.me/lanmei_logistics" target="_blank" rel="noreferrer" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2 2 6 3-4 5 3z"></path><path d="m9 13 9-8"></path></svg></a><a class="soc" href="https://wa.me/8613120794214" target="_blank" rel="noreferrer" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"></path><path d="M8 9h8M8 12h5"></path></svg></a><a class="soc" href="tel:+8613120794214" aria-label="Позвонить"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></a></div><div class="menu-overlay "><nav class="max-w-[1180px] mx-auto px-6 pt-[120px]"><a href="#who" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.06s;">кому подходит</a><a href="#brief" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.1s;">расчёт</a><a href="#estimate" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.14s;">смета</a><a href="#case" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.18s;">кейсы</a><a href="#guarantee" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.22s;">ответственность</a><a href="#docs" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.26s;">документы</a><a href="#team" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.3s;">команда</a><a href="#faq" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.34s;">вопросы</a><a href="#contacts" class="display display-b block text-[clamp(28px,4.4vw,56px)] leading-[1.05] menu-link" style="transition-delay: 0.38s;">контакты</a><div class="mt-10 text-white/70 text-[15px]">+86 131 2079 4214 · Шанхай</div></nav></div><a href="#brief" class="float-cta cta-main ">Получить расчёт<span class="cta-arr" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a><div class="page"><section id="top" class="reg-blue relative overflow-visible" style="border-radius: 34px 34px 0px 0px;"><div class="max-w-[1180px] mx-auto px-6 pt-7 relative z-10"><div class="hd-grid text-[13px]"><div class="flex items-center gap-3"><img width="1024" height="1024" loading="eager" decoding="async" fetchpriority="high" alt="" class="w-10 h-10 rounded-lg" src="img/logo.jpg"><div><b class="text-[15px]">Lanmei</b><br><span class="text-[13px] font-medium">помогаем бизнесу с&nbsp;выкупом и&nbsp;доставкой товаров из&nbsp;Китая</span></div></div><div class="desk-only font-medium">Доставили 500+ партий товаров для&nbsp;клиентов из&nbsp;РФ</div><div class="text-right"><a href="tel:+8613120794214" class="font-semibold text-[15px]">+86 131 2079 4214</a><br><a href="mailto:lanmeiltd_sale2@163.com" class="text-[12px] opacity-85 underline decoration-dotted">lanmeiltd_sale2@163.com</a></div><div class="flex items-center gap-2 desk-only"><a class="hd-ico" href="https://t.me/lanmei_logistics" target="_blank" rel="noreferrer" aria-label="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2 2 6 3-4 5 3z"></path><path d="m9 13 9-8"></path></svg></a><a class="hd-ico" href="https://max.ru/join/C9bF0L3UndVVCUR9lrVMY46AHpph49SPHMWvERbajyk" target="_blank" rel="noreferrer" aria-label="MAX"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"></path><path d="M8 9h8M8 12h5"></path></svg></a><button class="hd-btn">Заказать звонок</button></div></div><div class="hero-grid mt-12"><div class="hero-copy"><div class="hero-pills flex flex-wrap justify-center gap-2.5 reveal"><span class="pill pill-hero"><i class="dot"></i>Офис в Шанхае</span><span class="pill pill-hero">Работаем уже более 3&nbsp;лет</span></div><h1 class="display text-center mx-auto mt-6 text-[clamp(32px,4.1vw,52px)] max-w-[20ch] reveal">Выкуп и&nbsp;доставка<br>товаров из&nbsp;Китая<br><span class="display-b"><span class="h1-desk">с&nbsp;фиксированной ценой</span><span class="h1-mob">Фиксируем цену</span><br>в&nbsp;договоре</span></h1><p class="text-center mx-auto mt-6 max-w-[62ch] text-[17px] reveal" style="transition-delay: 0.1s;"><b>Для&nbsp;компаний, которые закупают регулярно и&nbsp;уходят с&nbsp;карго на&nbsp;белый импорт.</b> Считаем за&nbsp;48&nbsp;часов бесплатно.</p><ul class="hero-checks reveal" style="transition-delay: 0.16s;"><li><span class="chk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span><span>Смета по&nbsp;строкам: товар, комиссия, фрахт, таможня, доставка&nbsp;— отдельно</span></li><li><span class="chk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span><span>30% на&nbsp;запуск производства, 70%&nbsp;— после приёмки партии по&nbsp;вашему ТЗ</span></li><li><span class="chk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg></span><span>Фиксируем цену в&nbsp;договоре</span></li></ul><div class="cta-wrap items-center mt-8 reveal"><a href="#brief" class="cta-main cta-light">Получить расчёт<span class="cta-arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a><span class="cta-sub">Прозрачный расчёт за&nbsp;48&nbsp;часов. Бесплатно, без обязательств.</span></div></div><div class="hero-visual desk-only reveal" style="transition-delay: 0.12s;"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-05-480.webp 480w, img/m/o-05-800.webp 800w, img/o-05.webp 1200w" sizes="100vw"><img width="1200" height="1408" loading="eager" decoding="async" fetchpriority="high" alt="Офис Lanmei в Шанхае" src="img/o-05.webp"></picture></div></div></div><div class="scene hero-scene mx-auto max-w-[1180px] h-[520px] mt-2 relative z-20" style="margin-bottom: -150px;"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/scene-hero-480.webp 480w, img/m/scene-hero-800.webp 800w, img/m/scene-hero-1200.webp 1200w, img/scene-hero.webp 2400w" sizes="100vw"><img width="2400" height="972" loading="eager" decoding="async" fetchpriority="high" alt="" src="img/scene-hero.webp" style="left: 0px; bottom: 0px; width: 100%;"></picture></div></section><section class="nums-strip reg-paper after-scene pt-[190px] pb-[40px] relative z-10"><div class="max-w-[1180px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4"><div class="card card-paper p-6 reveal" style="transition-delay: 0s;"><div class="display display-b text-[clamp(30px,3.2vw,44px)]">50+</div><div class="mt-2 text-[14px] text-ink-2">постоянных клиентов</div></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.05s;"><div class="display display-b text-[clamp(30px,3.2vw,44px)]">500+</div><div class="mt-2 text-[14px] text-ink-2">поставок в&nbsp;РФ</div></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.1s;"><div class="display display-b text-[clamp(18px,1.5vw,22px)]">Экспортная лицензия</div><div class="mt-2 text-[14px] text-ink-2">официальный экспорт из&nbsp;Китая</div></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.15s;"><div class="display display-b text-[clamp(30px,3.2vw,44px)]">95%</div><div class="mt-2 text-[14px] text-ink-2">клиентов становятся постоянными</div></div></div></section><section id="who" class="reg-paper pt-[70px] pb-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label reveal">Для кого</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 reveal">Кому подходит</h2><div class="who-grid grid grid-cols-1 md:grid-cols-4 gap-5 mt-12"><a href="#brief" class="card card-paper who-card reveal" style="transition-delay: 0s;"><div class="who-photo is-stub"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-17-480.webp 480w, img/m/o-17-800.webp 800w, img/m/o-17-1200.webp 1200w, img/o-17.webp 1400w" sizes="100vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/o-17.webp"></picture></div><div class="p-6"><h3 class="display display-b text-[19px]">Производственные компании</h3><p class="mt-3 text-[14px] text-ink-2">Закупаете комплектующие, сырьё или оборудование регулярно и&nbsp;оптом.</p><p class="mt-3 text-[14px] font-semibold" style="color: var(--blue);">Фиксируем параметры в&nbsp;измеримом ТЗ и&nbsp;проверяем партию до&nbsp;оплаты 70%. Большинство проблем решаем ещё в&nbsp;Китае. →</p></div></a><a href="#brief" class="card card-paper who-card reveal" style="transition-delay: 0.05s;"><div class="who-photo is-stub"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-07-480.webp 480w, img/m/o-07-800.webp 800w, img/o-07.webp 1200w" sizes="100vw"><img width="1200" height="1672" loading="lazy" decoding="async" alt="" src="img/o-07.webp"></picture></div><div class="p-6"><h3 class="display display-b text-[19px]">Офлайн-ритейл</h3><p class="mt-3 text-[14px] text-ink-2">Товары для&nbsp;дома, инструменты, запчасти. Нужны стабильные поставки ходовых позиций и&nbsp;документы для&nbsp;бухгалтерии.</p><p class="mt-3 text-[14px] font-semibold" style="color: var(--blue);">Переходим на&nbsp;официальный белый импорт параллельно текущим поставкам, без дефицита и&nbsp;ущерба для&nbsp;бизнеса, с&nbsp;полным комплектом документов. →</p></div></a><a href="#brief" class="card card-paper who-card reveal" style="transition-delay: 0.1s;"><div class="who-photo is-stub"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-02-480.webp 480w, img/m/o-02-800.webp 800w, img/o-02.webp 1200w" sizes="100vw"><img width="1200" height="1696" loading="lazy" decoding="async" alt="" src="img/o-02.webp"></picture></div><div class="p-6"><h3 class="display display-b text-[19px]">Селлеры маркетплейсов</h3><p class="mt-3 text-[14px] text-ink-2">С&nbsp;1&nbsp;октября 2026&nbsp;года площадки проверяют сертификаты и&nbsp;декларации по&nbsp;госреестрам. С&nbsp;карго карточку могут не&nbsp;допустить.</p><p class="mt-3 text-[14px] font-semibold" style="color: var(--blue);">Подбираем документы под вашу категорию: декларации ТР ТС, «Честный знак», требования площадок. →</p></div></a><a href="#brief" class="card card-paper who-card reveal" style="transition-delay: 0.15s;"><div class="who-photo "><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/degidrator-1-480.webp 480w, img/m/cases/degidrator-1-800.webp 800w, img/cases/degidrator-1.webp 1046w" sizes="100vw"><img width="1046" height="1400" loading="lazy" decoding="async" alt="" src="img/cases/degidrator-1.webp"></picture></div><div class="p-6"><h3 class="display display-b text-[19px]">Бренды, которые выпускают свой товар</h3><p class="mt-3 text-[14px] text-ink-2">Запускаете свой товар или новую модель, но типовая китайская конструкция вас не&nbsp;устраивает&nbsp;— требуется другая фабрика или доработка.</p><p class="mt-3 text-[14px] font-semibold" style="color: var(--blue);">Дорабатываем изделие с&nbsp;инженером до&nbsp;серии: образец, ТЗ, контроль производства. →</p></div></a></div><div class="card card-char mt-5 p-8 md:p-9 md:flex md:items-center md:gap-10 reveal"><h3 class="display display-b text-[clamp(22px,2.2vw,30px)] md:w-[34%]">Компании со своим отделом закупок</h3><p class="mt-3 md:mt-0 text-[15.5px] opacity-85">Закрываем часть, где нужен свой человек в&nbsp;Китае со знанием языка: выезд на&nbsp;фабрику, переговоры с&nbsp;производителем на&nbsp;китайском, обсуждение лучших условий, знакомство с&nbsp;производством.</p></div></div></section><section id="brief" class="reg-paper pb-[110px]"><div class="slab reg-blue relative overflow-hidden py-[80px]"><div class="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-start"><div class="md:col-span-6"><h2 class="display text-[clamp(28px,3.6vw,50px)] reveal">Ответьте на&nbsp;5&nbsp;вопросов&nbsp;— и&nbsp;получите расчёт от&nbsp;2﻿–﻿5&nbsp;фабрик</h2><p class="mt-5 text-[16px] reveal">После прохождения с&nbsp;вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в&nbsp;Telegram или WhatsApp в&nbsp;течение 48&nbsp;часов. Бесплатно и&nbsp;без обязательств.</p><ol class="steps3 mt-7 reveal"><li><b>1</b><span>Тест&nbsp;— 2&nbsp;минуты</span></li><li><b>2</b><span>Звонок менеджера</span></li><li><b>3</b><span>Прозрачный расчёт за&nbsp;48&nbsp;ч</span></li></ol><div class="mt-7 reveal"><div class="lock-plate"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Цену фиксируем в&nbsp;договоре&nbsp;— в&nbsp;юанях или долларах</span></div></div><div class="mt-7 reveal"><div class="text-[13px] opacity-85 mb-3">Так выглядят документы поставки&nbsp;— инвойс, упаковочный лист, экспортная декларация</div><div class="quiz-docs flex gap-3 items-end flex-wrap"><figure class="paper zoomable " style="width: 120px; --zoom: 3.5; transform-origin: left bottom;"><img width="730" height="845" loading="lazy" decoding="async" alt="Документ Lanmei" src="img/doc-invoice.jpg"></figure><figure class="paper zoomable " style="width: 150px; --zoom: 3; transform-origin: left bottom;"><img width="772" height="239" loading="lazy" decoding="async" alt="Документ Lanmei" src="img/doc-packing.jpg"></figure><figure class="paper zoomable " style="width: 150px; --zoom: 3; transform-origin: right bottom;"><img width="772" height="606" loading="lazy" decoding="async" alt="Документ Lanmei" src="img/doc-declaration.jpg"></figure></div></div></div><div class="md:col-span-6 card card-paper p-7 reveal" style="transition-delay: 0.08s;"><div class="flex justify-between text-[13px] text-ink-2"><span>Короткий тест&nbsp;— всего 2&nbsp;минуты</span><span>1/5</span></div><div class="h-1.5 rounded-full bg-ink/10 overflow-hidden mt-2"><div class="h-full rounded-full" style="width: 20%; background: var(--blue); transition: width .6s var(--ease);"></div></div><h3 class="display display-b text-[clamp(19px,1.9vw,24px)] mt-6">Какую категорию товара вы планируете привезти из&nbsp;Китая?</h3><div class="grid gap-2.5 mt-5"><button class="q-opt">Хозтовары и товары для дома</button><button class="q-opt">Электроника и техника</button><button class="q-opt">Оборудование и станки</button><button class="q-opt">Продукты питания</button><button class="q-opt">Другая категория / нужен поиск</button></div></div></div></div></section><section class="reg-paper pb-[110px]"><div class="slab reg-blue relative overflow-hidden py-[90px]"><div class="max-w-[1180px] mx-auto px-6"><h2 class="display fear-title text-[clamp(28px,3.3vw,46px)] reveal">Хотите организовать поставки из&nbsp;Китая,<br><span class="display-b">но&nbsp;боитесь, что цена после оплаты вырастет?</span></h2><div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-10"><div class="md:col-span-6 relative h-[420px] desk-only scene"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-06-480.webp 480w, img/m/o-06-800.webp 800w, img/m/o-06-1200.webp 1200w, img/o-06.webp 1600w" sizes="100vw"><img width="1600" height="1251" loading="lazy" decoding="async" alt="" src="img/o-06.webp" style="left: -2%; top: 0px; width: 104%;"></picture></div><div class="md:col-span-6"><p class="text-[16.5px] max-w-[52ch] reveal"><b>Мы фиксируем цену в&nbsp;юанях или долларах в&nbsp;договоре.</b> Цена может измениться только в&nbsp;том случае, если изменился курс валют.</p><ul class="mt-6 grid gap-2 text-[15px] reveal"><li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Фиксируем цену в&nbsp;договоре</li><li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Юридически защищаем вас от&nbsp;повышения цены</li><li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Спорные ситуации решаем оперативно</li><li class="flex gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>Сопровождаем на&nbsp;всех этапах и&nbsp;предоставляем постпродажное обслуживание</li></ul><div class="cta-wrap mt-8 reveal"><a href="#brief" class="cta-main cta-light">Получить расчёт<span class="cta-arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a><span class="cta-sub">Прозрачный расчёт за&nbsp;48&nbsp;часов в&nbsp;Telegram или WhatsApp</span></div></div></div></div></div></section><section id="estimate" class="reg-char py-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label label-light reveal">Прозрачный расчёт</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 reveal">Расчёт, в&nbsp;котором видно все расходы</h2><p class="mt-4 text-[16.5px] opacity-80 max-w-[60ch] reveal">За&nbsp;48&nbsp;часов даём расчёт, в&nbsp;котором видно стоимость услуг и&nbsp;нашей комиссии.</p><div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12"><div class="md:col-span-7"><div class="card card-paper p-7 md:p-8 reveal"><ol class="est-rows"><li><span class="num">01</span><span>Товар</span></li><li><span class="num">02</span><span>Комиссия</span></li><li><span class="num">03</span><span>Фрахт</span></li><li><span class="num">04</span><span>Экспортное оформление</span></li><li><span class="num">05</span><span>Пошлина</span></li><li><span class="num">06</span><span>НДС</span></li><li><span class="num">07</span><span>Сертификация</span></li><li><span class="num">08</span><span>Маркировка</span></li><li><span class="num">09</span><span>Доставка до&nbsp;склада</span></li></ol><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-08-480.webp 480w, img/m/o-08-800.webp 800w, img/o-08.webp 1200w" sizes="100vw"><img width="1200" height="1053" loading="lazy" decoding="async" class="obj desk-only" alt="" src="img/o-08.webp" style="right: -2%; bottom: -4%; width: 36%;"></picture></div><div class="card card-paper p-7 mt-5 reveal" style="transition-delay: 0.06s;"><div class="flex items-center gap-3 font-semibold" style="color: var(--blue);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Фиксируем цену в&nbsp;договоре&nbsp;— в&nbsp;юанях или долларах.</span></div><p class="mt-2 text-[14.5px] text-ink-2">Закупка идёт в&nbsp;иностранной валюте, поэтому сумма в&nbsp;рублях может измениться вместе с&nbsp;курсом юаня или доллара.</p></div><div class="flex flex-wrap items-center gap-6 mt-7 reveal"><div class="cta-wrap "><a href="#brief" class="cta-main ">Получить смету на мой товар<span class="cta-arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a></div></div></div><div class="md:col-span-5 flex justify-center items-start reveal" style="transition-delay: 0.1s;"><figure class="paper zoomable " style="width: 320px; --zoom: 1.9; transform-origin: right top;"><img width="659" height="830" loading="lazy" decoding="async" alt="Пример реального расчёта — позиции и цифры считаем под ваш товар и маршрут" src="img/doc-estimate.jpg"><figcaption>Пример реального расчёта&nbsp;— позиции и&nbsp;цифры считаем под ваш товар и&nbsp;маршрут</figcaption></figure></div></div></div></section><section id="case" class="reg-paper py-[110px]"><div class="max-w-[1180px] mx-auto px-6"><div class="flex items-end justify-between gap-6 flex-wrap"><div><span class="label reveal">Кейсы</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 reveal">Примеры поставок</h2></div><div class="display text-[clamp(20px,2vw,28px)] text-ink-2">01 / 05</div></div><div class="flex gap-2 flex-wrap mt-8 reveal"><button class="tab is-on">Сантехника</button><button class="tab ">Товары для дома</button><button class="tab ">Продукты питания</button><button class="tab ">Тяжёлая техника</button><button class="tab ">Инженерный кейс</button></div><div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-8"><div class="md:col-span-6"><div class="card gallery"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-1-480.webp 480w, img/m/cases/santehnika-1-800.webp 800w, img/m/cases/santehnika-1-1200.webp 1200w, img/cases/santehnika-1.webp 1400w" sizes="100vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="Латунные и цинковые смесители, сантехника для ритейла" src="img/cases/santehnika-1.webp"></picture></div><div class="flex gap-2 mt-3 flex-wrap"><button class="thumb is-on"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-1-480.webp 480w, img/m/cases/santehnika-1-800.webp 800w, img/m/cases/santehnika-1-1200.webp 1200w, img/cases/santehnika-1.webp 1400w" sizes="64px"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/cases/santehnika-1.webp"></picture></button><button class="thumb "><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-2-480.webp 480w, img/cases/santehnika-2.webp 787w" sizes="64px"><img width="787" height="1400" loading="lazy" decoding="async" alt="" src="img/cases/santehnika-2.webp"></picture></button><button class="thumb "><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-3-480.webp 480w, img/m/cases/santehnika-3-800.webp 800w, img/m/cases/santehnika-3-1200.webp 1200w, img/cases/santehnika-3.webp 1400w" sizes="64px"><img width="1400" height="788" loading="lazy" decoding="async" alt="" src="img/cases/santehnika-3.webp"></picture></button><button class="thumb "><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-4-480.webp 480w, img/m/cases/santehnika-4-800.webp 800w, img/m/cases/santehnika-4-1200.webp 1200w, img/cases/santehnika-4.webp 1400w" sizes="64px"><img width="1400" height="788" loading="lazy" decoding="async" alt="" src="img/cases/santehnika-4.webp"></picture></button><button class="thumb "><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/cases/santehnika-5-480.webp 480w, img/m/cases/santehnika-5-800.webp 800w, img/cases/santehnika-5.webp 1280w" sizes="64px"><img width="1280" height="960" loading="lazy" decoding="async" alt="" src="img/cases/santehnika-5.webp"></picture></button></div></div><div class="md:col-span-6"><div class="display display-b text-[clamp(24px,2.6vw,36px)]">≈ $52&nbsp;000&nbsp;экономии на&nbsp;одном контейнере</div><div class="mt-2 text-[14px] text-ink-2">Латунные и&nbsp;цинковые смесители, сантехника для&nbsp;ритейла</div><dl class="case-rows mt-6"><dt>Ситуация</dt><dd>Уйти от&nbsp;агента: медленная связь, высокий процент, брак, невыгодные условия по&nbsp;фабрике</dd><dt>Решение</dt><dd>Вышли на&nbsp;5&nbsp;фабрик, сократили цикл производства с&nbsp;60&nbsp;до&nbsp;40&nbsp;дней, добились отсрочки платежа, ужесточили инспекцию при приёмке</dd><dt>Результат</dt><dd>Себестоимость −7% (≈ $52&nbsp;000&nbsp;на&nbsp;контейнере), поставки без срывов сроков</dd></dl><div class="case-nums grid grid-cols-3 gap-3 mt-6"><div class="card card-paper p-4"><div class="display display-b text-[clamp(18px,1.8vw,26px)]">≈ $52K</div><div class="text-[12.5px] text-ink-2 mt-1">экономия на&nbsp;контейнере</div></div><div class="card card-paper p-4"><div class="display display-b text-[clamp(18px,1.8vw,26px)]">−7%</div><div class="text-[12.5px] text-ink-2 mt-1">снижение себестоимости</div></div><div class="card card-paper p-4"><div class="display display-b text-[clamp(18px,1.8vw,26px)]">60→40 дней</div><div class="text-[12.5px] text-ink-2 mt-1">цикл производства</div></div></div><p class="mt-5 text-[13.5px] text-ink-2">Отвечали за&nbsp;поиск фабрик, переговоры, приём и&nbsp;инспекцию товара, организацию экспорта. Работаем вместе полтора года.</p></div></div></div></section><section id="guarantee" class="reg-char py-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label label-light reveal">Ответственность</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 max-w-[26ch] reveal">Отвечаем за&nbsp;результат&nbsp;— вот как это устроено</h2><div class="chain mt-12"><div class="card card-paper p-7 reveal" style="transition-delay: 0s;"><div class="display display-b text-[clamp(30px,3.4vw,48px)]">30%</div><div class="mt-3 font-semibold text-[17px]">Запуск производства</div><div class="mt-1 text-[14.5px] text-ink-2">аванс запускает партию по&nbsp;договору</div></div><div class="card card-paper p-7 reveal" style="transition-delay: 0.06s;"><div class="display display-b text-[clamp(30px,3.4vw,48px)]">Проверка</div><div class="mt-3 font-semibold text-[17px]">Отчёт о&nbsp;качестве партии</div><div class="mt-1 text-[14.5px] text-ink-2">«соответствует / не&nbsp;соответствует»&nbsp;— до&nbsp;второго платежа</div></div><div class="card card-blue p-7 reveal" style="transition-delay: 0.12s;"><div class="display display-b text-[clamp(30px,3.4vw,48px)]">70%</div><div class="mt-3 font-semibold text-[17px]">Только после вашего согласия</div><div class="mt-1 text-[14.5px] opacity-90">отклонения фабрика исправляет до&nbsp;оплаты остатка</div></div></div><div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-5"><div class="card p-5 reveal" style="background: var(--blue); color: rgb(255, 255, 255); transition-delay: 0s;"><div class="display display-b text-[17px]">Цена в&nbsp;договоре</div><div class="mt-2 text-[13.5px] opacity-80">фиксируем в&nbsp;юанях или долларах до&nbsp;запуска производства</div></div><div class="card p-5 reveal" style="background: var(--char-2); color: rgb(255, 255, 255); transition-delay: 0.05s;"><div class="display display-b text-[17px]">90&nbsp;дней</div><div class="mt-2 text-[13.5px] opacity-80">на&nbsp;претензии к&nbsp;качеству и&nbsp;количеству</div></div><div class="card p-5 reveal" style="background: var(--char-2); color: rgb(255, 255, 255); transition-delay: 0.1s;"><div class="display display-b text-[17px]">Договор с&nbsp;фабрикой</div><div class="mt-2 text-[13.5px] opacity-80">юридическая опора для&nbsp;претензий</div></div><div class="card p-5 reveal" style="background: var(--char-2); color: rgb(255, 255, 255); transition-delay: 0.15s;"><div class="display display-b text-[17px]">Спор ведём мы</div><div class="mt-2 text-[13.5px] opacity-80">на&nbsp;китайском, а&nbsp;не ваша переписка в&nbsp;мессенджере</div></div><div class="card p-5 reveal" style="background: var(--char-2); color: rgb(255, 255, 255); transition-delay: 0.2s;"><div class="display display-b text-[17px]">Комиссия</div><div class="mt-2 text-[13.5px] opacity-80">известна заранее, фрахт&nbsp;— отдельной строкой</div></div></div></div></section><section id="process" class="reg-paper py-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label reveal">Полный цикл</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 reveal">От&nbsp;поиска фабрики до&nbsp;вашего склада</h2><div class="stages grid grid-cols-2 md:grid-cols-3 gap-5 mt-12"><div class="card card-char reveal" style="transition-delay: 0s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-15-480.webp 480w, img/m/o-15-800.webp 800w, img/m/o-15-1200.webp 1200w, img/o-15.webp 1400w" sizes="40vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/o-15.webp"></picture></div><div class="p-6"><span class="num">этап 01</span><h3 class="display display-b text-[19px] mt-3">Поиск и&nbsp;аудит 2﻿–﻿5&nbsp;фабрик</h3><p class="mt-2 text-[14px] opacity-75">юридическая история и&nbsp;реальные мощности</p></div></div><div class="card card-paper reveal" style="transition-delay: 0.05s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-16-480.webp 480w, img/m/o-16-800.webp 800w, img/m/o-16-1200.webp 1200w, img/o-16.webp 1400w" sizes="40vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/o-16.webp"></picture></div><div class="p-6"><span class="num">этап 02</span><h3 class="display display-b text-[19px] mt-3">Образец и&nbsp;измеримое ТЗ</h3><p class="mt-2 text-[14px] opacity-75">габариты, материал, вес, упаковка, количество</p></div></div><div class="card card-char reveal" style="transition-delay: 0.1s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-12-480.webp 480w, img/m/o-12-800.webp 800w, img/o-12.webp 1200w" sizes="40vw"><img width="1200" height="1317" loading="lazy" decoding="async" alt="" src="img/o-12.webp"></picture></div><div class="p-6"><span class="num">этап 03</span><h3 class="display display-b text-[19px] mt-3">Договор и&nbsp;аванс 30%</h3><p class="mt-2 text-[14px] opacity-75">запуск производства по&nbsp;заранее утверждённому образцу</p></div></div><div class="card card-paper reveal" style="transition-delay: 0.15s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-17-480.webp 480w, img/m/o-17-800.webp 800w, img/m/o-17-1200.webp 1200w, img/o-17.webp 1400w" sizes="40vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/o-17.webp"></picture></div><div class="p-6"><span class="num">этап 04</span><h3 class="display display-b text-[19px] mt-3">Производство и&nbsp;инспекция</h3><p class="mt-2 text-[14px] opacity-75">фото и&nbsp;видео критичных узлов, протокол отклонений</p></div></div><div class="card card-char reveal" style="transition-delay: 0.2s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-02-480.webp 480w, img/m/o-02-800.webp 800w, img/o-02.webp 1200w" sizes="40vw"><img width="1200" height="1696" loading="lazy" decoding="async" alt="" src="img/o-02.webp"></picture></div><div class="p-6"><span class="num">этап 05</span><h3 class="display display-b text-[19px] mt-3">Приёмка и&nbsp;70%</h3><p class="mt-2 text-[14px] opacity-75">остаток&nbsp;— только после вашего согласия</p></div></div><div class="card card-paper reveal" style="transition-delay: 0.25s;"><div class="stage-photo"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-18-480.webp 480w, img/m/o-18-800.webp 800w, img/m/o-18-1200.webp 1200w, img/o-18.webp 1400w" sizes="40vw"><img width="1400" height="1050" loading="lazy" decoding="async" alt="" src="img/o-18.webp"></picture></div><div class="p-6"><span class="num">этап 06</span><h3 class="display display-b text-[19px] mt-3">Экспорт, таможня, доставка</h3><p class="mt-2 text-[14px] opacity-75">документы и&nbsp;доставка до&nbsp;склада в&nbsp;России. Сроки таможни и&nbsp;доставки по&nbsp;России зависят от&nbsp;товара</p></div></div></div></div></section><section id="docs" class="reg-paper pb-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label reveal">Полный комплект документов</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 max-w-[26ch] reveal">Поставки в&nbsp;белую&nbsp;— это уверенность и&nbsp;спокойствие</h2><p class="mt-4 text-[16.5px] text-ink-2 max-w-[60ch] reveal">Подбираем перечень документов под вашу категорию товара, с&nbsp;гарантией на&nbsp;случай брака.</p><div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-12 items-start"><div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="card card-paper p-6 reveal" style="transition-delay: 0s;"><div class="display display-b text-[17px]">Экспортная лицензия фабрики</div><p class="mt-2 text-[14px] text-ink-2">Подтверждаем право производителя на&nbsp;экспорт до&nbsp;запуска партии.</p></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.04s;"><div class="display display-b text-[17px]">Инвойс и&nbsp;упаковочный лист</div><p class="mt-2 text-[14px] text-ink-2">Состав партии, вес, объём и&nbsp;стоимость по&nbsp;позициям.</p></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.08s;"><div class="display display-b text-[17px]">Схема таможенного оформления</div><p class="mt-2 text-[14px] text-ink-2">Коды ТН ВЭД, расчёт пошлины и&nbsp;НДС, порядок выпуска.</p></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.12s;"><div class="display display-b text-[17px]">Сертификация и&nbsp;маркировка</div><p class="mt-2 text-[14px] text-ink-2">Декларации ТР ТС, «Честный знак» и&nbsp;требования площадок.</p></div><div class="card card-paper p-6 reveal" style="transition-delay: 0.16s;"><div class="display display-b text-[17px]">Договор с&nbsp;приложением по&nbsp;ТЗ</div><p class="mt-2 text-[14px] text-ink-2">Измеримые параметры, сроки, порядок претензий и&nbsp;гарантия от&nbsp;фабрики.</p></div><div class="card card-blue p-6 reveal" style="transition-delay: 0.2s;"><div class="display display-b text-[17px]">Результат</div><p class="mt-2 text-[14px] opacity-90">Полный комплект документов с&nbsp;постоянным сопровождением.</p></div></div><div class="md:col-span-5 relative min-h-[520px] desk-only doc-fan reveal"><figure class="paper zoomable " style="width: 240px; --zoom: 2; transform-origin: right top; position: absolute; left: 0px; top: 0px;"><img width="730" height="845" loading="lazy" decoding="async" alt="инвойс" src="img/doc-invoice.jpg"><figcaption>инвойс</figcaption></figure><figure class="paper zoomable " style="width: 260px; --zoom: 2; transform-origin: right top; position: absolute; right: 0px; top: 40px;"><img width="772" height="239" loading="lazy" decoding="async" alt="упаковочный лист" src="img/doc-packing.jpg"><figcaption>упаковочный лист</figcaption></figure><figure class="paper zoomable " style="width: 280px; --zoom: 1.9; transform-origin: right bottom; position: absolute; left: 60px; bottom: 0px;"><img width="772" height="606" loading="lazy" decoding="async" alt="экспортная декларация" src="img/doc-declaration.jpg"><figcaption>экспортная декларация</figcaption></figure></div></div></div></section><section id="team" class="reg-paper pb-[110px]"><div class="max-w-[1180px] mx-auto px-6"><span class="label reveal">Экспертиза</span><h2 class="display display-b text-[clamp(30px,4.4vw,62px)] mt-3 reveal">Команда</h2><p class="mt-4 text-[16.5px] text-ink-2 max-w-[64ch] reveal">Команда экспертов закрывает все вопросы и&nbsp;сопровождает контракт от&nbsp;поиска фабрики до&nbsp;получения товара в&nbsp;надлежащем состоянии в&nbsp;полном соответствии с&nbsp;ТЗ.</p><div class="grid grid-cols-2 md:grid-cols-5 gap-5 mt-12"><div class="reveal" style="transition-delay: 0s;"><img width="700" height="933" loading="lazy" decoding="async" alt="Юлия Бурматова" class="card w-full aspect-[4/5] object-cover" src="img/team/osnovatel.jpg"><div class="mt-3 font-semibold text-[16px]">Юлия Бурматова</div><div class="text-[13px]" style="color: var(--blue);">Основатель</div><div class="text-ink-2 text-[13.5px] mt-1">Ведёт переговоры с&nbsp;фабрикой и&nbsp;лично инспектирует партии</div></div><div class="reveal" style="transition-delay: 0.05s;"><img width="700" height="933" loading="lazy" decoding="async" alt="Норал" class="card w-full aspect-[4/5] object-cover" src="img/team/operationist.jpg"><div class="mt-3 font-semibold text-[16px]">Норал</div><div class="text-[13px]" style="color: var(--blue);">Операционист</div><div class="text-ink-2 text-[13.5px] mt-1">Отвечает за&nbsp;документы, таможню и&nbsp;сроки&nbsp;— в&nbsp;курсе всего по&nbsp;контракту</div></div><div class="reveal" style="transition-delay: 0.1s;"><img width="700" height="933" loading="lazy" decoding="async" alt="Cassie" class="card w-full aspect-[4/5] object-cover" src="img/team/manager-poisk.jpg"><div class="mt-3 font-semibold text-[16px]">Cassie</div><div class="text-[13px]" style="color: var(--blue);">Менеджер закупа</div><div class="text-ink-2 text-[13.5px] mt-1">Опыт более 5&nbsp;лет&nbsp;— находит самую подходящую фабрику под задачу</div></div><div class="reveal" style="transition-delay: 0.15s;"><img width="700" height="934" loading="lazy" decoding="async" alt="Анфиса" class="card w-full aspect-[4/5] object-cover" src="img/team/manager-sales.jpg"><div class="mt-3 font-semibold text-[16px]">Анфиса</div><div class="text-[13px]" style="color: var(--blue);">Менеджер по продажам</div><div class="text-ink-2 text-[13.5px] mt-1">Ведёт клиента от&nbsp;заявки до&nbsp;расчёта себестоимости, всегда на&nbsp;связи</div></div><div class="reveal" style="transition-delay: 0.2s;"><img width="700" height="933" loading="lazy" decoding="async" alt="Игорь Кузьмин" class="card w-full aspect-[4/5] object-cover" src="img/team/engineer.jpg"><div class="mt-3 font-semibold text-[16px]">Игорь Кузьмин</div><div class="text-[13px]" style="color: var(--blue);">Инженер</div><div class="text-ink-2 text-[13.5px] mt-1">Ведёт товары из&nbsp;категории техники и&nbsp;электроники</div></div></div></div></section><section id="faq" class="reg-paper pb-[110px]"><div class="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8"><div class="md:col-span-4"><span class="label reveal">Вопросы</span><h2 class="display display-b text-[clamp(28px,2.9vw,40px)] mt-3 reveal">Ответы на&nbsp;частые вопросы</h2><div class="mt-6 reveal"><div class="cta-wrap "><a href="#contacts" class="cta-main ">Задать свой вопрос<span class="cta-arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a></div></div></div><div class="md:col-span-8 grid gap-3"><div class="card card-paper reveal faq-item is-open" style="transition-delay: 0s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Будут ли доплаты после оплаты?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Смета приходит по&nbsp;строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и&nbsp;доставка. Цену фиксируем в&nbsp;договоре в&nbsp;юанях или долларах, поэтому сумма в&nbsp;рублях может измениться вместе с&nbsp;курсом.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.03s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Карго всё равно дешевле?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">По&nbsp;видимой ставке&nbsp;— да. Но в&nbsp;ней нет документов, пошлины и&nbsp;НДС, и&nbsp;нет ответственности за&nbsp;брак. Мы считаем обе схемы в&nbsp;одинаковых статьях и&nbsp;показываем разницу в&nbsp;себестоимости единицы на&nbsp;вашем складе. Если после честного сравнения карго выигрывает&nbsp;— так и&nbsp;скажем.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.06s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Как узнать стоимость заранее?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Ответьте на&nbsp;5&nbsp;вопросов на&nbsp;сайте&nbsp;— менеджер уточнит детали, и&nbsp;в течение 48&nbsp;часов пришлём расчёт в&nbsp;Telegram или WhatsApp. Бесплатно и&nbsp;без обязательств.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.09s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Можно ли оплатить в&nbsp;рублях и&nbsp;с НДС?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Да, оплатить можно в&nbsp;рублях и&nbsp;с НДС. Порядок оплаты и&nbsp;документы для&nbsp;бухгалтерии согласуем при расчёте.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.12s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Какие документы я получу?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Инвойс и&nbsp;упаковочный лист, экспортную декларацию, схему таможенного оформления с&nbsp;кодами ТН ВЭД и&nbsp;расчётом пошлины и&nbsp;НДС, декларации ТР ТС и&nbsp;маркировку «Честный знак», если они нужны вашей категории, и&nbsp;договор с&nbsp;приложением по&nbsp;ТЗ.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.15s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Подойдут ли документы для&nbsp;маркетплейсов?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">С&nbsp;1&nbsp;октября 2026&nbsp;года площадки проверяют сертификаты и&nbsp;декларации по&nbsp;госреестрам. Подбираем перечень документов под вашу категорию: декларации ТР ТС, «Честный знак», требования площадок.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.18s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Как вы проверяете фабрику?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Проверяем юридическую историю и&nbsp;реальные производственные мощности, сравниваем 2﻿–﻿5&nbsp;фабрик и&nbsp;показываем картину по&nbsp;каждой. Затем утверждаем образец, фиксируем параметры в&nbsp;ТЗ и&nbsp;проверяем партию до&nbsp;того, как уйдут 70% оплаты.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.21s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Какой минимальный заказ?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Берём заказы от&nbsp;$3&nbsp;000&nbsp;за&nbsp;партию или от&nbsp;300&nbsp;кг.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.24s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Можно ли работать с&nbsp;нашим поставщиком?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Да, можем работать с&nbsp;вашим поставщиком. Укажите его при расчёте&nbsp;— в&nbsp;квизе есть поле для&nbsp;ссылки на&nbsp;товар.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.27s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Кто вернёт деньги за&nbsp;брак?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Определение брака, порядок доказательств, сроки ответа и&nbsp;лимиты компенсации закреплены в&nbsp;договоре. На&nbsp;претензии&nbsp;— 90&nbsp;дней. Претензию с&nbsp;фабрикой ведём мы, на&nbsp;китайском. Серия проверяется до&nbsp;оплаты остатка, поэтому большинство проблем решается ещё в&nbsp;Китае.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.3s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Почему аванс 30%?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Это стандартная схема запуска производства в&nbsp;Китае: 30% фабрика получает на&nbsp;закупку сырья, 70%&nbsp;— после приёмки серии. После оплаты вы получаете календарь поставки с&nbsp;контрольными точками.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.33s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Сколько идёт поставка?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Срок производства и&nbsp;доставки называем в&nbsp;смете по&nbsp;датам. Сроки таможни и&nbsp;доставки по&nbsp;России зависят от&nbsp;товара.</p></div></div></div><div class="card card-paper reveal faq-item " style="transition-delay: 0.36s;"><button class="w-full text-left flex items-center justify-between gap-6 p-6"><span class="display display-b text-[18px]">Можно ли отследить партию в&nbsp;пути?</span><span class="faq-plus" aria-hidden="true"></span></button><div class="faq-body"><div><p class="px-6 pb-6 text-[15px] text-ink-2 max-w-[68ch]">Да. Менеджер отслеживает ваш груз и&nbsp;сообщает о&nbsp;его перемещении.</p></div></div></div></div></div></section><footer id="contacts" class="reg-char pt-[80px] pb-10" style="border-radius: 0px 0px 34px 34px;"><div class="max-w-[1180px] mx-auto px-6 mb-12"><picture><source media="(max-width: 900px)" type="image/webp" srcset="img/m/o-14-480.webp 480w, img/m/o-14-800.webp 800w, img/m/o-14-1200.webp 1200w, img/o-14.webp 1400w" sizes="100vw"><img width="1400" height="600" loading="lazy" decoding="async" alt="Маршрут Шанхай — Москва" class="card w-full h-[380px] object-cover" src="img/o-14.webp"></picture></div><div class="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10"><div class="md:col-span-6"><div class="flex items-center gap-3"><img width="1024" height="1024" loading="lazy" decoding="async" alt="" class="w-10 h-10 rounded-lg" src="img/logo.jpg"><b class="text-[18px]">Lanmei</b></div><p class="mt-4 text-[15px] opacity-80 max-w-[46ch]">Помогаем бизнесу организовать надёжные поставки из&nbsp;Китая, от&nbsp;проверенных поставщиков с&nbsp;полным комплектом документов.</p><a href="tel:+8613120794214" class="display display-b block text-[clamp(26px,3.2vw,44px)] mt-6">+86 131 2079 4214</a><div class="mt-3 text-[15px] grid gap-1.5 opacity-90"><a href="mailto:lanmeiltd_sale2@163.com" class="underline decoration-dotted">lanmeiltd_sale2@163.com</a><div><a href="https://t.me/lanmei_logistics" target="_blank" rel="noreferrer" class="underline decoration-dotted">Telegram</a> · <a href="https://wa.me/8613120794214" target="_blank" rel="noreferrer" class="underline decoration-dotted">WhatsApp</a> · <span>WeChat: тот же номер</span></div><div class="opacity-75">Шанхай, район Пудун, ул. Шанчэнлу, башня «Лэкай», офис 2408</div></div></div><div class="md:col-span-6 card card-paper p-7"><form novalidate=""><h3 class="display display-b text-[22px]">Остались вопросы?</h3><p class="mt-2 text-[14.5px] text-ink-2">Оставьте номер&nbsp;— в&nbsp;ближайшее время с&nbsp;вами свяжется наш менеджер.</p><div class="mt-4"><div class="lock-plate"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Цену фиксируем в&nbsp;договоре&nbsp;— в&nbsp;юанях или долларах</span></div></div><div class="grid gap-3 mt-4"><input class="q-opt" placeholder="Ваше имя" autocomplete="name" required="" name="name"><input class="q-opt" placeholder="Email (необязательно)" autocomplete="email" type="email" name="email"><input class="q-opt" placeholder="Телефон" inputmode="tel" autocomplete="tel" required="" name="phone"><input tabindex="-1" autocomplete="off" aria-hidden="true" name="website" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;"><button class="cta-main justify-center" type="submit">Получить консультацию<span class="cta-arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></button></div><p class="mt-3 text-[12px] text-ink-2">Нажимая кнопку, вы соглашаетесь с <a href="https://lanmei.ru/privacy/" target="_blank" rel="noreferrer" class="underline decoration-dotted">политикой обработки данных</a>.</p></form></div></div><div class="max-w-[1180px] mx-auto px-6 mt-12 flex flex-wrap justify-between gap-4 text-[12.5px] opacity-70"><span>© 2026 Lanmei. Белые поставки из Китая.</span><a href="https://lanmei.ru/privacy/" target="_blank" rel="noreferrer" class="underline decoration-dotted">Политика конфиденциальности</a></div></footer></div></div>
+  gtag('config', 'G-Z4LTW009FB');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111955901', 'ym');
 
-  </body>
+    ym(111955901, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111955901" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<a href="#hero" class="skip-link">Перейти к содержимому</a>
+
+<!-- ══════════ ХЕДЕР ══════════ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#hero" class="logo" data-scroll-to="#hero" aria-label="Lanmei — на главную">
+      <img class="logo__mark" src="photos/logo.jpg" alt="" width="38" height="38">
+      <span class="logo__text"><span class="logo__name">Lan<b>mei</b></span><i>помогаем бизнесу с выкупом и доставкой товаров из Китая</i></span>
+    </a>
+
+    <p class="header__stat">Доставили <b>500+</b> партий товаров для клиентов из РФ</p>
+
+    <div class="header__actions">
+      <a href="https://t.me/lanmei_logistics" target="_blank" rel="noopener" class="header__social" aria-label="Telegram">
+        <img src="photos/icons/telegram.png" alt="" width="32" height="32" loading="lazy" decoding="async">
+      </a>
+      <a href="https://max.ru/join/C9bF0L3UndVVCUR9lrVMY46AHpph49SPHMWvERbajyk" target="_blank" rel="noopener" class="header__social" aria-label="MAX">
+        <img src="photos/icons/max.png" alt="" width="32" height="32" loading="lazy" decoding="async">
+      </a>
+      <button type="button" class="btn btn--primary btn--sm" id="openCallback">Заказать звонок</button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ 01. ПЕРВЫЙ ЭКРАН ══════════ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <picture>
+      <source type="image/webp"
+              srcset="photos/glavnaya-768.webp 768w, photos/glavnaya-1152.webp 1152w, photos/glavnaya.webp 1536w"
+              sizes="100vw">
+      <img src="photos/glavnaya.jpg"
+           srcset="photos/glavnaya-768.jpg 768w, photos/glavnaya-1152.jpg 1152w, photos/glavnaya.jpg 1536w"
+           sizes="100vw"
+           alt=""
+           width="1536" height="1024" fetchpriority="high" decoding="async">
+    </picture>
+    <span class="hero__scrim"></span>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <div class="hero__badges">
+        <div class="hero__badge reveal"><i class="dot"></i> Офис в Шанхае</div>
+        <div class="hero__badge reveal" data-delay="40">Работаем уже более 3 лет</div>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="line"><span>Выкуп и доставка товаров</span></span>
+        <span class="line"><span>из Китая с фиксированной</span></span>
+        <span class="line"><span>ценой в договоре</span></span>
+      </h1>
+
+      <p class="hero__sub reveal" data-delay="120">Для компаний, которые закупают регулярно и уходят с карго на белый импорт. Считаем за 48 часов бесплатно.</p>
+
+      <ul class="hero__points reveal" data-delay="180">
+        <li>Смета по строкам: товар, комиссия, фрахт, таможня, доставка — отдельно</li>
+        <li>30% на запуск производства, 70% — после приёмки партии по вашему ТЗ</li>
+        <li>Фиксируем цену в договоре</li>
+      </ul>
+
+      <div class="hero__cta reveal" data-delay="260">
+        <a href="#brief" class="btn btn--primary btn--lg btn--glow magnetic" data-scroll-to="#brief">Рассчитать стоимость доставки</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 02. ОПОРНЫЕ ЦИФРЫ ══════════ -->
+<section class="facts" id="facts">
+  <div class="container facts__grid">
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="50">0</span>+</div>
+      <div class="fact__label" data-cms-id="facts.card1.label">постоянных клиентов</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="500">0</span>+</div>
+      <div class="fact__label" data-cms-id="facts.card2.label">поставок в РФ</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num" data-cms-id="facts.card3.num">Экспортная лицензия</div>
+      <div class="fact__label" data-cms-id="facts.card3.label">официальный экспорт из Китая</div>
+    </div>
+    <div class="fact reveal">
+      <div class="fact__num"><span class="count" data-to="95">0</span>%</div>
+      <div class="fact__label" data-cms-id="facts.card4.label">клиентов становятся постоянными</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="facts__note reveal" data-cms-id="facts.note">
+      Найдём подходящий товар, проведём аудит фабрики, надёжно упакуем
+      и доставим товар с документами на ваш склад.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ 03. ЧТО ВХОДИТ В УСЛУГУ ══════════ -->
+<section class="service section" id="service">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Полный цикл</span>
+      <h2 class="section__title reveal" data-delay="60">От поиска и аудита фабрики<br>до доставки на ваш склад</h2>
+    </div>
+
+    <div class="svcpanel reveal">
+    <div class="svcgrid">
+
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Поиск и проверка фабрики</h3>
+          <p>Проверяем юридическую историю и реальные производственные мощности, сравниваем 2–5 фабрик и показываем вам полную картину по каждой.</p>
+        </div>
+        <figure class="ph svccard__photo">
+          <img src="photos/service-poisk.jpg" alt="Поиск и проверка фабрики" loading="lazy" decoding="async">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="2"/><path d="m21 21 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
+      </article>
+
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Образец и техническое задание</h3>
+          <p>Фиксируем измеримые параметры в ТЗ, при необходимости дорабатываем изделие с инженером.</p>
+        </div>
+        <figure class="ph svccard__photo">
+          <img src="photos/service-obrazec.jpg" alt="Образец и техническое задание" loading="lazy" decoding="async">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><rect x="5" y="4" width="22" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 12h10M11 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
+      </article>
+
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Контроль производства</h3>
+          <p>Проводим инспекцию лично, делаем фото- и видеоотчёт. Если нашли отклонения — фабрика обязуется исправить их до внесения остатка оплаты.</p>
+        </div>
+        <figure class="ph svccard__photo">
+          <img src="photos/service-kontrol.jpg" alt="Контроль производства" loading="lazy" decoding="async">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><path d="M16 3 5 8v9c0 7 4.7 12.4 11 14 6.3-1.6 11-7 11-14V8L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m11.5 16 3.3 3.2L21 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </figure>
+      </article>
+
+      <article class="svccard reveal">
+        <div class="svccard__text">
+          <h3>Экспорт, таможня, доставка</h3>
+          <p>Надёжно упакуем, рассчитаем маршрут по Китаю, оформим экспортные и таможенные документы, пройдём контроль и доставим до вашего склада в России.</p>
+        </div>
+        <figure class="ph svccard__photo">
+          <img src="photos/service-export.jpg" alt="Экспорт, таможня, доставка" loading="lazy" decoding="async">
+          <span class="ph__inner"><svg class="ph__ico" viewBox="0 0 32 32" fill="none"><rect x="4" y="9" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 15h24M11 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        </figure>
+      </article>
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 04. ПОЧЕМУ ВЫБИРАЮТ НАС ══════════ -->
+<section class="advantages section" id="advantages">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Наши преимущества</span>
+      <h2 class="section__title reveal" data-delay="60">Почему выбирают нас</h2>
+      <p class="section__lead reveal" data-delay="120">Смета по строкам, инспекция партии до отгрузки и фиксированная комиссия — без пересчётов после того, как вы заплатили.</p>
+    </div>
+
+    <div class="advlist">
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">01.</span> Полный комплект документов</h3>
+          <p>Инвойс, упаковочный лист, экспортная декларация, «Честный знак», заранее считаем коды ТН ВЭД и пошлину — без сюрпризов на таможне. В результате получаете готовый пакет документов для бухгалтерии и налоговой.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/docs.jpg" alt="Полный комплект документов" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16h16M16 24h16M16 32h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">02.</span> Прозрачный расчёт</h3>
+          <p>Получаете расчёт, где видно цену за: товар, комиссию, упаковку, логистику, пошлину и доставку. Комиссия нашей компании фиксирована и известна заранее, а переговоры с фабрикой ведём мы.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual advrow__visual--doc">
+          <img src="photos/estimate-example.jpg" alt="Прозрачный расчёт" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 15l12 12 7-7 13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 33h9v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">03.</span> Полный контроль качества на всех этапах</h3>
+          <p>Проводим аудит 2–5 фабрик и выбираем лучшую, утверждаем образец и фиксируем параметры в техническом задании. Фото- и видеоотчёты партий до отгрузки, во время погрузки делаем финальную проверку с фиксацией и проверяем качество упаковки.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/adv-kontrol.jpg" alt="Полный контроль качества на всех этапах" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 5 8 12v12c0 10 6.5 17 16 20 9.5-3 16-10 16-20V12L24 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m17 24 5 5 10-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">04.</span> Гарантия на товар после отгрузки</h3>
+          <p>Фабрика предоставляет гарантию на товар и 90 дней на предъявление претензий. Мы ведём переговоры и решаем спорные вопросы с фабрикой на месте, на китайском языке.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/adv-garantiya.jpg" alt="Гарантия на товар после отгрузки" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 38V9h21l9 9v20H9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 27h13M17 20h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 12. КЕЙС ══════════ -->
+<section class="case section" id="case">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Кейсы</span>
+      <h2 class="section__title reveal" data-delay="60">Примеры поставок</h2>
+    </div>
+
+    <div class="case__toolbar reveal" data-delay="180">
+      <div class="case__tabs" role="tablist" aria-label="Выбор кейса">
+        <button type="button" class="case__tab is-active" id="caseTab0" role="tab" aria-selected="true" aria-controls="caseSlide0" data-index="0">Сантехника</button>
+        <button type="button" class="case__tab" id="caseTab1" role="tab" aria-selected="false" aria-controls="caseSlide1" tabindex="-1" data-index="1">Товары для дома</button>
+        <button type="button" class="case__tab" id="caseTab2" role="tab" aria-selected="false" aria-controls="caseSlide2" tabindex="-1" data-index="2">Продукты питания</button>
+        <button type="button" class="case__tab" id="caseTab3" role="tab" aria-selected="false" aria-controls="caseSlide3" tabindex="-1" data-index="3">Тяжёлая техника</button>
+        <button type="button" class="case__tab" id="caseTab4" role="tab" aria-selected="false" aria-controls="caseSlide4" tabindex="-1" data-index="4">Инженерный кейс с дегидратором</button>
+      </div>
+
+      <div class="case__nav">
+        <button type="button" class="case__arrow" id="casePrev" aria-label="Предыдущий кейс">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="case__count"><b id="caseCurrent">01</b> / 05</span>
+        <button type="button" class="case__arrow" id="caseNext" aria-label="Следующий кейс">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="case__stage reveal" data-delay="220" id="caseStage">
+
+      <!-- Кейс 1 — сантехника -->
+      <article class="case__slide is-current" id="caseSlide0" data-index="0" role="tabpanel" aria-labelledby="caseTab0">
+        <h3 class="case__headline">≈ $52 000 экономии на одном контейнере</h3>
+
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="santehnika" data-alt="Партия смесителей на складе после приёмки">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
+        </figure>
+
+        <div class="case__inner">
+          <article class="case__main reveal">
+            <div class="case__row"><span>Категория</span><b>Латунные и цинковые смесители, сантехника для ритейла</b></div>
+            <div class="case__row"><span>Задача</span><b>Уйти от агента: медленная связь, высокий процент, брак, невыгодные условия по фабрике</b></div>
+            <div class="case__row"><span>Что сделали</span><b>Вышли на 5 фабрик, сократили цикл производства с 60 до 40 дней, добились отсрочки платежа, ужесточили инспекцию при приёмке</b></div>
+            <div class="case__row"><span>Результат</span><b>Себестоимость −7% (≈ $52 000 на контейнере), поставки без срывов сроков</b></div>
+            <p class="case__note">Отвечали за поиск фабрик, переговоры, приём и инспекцию товара, организацию экспорта. Работаем вместе полтора года.</p>
+          </article>
+
+          <div class="case__nums">
+            <div class="cnum reveal"><b>≈ $52K</b><span>экономия на контейнере</span></div>
+            <div class="cnum reveal"><b>−7%</b><span>снижение себестоимости</span></div>
+            <div class="cnum reveal"><b>60→40</b><span>дней — цикл производства</span></div>
+            <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Кейс 2 — товары для дома, Roomlogic -->
+      <article class="case__slide" id="caseSlide1" data-index="1" role="tabpanel" aria-labelledby="caseTab1">
+        <h3 class="case__headline">Топ-1 продаж и 27 артикулов в категории</h3>
+
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="roomlogic" data-alt="Сенсорные мусорные баки Roomlogic на складе">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
+        </figure>
+
+        <div class="case__inner">
+          <article class="case__main reveal">
+            <div class="case__row"><span>Категория</span><b>Товары для дома, бренд Roomlogic</b></div>
+            <div class="case__row"><span>Задача</span><b>Уйти с карго на белый импорт, снизить цену новых SKU, расширить ассортимент</b></div>
+            <div class="case__row"><span>Что сделали</span><b>Ввели сенсорные мусорные баки вместо обычных пластиковых вёдер, довели категорию до 27 артикулов, добились эксклюзивных условий фабрики</b></div>
+            <div class="case__row"><span>Результат</span><b>Отсрочка 3 месяца с момента погрузки, Топ-1 продаж по категории, полный переход на белый импорт</b></div>
+            <p class="case__note">Инженер участвует в оптимизации характеристик товара, сопровождаем клиента в поездках на фабрики. Работаем вместе больше двух лет.</p>
+          </article>
+
+          <div class="case__nums">
+            <div class="cnum reveal"><b>27</b><span>артикулов в категории</span></div>
+            <div class="cnum reveal"><b>3 мес</b><span>отсрочка платежа</span></div>
+            <div class="cnum reveal"><b>Топ-1</b><span>продаж по категории</span></div>
+            <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Кейс 3 — продукты питания -->
+      <article class="case__slide" id="caseSlide2" data-index="2" role="tabpanel" aria-labelledby="caseTab2">
+        <h3 class="case__headline">64 контейнера сухофруктов и орехов в год</h3>
+
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="suhofrukty" data-alt="Отгрузка сухофруктов и орехов на складе">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
+        </figure>
+
+        <div class="case__inner">
+          <article class="case__main reveal">
+            <div class="case__row"><span>Категория</span><b>Сухофрукты и орехи из Узбекистана, Турции и Ирана</b></div>
+            <div class="case__row"><span>Задача</span><b>Ежегодный импорт продукции для собственного ритейла и участия в выставках</b></div>
+            <div class="case__row"><span>Что сделали</span><b>10 лет в продуктовой сфере, отобрали поставщиков в трёх странах, выстроили стабильный цикл поставок</b></div>
+            <div class="case__row"><span>Результат</span><b>64 контейнера в год, собственная розница, участие в отраслевых выставках</b></div>
+            <p class="case__note">В перспективе — импорт рыбы в Китай.</p>
+          </article>
+
+          <div class="case__nums">
+            <div class="cnum reveal"><b>64</b><span>контейнера в год</span></div>
+            <div class="cnum reveal"><b>10 лет</b><span>опыта в продуктах</span></div>
+            <div class="cnum reveal"><b>3</b><span>страны-поставщика</span></div>
+            <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Кейс 4 — тяжёлая техника -->
+      <article class="case__slide" id="caseSlide3" data-index="3" role="tabpanel" aria-labelledby="caseTab3">
+        <h3 class="case__headline">24 единицы техники в три страны</h3>
+
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="tehnika" data-alt="Погрузка сельскохозяйственной техники">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
+        </figure>
+
+        <div class="case__inner">
+          <article class="case__main reveal">
+            <div class="case__row"><span>Категория</span><b>Сельхозтехника для вспахивания</b></div>
+            <div class="case__row"><span>Задача</span><b>Экспорт техники под личное пользование и для ритейла</b></div>
+            <div class="case__row"><span>Что сделали</span><b>Организовали экспорт 24 единиц техники в Узбекистан, Турцию и Россию</b></div>
+            <div class="case__row"><span>Результат</span><b>24 единицы техники доставлены в три страны без потерь</b></div>
+            <p class="case__note">После отгрузки продолжаем сопровождать товар при браке или несоответствии.</p>
+          </article>
+
+          <div class="case__nums">
+            <div class="cnum reveal"><b>24</b><span>единицы техники</span></div>
+            <div class="cnum reveal"><b>3</b><span>страны экспорта</span></div>
+            <div class="cnum reveal"><b>после отгрузки</b><span>сопровождаем при браке</span></div>
+            <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Кейс 5 — инженерный кейс с дегидратором -->
+      <article class="case__slide" id="caseSlide4" data-index="4" role="tabpanel" aria-labelledby="caseTab4">
+        <h3 class="case__headline">10 инженерных доработок за 1,5 месяца до серийного запуска</h3>
+
+        <figure class="ph ph--16 reveal case__shot" data-gallery data-case="degidrator" data-alt="Дегидратор после инженерной доработки">
+          <div class="gallery__slides">
+            <div class="gallery__slide is-current">
+              <div class="ph__inner">
+                <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                  <path d="M24 4 6 13v22l18 9 18-9V13L24 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 13l18 9m0 0 18-9m-18 9v22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Предыдущее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 4.5 6 11l6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Следующее фото" hidden>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 6.5 6.5-6.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="gallery__dots" hidden></div>
+        </figure>
+
+        <div class="case__inner">
+          <article class="case__main reveal">
+            <div class="case__row"><span>Категория</span><b>Бытовые дегидраторы, 2 модели</b></div>
+            <div class="case__row"><span>Задача</span><b>Довести китайский дегидратор с типовой «дешёвой» конструкцией до безопасного, коммерчески готового продукта перед запуском продаж</b></div>
+            <div class="case__row"><span>Что сделали</span><b>Усилили ТЭН до 700 Вт, вынесли плату управления из камеры сушки, добавили термопредохранители, русифицировали прошивку и добавили озонирование, укрепили дверцу и корпус, откалибровали температурный режим</b></div>
+            <div class="case__row"><span>Результат</span><b>Оба дегидратора доведены до серийного производства — устранены конструктивные риски, повышены безопасность, надёжность и качество сборки</b></div>
+            <p class="case__note">Инженер вёл доработку от технического аудита до финального образца, готового к серии.</p>
+          </article>
+
+          <div class="case__nums">
+            <div class="cnum reveal"><b>10</b><span>инженерных доработок</span></div>
+            <div class="cnum reveal"><b>700 Вт</b><span>мощность ТЭНа после доработки</span></div>
+            <div class="cnum reveal"><b>1,5 мес</b><span>до готовности к серии</span></div>
+            <a href="#brief" class="btn btn--dark btn--block btn--glow magnetic reveal" data-scroll-to="#brief">Рассчитать мою партию</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 05. СМЕТА ДО СКЛАДА ══════════ -->
+<section class="estimate section chamfer-t" id="estimate">
+  <div class="container">
+    <div class="section__head section__head--left section__head--full">
+      <span class="tag reveal">Ключевой продукт</span>
+      <h2 class="section__title reveal" data-delay="60">Расчёт, в котором видно все расходы</h2>
+      <p class="section__lead reveal" data-delay="120">
+        <b>За 48 часов мы даём расчёт, в котором видно стоимость услуг и нашей комиссии,</b>
+        без скрытых платежей перекупам и агентам.
+      </p>
+    </div>
+
+    <div class="estimate__inner">
+      <figure class="estimate__doc reveal">
+        <img src="photos/estimate-example.jpg" alt="Пример реального расчёта себестоимости поставки: фрахт, таможенные платежи, сертификация, доставка до склада" loading="lazy" decoding="async">
+        <figcaption>Пример реального расчёта — позиции и цифры считаем под ваш товар и маршрут</figcaption>
+      </figure>
+
+      <div class="estimate__side">
+        <article class="scard reveal">
+          <h3>Что вы получаете вместо ставки за килограмм</h3>
+          <ul class="checklist">
+            <li>Себестоимость единицы товара</li>
+            <li>Сравнение 2–5 фабрик/поставщиков</li>
+            <li>Прозрачная комиссия компании</li>
+            <li>Срок производства и доставки по датам</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 06. БРИФ ══════════ -->
+<section class="brief section chamfer-t" id="brief">
+  <div class="container brief__inner">
+    <div class="brief__text">
+      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 2–5 фабрик</h2>
+      <p class="reveal" data-delay="80">После прохождения с вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в Telegram или WhatsApp в течение 48 часов. Бесплатно и без обязательств.</p>
+      <div class="brief__steps reveal" data-delay="160">
+        <div><b>1</b> Тест — 2 минуты</div>
+        <div><b>2</b> Ответ ≤ 2 ч</div>
+        <div><b>3</b> Смета за 48 ч</div>
+      </div>
+      <div class="brief__contacts reveal" data-delay="220">
+        <a href="mailto:lanmeiltd_sale2@163.com">lanmeiltd_sale2@163.com</a>
+        <a href="https://wa.me/8613120794214" target="_blank" rel="noopener">+86 131 2079 4214</a>
+      </div>
+    </div>
+
+    <form class="briefform quiz reveal" data-delay="120" id="leadForm" novalidate>
+
+      <div class="quiz__bar">
+        <span class="quiz__bar-label">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Короткий тест — всего 2 минуты
+        </span>
+        <span class="quiz__bar-step"><span id="quizStepNum">1</span>/4</span>
+      </div>
+
+      <div class="quiz__body">
+
+        <div class="quizstep is-active" data-step="1">
+          <h3 class="quiz__q">Какую категорию товара вы планируете привезти из Китая?</h3>
+          <div class="quiz__tiles" data-field="sku" data-required="true">
+            <button type="button" class="quiz__tile" data-value="Хозтовары и товары для дома">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 15 16 6l11 9v13H5V15Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 28v-9h8v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span>Хозтовары и товары для дома</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Электроника и техника">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="7" width="24" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M11 26h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Электроника и техника</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Оборудование и станки">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="2"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M7.5 24.5l2.8-2.8M21.7 10.3l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Оборудование и станки</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Продукты питания">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 4c0 4-3 5-3 10a10 10 0 0 0 20 0c0-5-3-6-3-10-2 2-3 4-3 4s-2-4-4-4-4 4-4 4-2-4-3-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span>Продукты питания</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Другая категория">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><path d="M16 21v.1M16 17c0-2.5 3-2.5 3-5.5 0-2-1.5-3.5-3.5-3.5S12 9.5 12 11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Другая категория / нужен поиск</span>
+            </button>
+          </div>
+          <span class="field__err quiz__err" data-err-for="1">Выберите категорию товара</span>
+        </div>
+
+        <div class="quizstep" data-step="2">
+          <h3 class="quiz__q">Есть ссылка на товар, который хотите привезти?</h3>
+          <div class="field">
+            <input type="text" id="link" placeholder=" " inputmode="url">
+            <label for="link">Ссылка на товар (1688, Alibaba, Wildberries и т.д.)</label>
+          </div>
+          <p class="quiz__hint">Нет под рукой — не страшно, можно пропустить и описать на созвоне.</p>
+        </div>
+
+        <div class="quizstep" data-step="3">
+          <h3 class="quiz__q">Какой ориентировочный бюджет вы закладываете на закупку партии?</h3>
+          <div class="quiz__tiles quiz__tiles--list" data-field="budget" data-required="true">
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="до $3 000"><span>до $3 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$3 000 – $10 000"><span>$3 000 – $10 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$10 000 – $50 000"><span>$10 000 – $50 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="более $50 000"><span>более $50 000</span></button>
+          </div>
+          <span class="field__err quiz__err" data-err-for="3">Выберите вариант бюджета</span>
+          <div class="briefform__hint" id="briefHint" hidden>
+            При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="4">
+          <h3 class="quiz__q">Сколько товара планируете заказать?</h3>
+          <p class="briefform__hint">Берём заказы от&nbsp;300&nbsp;кг или от&nbsp;250&nbsp;000&nbsp;₽</p>
+          <div class="field">
+            <input type="text" id="qty" placeholder=" " required aria-describedby="err-qty">
+            <label for="qty">Количество в штуках или килограммах</label>
+            <span class="field__err" id="err-qty">Укажите количество, например 500&nbsp;шт или 300&nbsp;кг</span>
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="5">
+          <h3 class="quiz__q">В какой город доставить товар?</h3>
+          <div class="field">
+            <input type="text" id="city" placeholder=" " required aria-describedby="err-city">
+            <label for="city">Город и склад доставки</label>
+            <span class="field__err" id="err-city">Укажите город доставки</span>
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="6">
+          <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
+          <div class="field">
+            <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
+            <label for="name">Ваше имя</label>
+            <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
+          </div>
+          <div class="field">
+            <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
+            <label for="phone">Телефон или Telegram</label>
+            <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
+          </div>
+          <label class="quiz__consent">
+            <input type="checkbox" id="consent" required>
+            <span>Согласен(на) с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a></span>
+          </label>
+          <span class="field__err quiz__err" id="err-consent">Нужно согласие на обработку данных</span>
+        </div>
+
+      </div>
+
+      <!-- honeypot: невидимое обычным пользователям поле-ловушка для ботов.
+           Не position:absolute с уводом за экран — это создавало горизонтальный
+           скролл страницы. Схлопываем высоту/ширину в потоке документа. -->
+      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+        <label for="website">Оставьте это поле пустым</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="quiz__nav">
+        <button type="button" class="quiz__back" id="quizBack" hidden>← Назад</button>
+        <button type="button" class="btn btn--white magnetic" id="quizNext">Дальше →</button>
+        <button type="submit" class="btn btn--white btn--glow magnetic" id="quizSubmit" hidden>Получить расчёт стоимости</button>
+      </div>
+      <div class="briefform__ok" id="leadOk">
+        <b id="leadOkTitle">Бриф отправлен</b>
+        <span id="leadOkText">Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ 09. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
+<section class="quality section" id="quality">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Качество</span>
+      <h2 class="section__title reveal" data-delay="60">Аудит поставщика<br>и проверка товара</h2>
+      <p class="section__lead reveal" data-delay="120">Контролируем ключевые измеримые параметры, выборку, статус каждого пункта, фиксируем отклонения и решаем вопрос с поставщиком.</p>
+    </div>
+
+    <div class="quality__inner">
+      <div class="quality__text">
+        <div class="qsteps reveal" data-delay="180">
+          <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
+          <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
+          <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
+          <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
+        </div>
+      </div>
+
+      <div class="quality__side">
+        <figure class="ph ph--43 ph--doc reveal" data-delay="80">
+          <img src="photos/proverka.jpg" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
+              <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 11. ДОКУМЕНТЫ ══════════ -->
+<section class="docs section chamfer-tb" id="docs">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Полный комплект документов</span>
+      <h2 class="section__title reveal only-desktop" data-delay="60">Поставки в белую, это<br>уверенность и спокойствие</h2>
+      <h2 class="section__title reveal only-mobile" data-delay="60">Поставки в белую,<br>это уверенность<br>и спокойствие</h2>
+      <p class="section__lead reveal" data-delay="120">Подбираем перечень документов под вашу категорию товара, с гарантией на случай брака.</p>
+    </div>
+
+    <div class="docs__grid">
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 3h10l6 6v16H6V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 16h8M10 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Экспортная лицензия фабрики</h3><p>Подтверждаем право производителя на экспорт до запуска партии.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M5 3h18v22l-3-2-3 2-3-2-3 2-3-2-3 2V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 10h8M10 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Инвойс и упаковочный лист</h3><p>Состав партии, вес, объём и стоимость по позициям.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M3 24h22M6 24V11l8-6 8 6v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 24v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Схема таможенного оформления</h3><p>Коды ТН ВЭД, расчёт пошлины и НДС, порядок выпуска.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m10.5 11 2.6 2.5L18 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 18-2 8 7-3 7 3-2-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Сертификация и маркировка</h3><p>Декларации ТР ТС, «Честный знак» и требования площадок.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="4" y="3" width="20" height="22" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M9 9h10M9 14h10M9 19h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Договор с приложением по ТЗ</h3><p>Измеримые параметры, сроки, порядок претензий и лимиты.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 3.5 8v12L14 25l10.5-5V8L14 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 8 14 13m0 0 10.5-5M14 13v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Результат</h3><p>Полный комплект документов с постоянным сопровождением и прозрачными ценами.</p>
+      </article>
+    </div>
+
+    <figure class="ph ph--32 reveal docs__shot">
+      <img src="photos/docs.jpg" alt="Комплект документов на партию: инвойс, упаковочный лист, экспортная декларация" loading="lazy" decoding="async">
+      <div class="ph__inner">
+        <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M28 5v9h9M18 27h13M18 34h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════ 13. КОМАНДА ══════════ -->
+<section class="team section" id="team">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Экспертиза</span>
+      <h2 class="section__title reveal" data-delay="60">Команда</h2>
+      <p class="section__lead reveal" data-delay="120">Пять человек ведут поставку от поиска фабрики до документов на складе: переговоры с фабрикой, инженерная доработка, закуп и сопровождение контракта — у каждого этапа свой ответственный.</p>
+    </div>
+
+    <div class="team__grid">
+      <article class="team__card reveal">
+        <div class="avatar">
+          <img src="photos/team/osnovatel.jpg" alt="Юлия Бурматова — основатель Lanmei" loading="lazy" decoding="async">
+        </div>
+        <h3>Юлия Бурматова</h3>
+        <span class="team__role">Основатель</span>
+        <p>Ведёт переговоры с фабрикой и лично инспектирует партии</p>
+      </article>
+
+      <article class="team__card reveal">
+        <div class="avatar">
+          <img src="photos/team/operationist.jpg" alt="Норал — операционист Lanmei" loading="lazy" decoding="async">
+        </div>
+        <h3>Норал</h3>
+        <span class="team__role">Операционист</span>
+        <p>Отвечает за документы, таможню и сроки — в курсе всего по контракту</p>
+      </article>
+
+      <div class="team__break" aria-hidden="true"></div>
+
+      <article class="team__card reveal">
+        <div class="avatar">
+          <img src="photos/team/manager-poisk.jpg" alt="Cassie — менеджер закупа Lanmei" loading="lazy" decoding="async">
+        </div>
+        <h3>Cassie</h3>
+        <span class="team__role">Менеджер закупа</span>
+        <p>Опыт более 5 лет — находит самую подходящую фабрику под задачу</p>
+      </article>
+
+      <article class="team__card reveal">
+        <div class="avatar">
+          <img src="photos/team/manager-sales.jpg" alt="Анфиса — менеджер по продажам Lanmei" loading="lazy" decoding="async">
+        </div>
+        <h3>Анфиса</h3>
+        <span class="team__role">Менеджер по продажам</span>
+        <p>Ведёт клиента от заявки до расчёта себестоимости, всегда на связи</p>
+      </article>
+
+      <article class="team__card reveal">
+        <div class="avatar">
+          <img src="photos/team/engineer.jpg" alt="Игорь Кузьмин — инженер Lanmei" loading="lazy" decoding="async">
+        </div>
+        <h3>Игорь Кузьмин</h3>
+        <span class="team__role">Инженер</span>
+        <p>Ведёт товары из категории техники и электроники</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ 15. ГАРАНТИИ ══════════ -->
+<section class="guarantee section" id="guarantee">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Ответственность</span>
+      <h2 class="section__title reveal" data-delay="60">Отвечаем за результат —<br>вот как это устроено:</h2>
+    </div>
+
+    <div class="grt__grid">
+      <article class="grt reveal">
+        <b>30 / 70</b>
+        <h3>Схема оплаты производства</h3>
+        <p>Аванс запускает партию, остаток уходит только после вашего согласия по QC-отчёту.</p>
+      </article>
+      <article class="grt reveal">
+        <b>Договор</b>
+        <h3>Юридическая основа претензии</h3>
+        <p>Работаем с фабрикой по официальному контракту — это даёт юридическую опору для претензий по качеству.</p>
+      </article>
+      <article class="grt reveal">
+        <b>Мы</b>
+        <h3>Ведём спор с фабрикой</h3>
+        <p>Претензионная работа на китайском — это наша задача, а не ваша переписка в мессенджере.</p>
+      </article>
+      <article class="grt reveal">
+        <b>5–10%</b>
+        <h3>Комиссия известна заранее</h3>
+        <p>5% — стандартный цикл, 10% — товар с доработками. Фрахт и зависимые расходы идут отдельными строками.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ══════════ 16. ВОЗРАЖЕНИЯ / FAQ ══════════ -->
+<section class="faq section chamfer-t" id="faq">
+  <div class="container faq__inner">
+    <div class="faq__side">
+      <span class="tag reveal">Вопросы</span>
+      <h2 class="section__title reveal" data-delay="60">Ответы на часто<br>задаваемые вопросы</h2>
+      <p class="section__lead reveal" data-delay="120">Пять возражений, которые звучат почти в каждом разговоре. Отвечаем на них прямо, без обтекаемых формулировок.</p>
+      <a href="#brief" class="btn btn--white magnetic reveal faq__cta" data-delay="180" data-scroll-to="#brief">Задать свой вопрос</a>
+    </div>
+
+    <div class="acc" id="acc">
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Карго всё равно дешевле»<i></i></button>
+        <div class="acc__a"><p>По видимой ставке — да. Но в ней нет документов, пошлины и НДС, и нет ответственности за брак. Мы считаем обе схемы в одинаковых статьях и показываем разницу в себестоимости единицы на вашем складе. Если после честного сравнения карго выигрывает — мы так и скажем.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Кто вернёт деньги за брак?»<i></i></button>
+        <div class="acc__a"><p>Определение брака, порядок доказательств, сроки ответа и лимиты компенсации закреплены в договоре. Претензию с фабрикой ведём мы, на китайском — от заявки до решения. Именно поэтому серия проверяется до оплаты остатка — большинство проблем решается ещё в Китае.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Будут ли скрытые платежи?»<i></i></button>
+        <div class="acc__a"><p>Смета приходит по строкам: товар, комиссия, фрахт, экспортное оформление, пошлина, НДС, сертификация, маркировка и доставка. Цена в договоре фиксируется в юанях или долларах: закупка идёт не в рублях, а в иностранной валюте. Поэтому сумма в рублях может измениться, если изменится курс юаня или доллара.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Почему аванс 30%?»<i></i></button>
+        <div class="acc__a"><p>Это стандартная схема запуска производства в Китае: 30% фабрика получает на закупку сырья, 70% — после приёмки серии. Аванс уходит фабрике, а не нам, и подтверждается документами. После оплаты вы получаете календарь поставки с контрольными точками.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«Успеем ли пополнить остатки?»<i></i></button>
+        <div class="acc__a"><p>Переход делается параллельно текущим поставкам: начинаем с одной тестовой партии, пока карго продолжает возить. Так вы проверяете схему без риска дефицита ходового SKU и переносите остальной ассортимент уже по факту.</p></div>
+      </div>
+      <div class="acc__item reveal">
+        <button class="acc__q" type="button" aria-expanded="false">«У нас свой отдел закупок»<i></i></button>
+        <div class="acc__a"><p>Тогда мы закрываем ту часть, где нужен человек в Китае: выезд на фабрику, переговоры на китайском, инспекция серии и претензии. Многие клиенты используют нас как внешнюю китайскую руку своего отдела ВЭД, а не как замену ему.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 17. ФУТЕР ══════════ -->
+<footer class="footer" id="contacts">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__info">
+        <a href="#hero" class="logo logo--light" data-scroll-to="#hero">
+          <img class="logo__mark" src="photos/logo.jpg" alt="" width="38" height="38">
+          <span class="logo__text"><span class="logo__name">Lan<b>mei</b></span></span>
+        </a>
+        <p class="footer__lead">Помогаем бизнесу организовать надёжные поставки из Китая, от проверенных поставщиков с полным комплектом документов.</p>
+
+        <div class="footer__contact">
+          <div class="footer__clinks">
+            <a class="footer__clink" href="mailto:lanmeiltd_sale2@163.com">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m3.5 6 6.5 5 6.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              lanmeiltd_sale2@163.com
+            </a>
+            <a class="footer__clink" href="https://t.me/lanmei_logistics" target="_blank" rel="noopener">
+              <img src="photos/icons/telegram.png" alt="" width="18" height="18" loading="lazy" decoding="async">
+              Telegram
+            </a>
+            <a class="footer__clink" href="https://wa.me/8613120794214" target="_blank" rel="noopener">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 0 0-6.4 11.4L3 17.5l3.7-.97A7.5 7.5 0 1 0 10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.3 7.2c.2-.5.5-.5.7-.5h.5c.2 0 .4 0 .5.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.4-.1.2-.3.3-.4.5-.1.1-.3.3-.1.6.2.3.9 1.4 1.9 2.2 1.3 1 2.2 1.3 2.6 1.1.1 0 .3-.1.4-.2l.5-.6c.1-.1.3-.2.5-.1l1.4.7c.2.1.3.1.4.2 0 .2 0 1-.4 1.5-.4.5-1.2.9-2 .8-1.9-.2-3.7-1.3-4.9-2.5-1.1-1-1.9-2.3-2.2-3.7-.1-.6.1-1.3.4-1.7Z" fill="currentColor"/></svg>
+              WhatsApp
+            </a>
+            <span class="footer__clink footer__clink--static">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6.5 3.5C3.5 4 1.5 6.3 1.5 9c0 1.6.8 3 2 4l-.5 2.2 2.3-1c.6.2 1.2.3 1.9.3h.1M13.5 6.5c3 .5 5 2.8 5 5.5 0 1.6-.8 3-2 4l.5 2.2-2.3-1c-.6.2-1.2.3-1.9.3-3.3 0-6-2.4-6-5.4s2.7-5.4 6-5.4c.3 0 .5 0 .7.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              WeChat: +86 131 2079 4214
+            </span>
+          </div>
+        </div>
+
+        <p class="footer__meta">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18s6-5.1 6-9.6A6 6 0 0 0 4 8.4C4 12.9 10 18 10 18Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8.2" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+          Шанхай, район Пудун, ул. Шанчэнлу, башня «Лэкай», офис 2408
+        </p>
+        <p class="footer__meta">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.3" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.8V10l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Отвечаем в течение 2 часов в рабочее время
+        </p>
+      </div>
+
+      <div class="footer__form">
+        <h3>Остались вопросы?</h3>
+        <p>Оставьте свой номер — наш менеджер вам позвонит в ближайшее время и ответит на все интересующие вопросы.</p>
+
+        <form id="footerLeadForm" novalidate>
+          <div class="field">
+            <input type="text" id="flName" placeholder=" " autocomplete="name" aria-describedby="err-flName">
+            <label for="flName">Ваше имя</label>
+            <span class="field__err" id="err-flName">Укажите, как к вам обращаться</span>
+          </div>
+          <div class="field">
+            <input type="email" id="flEmail" placeholder=" " autocomplete="email" aria-describedby="err-flEmail">
+            <label for="flEmail">Email (необязательно)</label>
+            <span class="field__err" id="err-flEmail">Проверьте адрес почты</span>
+          </div>
+          <div class="field">
+            <input type="tel" id="flPhone" placeholder=" " required autocomplete="tel" inputmode="tel" aria-describedby="err-flPhone">
+            <label for="flPhone">Телефон</label>
+            <span class="field__err" id="err-flPhone">Введите корректный номер телефона</span>
+          </div>
+
+          <!-- honeypot -->
+          <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+            <label for="flWebsite">Оставьте это поле пустым</label>
+            <input type="text" id="flWebsite" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block btn--glow magnetic">Получить консультацию</button>
+          <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
+
+          <div class="briefform__ok" id="footerLeadOk">
+            <b id="footerLeadOkTitle">Заявка отправлена</b>
+            <span id="footerLeadOkText">Ответим в течение 2 часов в рабочее время.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Lanmei. Белые поставки из Китая.</span>
+      <a href="privacy/">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- индикатор секций, как в референсе -->
+<nav class="dots" id="dots" aria-label="Навигация по секциям"></nav>
+
+<a href="#brief" class="fab" id="fab" data-scroll-to="#brief"><span>Рассчитать<br>доставку</span></a>
+<div class="scrollbar" id="scrollbar"></div>
+
+<!-- ══════════ МОДАЛКА: ОБРАТНЫЙ ЗВОНОК ══════════ -->
+<div class="modal" id="callbackModal" hidden>
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
+    <button type="button" class="modal__close" data-modal-close aria-label="Закрыть">
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+
+    <h3 class="modal__title" id="callbackTitle">Закажите обратный звонок</h3>
+    <p class="modal__sub">Перезвоним в течение 15 минут в рабочее время и обсудим вашу поставку.</p>
+
+    <form id="callbackForm" novalidate>
+      <div class="field">
+        <input type="text" id="cbName" placeholder=" " autocomplete="name" aria-describedby="err-cbName">
+        <label for="cbName">Ваше имя</label>
+        <span class="field__err" id="err-cbName">Укажите, как к вам обращаться</span>
+      </div>
+      <div class="field">
+        <input type="tel" id="cbPhone" placeholder=" " required autocomplete="tel" inputmode="tel" aria-describedby="err-cbPhone">
+        <label for="cbPhone">Телефон</label>
+        <span class="field__err" id="err-cbPhone">Введите корректный номер телефона</span>
+      </div>
+
+      <!-- honeypot -->
+      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+        <label for="cbWebsite">Оставьте это поле пустым</label>
+        <input type="text" id="cbWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block btn--glow magnetic">Заказать звонок</button>
+      <p class="briefform__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a>.</p>
+
+      <div class="briefform__ok" id="callbackOk">
+        <b id="callbackOkTitle">Заявка принята</b>
+        <span id="callbackOkText">Перезвоним в течение 15 минут в рабочее время.</span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании файлов cookie" hidden>
+  <p>Сайт использует cookie. <a href="privacy/" target="_blank" rel="noopener">Подробнее</a></p>
+  <button type="button" class="btn btn--primary btn--sm cookie-banner__accept" id="cookieAccept">Хорошо</button>
+</div>
+
+<script src="js/forms-config.js?v=2"></script>
+<script src="js/main.js?v=23"></script>
+</body>
 </html>
