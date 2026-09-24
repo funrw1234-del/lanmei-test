@@ -178,6 +178,7 @@
 </header>
 
 <!-- ══════════ 01. ПЕРВЫЙ ЭКРАН ══════════ -->
+<!-- ══════════ 01. ПЕРВЫЙ ЭКРАН ══════════ -->
 <section class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
     <picture>
@@ -251,7 +252,180 @@
   </div>
 </section>
 
-<!-- ══════════ 03. ЧТО ВХОДИТ В УСЛУГУ ══════════ -->
+<!-- ══════════ 03. КЛЮЧЕВОЙ ПРОДУКТ — РАСЧЁТ ══════════ -->
+<section class="estimate section chamfer-t" id="estimate">
+  <div class="container">
+    <div class="section__head section__head--left section__head--full">
+      <span class="tag reveal">Ключевой продукт</span>
+      <h2 class="section__title reveal" data-delay="60">Расчёт, в котором видно все расходы</h2>
+      <p class="section__lead reveal" data-delay="120">
+        <b>За 48 часов мы даём расчёт, в котором видно стоимость услуг и нашей комиссии,</b>
+        без скрытых платежей перекупам и агентам.
+      </p>
+    </div>
+
+    <div class="estimate__inner">
+      <figure class="estimate__doc reveal">
+        <img src="photos/estimate-example.jpg" alt="Пример реального расчёта себестоимости поставки: фрахт, таможенные платежи, сертификация, доставка до склада" loading="lazy" decoding="async">
+        <figcaption>Пример реального расчёта — позиции и цифры считаем под ваш товар и маршрут</figcaption>
+      </figure>
+
+      <div class="estimate__side">
+        <article class="scard reveal">
+          <h3>Что вы получаете вместо ставки за килограмм</h3>
+          <ul class="checklist">
+            <li>Себестоимость единицы товара</li>
+            <li>Сравнение 2–5 фабрик/поставщиков</li>
+            <li>Прозрачная комиссия компании</li>
+            <li>Срок производства и доставки по датам</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 04. КВИЗ ══════════ -->
+<section class="brief section chamfer-t" id="brief">
+  <div class="container brief__inner">
+    <div class="brief__text">
+      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 2–5 фабрик</h2>
+      <p class="reveal" data-delay="80">После прохождения с вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в Telegram или WhatsApp в течение 48 часов. Бесплатно и без обязательств.</p>
+      <div class="brief__steps reveal" data-delay="160">
+        <div><b>1</b> Тест — 2 минуты</div>
+        <div><b>2</b> Ответ ≤ 2 ч</div>
+        <div><b>3</b> Смета за 48 ч</div>
+      </div>
+      <div class="brief__contacts reveal" data-delay="220">
+        <a href="mailto:lanmeiltd_sale2@163.com">lanmeiltd_sale2@163.com</a>
+        <a href="https://wa.me/8613120794214" target="_blank" rel="noopener">+86 131 2079 4214</a>
+      </div>
+    </div>
+
+    <form class="briefform quiz reveal" data-delay="120" id="leadForm" novalidate>
+
+      <div class="quiz__bar">
+        <span class="quiz__bar-label">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Короткий тест — всего 2 минуты
+        </span>
+        <span class="quiz__bar-step"><span id="quizStepNum">1</span>/4</span>
+      </div>
+
+      <div class="quiz__body">
+
+        <div class="quizstep is-active" data-step="1">
+          <h3 class="quiz__q">Какую категорию товара вы планируете привезти из Китая?</h3>
+          <div class="quiz__tiles" data-field="sku" data-required="true">
+            <button type="button" class="quiz__tile" data-value="Хозтовары и товары для дома">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 15 16 6l11 9v13H5V15Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 28v-9h8v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span>Хозтовары и товары для дома</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Электроника и техника">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="7" width="24" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M11 26h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Электроника и техника</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Оборудование и станки">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="2"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M7.5 24.5l2.8-2.8M21.7 10.3l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Оборудование и станки</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Продукты питания">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 4c0 4-3 5-3 10a10 10 0 0 0 20 0c0-5-3-6-3-10-2 2-3 4-3 4s-2-4-4-4-4 4-4 4-2-4-3-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <span>Продукты питания</span>
+            </button>
+            <button type="button" class="quiz__tile" data-value="Другая категория">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><path d="M16 21v.1M16 17c0-2.5 3-2.5 3-5.5 0-2-1.5-3.5-3.5-3.5S12 9.5 12 11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Другая категория / нужен поиск</span>
+            </button>
+          </div>
+          <span class="field__err quiz__err" data-err-for="1">Выберите категорию товара</span>
+        </div>
+
+        <div class="quizstep" data-step="2">
+          <h3 class="quiz__q">Есть ссылка на товар, который хотите привезти?</h3>
+          <div class="field">
+            <input type="text" id="link" placeholder=" " inputmode="url">
+            <label for="link">Ссылка на товар (1688, Alibaba, Wildberries и т.д.)</label>
+          </div>
+          <p class="quiz__hint">Нет под рукой — не страшно, можно пропустить и описать на созвоне.</p>
+        </div>
+
+        <div class="quizstep" data-step="3">
+          <h3 class="quiz__q">Какой ориентировочный бюджет вы закладываете на закупку партии?</h3>
+          <div class="quiz__tiles quiz__tiles--list" data-field="budget" data-required="true">
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="до $3 000"><span>до $3 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$3 000 – $10 000"><span>$3 000 – $10 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$10 000 – $50 000"><span>$10 000 – $50 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="более $50 000"><span>более $50 000</span></button>
+          </div>
+          <span class="field__err quiz__err" data-err-for="3">Выберите вариант бюджета</span>
+          <div class="briefform__hint" id="briefHint" hidden>
+            При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="4">
+          <h3 class="quiz__q">Сколько товара планируете заказать?</h3>
+          <p class="briefform__hint">Берём заказы от&nbsp;300&nbsp;кг или от&nbsp;250&nbsp;000&nbsp;₽</p>
+          <div class="field">
+            <input type="text" id="qty" placeholder=" " required aria-describedby="err-qty">
+            <label for="qty">Количество в штуках или килограммах</label>
+            <span class="field__err" id="err-qty">Укажите количество, например 500&nbsp;шт или 300&nbsp;кг</span>
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="5">
+          <h3 class="quiz__q">В какой город доставить товар?</h3>
+          <div class="field">
+            <input type="text" id="city" placeholder=" " required aria-describedby="err-city">
+            <label for="city">Город и склад доставки</label>
+            <span class="field__err" id="err-city">Укажите город доставки</span>
+          </div>
+        </div>
+
+        <div class="quizstep" data-step="6">
+          <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
+          <div class="field">
+            <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
+            <label for="name">Ваше имя</label>
+            <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
+          </div>
+          <div class="field">
+            <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
+            <label for="phone">Телефон или Telegram</label>
+            <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
+          </div>
+          <label class="quiz__consent">
+            <input type="checkbox" id="consent" required>
+            <span>Согласен(на) с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a></span>
+          </label>
+          <span class="field__err quiz__err" id="err-consent">Нужно согласие на обработку данных</span>
+        </div>
+
+      </div>
+
+      <!-- honeypot: невидимое обычным пользователям поле-ловушка для ботов.
+           Не position:absolute с уводом за экран — это создавало горизонтальный
+           скролл страницы. Схлопываем высоту/ширину в потоке документа. -->
+      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
+        <label for="website">Оставьте это поле пустым</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="quiz__nav">
+        <button type="button" class="quiz__back" id="quizBack" hidden>← Назад</button>
+        <button type="button" class="btn btn--white magnetic" id="quizNext">Дальше →</button>
+        <button type="submit" class="btn btn--white btn--glow magnetic" id="quizSubmit" hidden>Получить расчёт стоимости</button>
+      </div>
+      <div class="briefform__ok" id="leadOk">
+        <b id="leadOkTitle">Бриф отправлен</b>
+        <span id="leadOkText">Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ 05. ПОЛНЫЙ ЦИКЛ ══════════ -->
 <section class="service section" id="service">
   <div class="container">
     <div class="section__head section__head--full">
@@ -311,72 +485,7 @@
   </div>
 </section>
 
-<!-- ══════════ 04. ПОЧЕМУ ВЫБИРАЮТ НАС ══════════ -->
-<section class="advantages section" id="advantages">
-  <div class="container">
-    <div class="section__head">
-      <span class="tag reveal">Наши преимущества</span>
-      <h2 class="section__title reveal" data-delay="60">Почему выбирают нас</h2>
-      <p class="section__lead reveal" data-delay="120">Смета по строкам, инспекция партии до отгрузки и фиксированная комиссия — без пересчётов после того, как вы заплатили.</p>
-    </div>
-
-    <div class="advlist">
-      <div class="advrow reveal">
-        <div class="advrow__text">
-          <h3><span class="advrow__num">01.</span> Полный комплект документов</h3>
-          <p>Инвойс, упаковочный лист, экспортная декларация, «Честный знак», заранее считаем коды ТН ВЭД и пошлину — без сюрпризов на таможне. В результате получаете готовый пакет документов для бухгалтерии и налоговой.</p>
-        </div>
-        <figure class="ph ph--43 advrow__visual">
-          <img src="photos/docs.jpg" alt="Полный комплект документов" loading="lazy" decoding="async">
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16h16M16 24h16M16 32h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-        </figure>
-      </div>
-
-      <div class="advrow reveal">
-        <div class="advrow__text">
-          <h3><span class="advrow__num">02.</span> Прозрачный расчёт</h3>
-          <p>Получаете расчёт, где видно цену за: товар, комиссию, упаковку, логистику, пошлину и доставку. Комиссия нашей компании фиксирована и известна заранее, а переговоры с фабрикой ведём мы.</p>
-        </div>
-        <figure class="ph ph--43 advrow__visual advrow__visual--doc">
-          <img src="photos/estimate-example.jpg" alt="Прозрачный расчёт" loading="lazy" decoding="async">
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 15l12 12 7-7 13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 33h9v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </figure>
-      </div>
-
-      <div class="advrow reveal">
-        <div class="advrow__text">
-          <h3><span class="advrow__num">03.</span> Полный контроль качества на всех этапах</h3>
-          <p>Проводим аудит 2–5 фабрик и выбираем лучшую, утверждаем образец и фиксируем параметры в техническом задании. Фото- и видеоотчёты партий до отгрузки, во время погрузки делаем финальную проверку с фиксацией и проверяем качество упаковки.</p>
-        </div>
-        <figure class="ph ph--43 advrow__visual">
-          <img src="photos/adv-kontrol.jpg" alt="Полный контроль качества на всех этапах" loading="lazy" decoding="async">
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 5 8 12v12c0 10 6.5 17 16 20 9.5-3 16-10 16-20V12L24 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m17 24 5 5 10-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </figure>
-      </div>
-
-      <div class="advrow reveal">
-        <div class="advrow__text">
-          <h3><span class="advrow__num">04.</span> Гарантия на товар после отгрузки</h3>
-          <p>Фабрика предоставляет гарантию на товар и 90 дней на предъявление претензий. Мы ведём переговоры и решаем спорные вопросы с фабрикой на месте, на китайском языке.</p>
-        </div>
-        <figure class="ph ph--43 advrow__visual">
-          <img src="photos/adv-garantiya.jpg" alt="Гарантия на товар после отгрузки" loading="lazy" decoding="async">
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 38V9h21l9 9v20H9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 27h13M17 20h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 12. КЕЙС ══════════ -->
+<!-- ══════════ 06. КЕЙСЫ ══════════ -->
 <section class="case section" id="case">
   <div class="container">
     <div class="section__head section__head--full">
@@ -620,264 +729,7 @@
   </div>
 </section>
 
-<!-- ══════════ 05. СМЕТА ДО СКЛАДА ══════════ -->
-<section class="estimate section chamfer-t" id="estimate">
-  <div class="container">
-    <div class="section__head section__head--left section__head--full">
-      <span class="tag reveal">Ключевой продукт</span>
-      <h2 class="section__title reveal" data-delay="60">Расчёт, в котором видно все расходы</h2>
-      <p class="section__lead reveal" data-delay="120">
-        <b>За 48 часов мы даём расчёт, в котором видно стоимость услуг и нашей комиссии,</b>
-        без скрытых платежей перекупам и агентам.
-      </p>
-    </div>
-
-    <div class="estimate__inner">
-      <figure class="estimate__doc reveal">
-        <img src="photos/estimate-example.jpg" alt="Пример реального расчёта себестоимости поставки: фрахт, таможенные платежи, сертификация, доставка до склада" loading="lazy" decoding="async">
-        <figcaption>Пример реального расчёта — позиции и цифры считаем под ваш товар и маршрут</figcaption>
-      </figure>
-
-      <div class="estimate__side">
-        <article class="scard reveal">
-          <h3>Что вы получаете вместо ставки за килограмм</h3>
-          <ul class="checklist">
-            <li>Себестоимость единицы товара</li>
-            <li>Сравнение 2–5 фабрик/поставщиков</li>
-            <li>Прозрачная комиссия компании</li>
-            <li>Срок производства и доставки по датам</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 06. БРИФ ══════════ -->
-<section class="brief section chamfer-t" id="brief">
-  <div class="container brief__inner">
-    <div class="brief__text">
-      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 2–5 фабрик</h2>
-      <p class="reveal" data-delay="80">После прохождения с вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в Telegram или WhatsApp в течение 48 часов. Бесплатно и без обязательств.</p>
-      <div class="brief__steps reveal" data-delay="160">
-        <div><b>1</b> Тест — 2 минуты</div>
-        <div><b>2</b> Ответ ≤ 2 ч</div>
-        <div><b>3</b> Смета за 48 ч</div>
-      </div>
-      <div class="brief__contacts reveal" data-delay="220">
-        <a href="mailto:lanmeiltd_sale2@163.com">lanmeiltd_sale2@163.com</a>
-        <a href="https://wa.me/8613120794214" target="_blank" rel="noopener">+86 131 2079 4214</a>
-      </div>
-    </div>
-
-    <form class="briefform quiz reveal" data-delay="120" id="leadForm" novalidate>
-
-      <div class="quiz__bar">
-        <span class="quiz__bar-label">
-          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          Короткий тест — всего 2 минуты
-        </span>
-        <span class="quiz__bar-step"><span id="quizStepNum">1</span>/4</span>
-      </div>
-
-      <div class="quiz__body">
-
-        <div class="quizstep is-active" data-step="1">
-          <h3 class="quiz__q">Какую категорию товара вы планируете привезти из Китая?</h3>
-          <div class="quiz__tiles" data-field="sku" data-required="true">
-            <button type="button" class="quiz__tile" data-value="Хозтовары и товары для дома">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 15 16 6l11 9v13H5V15Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 28v-9h8v9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-              <span>Хозтовары и товары для дома</span>
-            </button>
-            <button type="button" class="quiz__tile" data-value="Электроника и техника">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="7" width="24" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M11 26h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Электроника и техника</span>
-            </button>
-            <button type="button" class="quiz__tile" data-value="Оборудование и станки">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="2"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M7.5 24.5l2.8-2.8M21.7 10.3l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Оборудование и станки</span>
-            </button>
-            <button type="button" class="quiz__tile" data-value="Продукты питания">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M9 4c0 4-3 5-3 10a10 10 0 0 0 20 0c0-5-3-6-3-10-2 2-3 4-3 4s-2-4-4-4-4 4-4 4-2-4-3-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-              <span>Продукты питания</span>
-            </button>
-            <button type="button" class="quiz__tile" data-value="Другая категория">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><path d="M16 21v.1M16 17c0-2.5 3-2.5 3-5.5 0-2-1.5-3.5-3.5-3.5S12 9.5 12 11.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Другая категория / нужен поиск</span>
-            </button>
-          </div>
-          <span class="field__err quiz__err" data-err-for="1">Выберите категорию товара</span>
-        </div>
-
-        <div class="quizstep" data-step="2">
-          <h3 class="quiz__q">Есть ссылка на товар, который хотите привезти?</h3>
-          <div class="field">
-            <input type="text" id="link" placeholder=" " inputmode="url">
-            <label for="link">Ссылка на товар (1688, Alibaba, Wildberries и т.д.)</label>
-          </div>
-          <p class="quiz__hint">Нет под рукой — не страшно, можно пропустить и описать на созвоне.</p>
-        </div>
-
-        <div class="quizstep" data-step="3">
-          <h3 class="quiz__q">Какой ориентировочный бюджет вы закладываете на закупку партии?</h3>
-          <div class="quiz__tiles quiz__tiles--list" data-field="budget" data-required="true">
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="до $3 000"><span>до $3 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$3 000 – $10 000"><span>$3 000 – $10 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$10 000 – $50 000"><span>$10 000 – $50 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="более $50 000"><span>более $50 000</span></button>
-          </div>
-          <span class="field__err quiz__err" data-err-for="3">Выберите вариант бюджета</span>
-          <div class="briefform__hint" id="briefHint" hidden>
-            При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="4">
-          <h3 class="quiz__q">Сколько товара планируете заказать?</h3>
-          <p class="briefform__hint">Берём заказы от&nbsp;300&nbsp;кг или от&nbsp;250&nbsp;000&nbsp;₽</p>
-          <div class="field">
-            <input type="text" id="qty" placeholder=" " required aria-describedby="err-qty">
-            <label for="qty">Количество в штуках или килограммах</label>
-            <span class="field__err" id="err-qty">Укажите количество, например 500&nbsp;шт или 300&nbsp;кг</span>
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="5">
-          <h3 class="quiz__q">В какой город доставить товар?</h3>
-          <div class="field">
-            <input type="text" id="city" placeholder=" " required aria-describedby="err-city">
-            <label for="city">Город и склад доставки</label>
-            <span class="field__err" id="err-city">Укажите город доставки</span>
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="6">
-          <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
-          <div class="field">
-            <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
-            <label for="name">Ваше имя</label>
-            <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
-          </div>
-          <div class="field">
-            <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
-            <label for="phone">Телефон или Telegram</label>
-            <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
-          </div>
-          <label class="quiz__consent">
-            <input type="checkbox" id="consent" required>
-            <span>Согласен(на) с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a></span>
-          </label>
-          <span class="field__err quiz__err" id="err-consent">Нужно согласие на обработку данных</span>
-        </div>
-
-      </div>
-
-      <!-- honeypot: невидимое обычным пользователям поле-ловушка для ботов.
-           Не position:absolute с уводом за экран — это создавало горизонтальный
-           скролл страницы. Схлопываем высоту/ширину в потоке документа. -->
-      <div class="field" style="height:0;width:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true">
-        <label for="website">Оставьте это поле пустым</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-      </div>
-
-      <div class="quiz__nav">
-        <button type="button" class="quiz__back" id="quizBack" hidden>← Назад</button>
-        <button type="button" class="btn btn--white magnetic" id="quizNext">Дальше →</button>
-        <button type="submit" class="btn btn--white btn--glow magnetic" id="quizSubmit" hidden>Получить расчёт стоимости</button>
-      </div>
-      <div class="briefform__ok" id="leadOk">
-        <b id="leadOkTitle">Бриф отправлен</b>
-        <span id="leadOkText">Ответим в течение 2 часов, смету пришлём за 48 часов.</span>
-      </div>
-    </form>
-  </div>
-</section>
-
-<!-- ══════════ 09. КОНТРОЛЬ КАЧЕСТВА ══════════ -->
-<section class="quality section" id="quality">
-  <div class="container">
-    <div class="section__head section__head--full">
-      <span class="tag reveal">Качество</span>
-      <h2 class="section__title reveal" data-delay="60">Аудит поставщика<br>и проверка товара</h2>
-      <p class="section__lead reveal" data-delay="120">Контролируем ключевые измеримые параметры, выборку, статус каждого пункта, фиксируем отклонения и решаем вопрос с поставщиком.</p>
-    </div>
-
-    <div class="quality__inner">
-      <div class="quality__text">
-        <div class="qsteps reveal" data-delay="180">
-          <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
-          <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
-          <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
-          <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
-        </div>
-      </div>
-
-      <div class="quality__side">
-        <figure class="ph ph--43 ph--doc reveal" data-delay="80">
-          <img src="photos/proverka.jpg" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
-          <div class="ph__inner">
-            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
-              <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 11. ДОКУМЕНТЫ ══════════ -->
-<section class="docs section chamfer-tb" id="docs">
-  <div class="container">
-    <div class="section__head section__head--full">
-      <span class="tag reveal">Полный комплект документов</span>
-      <h2 class="section__title reveal only-desktop" data-delay="60">Поставки в белую, это<br>уверенность и спокойствие</h2>
-      <h2 class="section__title reveal only-mobile" data-delay="60">Поставки в белую,<br>это уверенность<br>и спокойствие</h2>
-      <p class="section__lead reveal" data-delay="120">Подбираем перечень документов под вашу категорию товара, с гарантией на случай брака.</p>
-    </div>
-
-    <div class="docs__grid">
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 3h10l6 6v16H6V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 16h8M10 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <h3>Экспортная лицензия фабрики</h3><p>Подтверждаем право производителя на экспорт до запуска партии.</p>
-      </article>
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M5 3h18v22l-3-2-3 2-3-2-3 2-3-2-3 2V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 10h8M10 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <h3>Инвойс и упаковочный лист</h3><p>Состав партии, вес, объём и стоимость по позициям.</p>
-      </article>
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M3 24h22M6 24V11l8-6 8 6v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 24v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
-        <h3>Схема таможенного оформления</h3><p>Коды ТН ВЭД, расчёт пошлины и НДС, порядок выпуска.</p>
-      </article>
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m10.5 11 2.6 2.5L18 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 18-2 8 7-3 7 3-2-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
-        <h3>Сертификация и маркировка</h3><p>Декларации ТР ТС, «Честный знак» и требования площадок.</p>
-      </article>
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="4" y="3" width="20" height="22" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M9 9h10M9 14h10M9 19h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <h3>Договор с приложением по ТЗ</h3><p>Измеримые параметры, сроки, порядок претензий и лимиты.</p>
-      </article>
-      <article class="doc reveal">
-        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 3.5 8v12L14 25l10.5-5V8L14 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 8 14 13m0 0 10.5-5M14 13v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
-        <h3>Результат</h3><p>Полный комплект документов с постоянным сопровождением и прозрачными ценами.</p>
-      </article>
-    </div>
-
-    <figure class="ph ph--32 reveal docs__shot">
-      <img src="photos/docs.jpg" alt="Комплект документов на партию: инвойс, упаковочный лист, экспортная декларация" loading="lazy" decoding="async">
-      <div class="ph__inner">
-        <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M28 5v9h9M18 27h13M18 34h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </figure>
-  </div>
-</section>
-
-<!-- ══════════ 13. КОМАНДА ══════════ -->
+<!-- ══════════ 07. ЭКСПЕРТИЗА — КОМАНДА ══════════ -->
 <section class="team section" id="team">
   <div class="container">
     <div class="section__head">
@@ -937,8 +789,156 @@
   </div>
 </section>
 
+<!-- ══════════ 08. НАШИ ПРЕИМУЩЕСТВА ══════════ -->
+<section class="advantages section" id="advantages">
+  <div class="container">
+    <div class="section__head">
+      <span class="tag reveal">Наши преимущества</span>
+      <h2 class="section__title reveal" data-delay="60">Почему выбирают нас</h2>
+      <p class="section__lead reveal" data-delay="120">Смета по строкам, инспекция партии до отгрузки и фиксированная комиссия — без пересчётов после того, как вы заплатили.</p>
+    </div>
 
-<!-- ══════════ 15. ГАРАНТИИ ══════════ -->
+    <div class="advlist">
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">01.</span> Полный комплект документов</h3>
+          <p>Инвойс, упаковочный лист, экспортная декларация, «Честный знак», заранее считаем коды ТН ВЭД и пошлину — без сюрпризов на таможне. В результате получаете готовый пакет документов для бухгалтерии и налоговой.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/docs.jpg" alt="Полный комплект документов" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16h16M16 24h16M16 32h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">02.</span> Прозрачный расчёт</h3>
+          <p>Получаете расчёт, где видно цену за: товар, комиссию, упаковку, логистику, пошлину и доставку. Комиссия нашей компании фиксирована и известна заранее, а переговоры с фабрикой ведём мы.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual advrow__visual--doc">
+          <img src="photos/estimate-example.jpg" alt="Прозрачный расчёт" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 15l12 12 7-7 13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 33h9v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">03.</span> Полный контроль качества на всех этапах</h3>
+          <p>Проводим аудит 2–5 фабрик и выбираем лучшую, утверждаем образец и фиксируем параметры в техническом задании. Фото- и видеоотчёты партий до отгрузки, во время погрузки делаем финальную проверку с фиксацией и проверяем качество упаковки.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/adv-kontrol.jpg" alt="Полный контроль качества на всех этапах" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 5 8 12v12c0 10 6.5 17 16 20 9.5-3 16-10 16-20V12L24 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m17 24 5 5 10-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </figure>
+      </div>
+
+      <div class="advrow reveal">
+        <div class="advrow__text">
+          <h3><span class="advrow__num">04.</span> Гарантия на товар после отгрузки</h3>
+          <p>Фабрика предоставляет гарантию на товар и 90 дней на предъявление претензий. Мы ведём переговоры и решаем спорные вопросы с фабрикой на месте, на китайском языке.</p>
+        </div>
+        <figure class="ph ph--43 advrow__visual">
+          <img src="photos/adv-garantiya.jpg" alt="Гарантия на товар после отгрузки" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 38V9h21l9 9v20H9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 27h13M17 20h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 09. КАЧЕСТВО ══════════ -->
+<section class="quality section" id="quality">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Качество</span>
+      <h2 class="section__title reveal" data-delay="60">Аудит поставщика<br>и проверка товара</h2>
+      <p class="section__lead reveal" data-delay="120">Контролируем ключевые измеримые параметры, выборку, статус каждого пункта, фиксируем отклонения и решаем вопрос с поставщиком.</p>
+    </div>
+
+    <div class="quality__inner">
+      <div class="quality__text">
+        <div class="qsteps reveal" data-delay="180">
+          <div class="qstep"><b>01</b><div><h4>Образец до серии</h4><p>Утверждаем эталон и закрепляем характеристики в приложении к договору.</p></div></div>
+          <div class="qstep"><b>02</b><div><h4>Измеримое ТЗ</h4><p>Габариты, материал, вес, упаковка, маркировка — параметрами, а не словами.</p></div></div>
+          <div class="qstep"><b>03</b><div><h4>Инспекция партии</h4><p>Выборка по чек-листу, фото и видео критичных узлов, протокол отклонений.</p></div></div>
+          <div class="qstep"><b>04</b><div><h4>Решение до оплаты 70%</h4><p>Отчёт «соответствует / не соответствует» — остаток уходит только после вашего согласия.</p></div></div>
+        </div>
+      </div>
+
+      <div class="quality__side">
+        <figure class="ph ph--43 ph--doc reveal" data-delay="80">
+          <img src="photos/proverka.jpg" alt="Отчёт проверки качества: фото партии на складе и таблица результатов инспекции" loading="lazy" decoding="async">
+          <div class="ph__inner">
+            <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="21" cy="21" r="13" stroke="currentColor" stroke-width="2"/>
+              <path d="m31 31 11 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="m16 21 4 4 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 10. ДОКУМЕНТЫ ══════════ -->
+<section class="docs section chamfer-tb" id="docs">
+  <div class="container">
+    <div class="section__head section__head--full">
+      <span class="tag reveal">Полный комплект документов</span>
+      <h2 class="section__title reveal only-desktop" data-delay="60">Поставки в белую, это<br>уверенность и спокойствие</h2>
+      <h2 class="section__title reveal only-mobile" data-delay="60">Поставки в белую,<br>это уверенность<br>и спокойствие</h2>
+      <p class="section__lead reveal" data-delay="120">Подбираем перечень документов под вашу категорию товара, с гарантией на случай брака.</p>
+    </div>
+
+    <div class="docs__grid">
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M6 3h10l6 6v16H6V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 3v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 16h8M10 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Экспортная лицензия фабрики</h3><p>Подтверждаем право производителя на экспорт до запуска партии.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M5 3h18v22l-3-2-3 2-3-2-3 2-3-2-3 2V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 10h8M10 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Инвойс и упаковочный лист</h3><p>Состав партии, вес, объём и стоимость по позициям.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M3 24h22M6 24V11l8-6 8 6v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 24v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Схема таможенного оформления</h3><p>Коды ТН ВЭД, расчёт пошлины и НДС, порядок выпуска.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="m10.5 11 2.6 2.5L18 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 18-2 8 7-3 7 3-2-8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Сертификация и маркировка</h3><p>Декларации ТР ТС, «Честный знак» и требования площадок.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="4" y="3" width="20" height="22" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M9 9h10M9 14h10M9 19h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Договор с приложением по ТЗ</h3><p>Измеримые параметры, сроки, порядок претензий и лимиты.</p>
+      </article>
+      <article class="doc reveal">
+        <span class="doc__ico"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3 3.5 8v12L14 25l10.5-5V8L14 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 8 14 13m0 0 10.5-5M14 13v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Результат</h3><p>Полный комплект документов с постоянным сопровождением и прозрачными ценами.</p>
+      </article>
+    </div>
+
+    <figure class="ph ph--32 reveal docs__shot">
+      <img src="photos/docs.jpg" alt="Комплект документов на партию: инвойс, упаковочный лист, экспортная декларация" loading="lazy" decoding="async">
+      <div class="ph__inner">
+        <svg class="ph__ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M11 5h17l9 9v29H11V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M28 5v9h9M18 27h13M18 34h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════ 11. ОТВЕТСТВЕННОСТЬ ══════════ -->
 <section class="guarantee section" id="guarantee">
   <div class="container">
     <div class="section__head section__head--full">
@@ -970,7 +970,8 @@
     </div>
   </div>
 </section>
-<!-- ══════════ 16. ВОЗРАЖЕНИЯ / FAQ ══════════ -->
+
+<!-- ══════════ 12. ВОПРОСЫ ══════════ -->
 <section class="faq section chamfer-t" id="faq">
   <div class="container faq__inner">
     <div class="faq__side">
@@ -1008,6 +1009,8 @@
     </div>
   </div>
 </section>
+
+
 
 <!-- ══════════ 17. ФУТЕР ══════════ -->
 <footer class="footer" id="contacts">
