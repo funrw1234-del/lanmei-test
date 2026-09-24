@@ -589,6 +589,10 @@
 
   // Микроцели квиза в Яндекс.Метрике — считаем шаги воронки отдельно от
   // финальной заявки, чтобы видеть, на каком вопросе отваливаются.
+  // Служебные цели (23.09): form_invalid — человек нажал «отправить», но форма не пропустила
+  // (нет согласия, короткий номер); send_fail — форма отправила, но сервер не подтвердил приём.
+  // Нужны, чтобы отличать «сам не отправил» от «заявка потерялась»: в Метрике видно только
+  // нажатие кнопки (автоцель) и успех (страница /thanks/), а промежуток между ними был слепым.
   function trackGoal(name) {
     try { if (typeof window.ym === 'function') window.ym(111955901, 'reachGoal', name); }
     catch (err) { /* блокировщики рекламы режут ym — не мешаем работе формы */ }
@@ -707,7 +711,7 @@
 
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!validateFinal()) return;
+      if (!validateFinal()) { trackGoal('form_invalid'); return; }
 
       // honeypot: если скрытое поле заполнено — это бот, тихо "успешно" выходим
       const hp = $('#website');
@@ -739,6 +743,7 @@
         if (hint) hint.hidden = true;
         window.location.href = 'thanks/';
       } else {
+        trackGoal('send_fail');
         endSubmit(leadForm, submitBtn);
         showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
@@ -803,7 +808,7 @@
 
     cbForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!validateCbPhone()) { cbPhone.focus(); return; }
+      if (!validateCbPhone()) { trackGoal('form_invalid'); cbPhone.focus(); return; }
 
       // honeypot
       const hp = $('#cbWebsite');
@@ -825,6 +830,7 @@
         cbForm.reset();
         window.location.href = 'thanks/';
       } else {
+        trackGoal('send_fail');
         endSubmit(cbForm, submitBtn);
         showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram: t.me/lanmei_logistics.');
       }
@@ -864,8 +870,8 @@
       e.preventDefault();
       const phoneOk = validateFlPhone();
       const emailOk = validateFlEmail();
-      if (!phoneOk) { flPhone.focus(); return; }
-      if (!emailOk) { flEmail.focus(); return; }
+      if (!phoneOk) { trackGoal('form_invalid'); flPhone.focus(); return; }
+      if (!emailOk) { trackGoal('form_invalid'); flEmail.focus(); return; }
 
       // honeypot
       const hp = $('#flWebsite');
@@ -888,6 +894,7 @@
         footerForm.reset();
         window.location.href = 'thanks/';
       } else {
+        trackGoal('send_fail');
         endSubmit(footerForm, submitBtn);
         showFormResult($('#footerLeadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
       }
