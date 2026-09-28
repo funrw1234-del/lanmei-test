@@ -262,14 +262,14 @@ a,button,select{cursor:pointer}
 /* на мобильном показываем тем же текстом, но отдельной строкой снизу —
    в среднем диапазоне (760–1180px) не помещается рядом с иконками, там
    оставляем скрытой */
+/* Мобильная шапка (28.09, правка Леонида): одна строка — логотип с подписью
+   слева, иконки Telegram и MAX справа. Строку «Доставили 500+ партий» убрали:
+   она занимала третью строку и делала шапку 107px — четверть первого экрана. */
 @media (max-width:760px){
-  .header__inner{flex-wrap:wrap;row-gap:4px}
-  .logo{order:1}
-  .header__actions{order:2}
-  .header__stat{
-    order:3;flex-basis:100%;display:block;white-space:normal;
-    font-size:11.5px;text-align:left;
-  }
+  .header__inner{flex-wrap:nowrap;gap:12px}
+  .header__stat{display:none}
+  .header__actions{margin-left:auto;gap:10px}
+  .logo__text i{font-size:9px;line-height:1.25}
 }
 
 .header__actions{display:flex;align-items:center;gap:14px}
@@ -337,9 +337,9 @@ a.header__social:hover{transform:translateY(-2px)}
 }
 @media (max-width:899px){
   .hero__title{font-size:clamp(19px,5.5vw + 1.4px,44px)}
-  /* шапка на мобильном фиксированная (~107px) и перекрывала верх бейджей —
-     поднимаем верхний отступ первого экрана выше высоты шапки */
-  .hero{padding-top:132px}
+  /* отступ первого экрана держим выше фиксированной шапки; с 28.09 она
+     стала однострочной (~58px вместо 107px), поэтому отступ уменьшен */
+  .hero{padding-top:84px}
 }
 .hero__title .line{display:block;overflow:hidden;padding-bottom:.06em}
 .hero__title .line>span{display:block;transform:translateY(105%);transition:transform .9s var(--ease)}
