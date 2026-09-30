@@ -726,14 +726,17 @@
 
       const data = {
         formType: 'Квиз-бриф с сайта Lanmei',
-        name: $('#name').value.trim() || '—',
+        name: $('#name').value.trim() || 'не указано',
         // способ связи — пометкой рядом с номером: Worker и таблица не меняются,
         // а номер для SMS Worker всё равно достаёт только из цифр
         phone: $('#phone').value.trim() + ' (' + ($('.quiz__tiles[data-field="channel"]', leadForm).dataset.value || 'Telegram') + ')',
         sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
-
+        // ссылку, количество и город квиз больше не спрашивает (30.09) — чтобы в Telegram,
+        // письме и таблице не было пустых строк, пишем, кто их выясняет
+        link: 'уточнит менеджер',
         budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
-
+        qty: 'уточнит менеджер',
+        city: 'уточнит менеджер',
         yclid: getStoredYclid()
       };
 
