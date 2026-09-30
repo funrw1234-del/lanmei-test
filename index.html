@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=60">
+<link rel="stylesheet" href="css/style.css?v=61">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -289,10 +289,10 @@
 <section class="brief section chamfer-t" id="brief">
   <div class="container brief__inner">
     <div class="brief__text">
-      <h2 class="brief__title reveal">Ответьте на 5 вопросов — и получите расчёт от 2–5 фабрик</h2>
+      <h2 class="brief__title reveal">Два вопроса и контакт — и получите расчёт от 2–5 фабрик</h2>
       <p class="reveal" data-delay="80">После прохождения с вами свяжется менеджер, чтобы уточнить детали. Пришлём расчёт в Telegram или WhatsApp в течение 48 часов. Бесплатно и без обязательств.</p>
       <div class="brief__steps reveal" data-delay="160">
-        <div><b>1</b> Тест — 2 минуты</div>
+        <div><b>1</b> Тест — 30 секунд</div>
         <div><b>2</b> Ответ ≤ 2 ч</div>
         <div><b>3</b> Смета за 48 ч</div>
       </div>
@@ -307,9 +307,9 @@
       <div class="quiz__bar">
         <span class="quiz__bar-label">
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          Короткий тест — всего 2 минуты
+          3 шага — меньше минуты
         </span>
-        <span class="quiz__bar-step"><span id="quizStepNum">1</span>/4</span>
+        <span class="quiz__bar-step"><span id="quizStepNum">1</span>/3</span>
       </div>
 
       <div class="quiz__body">
@@ -342,64 +342,37 @@
         </div>
 
         <div class="quizstep" data-step="2">
-          <h3 class="quiz__q">Есть ссылка на товар, который хотите привезти?</h3>
-          <div class="field">
-            <input type="text" id="link" placeholder=" " inputmode="url">
-            <label for="link">Ссылка на товар (1688, Alibaba, Wildberries и т.д.)</label>
+          <h3 class="quiz__q">Какой объём партии планируете?</h3>
+          <p class="quiz__hint quiz__hint--top">Примерно, в долларах — точную сумму посчитаем вместе</p>
+          <div class="quiz__tiles quiz__tiles--list quiz__tiles--vol" data-field="budget" data-required="true">
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$3 000 – $10 000"><span>$3 000 – $10 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$10 000 – $50 000"><span>$10 000 – $50 000</span></button>
+            <button type="button" class="quiz__tile quiz__tile--sm" data-value="более $50 000"><span>больше $50 000</span></button>
           </div>
-          <p class="quiz__hint">Нет под рукой — не страшно, можно пропустить и описать на созвоне.</p>
+          <span class="field__err quiz__err" data-err-for="2">Выберите примерный объём</span>
         </div>
 
         <div class="quizstep" data-step="3">
-          <h3 class="quiz__q">Какой ориентировочный бюджет вы закладываете на закупку партии?</h3>
-          <div class="quiz__tiles quiz__tiles--list" data-field="budget" data-required="true">
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="до $3 000"><span>до $3 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$3 000 – $10 000"><span>$3 000 – $10 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="$10 000 – $50 000"><span>$10 000 – $50 000</span></button>
-            <button type="button" class="quiz__tile quiz__tile--sm" data-value="более $50 000"><span>более $50 000</span></button>
+          <h3 class="quiz__q">Как с вами связаться?</h3>
+          <div class="quiz__tiles quiz__tiles--channel" data-field="channel">
+            <button type="button" class="quiz__tile quiz__tile--ch is-selected" data-value="Telegram"><img src="photos/icons/telegram.png" alt="" width="28" height="28" loading="lazy" decoding="async"><span>Telegram</span></button>
+            <button type="button" class="quiz__tile quiz__tile--ch" data-value="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#25D366"/><path d="M22.6 18.9c-.3-.2-1.9-1-2.2-1s-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.6 8.6 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5.2 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5 0-.1-.3-.2-.6-.4Z" fill="#fff"/></svg><span>WhatsApp</span></button>
+            <button type="button" class="quiz__tile quiz__tile--ch" data-value="Звонок"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8.5 5h4l2 5-2.6 1.6a12 12 0 0 0 5.5 5.5L19 14.5l5 2v4A2.5 2.5 0 0 1 21.5 23 16.5 16.5 0 0 1 6 7.5 2.5 2.5 0 0 1 8.5 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(1 2)"/></svg><span>Звонок</span></button>
           </div>
-          <span class="field__err quiz__err" data-err-for="3">Выберите вариант бюджета</span>
-          <div class="briefform__hint" id="briefHint" hidden>
-            При закупках до $3 000 в месяц белая схема обычно не окупается. Мы всё равно посмотрим ваш запрос и честно скажем, есть ли смысл.
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="4">
-          <h3 class="quiz__q">Сколько товара планируете заказать?</h3>
-          <p class="briefform__hint">Берём заказы от&nbsp;300&nbsp;кг или от&nbsp;250&nbsp;000&nbsp;₽</p>
-          <div class="field">
-            <input type="text" id="qty" placeholder=" " required aria-describedby="err-qty">
-            <label for="qty">Количество в штуках или килограммах</label>
-            <span class="field__err" id="err-qty">Укажите количество, например 500&nbsp;шт или 300&nbsp;кг</span>
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="5">
-          <h3 class="quiz__q">В какой город доставить товар?</h3>
-          <div class="field">
-            <input type="text" id="city" placeholder=" " required aria-describedby="err-city">
-            <label for="city">Город и склад доставки</label>
-            <span class="field__err" id="err-city">Укажите город доставки</span>
-          </div>
-        </div>
-
-        <div class="quizstep" data-step="6">
-          <h3 class="quiz__q">Оставьте имя и телефон, чтобы получить коммерческое предложение</h3>
-          <div class="field">
-            <input type="text" id="name" placeholder=" " required autocomplete="name" aria-describedby="err-name">
-            <label for="name">Ваше имя</label>
-            <span class="field__err" id="err-name">Укажите, как к вам обращаться</span>
-          </div>
-          <div class="field">
+          <div class="field quiz__phone">
             <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
-            <label for="phone">Телефон или Telegram</label>
+            <label for="phone" id="phoneLabel">Номер или @ник в Telegram</label>
             <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
+          </div>
+          <div class="field">
+            <input type="text" id="name" placeholder=" " autocomplete="name">
+            <label for="name">Как к вам обращаться</label>
           </div>
           <label class="quiz__consent">
             <input type="checkbox" id="consent" required>
             <span>Согласен(на) с <a href="privacy/" target="_blank" rel="noopener">политикой обработки данных</a></span>
           </label>
-          <span class="field__err quiz__err" id="err-consent">Нужно согласие на обработку данных</span>
+          <span class="field__err quiz__err" id="err-consent">Поставьте галочку — без согласия мы не можем принять заявку</span>
         </div>
 
       </div>
@@ -415,7 +388,7 @@
       <div class="quiz__nav">
         <button type="button" class="quiz__back" id="quizBack" hidden>← Назад</button>
         <button type="button" class="btn btn--white magnetic" id="quizNext">Дальше →</button>
-        <button type="submit" class="btn btn--white btn--glow magnetic" id="quizSubmit" hidden>Получить расчёт стоимости</button>
+        <button type="submit" class="btn btn--white btn--glow magnetic" id="quizSubmit" hidden>Получить расчёт</button>
       </div>
       <div class="briefform__ok" id="leadOk">
         <b id="leadOkTitle">Бриф отправлен</b>
@@ -1164,6 +1137,6 @@
 </div>
 
 <script src="js/forms-config.js?v=2"></script>
-<script src="js/main.js?v=24"></script>
+<script src="js/main.js?v=25"></script>
 </body>
 </html>

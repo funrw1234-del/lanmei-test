@@ -611,8 +611,7 @@
   const leadForm = $('#leadForm');
   if (leadForm) {
     const steps = $$('.quizstep', leadForm);
-    const totalSteps = steps.length; // 6: 5 вопросов + контакты
-    const questionSteps = totalSteps - 1; // «N/5» считаем только по вопросам
+    const totalSteps = steps.length; // 3: категория, объём, контакт
     let current = 1;
 
     const stepNum = $('#quizStepNum');
@@ -626,6 +625,7 @@
     // выбор плитки: одиночный выбор внутри своей группы, значение — в dataset.
     // Шаги с плитками (1 и 3) после выбора сами переходят дальше — не нужно
     // жать «Дальше». Шаги 2 и 4 — текстовые поля, туда это не относится.
+    $('.quiz__tiles[data-field="channel"]', leadForm).dataset.value = 'Telegram';
     $$('.quiz__tiles', leadForm).forEach((group) => {
       $$('.quiz__tile', group).forEach((tile) => {
         tile.addEventListener('click', () => {
@@ -634,8 +634,9 @@
           group.dataset.value = tile.dataset.value;
           const step = group.closest('.quizstep');
           step.querySelector('.quiz__err')?.classList.remove('is-visible');
-          if (group.dataset.field === 'budget' && hint) {
-            hint.hidden = tile.dataset.value !== 'до $3 000';
+          if (group.dataset.field === 'channel') {
+            $('#phoneLabel').textContent = tile.dataset.value === 'Telegram'
+              ? 'Номер или @ник в Telegram' : 'Номер телефона';
           }
           const stepNo = Number(step.dataset.step);
           // Автопереход только на шагах с одними плитками: где есть текстовое
@@ -654,10 +655,11 @@
       submitBtn.hidden = n !== totalSteps;
       nextBtn.hidden = n === totalSteps;
       if (n === totalSteps) {
-        barLabel.lastChild.textContent = ' Отлично, остался последний шаг!';
-        barStep.hidden = true;
+        barLabel.lastChild.textContent = ' Последний шаг';
+        barStep.hidden = false;
+        stepNum.textContent = n;
       } else {
-        barLabel.lastChild.textContent = ' Короткий тест — всего 2 минуты';
+        barLabel.lastChild.textContent = ' 3 шага — меньше минуты';
         barStep.hidden = false;
         stepNum.textContent = n;
       }
@@ -700,8 +702,7 @@
 
     function validateFinal() {
       let ok = true;
-      const name = $('#name'), phone = $('#phone'), consent = $('#consent');
-      if (name.value.trim().length < 2) { name.closest('.field').classList.add('is-error'); ok = false; }
+      const phone = $('#phone'), consent = $('#consent');
       if (phone.value.trim().length < 6) { phone.closest('.field').classList.add('is-error'); ok = false; }
       const consentErr = $('#err-consent');
       if (!consent.checked) { consentErr.classList.add('is-visible'); ok = false; }
@@ -725,13 +726,14 @@
 
       const data = {
         formType: 'Квиз-бриф с сайта Lanmei',
-        name: $('#name').value,
-        phone: $('#phone').value,
+        name: $('#name').value.trim() || '—',
+        // способ связи — пометкой рядом с номером: Worker и таблица не меняются,
+        // а номер для SMS Worker всё равно достаёт только из цифр
+        phone: $('#phone').value.trim() + ' (' + ($('.quiz__tiles[data-field="channel"]', leadForm).dataset.value || 'Telegram') + ')',
         sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
-        link: $('#link').value,
+
         budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
-        qty: $('#qty').value.trim(),
-        city: $('#city').value,
+
         yclid: getStoredYclid()
       };
 

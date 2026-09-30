@@ -1218,3 +1218,14 @@ a.footer__clink:hover{color:#fff}
   .lic{grid-template-columns:1fr;gap:18px;padding:16px}
   .lic__text b{font-size:20px}
 }
+
+/* квиз из 3 шагов: способ связи */
+.quiz__hint--top{margin:-8px 0 16px}
+.quiz__tiles--vol{grid-template-columns:repeat(3,1fr)}
+@media (max-width:560px){ .quiz__tiles--vol{grid-template-columns:1fr} }
+.quiz__tiles--channel{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.quiz__tile--ch{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:12px 6px;font-size:14px}
+.quiz__tile--ch img,.quiz__tile--ch svg{width:28px;height:28px}
+.quiz__tile--ch.is-selected{background:var(--violet-50,#f3effe);border-color:var(--violet-600);color:var(--ink);box-shadow:0 0 0 1px var(--violet-600) inset}
+.quiz__tile--ch.is-selected svg{color:var(--violet-600)}
+@media (max-width:560px){ .quiz__tiles--channel{grid-template-columns:repeat(3,1fr)} }
