@@ -731,12 +731,11 @@
         // а номер для SMS Worker всё равно достаёт только из цифр
         phone: $('#phone').value.trim() + ' (' + ($('.quiz__tiles[data-field="channel"]', leadForm).dataset.value || 'Telegram') + ')',
         sku: $('.quiz__tiles[data-field="sku"]', leadForm).dataset.value || '',
-        // ссылку, количество и город квиз больше не спрашивает (30.09) — чтобы в Telegram,
-        // письме и таблице не было пустых строк, пишем, кто их выясняет
-        link: 'уточнит менеджер',
+        // ссылка необязательна: пустую не отправляем — в Telegram строки не будет
+        // (в письме строки задаёт шаблон EmailJS, там останется пустое значение).
+        // Количество и город квиз не спрашивает и с 03.10 не отправляет
+        link: $('#link').value.trim() || undefined,
         budget: $('.quiz__tiles[data-field="budget"]', leadForm).dataset.value || '',
-        qty: 'уточнит менеджер',
-        city: 'уточнит менеджер',
         yclid: getStoredYclid()
       };
 
