@@ -511,25 +511,66 @@
   });
 
   /* ---------- Маска телефона (общая для всех форм) ---------- */
-  function applyPhoneMask(input, { allowText = false } = {}) {
-    if (!input) return;
-    input.addEventListener('input', () => {
-      const v = input.value;
-      if (allowText && (v.startsWith('@') || /[a-zA-Zа-яА-Я]/.test(v))) return; // Telegram-ник не трогаем
-      let d = v.replace(/\D/g, '');
-      if (!d) { input.value = ''; return; }
-      if (d[0] === '8') d = '7' + d.slice(1);
-      if (d[0] !== '7') d = '7' + d;
-      d = d.slice(0, 11);
-      let out = '+7';
-      if (d.length > 1) out += ' (' + d.slice(1, 4);
-      if (d.length >= 5) out += ') ' + d.slice(4, 7);
-      if (d.length >= 8) out += '-' + d.slice(7, 9);
-      if (d.length >= 10) out += '-' + d.slice(9, 11);
-      input.value = out;
-    });
+  // Телефон (08.10): маска на каждую цифру переписывала любой номер в +7 и обрезала
+  // до 11 цифр — иностранный номер (+375, +998, +86…) ввести было нельзя, а курсор
+  // при исправлении цифры в середине улетал в конец. Теперь во время ввода поле
+  // не трогаем, номер оформляем, когда человек вышел из поля.
+  // Российский без «+»: 8XXXXXXXXXX или 10 цифр → 7XXXXXXXXXX. С «+» — как ввели.
+  function phoneDigits(value) {
+    let d = String(value).replace(/\D/g, '');
+    if (!/^\s*\+/.test(value)) {
+      if (d.length === 11 && d[0] === '8') d = '7' + d.slice(1);
+      else if (d.length === 10) d = '7' + d;
+    }
+    return d;
   }
-  applyPhoneMask($('#phone'), { allowText: true }); // «Телефон или Telegram» — буквы/@ не трогаем
+
+  // '' — номер в порядке, иначе текст ошибки для посетителя
+  function phoneError(value) {
+    const v = String(value).trim();
+    if (!v) return 'Укажите номер телефона';
+    if (/[a-zA-Zа-яА-ЯёЁ@]/.test(v)) return 'Номер — только цифры, можно с «+» в начале';
+    const d = phoneDigits(v);
+    if (d.length < 10) return 'Номер слишком короткий — проверьте цифры';
+    if (d.length > 15) return 'Номер слишком длинный — проверьте цифры';
+    if (d[0] === '7' && d.length !== 11) return 'В номере с +7 должно быть 11 цифр';
+    return '';
+  }
+
+  function formatPhone(value) {
+    const d = phoneDigits(value);
+    if (d[0] === '7' && d.length === 11) {
+      return '+7 (' + d.slice(1, 4) + ') ' + d.slice(4, 7) + '-' + d.slice(7, 9) + '-' + d.slice(9, 11);
+    }
+    return '+' + d;
+  }
+
+  // Ник Telegram: 5–32 символа, латиница, цифры и «_», «@» в начале по желанию
+  function isTelegramNick(value) {
+    return /^@?[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(String(value).trim());
+  }
+
+  // Показ ошибки под полем: текст подставляется в .field__err этого поля
+  function setFieldError(input, message) {
+    const field = input.closest('.field');
+    const err = field.querySelector('.field__err');
+    if (message && err) err.textContent = message;
+    field.classList.toggle('is-error', !!message);
+    input.setAttribute('aria-invalid', String(!!message));
+  }
+
+  // Поле только для телефона: проверка и оформление при выходе из поля
+  function bindPhoneField(input) {
+    if (!input) return;
+    input.addEventListener('blur', () => {
+      if (!input.value.trim()) return;
+      const msg = phoneError(input.value);
+      if (!msg) input.value = formatPhone(input.value);
+      setFieldError(input, msg);
+    });
+    input.addEventListener('input', () => setFieldError(input, ''));
+  }
+
 
   /* ---------- Отправка форм: и почта, и Telegram — одним запросом в Cloudflare
      Worker (см. cloudflare-worker/telegram-relay.js). Раньше почта уходила прямо
@@ -626,6 +667,37 @@
     // Шаги с плитками (1 и 3) после выбора сами переходят дальше — не нужно
     // жать «Дальше». Шаги 2 и 4 — текстовые поля, туда это не относится.
     $('.quiz__tiles[data-field="channel"]', leadForm).dataset.value = 'Telegram';
+
+    // Telegram — можно ник, поэтому обычная клавиатура с буквами; остальное — цифровая
+    const quizPhone = $('#phone');
+    function applyChannel(channel) {
+      const tg = channel === 'Telegram';
+      $('#phoneLabel').textContent = tg ? 'Номер или @ник в Telegram' : 'Номер телефона';
+      quizPhone.setAttribute('inputmode', tg ? 'text' : 'tel');
+      setFieldError(quizPhone, '');
+    }
+    function quizContactError() {
+      const v = quizPhone.value.trim();
+      const tg = $('.quiz__tiles[data-field="channel"]', leadForm).dataset.value === 'Telegram';
+      if (tg && !v) return 'Укажите номер или @ник в Telegram';
+      if (tg && /[a-zA-Z@_]/.test(v) && !/[а-яА-ЯёЁ]/.test(v)) {
+        return isTelegramNick(v) ? '' : 'Ник в Telegram — латиница, цифры и «_», от 5 символов';
+      }
+      return phoneError(v);
+    }
+    // оформить контакт к отправке: ник — с «@», номер — в едином виде
+    function quizContactValue() {
+      const v = quizPhone.value.trim();
+      if (isTelegramNick(v)) return '@' + v.replace(/^@/, '');
+      return formatPhone(v);
+    }
+    quizPhone.addEventListener('blur', () => {
+      if (!quizPhone.value.trim()) return;
+      const msg = quizContactError();
+      if (!msg) quizPhone.value = quizContactValue();
+      setFieldError(quizPhone, msg);
+    });
+    applyChannel('Telegram');
     $$('.quiz__tiles', leadForm).forEach((group) => {
       $$('.quiz__tile', group).forEach((tile) => {
         tile.addEventListener('click', () => {
@@ -634,10 +706,7 @@
           group.dataset.value = tile.dataset.value;
           const step = group.closest('.quizstep');
           step.querySelector('.quiz__err')?.classList.remove('is-visible');
-          if (group.dataset.field === 'channel') {
-            $('#phoneLabel').textContent = tile.dataset.value === 'Telegram'
-              ? 'Номер или @ник в Telegram' : 'Номер телефона';
-          }
+          if (group.dataset.field === 'channel') applyChannel(tile.dataset.value);
           const stepNo = Number(step.dataset.step);
           // Автопереход только на шагах с одними плитками: где есть текстовое
           // поле, «Дальше» нажимают сами (номера шагов не зашиты — квиз
@@ -702,11 +771,15 @@
 
     function validateFinal() {
       let ok = true;
-      const phone = $('#phone'), consent = $('#consent');
-      if (phone.value.trim().length < 6) { phone.closest('.field').classList.add('is-error'); ok = false; }
+      const consent = $('#consent');
+      const msg = quizContactError();
+      setFieldError(quizPhone, msg);
+      if (msg) { ok = false; quizPhone.focus(); }
+      else quizPhone.value = quizContactValue();
       const consentErr = $('#err-consent');
-      if (!consent.checked) { consentErr.classList.add('is-visible'); ok = false; }
-      else consentErr.classList.remove('is-visible');
+      consentErr.classList.toggle('is-visible', !consent.checked);
+      $('.quiz__consent', leadForm).classList.toggle('is-error', !consent.checked);
+      if (!consent.checked) ok = false;
       return ok;
     }
 
@@ -756,7 +829,10 @@
     $$('.field input', leadForm).forEach((el) => {
       el.addEventListener('input', () => el.closest('.field').classList.remove('is-error'));
     });
-    $('#consent')?.addEventListener('change', () => $('#err-consent').classList.remove('is-visible'));
+    $('#consent')?.addEventListener('change', () => {
+      $('#err-consent').classList.remove('is-visible');
+      $('.quiz__consent', leadForm).classList.remove('is-error');
+    });
   }
 
   /* ---------- Модалка: обратный звонок ---------- */
@@ -769,7 +845,7 @@
     const cbName = $('#cbName');
     let lastFocused = null;
 
-    applyPhoneMask(cbPhone); // строго телефон, без исключения под Telegram-ник
+    bindPhoneField(cbPhone); // только телефон, ник Telegram здесь не принимаем
 
     function onKeydown(e) {
       if (e.key === 'Escape') closeCallback();
@@ -795,20 +871,13 @@
     openCallbackBtn.addEventListener('click', openCallback);
     closeBtns.forEach((b) => b.addEventListener('click', closeCallback));
 
-    function phoneValid() {
-      const digits = cbPhone.value.replace(/\D/g, '');
-      return digits.length === 11 && digits[0] === '7';
-    }
-
     function validateCbPhone() {
-      const valid = phoneValid();
-      cbPhone.closest('.field').classList.toggle('is-error', !valid);
-      cbPhone.setAttribute('aria-invalid', String(!valid));
-      return valid;
+      const msg = phoneError(cbPhone.value);
+      setFieldError(cbPhone, msg);
+      if (!msg) cbPhone.value = formatPhone(cbPhone.value);
+      return !msg;
     }
 
-    cbPhone.addEventListener('blur', () => { if (cbPhone.value.trim()) validateCbPhone(); });
-    cbPhone.addEventListener('input', () => cbPhone.closest('.field').classList.remove('is-error'));
 
     cbForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -848,13 +917,13 @@
     const flEmail = $('#flEmail');
     const flPhone = $('#flPhone');
 
-    applyPhoneMask(flPhone);
+    bindPhoneField(flPhone);
 
     function validateFlPhone() {
-      const digits = flPhone.value.replace(/\D/g, '');
-      const valid = digits.length === 11 && digits[0] === '7';
-      flPhone.closest('.field').classList.toggle('is-error', !valid);
-      return valid;
+      const msg = phoneError(flPhone.value);
+      setFieldError(flPhone, msg);
+      if (!msg) flPhone.value = formatPhone(flPhone.value);
+      return !msg;
     }
     function validateFlEmail() {
       const v = flEmail.value.trim();
@@ -864,7 +933,6 @@
       return valid;
     }
 
-    flPhone.addEventListener('blur', () => { if (flPhone.value.trim()) validateFlPhone(); });
     flEmail.addEventListener('blur', () => { if (flEmail.value.trim()) validateFlEmail(); });
     $$('.field input', footerForm).forEach((el) => {
       el.addEventListener('input', () => el.closest('.field').classList.remove('is-error'));

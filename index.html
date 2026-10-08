@@ -123,7 +123,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css?v=62">
+<link rel="stylesheet" href="css/style.css?v=63">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -361,7 +361,7 @@
             <button type="button" class="quiz__tile quiz__tile--ch" data-value="Звонок"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8.5 5h4l2 5-2.6 1.6a12 12 0 0 0 5.5 5.5L19 14.5l5 2v4A2.5 2.5 0 0 1 21.5 23 16.5 16.5 0 0 1 6 7.5 2.5 2.5 0 0 1 8.5 5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(1 2)"/></svg><span>Звонок</span></button>
           </div>
           <div class="field quiz__phone">
-            <input type="tel" id="phone" placeholder=" " required autocomplete="tel" aria-describedby="err-phone">
+            <input type="text" id="phone" placeholder=" " required autocomplete="tel" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="err-phone">
             <label for="phone" id="phoneLabel">Номер или @ник в Telegram</label>
             <span class="field__err" id="err-phone">Введите номер телефона или ник в Telegram</span>
           </div>
@@ -1142,6 +1142,6 @@
 </div>
 
 <script src="js/forms-config.js?v=2"></script>
-<script src="js/main.js?v=27"></script>
+<script src="js/main.js?v=28"></script>
 </body>
 </html>
