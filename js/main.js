@@ -579,26 +579,18 @@
 
 
   /* ---------- Отправка форм: и почта, и Telegram — одним запросом в Cloudflare
-     Worker (см. cloudflare-worker/telegram-relay.js). Раньше почта уходила прямо
-     из браузера через EmailJS SDK отдельным запросом от Telegram-релея — если
-     блокировщик рекламы рубил только домен *.workers.dev, заявка терялась в
-     одном из двух каналов незаметно для посетителя. Теперь один запрос — либо
-     блокируется целиком (и видно ошибку), либо доходит и разносится на оба
-     канала на стороне Worker'а. ---------- */
+     Worker (см. cloudflare-worker/telegram-relay.js). У части посетителей
+     (мобильные операторы) запрос к *.workers.dev обрывается или виснет — за
+     03–10.10 так потерялись заявки 7 человек. Пока заявки не ходят через наш
+     сервер, спасаемся повторами: до 3 попыток за одно нажатие, а после
+     неудачи — автоповтор каждые 25 секунд, пока страница открыта. Дубли не
+     страшны: Worker узнаёт повторную заявку по содержимому и второй раз в
+     Telegram/почту не шлёт (отвечает ok, duplicate). ---------- */
   const FORMS_CFG = window.LANMEI_FORMS_CONFIG || {};
 
-  async function submitLead(data, emailTemplateId) {
-    if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
-      return { ok: false };
-    }
-    // На мобильной сети fetch без таймаута мог зависнуть на неопределённое
-    // время (кнопка крутится, редиректа нет) — обрываем через 25с. Раньше
-    // было 12с, но Worker сам ждёт Google-таблицу до 8с, и при медленном
-    // ответе клиент видел «Не получилось отправить», хотя заявка уже ушла,
-    // и отправлял её повторно. keepalive держит запрос живым, даже если
-    // посетитель свернёт вкладку сразу после отправки.
+  async function fetchLead(data, emailTemplateId, timeoutMs) {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 25000);
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
         method: 'POST',
@@ -617,9 +609,20 @@
     }
   }
 
-  // Пока заявка отправляется, форма заблокирована: класс is-loading на кнопке
-  // гасил только клики мышью, а Enter в поле отправлял форму повторно.
-  // Возвращает false, если отправка уже идёт — тогда обработчик выходит.
+  async function submitLead(data, emailTemplateId, tries = 3) {
+    if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
+      return { ok: false };
+    }
+    // Первая попытка ждёт дольше (Worker сам ждёт Google-таблицу до 8с на
+    // медленной сети), повторные — короче: обрыв виден быстрее.
+    for (let i = 0; i < tries; i += 1) {
+      const { ok } = await fetchLead(data, emailTemplateId, i === 0 ? 20000 : 12000);
+      if (ok) return { ok: true };
+      if (i < tries - 1) await new Promise((r) => setTimeout(r, 1500 + i * 1500));
+    }
+    return { ok: false };
+  }
+
   // Состояние отправки показываем текстом на самой кнопке (10.10): прежний спиннер
   // через ::before перекрывался свечением .btn--glow, и после нажатия кнопка либо не
   // менялась вовсе (квиз), либо пустела (звонок, подвал) — выглядело как «ничего не происходит».
@@ -631,6 +634,7 @@
 
   function beginSubmit(form, btn) {
     if (form.dataset.sending === '1') return false;
+    cancelBgRetry();
     form.dataset.sending = '1';
     btn.disabled = true;
     btn.classList.add('is-loading');
@@ -661,16 +665,11 @@
   }
 
   // box — элемент .briefform__ok с <b> заголовком и <span> текстом внутри
-  // Сбой отправки не прячем через 7 секунд, как раньше: человек должен успеть прочитать
-  // и написать нам в мессенджер. Закрывается кнопкой «Попробовать ещё раз».
+  // Сбой отправки: сообщение не исчезает само, в нём кнопка «Отправить ещё раз».
+  // Параллельно идёт автоповтор (startRetrying) — человеку достаточно не закрывать страницу.
   const FAIL_TITLE = 'Не получилось отправить';
-  const FAIL_TEXT = 'Похоже, прервалась связь. Напишите нам в мессенджер — ответим там же.';
-  const FAIL_LINKS = [
-    ['Telegram', 'https://t.me/lanmei_logistics', 'photos/icons/telegram.png'],
-    ['WhatsApp', 'https://wa.me/8613120794214', 'photos/icons/whatsapp.png'],
-    ['MAX', 'https://max.ru/join/C9bF0L3UndVVCUR9lrVMY46AHpph49SPHMWvERbajyk', 'photos/icons/max.png']
-  ];
-  function showFormResult(box, ok, title, text) {
+  const FAIL_TEXT = 'Связь прерывается — такое бывает на мобильном интернете. Не закрывайте страницу: мы сами повторим отправку.';
+  function showFormResult(box, ok, title, text, onRetry) {
     $('b', box).textContent = title;
     $('span', box).textContent = text;
     box.classList.toggle('is-error', !ok);
@@ -682,14 +681,51 @@
     }
     const alt = document.createElement('div');
     alt.className = 'briefform__alt';
-    alt.innerHTML = '<div class="briefform__links">' + FAIL_LINKS.map(([name, href, icon]) =>
-      '<a href="' + href + '" target="_blank" rel="noopener"><img src="' + icon + '" alt="" width="22" height="22">' + name + '</a>'
-    ).join('') + '</div><button type="button" class="briefform__retry">Попробовать ещё раз</button>';
-    $('.briefform__retry', alt).addEventListener('click', () => box.classList.remove('is-visible'));
+    alt.innerHTML = '<button type="button" class="briefform__retry">Отправить ещё раз</button>';
+    const retryBtn = $('.briefform__retry', alt);
+    retryBtn.addEventListener('click', () => (onRetry ? onRetry(retryBtn, box) : box.classList.remove('is-visible')));
     box.appendChild(alt);
     box.classList.add('is-visible');
     // форма бывает выше экрана — подводим сообщение в центр, чтобы его не пришлось искать
-    $('.briefform__links', box).scrollIntoView({ block: 'center', behavior: 'smooth' });
+    retryBtn.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
+  // Автоповтор после неудачи: каждые 25 секунд, не дольше 5 минут. Активен
+  // один на страницу; новая отправка любой формы отменяет предыдущий.
+  let bgRetry = null;
+  function cancelBgRetry() {
+    if (bgRetry) { clearInterval(bgRetry.timer); bgRetry = null; }
+  }
+  function startRetrying(form, box, data, emailTemplateId) {
+    cancelBgRetry();
+    const state = { busy: false, tries: 0 };
+    async function attempt(tries) {
+      if (state.busy) return false;
+      state.busy = true;
+      const { ok } = await submitLead(data, emailTemplateId, tries);
+      state.busy = false;
+      if (ok) {
+        cancelBgRetry();
+        form.reset();
+        window.location.href = 'thanks/';
+      }
+      return ok;
+    }
+    state.timer = setInterval(() => {
+      state.tries += 1;
+      if (state.tries > 12) { cancelBgRetry(); return; }
+      attempt(1);
+    }, 25000);
+    bgRetry = state;
+    showFormResult(box, false, FAIL_TITLE, FAIL_TEXT, async (retryBtn) => {
+      retryBtn.disabled = true;
+      retryBtn.textContent = 'Отправляем…';
+      const ok = await attempt(2);
+      if (!ok) {
+        retryBtn.disabled = false;
+        retryBtn.textContent = 'Отправить ещё раз';
+      }
+    });
   }
 
   /* ---------- Квиз-бриф: пошаговый тест вместо длинной формы ---------- */
@@ -866,7 +902,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(leadForm, submitBtn);
-        showFormResult($('#leadOk'), false, FAIL_TITLE, FAIL_TEXT);
+        startRetrying(leadForm, $('#leadOk'), data, FORMS_CFG.emailTemplateId);
       }
     });
 
@@ -949,7 +985,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(cbForm, submitBtn);
-        showFormResult($('#callbackOk'), false, FAIL_TITLE, FAIL_TEXT);
+        startRetrying(cbForm, $('#callbackOk'), data, FORMS_CFG.emailTemplateIdCallback);
       }
     });
   }
@@ -1012,7 +1048,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(footerForm, submitBtn);
-        showFormResult($('#footerLeadOk'), false, FAIL_TITLE, FAIL_TEXT);
+        startRetrying(footerForm, $('#footerLeadOk'), data, FORMS_CFG.emailTemplateIdCallback);
       }
     });
   }

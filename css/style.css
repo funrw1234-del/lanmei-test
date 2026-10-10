@@ -1234,11 +1234,9 @@ a.footer__clink:hover{color:#fff}
 .field input::placeholder{color:transparent}
 .field input:focus::placeholder{color:#a8a0bd;font-weight:500}
 
-/* сбой отправки: ссылки на мессенджеры и повтор */
-.briefform__alt{display:grid;gap:14px;justify-items:center;margin-top:6px}
-.briefform__links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.briefform__links a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:100px;border:1px solid var(--violet-200);background:var(--lilac-bg);color:var(--ink);font-size:14px;font-weight:600}
-.briefform__links a:hover{border-color:var(--violet-400)}
-.briefform__links img{width:22px;height:22px}
-.briefform__retry{font-size:14px;font-weight:600;color:var(--violet-600);text-decoration:underline;text-underline-offset:3px;background:none;border:0;cursor:pointer;padding:6px}
+/* сбой отправки: кнопка повтора */
+.briefform__alt{display:grid;justify-items:center;margin-top:8px}
+.briefform__retry{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 28px;border-radius:100px;border:0;background:var(--violet-600);color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background var(--t-fast),transform var(--t-hover) var(--ease)}
+.briefform__retry:hover{background:var(--violet-700,#5b21b6)}
+.briefform__retry:disabled{opacity:.75;cursor:default}
 @media (max-width:560px){ .briefform__ok{padding:24px 16px} }
