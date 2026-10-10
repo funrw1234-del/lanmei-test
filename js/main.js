@@ -79,6 +79,7 @@
   /* ---------- Шапка ---------- */
   const header = $('#header');
   const fab = $('#fab');
+  const fabForms = [$('#leadForm'), $('#footerLeadForm')].filter(Boolean);
   const bar = $('#scrollbar');
   const navLinks = $$('.nav a');
   const sections = navLinks.map((a) => $(a.dataset.scrollTo)).filter(Boolean);
@@ -92,7 +93,12 @@
     header.classList.toggle('is-hidden', y > 500 && y > lastY && !header.classList.contains('is-nav-open'));
     lastY = y;
 
-    fab.classList.toggle('is-visible', y > 800);
+    // рядом с формой круглую кнопку прячем: на телефоне она ложилась на «Получить расчёт»
+    const overForm = fabForms.some((f) => {
+      const r = f.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    });
+    fab.classList.toggle('is-visible', y > 800 && !overForm);
     bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
 
     let current = null;
@@ -614,11 +620,24 @@
   // Пока заявка отправляется, форма заблокирована: класс is-loading на кнопке
   // гасил только клики мышью, а Enter в поле отправлял форму повторно.
   // Возвращает false, если отправка уже идёт — тогда обработчик выходит.
+  // Состояние отправки показываем текстом на самой кнопке (10.10): прежний спиннер
+  // через ::before перекрывался свечением .btn--glow, и после нажатия кнопка либо не
+  // менялась вовсе (квиз), либо пустела (звонок, подвал) — выглядело как «ничего не происходит».
+  const btnLabels = new WeakMap();
+  const btnTimers = new WeakMap();
+  function setBtnBusy(btn, text) {
+    btn.innerHTML = '<span class="btn__spin" aria-hidden="true"></span><span>' + text + '</span>';
+  }
+
   function beginSubmit(form, btn) {
     if (form.dataset.sending === '1') return false;
     form.dataset.sending = '1';
     btn.disabled = true;
     btn.classList.add('is-loading');
+    btnLabels.set(btn, btn.innerHTML);
+    setBtnBusy(btn, 'Отправляем…');
+    // сервер обычно отвечает за 2–5 секунд; если дольше — говорим, что процесс идёт
+    btnTimers.set(btn, setTimeout(() => setBtnBusy(btn, 'Ещё отправляем…'), 7000));
     return true;
   }
 
@@ -626,6 +645,8 @@
     delete form.dataset.sending;
     btn.disabled = false;
     btn.classList.remove('is-loading');
+    clearTimeout(btnTimers.get(btn));
+    if (btnLabels.has(btn)) btn.innerHTML = btnLabels.get(btn);
   }
 
   // Микроцели квиза в Яндекс.Метрике — считаем шаги воронки отдельно от
@@ -640,12 +661,35 @@
   }
 
   // box — элемент .briefform__ok с <b> заголовком и <span> текстом внутри
+  // Сбой отправки не прячем через 7 секунд, как раньше: человек должен успеть прочитать
+  // и написать нам в мессенджер. Закрывается кнопкой «Попробовать ещё раз».
+  const FAIL_TITLE = 'Не получилось отправить';
+  const FAIL_TEXT = 'Похоже, прервалась связь. Напишите нам в мессенджер — ответим там же.';
+  const FAIL_LINKS = [
+    ['Telegram', 'https://t.me/lanmei_logistics', 'photos/icons/telegram.png'],
+    ['WhatsApp', 'https://wa.me/8613120794214', 'photos/icons/whatsapp.png'],
+    ['MAX', 'https://max.ru/join/C9bF0L3UndVVCUR9lrVMY46AHpph49SPHMWvERbajyk', 'photos/icons/max.png']
+  ];
   function showFormResult(box, ok, title, text) {
     $('b', box).textContent = title;
     $('span', box).textContent = text;
     box.classList.toggle('is-error', !ok);
+    $('.briefform__alt', box)?.remove();
+    if (ok) {
+      box.classList.add('is-visible');
+      setTimeout(() => box.classList.remove('is-visible'), 7000);
+      return;
+    }
+    const alt = document.createElement('div');
+    alt.className = 'briefform__alt';
+    alt.innerHTML = '<div class="briefform__links">' + FAIL_LINKS.map(([name, href, icon]) =>
+      '<a href="' + href + '" target="_blank" rel="noopener"><img src="' + icon + '" alt="" width="22" height="22">' + name + '</a>'
+    ).join('') + '</div><button type="button" class="briefform__retry">Попробовать ещё раз</button>';
+    $('.briefform__retry', alt).addEventListener('click', () => box.classList.remove('is-visible'));
+    box.appendChild(alt);
     box.classList.add('is-visible');
-    setTimeout(() => box.classList.remove('is-visible'), 7000);
+    // форма бывает выше экрана — подводим сообщение в центр, чтобы его не пришлось искать
+    $('.briefform__links', box).scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   /* ---------- Квиз-бриф: пошаговый тест вместо длинной формы ---------- */
@@ -822,7 +866,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(leadForm, submitBtn);
-        showFormResult($('#leadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
+        showFormResult($('#leadOk'), false, FAIL_TITLE, FAIL_TEXT);
       }
     });
 
@@ -905,7 +949,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(cbForm, submitBtn);
-        showFormResult($('#callbackOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram: t.me/lanmei_logistics.');
+        showFormResult($('#callbackOk'), false, FAIL_TITLE, FAIL_TEXT);
       }
     });
   }
@@ -968,7 +1012,7 @@
       } else {
         trackGoal('send_fail');
         endSubmit(footerForm, submitBtn);
-        showFormResult($('#footerLeadOk'), false, 'Не получилось отправить', 'Напишите нам напрямую в Telegram или на lanmeiltd_sale2@163.com.');
+        showFormResult($('#footerLeadOk'), false, FAIL_TITLE, FAIL_TEXT);
       }
     });
   }
