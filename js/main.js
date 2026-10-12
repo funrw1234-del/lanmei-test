@@ -588,11 +588,16 @@
      Telegram/почту не шлёт (отвечает ok, duplicate). ---------- */
   const FORMS_CFG = window.LANMEI_FORMS_CONFIG || {};
 
-  async function fetchLead(data, emailTemplateId, timeoutMs) {
+  // Адреса приёма по порядку: сначала наш сервер (lanmei.ru/lead/ пересылает заявку в
+  // Worker сам — так запрос клиента не зависит от доступности Cloudflare у его оператора),
+  // запасным — Worker напрямую, на случай неполадок на сервере.
+  const LEAD_ENDPOINTS = [FORMS_CFG.leadProxyUrl, FORMS_CFG.telegramWorkerUrl].filter(Boolean);
+
+  async function fetchLead(url, data, emailTemplateId, timeoutMs) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const res = await fetch(FORMS_CFG.telegramWorkerUrl, {
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, emailTemplateId }),
@@ -609,16 +614,17 @@
     }
   }
 
-  async function submitLead(data, emailTemplateId, tries = 3) {
-    if (!FORMS_CFG.telegramWorkerUrl || FORMS_CFG.telegramWorkerUrl.startsWith('ЗАМЕНИТЕ')) {
-      return { ok: false };
-    }
+  // offset — с какого адреса начать (автоповтор чередует их между заходами)
+  async function submitLead(data, emailTemplateId, tries = 4, offset = 0) {
+    const n = LEAD_ENDPOINTS.length;
+    if (!n || LEAD_ENDPOINTS[n - 1].startsWith('ЗАМЕНИТЕ')) return { ok: false };
     // Первая попытка ждёт дольше (Worker сам ждёт Google-таблицу до 8с на
     // медленной сети), повторные — короче: обрыв виден быстрее.
     for (let i = 0; i < tries; i += 1) {
-      const { ok } = await fetchLead(data, emailTemplateId, i === 0 ? 20000 : 12000);
+      const { ok } = await fetchLead(LEAD_ENDPOINTS[(offset + i) % n], data, emailTemplateId, i === 0 ? 20000 : 12000);
       if (ok) return { ok: true };
-      if (i < tries - 1) await new Promise((r) => setTimeout(r, 1500 + i * 1500));
+      // после неудачи сразу пробуем другой адрес; паузу делаем, только когда перебрали все
+      if (i < tries - 1 && (offset + i + 1) % n === 0) await new Promise((r) => setTimeout(r, 2000));
     }
     return { ok: false };
   }
@@ -702,7 +708,7 @@
     async function attempt(tries) {
       if (state.busy) return false;
       state.busy = true;
-      const { ok } = await submitLead(data, emailTemplateId, tries);
+      const { ok } = await submitLead(data, emailTemplateId, tries, state.tries);
       state.busy = false;
       if (ok) {
         cancelBgRetry();

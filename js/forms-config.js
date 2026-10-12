@@ -7,5 +7,8 @@
 window.LANMEI_FORMS_CONFIG = {
   emailTemplateId: 'template_hvldedk', // шаблон квиза (#leadForm)
   emailTemplateIdCallback: 'template_cu9j7qh', // обратный звонок + форма в подвале
+  // Основной адрес приёма: наш сервер пересылает заявку в Worker (nginx, /lead/).
+  // Прямой адрес Worker'а ниже — запасной.
+  leadProxyUrl: '/lead/',
   telegramWorkerUrl: 'https://lanmei-forms.leonidpadalko1996.workers.dev/'
 };
