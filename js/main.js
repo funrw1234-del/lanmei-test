@@ -40,10 +40,18 @@
     }
   }
 
-  /* ---------- Появление заголовка первого экрана ---------- */
-  window.addEventListener('load', () => {
-    document.body.classList.add('is-loaded');
-  });
+  /* ---------- Появление заголовка первого экрана ----------
+     Раньше заголовок выезжал только по событию load, а оно ждёт все картинки и внешние
+     скрипты (Метрика, Google). Если чужой сервер «зависал», главный заголовок не появлялся
+     до тайм-аута. Теперь (13.10) показываем его, как только готов шрифт, но не позже чем
+     через 0,9 с после отрисовки страницы; load и таймер — страховка (в фоновой вкладке
+     requestAnimationFrame не срабатывает). */
+  const showHero = () => document.body.classList.add('is-loaded');
+  const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  Promise.race([fontsReady, new Promise((r) => setTimeout(r, 900))])
+    .then(() => requestAnimationFrame(showHero));
+  setTimeout(showHero, 1500);
+  window.addEventListener('load', showHero);
 
   /* ---------- Cookie-уведомление ----------
      Показываем один раз при первом визите (localStorage), не мешая
