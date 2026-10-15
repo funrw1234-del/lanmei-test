@@ -764,25 +764,36 @@
 
     // Telegram — можно ник, поэтому обычная клавиатура с буквами; остальное — цифровая
     const quizPhone = $('#phone');
+    // В Telegram можно оставить ник, в WeChat — ID: для них обычная клавиатура с буквами
+    const LABELS = { Telegram: 'Номер или @ник в Telegram', WeChat: 'Номер или ID в WeChat' };
+    const channelNow = () => $('.quiz__tiles[data-field="channel"]', leadForm).dataset.value;
+    // ID WeChat: 6–20 символов, начинается с буквы, латиница, цифры, «_» и «-»
+    const isWeChatId = (v) => /^[a-zA-Z][-_a-zA-Z0-9]{5,19}$/.test(String(v).trim());
     function applyChannel(channel) {
-      const tg = channel === 'Telegram';
-      $('#phoneLabel').textContent = tg ? 'Номер или @ник в Telegram' : 'Номер телефона';
-      quizPhone.setAttribute('inputmode', tg ? 'text' : 'tel');
+      $('#phoneLabel').textContent = LABELS[channel] || 'Номер телефона';
+      quizPhone.setAttribute('inputmode', LABELS[channel] ? 'text' : 'tel');
       setFieldError(quizPhone, '');
     }
     function quizContactError() {
       const v = quizPhone.value.trim();
-      const tg = $('.quiz__tiles[data-field="channel"]', leadForm).dataset.value === 'Telegram';
-      if (tg && !v) return 'Укажите номер или @ник в Telegram';
-      if (tg && /[a-zA-Z@_]/.test(v) && !/[а-яА-ЯёЁ]/.test(v)) {
-        return isTelegramNick(v) ? '' : 'Ник в Telegram — латиница, цифры и «_», от 5 символов';
+      const ch = channelNow();
+      const hasLatin = /[a-zA-Z@_]/.test(v) && !/[а-яА-ЯёЁ]/.test(v);
+      if (ch === 'Telegram') {
+        if (!v) return 'Укажите номер или @ник в Telegram';
+        if (hasLatin) return isTelegramNick(v) ? '' : 'Ник в Telegram — латиница, цифры и «_», от 5 символов';
+      }
+      if (ch === 'WeChat') {
+        if (!v) return 'Укажите номер или ID в WeChat';
+        if (hasLatin) return isWeChatId(v) ? '' : 'ID в WeChat — латиница, цифры, «_» или «-», от 6 символов';
       }
       return phoneError(v);
     }
-    // оформить контакт к отправке: ник — с «@», номер — в едином виде
+    // оформить контакт к отправке: ник Telegram — с «@», ID WeChat — как есть, номер — в едином виде
     function quizContactValue() {
       const v = quizPhone.value.trim();
-      if (isTelegramNick(v)) return '@' + v.replace(/^@/, '');
+      const ch = channelNow();
+      if (ch === 'Telegram' && isTelegramNick(v)) return '@' + v.replace(/^@/, '');
+      if (ch === 'WeChat' && isWeChatId(v)) return v;
       return formatPhone(v);
     }
     quizPhone.addEventListener('blur', () => {
