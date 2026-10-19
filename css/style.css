@@ -352,6 +352,17 @@ a.header__social:hover{transform:translateY(-2px)}
 .hero__title .line>span{display:block;transform:translateY(105%);transition:transform .9s var(--ease)}
 .is-loaded .hero__title .line>span{transform:translateY(0)}
 .is-loaded .hero__title .line:nth-child(2)>span{transition-delay:.1s}
+/* заголовок первого экрана с 19.10 — куски фразы (.h1-part), строки задают br-d / br-m */
+.hero__title{white-space:nowrap}
+.hero__title .h1-part{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.hero__title .h1-part>span{display:inline-block;transform:translateY(105%);transition:transform .9s var(--ease)}
+.is-loaded .hero__title .h1-part>span{transform:translateY(0)}
+.is-loaded .hero__title .h1-part:nth-of-type(2)>span{transition-delay:.06s}
+.is-loaded .hero__title .h1-part:nth-of-type(3)>span{transition-delay:.12s}
+.is-loaded .hero__title .h1-part:nth-of-type(4)>span{transition-delay:.18s}
+.is-loaded .hero__title .h1-part:nth-of-type(5)>span{transition-delay:.24s}
+.hero__title .br-d{display:none}
+@media (min-width:900px){ .hero__title .br-d{display:inline} .hero__title .br-m{display:none} }
 /* «под ключ» — вторым цветом, как акцент во второй строке референса */
 .hero__title em{font-style:normal;color:var(--violet-300)}
 
